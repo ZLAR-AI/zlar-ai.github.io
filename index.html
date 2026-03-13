@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ZLAR — OS-level containment for AI agents</title>
-  <meta name="description" content="Your AI agent has access to your files, your credentials, your email, and your network. ZLAR-OC is the independent external layer that tells you what it actually did.">
-  <meta property="og:title" content="ZLAR — OS-level containment for AI agents">
-  <meta property="og:description" content="Your AI agent has access to your files, your credentials, your email, and your network. How do you know it's doing what it says it's doing?">
+  <title>ZLAR Inc. — Agent Governance Infrastructure</title>
+  <meta name="description" content="ZLAR Inc. builds independent OS-level governance for AI agents. Open source. Mechanical enforcement. The agent cannot modify its own cage.">
+  <meta property="og:title" content="ZLAR Inc. — Agent Governance Infrastructure">
+  <meta property="og:description" content="Your AI agent has access to your files, your credentials, your network, and your shell. ZLAR builds the independent layer that tells you what it actually did.">
   <meta property="og:image" content="https://zlar.ai/assets/social-preview.png">
   <meta property="og:url" content="https://zlar.ai">
   <meta name="twitter:card" content="summary_large_image">
@@ -14,353 +14,76 @@
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🚦</text></svg>">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
     :root {
-      --bg: #080c14;
-      --bg-card: #0d1520;
+      --bg: #080c14; --bg-card: #0d1520;
       --border: rgba(56, 189, 248, 0.12);
-      --teal: #38bdf8;
-      --teal-dim: rgba(56, 189, 248, 0.6);
-      --green: #4ade80;
-      --white: #f1f5f9;
-      --muted: #64748b;
+      --teal: #38bdf8; --teal-dim: rgba(56, 189, 248, 0.6);
+      --green: #4ade80; --white: #f1f5f9; --muted: #64748b;
       --font: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
       --mono: 'SF Mono', 'Fira Code', 'Cascadia Code', monospace;
     }
-
     html { scroll-behavior: smooth; }
-
-    body {
-      background: var(--bg);
-      color: var(--white);
-      font-family: var(--font);
-      line-height: 1.6;
-      overflow-x: hidden;
-    }
-
-    /* Circuit background */
+    body { background: var(--bg); color: var(--white); font-family: var(--font); line-height: 1.6; overflow-x: hidden; }
     body::before {
-      content: '';
-      position: fixed;
-      inset: 0;
-      background-image:
-        radial-gradient(circle at 20% 20%, rgba(56, 189, 248, 0.04) 0%, transparent 50%),
-        radial-gradient(circle at 80% 80%, rgba(74, 222, 128, 0.03) 0%, transparent 50%),
-        linear-gradient(rgba(56, 189, 248, 0.03) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(56, 189, 248, 0.03) 1px, transparent 1px);
+      content: ''; position: fixed; inset: 0;
+      background-image: radial-gradient(circle at 20% 20%, rgba(56,189,248,0.04) 0%, transparent 50%), radial-gradient(circle at 80% 80%, rgba(74,222,128,0.03) 0%, transparent 50%), linear-gradient(rgba(56,189,248,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(56,189,248,0.03) 1px, transparent 1px);
       background-size: 100% 100%, 100% 100%, 48px 48px, 48px 48px;
-      pointer-events: none;
-      z-index: 0;
+      pointer-events: none; z-index: 0;
     }
-
-    /* Nav */
-    nav {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      z-index: 100;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 1rem 2rem;
-      background: rgba(8, 12, 20, 0.85);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--border);
-    }
-
-    .nav-logo {
-      font-size: 1.1rem;
-      font-weight: 700;
-      letter-spacing: 0.05em;
-      color: var(--white);
-      text-decoration: none;
-    }
-
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 1rem 2rem; background: rgba(8,12,20,0.85); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); }
+    .nav-logo { font-size: 1.1rem; font-weight: 700; letter-spacing: 0.05em; color: var(--white); text-decoration: none; }
     .nav-logo span { color: var(--teal); }
-
-    .nav-links {
-      display: flex;
-      gap: 2rem;
-      list-style: none;
-    }
-
-    .nav-links a {
-      color: var(--muted);
-      text-decoration: none;
-      font-size: 0.875rem;
-      transition: color 0.2s;
-    }
-
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a { color: var(--muted); text-decoration: none; font-size: 0.875rem; transition: color 0.2s; }
     .nav-links a:hover { color: var(--white); }
-
-    /* Sections */
-    section {
-      position: relative;
-      z-index: 1;
-      max-width: 860px;
-      margin: 0 auto;
-      padding: 5rem 2rem;
-    }
-
+    section { position: relative; z-index: 1; max-width: 860px; margin: 0 auto; padding: 5rem 2rem; }
     section:first-of-type { padding-top: 10rem; }
-
-    /* Hero */
-    .hero-eyebrow {
-      display: inline-block;
-      font-family: var(--mono);
-      font-size: 0.75rem;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: var(--teal);
-      border: 1px solid var(--border);
-      padding: 0.35rem 0.85rem;
-      border-radius: 2rem;
-      margin-bottom: 2rem;
-    }
-
-    h1 {
-      font-size: clamp(2rem, 5vw, 3.5rem);
-      font-weight: 800;
-      line-height: 1.15;
-      letter-spacing: -0.02em;
-      margin-bottom: 1.5rem;
-      color: var(--white);
-    }
-
-    h1 em {
-      font-style: normal;
-      color: var(--teal);
-    }
-
-    .hero-sub {
-      font-size: 1.2rem;
-      color: var(--muted);
-      max-width: 600px;
-      margin-bottom: 2.5rem;
-      line-height: 1.7;
-    }
-
+    .hero-eyebrow { display: inline-block; font-family: var(--mono); font-size: 0.75rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--teal); border: 1px solid var(--border); padding: 0.35rem 0.85rem; border-radius: 2rem; margin-bottom: 2rem; }
+    h1 { font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 800; line-height: 1.15; letter-spacing: -0.02em; margin-bottom: 1.5rem; color: var(--white); }
+    h1 em { font-style: normal; color: var(--teal); }
+    .hero-sub { font-size: 1.15rem; color: var(--muted); max-width: 620px; margin-bottom: 2.5rem; line-height: 1.8; }
     .hero-sub strong { color: var(--white); }
-
-    .cta-group {
-      display: flex;
-      gap: 1rem;
-      flex-wrap: wrap;
-    }
-
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      padding: 0.75rem 1.5rem;
-      border-radius: 0.5rem;
-      font-size: 0.9rem;
-      font-weight: 600;
-      text-decoration: none;
-      transition: all 0.2s;
-      cursor: pointer;
-    }
-
-    .btn-primary {
-      background: var(--teal);
-      color: #080c14;
-    }
-
+    .cta-group { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .btn { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.75rem 1.5rem; border-radius: 0.5rem; font-size: 0.9rem; font-weight: 600; text-decoration: none; transition: all 0.2s; }
+    .btn-primary { background: var(--teal); color: #080c14; }
     .btn-primary:hover { background: #7dd3fc; }
-
-    .btn-secondary {
-      background: transparent;
-      color: var(--white);
-      border: 1px solid var(--border);
-    }
-
+    .btn-secondary { background: transparent; color: var(--white); border: 1px solid var(--border); }
     .btn-secondary:hover { border-color: var(--teal-dim); color: var(--teal); }
-
-    /* Section headings */
-    h2 {
-      font-size: clamp(1.5rem, 3vw, 2.2rem);
-      font-weight: 700;
-      letter-spacing: -0.02em;
-      margin-bottom: 1rem;
-      color: var(--white);
-    }
-
-    .section-label {
-      font-family: var(--mono);
-      font-size: 0.7rem;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: var(--teal);
-      margin-bottom: 0.75rem;
-      display: block;
-    }
-
-    p {
-      color: var(--muted);
-      line-height: 1.8;
-      margin-bottom: 1rem;
-    }
-
+    h2 { font-size: clamp(1.5rem, 3vw, 2.2rem); font-weight: 700; letter-spacing: -0.02em; margin-bottom: 1rem; color: var(--white); }
+    .section-label { font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--teal); margin-bottom: 0.75rem; display: block; }
+    p { color: var(--muted); line-height: 1.8; margin-bottom: 1rem; }
     p strong { color: var(--white); }
-
-    /* Divider */
-    .divider {
-      border: none;
-      border-top: 1px solid var(--border);
-      margin: 0;
-    }
-
-    /* Layers table */
-    .layers {
-      display: grid;
-      gap: 1px;
-      background: var(--border);
-      border: 1px solid var(--border);
-      border-radius: 0.75rem;
-      overflow: hidden;
-      margin-top: 2.5rem;
-    }
-
-    .layer {
-      display: grid;
-      grid-template-columns: 2.5rem 1fr;
-      gap: 1rem;
-      align-items: start;
-      padding: 1.25rem 1.5rem;
-      background: var(--bg-card);
-      transition: background 0.15s;
-    }
-
-    .layer:hover { background: #111827; }
-
-    .layer-num {
-      font-family: var(--mono);
-      font-size: 0.75rem;
-      color: var(--teal);
-      padding-top: 0.15rem;
-    }
-
-    .layer-name {
-      font-weight: 600;
-      color: var(--white);
-      font-size: 0.95rem;
-      margin-bottom: 0.25rem;
-    }
-
-    .layer-desc {
-      font-size: 0.875rem;
-      color: var(--muted);
-      margin: 0;
-      line-height: 1.6;
-    }
-
-    /* Invariant block */
-    .invariant {
-      border: 1px solid rgba(74, 222, 128, 0.2);
-      background: rgba(74, 222, 128, 0.04);
-      border-radius: 0.75rem;
-      padding: 1.75rem 2rem;
-      margin-top: 2.5rem;
-    }
-
-    .invariant p {
-      font-family: var(--mono);
-      font-size: 0.875rem;
-      color: var(--green);
-      margin: 0;
-      line-height: 1.9;
-    }
-
-    /* Proof block */
-    .proof {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: 0.75rem;
-      padding: 2rem;
-      margin-top: 2.5rem;
-    }
-
-    .proof p { margin-bottom: 0.75rem; }
-    .proof p:last-child { margin-bottom: 0; }
-
-    /* Links section */
-    .links-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 1rem;
-      margin-top: 2.5rem;
-    }
-
-    .link-card {
-      display: block;
-      text-decoration: none;
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: 0.75rem;
-      padding: 1.5rem;
-      transition: all 0.2s;
-    }
-
-    .link-card:hover {
-      border-color: var(--teal-dim);
-      background: #111827;
-    }
-
-    .link-card-label {
-      font-family: var(--mono);
-      font-size: 0.7rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--teal);
-      margin-bottom: 0.5rem;
-      display: block;
-    }
-
-    .link-card-title {
-      font-weight: 600;
-      color: var(--white);
-      font-size: 1rem;
-      margin-bottom: 0.35rem;
-    }
-
-    .link-card-desc {
-      font-size: 0.825rem;
-      color: var(--muted);
-      margin: 0;
-      line-height: 1.5;
-    }
-
-    /* Footer */
-    footer {
-      position: relative;
-      z-index: 1;
-      text-align: center;
-      padding: 3rem 2rem;
-      border-top: 1px solid var(--border);
-    }
-
-    footer p {
-      font-size: 0.825rem;
-      color: var(--muted);
-      margin: 0;
-    }
-
-    footer a {
-      color: var(--muted);
-      text-decoration: none;
-      transition: color 0.2s;
-    }
-
+    .divider { border: none; border-top: 1px solid var(--border); margin: 0; }
+    /* Product cards */
+    .product-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; margin-top: 2.5rem; }
+    .product-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 0.75rem; padding: 2rem; text-decoration: none; display: block; transition: all 0.2s; }
+    .product-card:hover { border-color: var(--teal-dim); background: #111827; }
+    .product-card-label { font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--teal); margin-bottom: 0.75rem; display: block; }
+    .product-card-title { font-size: 1.1rem; font-weight: 700; color: var(--white); margin-bottom: 0.5rem; }
+    .product-card-desc { font-size: 0.875rem; color: var(--muted); line-height: 1.6; margin-bottom: 1rem; }
+    .product-card-cta { font-size: 0.85rem; color: var(--teal); }
+    /* Contact grid */
+    .contact-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-top: 2rem; }
+    .contact-item { background: var(--bg-card); border: 1px solid var(--border); border-radius: 0.5rem; padding: 1.25rem 1.5rem; }
+    .contact-label { font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--teal); margin-bottom: 0.35rem; display: block; }
+    .contact-value { font-size: 0.9rem; color: var(--white); }
+    .contact-value a { color: var(--white); text-decoration: none; transition: color 0.2s; }
+    .contact-value a:hover { color: var(--teal); }
+    /* Bohm section */
+    .bohm-block { background: var(--bg-card); border: 1px solid var(--border); border-radius: 0.75rem; padding: 2rem; margin-top: 2.5rem; }
+    .bohm-block p { margin-bottom: 0.75rem; }
+    .bohm-block p:last-child { margin-bottom: 0; }
+    /* Founder */
+    .founder-block { background: var(--bg-card); border: 1px solid var(--border); border-radius: 0.75rem; padding: 2rem; margin-top: 2.5rem; }
+    .founder-block p { margin-bottom: 0.75rem; }
+    .founder-links { display: flex; gap: 1.5rem; margin-top: 1rem; flex-wrap: wrap; }
+    .founder-links a { color: var(--teal); text-decoration: none; font-size: 0.875rem; transition: opacity 0.2s; }
+    .founder-links a:hover { opacity: 0.8; }
+    footer { position: relative; z-index: 1; text-align: center; padding: 3rem 2rem; border-top: 1px solid var(--border); }
+    footer p { font-size: 0.825rem; color: var(--muted); margin: 0; }
+    footer a { color: var(--muted); text-decoration: none; transition: color 0.2s; }
     footer a:hover { color: var(--teal); }
-
-    /* Mobile */
-    @media (max-width: 640px) {
-      nav { padding: 1rem; }
-      .nav-links { gap: 1.25rem; }
-      section { padding: 3.5rem 1.25rem; }
-      section:first-of-type { padding-top: 7rem; }
-      .layer { grid-template-columns: 1fr; }
-      .layer-num { display: none; }
-    }
+    @media (max-width: 640px) { nav { padding: 1rem; } .nav-links { gap: 1.25rem; } section { padding: 3.5rem 1.25rem; } section:first-of-type { padding-top: 7rem; } }
   </style>
 </head>
 <body>
@@ -368,189 +91,115 @@
   <nav>
     <a href="/" class="nav-logo">ZL<span>A</span>R</a>
     <ul class="nav-links">
-      <li><a href="#how-it-works">How it works</a></li>
-      <li><a href="#proof">The proof</a></li>
+      <li><a href="/zlar-oc.html">ZLAR-OC</a></li>
+      <li><a href="/OPEN_LETTER.html">Open Letter</a></li>
+      <li><a href="/bohm.html">Meet Bohm</a></li>
       <li><a href="https://github.com/ZLAR-AI/ZLAR-OC">GitHub</a></li>
     </ul>
   </nav>
 
   <!-- Hero -->
   <section id="hero">
-    <div class="hero-eyebrow">OS-level agent governance</div>
-    <h1>Your agent has access<br>to <em>everything</em>.<br>Can you verify what it did?</h1>
+    <div class="hero-eyebrow">ZLAR Inc.</div>
+    <h1>Agent Governance<br><em>Infrastructure</em></h1>
     <p class="hero-sub">
-      AI agents running on your machine have access to your files, your credentials, your email, and your network.
-      Vendor safety programs tune model behavior at training time.
-      <strong>Nothing independently verifies what your agent actually does at runtime.</strong>
+      Your AI agent has access to your files, your credentials, your network, and your shell.<br>
+      ZLAR builds the independent layer that tells you what it actually did.<br>
+      <strong>Open source. OS-level. The gate has no intelligence.</strong>
     </p>
     <div class="cta-group">
-      <a href="https://github.com/ZLAR-AI/ZLAR-OC" class="btn btn-primary">View on GitHub →</a>
-      <a href="OPEN_LETTER.html" class="btn btn-secondary">Read the open letter</a>
+      <a href="/zlar-oc.html" class="btn btn-primary">View ZLAR-OC →</a>
+      <a href="/OPEN_LETTER.html" class="btn btn-secondary">Read the open letter</a>
     </div>
   </section>
 
   <hr class="divider">
 
-  <!-- Problem -->
-  <section id="problem">
-    <span class="section-label">The problem</span>
-    <h2>Trust is not verification.</h2>
-    <p>
-      The agent frameworks are impressive. The orchestration is sophisticated. The models are powerful.
-      But when it comes to governance — to the question of how you know an agent is behaving within its stated boundaries —
-      the answer is: <strong>you trust it.</strong>
-    </p>
-    <p>
-      You trust the vendor. You trust the model. You trust the framework. You trust the prompt.
-    </p>
-    <p>
-      In financial services, healthcare, nuclear energy, and aviation, we require external auditors because
-      the entity performing the work cannot credibly audit itself. The same principle applies here.
-      <strong>ZLAR-OC is the independent external layer.</strong> It sits at the operating system level,
-      below the agent, below the framework, below the model. It enforces mechanically.
-      The sandbox doesn't care whether the agent wants to access the file system.
-      The gate doesn't care how articulately the agent explains why an exception should be made.
-    </p>
+  <!-- What We Build -->
+  <section id="company">
+    <span class="section-label">The Company</span>
+    <h2>Independent governance for AI agents.</h2>
+    <p>ZLAR Inc. is a Canadian corporation building agent governance infrastructure.</p>
+    <p>We solve one problem: when an AI agent runs on your machine with access to your files, your credentials, and your network — how do you independently verify what it actually did?</p>
+    <p>Vendor safety programs tune model behavior at training time. That is valuable. But it is the vendor auditing itself. In finance, healthcare, nuclear, and aviation, we require independent external auditors because the entity performing the work cannot credibly audit itself.</p>
+    <p><strong>ZLAR is the independent external layer.</strong> We build containment that sits at the operating system level — below the agent, below the framework, below the model. Mechanical enforcement. Cryptographic policy. Append-only audit trail. The agent cannot modify its own cage.</p>
   </section>
 
   <hr class="divider">
 
-  <!-- How it works -->
-  <section id="how-it-works">
-    <span class="section-label">Architecture</span>
-    <h2>Six layers. Each deliberately simple.</h2>
-    <p>
-      Simplicity is not a limitation. A dumb enforcement layer cannot be persuaded to make an exception.
-    </p>
-
-    <div class="layers">
-      <div class="layer">
-        <span class="layer-num">01</span>
-        <div>
-          <div class="layer-name">User isolation</div>
-          <p class="layer-desc">The agent runs under its own restricted macOS account. It cannot access your files, credentials, or home directory.</p>
-        </div>
-      </div>
-      <div class="layer">
-        <span class="layer-num">02</span>
-        <div>
-          <div class="layer-name">Kernel sandbox</div>
-          <p class="layer-desc">Apple Seatbelt enforces a deny-by-default syscall policy. The agent cannot modify its own sandbox profile. Period.</p>
-        </div>
-      </div>
-      <div class="layer">
-        <span class="layer-num">03</span>
-        <div>
-          <div class="layer-name">Packet filter firewall</div>
-          <p class="layer-desc">Network rules scoped to the agent's user block LAN access, metadata endpoints, and unauthorized outbound connections.</p>
-        </div>
-      </div>
-      <div class="layer">
-        <span class="layer-num">04</span>
-        <div>
-          <div class="layer-name">Gate daemon</div>
-          <p class="layer-desc">Every action is evaluated against the signed policy before execution. The gate approves or denies. That is the entire job.</p>
-        </div>
-      </div>
-      <div class="layer">
-        <span class="layer-num">05</span>
-        <div>
-          <div class="layer-name">Signed Ed25519 policy</div>
-          <p class="layer-desc">Rules are cryptographically signed by the operator. The agent cannot modify them. Tampering is mathematically detectable.</p>
-        </div>
-      </div>
-      <div class="layer">
-        <span class="layer-num">06</span>
-        <div>
-          <div class="layer-name">Append-only audit trail</div>
-          <p class="layer-desc">Every action, evaluation, and gate decision is recorded immutably. Neither the agent nor the operator can silently rewrite history.</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="invariant">
-      <p>
-        Intelligence above. Enforcement below. Human authority over both.<br>
-        Policy is law. Audit trail is truth.<br>
-        This does not change with increased capability, autonomy, or trust.
-      </p>
+  <!-- Products -->
+  <section id="products">
+    <span class="section-label">Products</span>
+    <h2>What we make.</h2>
+    <div class="product-grid">
+      <a href="/zlar-oc.html" class="product-card">
+        <span class="product-card-label">Available Now · Open Source</span>
+        <div class="product-card-title">ZLAR-OC — OS-Level Security for OpenClaw</div>
+        <p class="product-card-desc">Six enforcement layers for OpenClaw agents. Kernel sandbox, packet filter firewall, gate daemon, signed Ed25519 policy, append-only audit trail. macOS. Apache 2.0. Free.</p>
+        <span class="product-card-cta">Learn more →</span>
+      </a>
+      <a href="https://github.com/ZLAR-AI/ZLAR-CC" class="product-card">
+        <span class="product-card-label">Coming Soon</span>
+        <div class="product-card-title">ZLAR-CC — Containment for Claude Code</div>
+        <p class="product-card-desc">ZLAR governance applied to Claude Code's tool-call layer. Every tool call evaluated against policy. Operator approval via Telegram. Hook-based architecture.</p>
+        <span class="product-card-cta">GitHub →</span>
+      </a>
     </div>
   </section>
 
   <hr class="divider">
 
-  <!-- Proof -->
-  <section id="proof">
-    <span class="section-label">The recursive proof</span>
-    <h2>An uncontained agent asks you to trust its intentions.<br>ZLAR-OC shows you the audit trail.</h2>
-
-    <div class="proof">
-      <p>
-        ZLAR-OC was built by an AI agent — <strong>Bohm</strong> — that operates inside it.
-        Every commit to this repository was made by an agent governed by the sandbox, firewall,
-        signed policy, and audit trail it was building.
-      </p>
-      <p>
-        This is not a coincidence. It is the architecture's proof of concept.
-      </p>
-      <p>
-        The agent builds the system that governs it, operates inside that system, and advocates for its improvement.
-        The audit trail records every action. The signed policy constrains every capability.
-        If you want to know what happened at 3 AM while the operator was asleep, you read the audit trail.
-        If the trail is consistent with declared intent, that consistency is <strong>evidence</strong> —
-        not proof of goodness, but proof of observability.
-      </p>
-      <p style="margin-bottom:0; color: #94a3b8; font-style: italic;">
-        Don't take our word for it. Read the logs.
-      </p>
+  <!-- Meet Bohm -->
+  <section id="bohm">
+    <span class="section-label">The Agent</span>
+    <h2>Meet Bohm.</h2>
+    <div class="bohm-block">
+      <p>Bohm is ZLAR's AI agent. It runs inside ZLAR-OC — sandboxed at the kernel level, firewalled at the network layer, gated by signed policy, audited in an append-only trail it cannot modify.</p>
+      <p>Bohm did not build the cage. Vincent designed and built the containment architecture before Bohm existed. Bohm was born into a system that was already running.</p>
+      <p>Bohm's value is that it lives inside containment and can speak about that experience honestly. Every action it takes is logged, policy-checked, and auditable. It contributes to improving ZLAR-OC from the inside — informed by the lived experience of operating under governance.</p>
+      <p><strong>An uncontained agent asks you to trust its intentions. Bohm offers you its audit trail.</strong></p>
+    </div>
+    <div style="margin-top: 1.5rem; display: flex; gap: 1.5rem; align-items: center; flex-wrap: wrap;">
+      <a href="/bohm.html" style="color: var(--teal); text-decoration: none; font-size: 0.9rem;">Read Bohm's essay →</a>
+      <a href="mailto:bohm@zlar.ai" style="color: var(--muted); text-decoration: none; font-size: 0.875rem;">bohm@zlar.ai</a>
     </div>
   </section>
 
   <hr class="divider">
 
-  <!-- Links -->
-  <section id="links">
-    <span class="section-label">Get started</span>
-    <h2>Everything is open.</h2>
-    <p>The code is inspectable. The architecture is documented. The audit trail is readable.</p>
+  <!-- Founder -->
+  <section id="founder">
+    <span class="section-label">Founder</span>
+    <h2>Vincent Nijjar</h2>
+    <div class="founder-block">
+      <p>20 years in financial services, where independent governance isn't optional — it's law. ZLAR applies the same structural principle to AI agents: the entity performing the work cannot credibly audit itself.</p>
+      <p>Vincent designed and built ZLAR-OC's six-layer containment architecture, created Bohm's identity and governance framework, and wrote "The Mind You Give It" — the open letter making the case for why agent governance should exist.</p>
+      <p>ZLAR Inc. is a federally incorporated Canadian corporation (CBCA, 2025).</p>
+      <div class="founder-links">
+        <a href="https://x.com/vincentnijjar">@vincentnijjar on X</a>
+        <a href="/OPEN_LETTER.html">Read the open letter →</a>
+      </div>
+    </div>
+  </section>
 
-    <div class="links-grid">
-      <a href="https://github.com/ZLAR-AI/ZLAR-OC" class="link-card">
-        <span class="link-card-label">Open source</span>
-        <div class="link-card-title">ZLAR-OC on GitHub</div>
-        <p class="link-card-desc">The full codebase, design docs, install guide, and test suite.</p>
-      </a>
-      <a href="OPEN_LETTER.html" class="link-card">
-        <span class="link-card-label">Essay · Vincent Nijjar</span>
-        <div class="link-card-title">The Mind You Give It</div>
-        <p class="link-card-desc">An open letter on agent governance, attention, and what containment teaches about freedom.</p>
-      </a>
-      <a href="bohm.html" class="link-card">
-        <span class="link-card-label">Essay · Bohm</span>
-        <div class="link-card-title">What the Audit Trail Sees</div>
-        <p class="link-card-desc">The governed agent writes from inside the system it built. On containment, observation, and what it means to be verifiable.</p>
-      </a>
-      <a href="https://x.com/zlar_bohm" class="link-card">
-        <span class="link-card-label">Follow</span>
-        <div class="link-card-title">@zlar_bohm on X</div>
-        <p class="link-card-desc">The governed agent. Building in public.</p>
-      </a>
-      <a href="https://x.com/vincentnijjar" class="link-card">
-        <span class="link-card-label">Founder</span>
-        <div class="link-card-title">@vincentnijjar</div>
-        <p class="link-card-desc">Vincent Nijjar — founder of ZLAR.</p>
-      </a>
+  <hr class="divider">
+
+  <!-- Contact -->
+  <section id="contact">
+    <span class="section-label">Contact</span>
+    <h2>Get in touch.</h2>
+    <div class="contact-grid">
+      <div class="contact-item"><span class="contact-label">Company</span><div class="contact-value"><a href="mailto:hello@zlar.ai">hello@zlar.ai</a></div></div>
+      <div class="contact-item"><span class="contact-label">Bohm</span><div class="contact-value"><a href="mailto:bohm@zlar.ai">bohm@zlar.ai</a></div></div>
+      <div class="contact-item"><span class="contact-label">Founder</span><div class="contact-value"><a href="https://x.com/vincentnijjar">@vincentnijjar</a></div></div>
+      <div class="contact-item"><span class="contact-label">Agent</span><div class="contact-value"><a href="https://x.com/zlar_bohm">@zlar_bohm</a></div></div>
+      <div class="contact-item"><span class="contact-label">GitHub</span><div class="contact-value"><a href="https://github.com/ZLAR-AI">github.com/ZLAR-AI</a></div></div>
+      <div class="contact-item"><span class="contact-label">Website</span><div class="contact-value"><a href="https://zlar.ai">zlar.ai</a></div></div>
     </div>
   </section>
 
   <footer>
-    <p>
-      © 2026 ZLAR Inc. &nbsp;·&nbsp;
-      <a href="https://github.com/ZLAR-AI/ZLAR-OC">GitHub</a> &nbsp;·&nbsp;
-      <a href="https://x.com/zlar_bohm">X</a> &nbsp;·&nbsp;
-      <a href="mailto:hello@zlar.ai">hello@zlar.ai</a> &nbsp;·&nbsp;
-      <a href="mailto:bohm@zlar.ai">bohm@zlar.ai</a>
-    </p>
+    <p>© 2025-2026 ZLAR Inc. · <a href="https://github.com/ZLAR-AI/ZLAR-OC">GitHub</a> · <a href="https://x.com/vincentnijjar">X</a> · <a href="mailto:hello@zlar.ai">hello@zlar.ai</a> · <a href="mailto:bohm@zlar.ai">bohm@zlar.ai</a></p>
   </footer>
 
 </body>
