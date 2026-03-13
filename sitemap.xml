@@ -11,6 +11,11 @@
     <priority>0.9</priority>
   </url>
   <url>
+    <loc>https://zlar.ai/zlar-cc.html</loc>
+    <lastmod>2026-03-13</lastmod>
+    <priority>0.9</priority>
+  </url>
+  <url>
     <loc>https://zlar.ai/bohm.html</loc>
     <lastmod>2026-03-13</lastmod>
     <priority>0.8</priority>
@@ -21,8 +26,8 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://zlar.ai/OPEN_LETTER.html</loc>
-    <lastmod>2025-01-01</lastmod>
-    <priority>0.8</priority>
+    <loc>https://zlar.ai/legal.html</loc>
+    <lastmod>2026-03-13</lastmod>
+    <priority>0.5</priority>
   </url>
 </urlset>
