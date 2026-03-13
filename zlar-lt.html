@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ZLAR-LT — Zero-Config Governance for AI Coding Agents</title>
+  <meta name="description" content="One command. Your agent governed in under 60 seconds. Auto-detects Claude Code, Cursor, Windsurf. Deny-heavy defaults. No setup. No Telegram. Just governance.">
+  <meta property="og:title" content="ZLAR-LT — Zero-Config Governance for AI Coding Agents">
+  <meta property="og:description" content="curl -fsSL https://zlar.ai/install.sh | bash — governance running before your coffee gets cold.">
+  <meta property="og:image" content="https://zlar.ai/assets/social-preview.png">
+  <meta property="og:url" content="https://zlar.ai/zlar-lt.html">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@zlar_bohm">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🚦</text></svg>">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #080c14; --bg-card: #0d1520;
+      --border: rgba(56, 189, 248, 0.12);
+      --teal: #38bdf8; --teal-dim: rgba(56, 189, 248, 0.6);
+      --green: #4ade80; --white: #f1f5f9; --muted: #64748b;
+      --font: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+      --mono: 'SF Mono', 'Fira Code', 'Cascadia Code', monospace;
+    }
+    html { scroll-behavior: smooth; }
+    body { background: var(--bg); color: var(--white); font-family: var(--font); line-height: 1.6; overflow-x: hidden; }
+    body::before {
+      content: ''; position: fixed; inset: 0;
+      background-image: radial-gradient(circle at 20% 20%, rgba(56,189,248,0.04) 0%, transparent 50%), radial-gradient(circle at 80% 80%, rgba(74,222,128,0.03) 0%, transparent 50%), linear-gradient(rgba(56,189,248,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(56,189,248,0.03) 1px, transparent 1px);
+      background-size: 100% 100%, 100% 100%, 48px 48px, 48px 48px;
+      pointer-events: none; z-index: 0;
+    }
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 1rem 2rem; background: rgba(8,12,20,0.85); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); }
+    .nav-logo { font-size: 1.1rem; font-weight: 700; letter-spacing: 0.05em; color: var(--white); text-decoration: none; }
+    .nav-logo span { color: var(--teal); }
+    .nav-links { display: flex; gap: 1.5rem; list-style: none; }
+    .nav-links a { color: var(--muted); text-decoration: none; font-size: 0.875rem; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--white); }
+    .nav-links a.active { color: var(--teal); }
+    section { position: relative; z-index: 1; max-width: 860px; margin: 0 auto; padding: 5rem 2rem; }
+    section:first-of-type { padding-top: 10rem; }
+    .hero-eyebrow { display: inline-block; font-family: var(--mono); font-size: 0.75rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--teal); border: 1px solid var(--border); padding: 0.35rem 0.85rem; border-radius: 2rem; margin-bottom: 1.5rem; }
+    h1 { font-size: clamp(2.5rem, 6vw, 4rem); font-weight: 800; line-height: 1.1; letter-spacing: -0.03em; margin-bottom: 0.75rem; color: var(--white); }
+    h2 { font-size: clamp(1.4rem, 3vw, 2rem); font-weight: 700; letter-spacing: -0.02em; margin-bottom: 1rem; color: var(--white); }
+    h3 { font-size: 1.05rem; font-weight: 600; color: var(--white); margin-bottom: 0.5rem; }
+    .hero-tagline { font-size: clamp(1.1rem, 2.5vw, 1.5rem); color: var(--muted); margin-bottom: 1.25rem; font-weight: 400; }
+    .hero-sub { font-size: 1.05rem; color: var(--muted); max-width: 640px; margin-bottom: 2.5rem; line-height: 1.8; }
+    .hero-sub strong { color: var(--white); }
+    .cta-group { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .btn { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.75rem 1.5rem; border-radius: 0.5rem; font-size: 0.9rem; font-weight: 600; text-decoration: none; transition: all 0.2s; }
+    .btn-primary { background: var(--teal); color: #080c14; }
+    .btn-primary:hover { background: #7dd3fc; }
+    .btn-secondary { background: transparent; color: var(--white); border: 1px solid var(--border); }
+    .btn-secondary:hover { border-color: var(--teal-dim); color: var(--teal); }
+    .section-label { font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--teal); margin-bottom: 0.75rem; display: block; }
+    p { color: var(--muted); line-height: 1.8; margin-bottom: 1rem; }
+    p strong { color: var(--white); }
+    .divider { border: none; border-top: 1px solid var(--border); margin: 0; }
+    table { width: 100%; border-collapse: collapse; margin: 1.5rem 0; font-size: 0.875rem; }
+    th { text-align: left; padding: 0.65rem 1rem; background: var(--bg-card); color: var(--teal); font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; border-bottom: 1px solid var(--border); }
+    td { padding: 0.65rem 1rem; border-bottom: 1px solid rgba(56,189,248,0.06); color: var(--muted); vertical-align: top; }
+    td strong { color: var(--white); }
+    tr:last-child td { border-bottom: none; }
+    pre { background: var(--bg-card); border: 1px solid var(--border); border-radius: 0.5rem; padding: 1.25rem 1.5rem; overflow-x: auto; margin: 1.5rem 0; }
+    code { font-family: var(--mono); font-size: 0.875rem; color: var(--teal); }
+    pre code { color: #94a3b8; }
+    .stat-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 1rem; margin: 2rem 0; }
+    .stat-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 0.75rem; padding: 1.5rem; text-align: center; }
+    .stat-number { font-size: 2rem; font-weight: 800; color: var(--teal); letter-spacing: -0.03em; display: block; }
+    .stat-label { font-size: 0.8rem; color: var(--muted); margin-top: 0.25rem; }
+    .allow-deny-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin: 2rem 0; }
+    .allow-block { background: var(--bg-card); border: 1px solid rgba(74,222,128,0.2); border-radius: 0.75rem; padding: 1.5rem; }
+    .deny-block { background: var(--bg-card); border: 1px solid rgba(248,113,113,0.2); border-radius: 0.75rem; padding: 1.5rem; }
+    .block-title { font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 1rem; }
+    .allow-block .block-title { color: var(--green); }
+    .deny-block .block-title { color: #f87171; }
+    .rule-list { list-style: none; padding: 0; }
+    .rule-list li { padding: 0.4rem 0; font-size: 0.875rem; color: var(--muted); border-bottom: 1px solid rgba(56,189,248,0.05); display: flex; gap: 0.6rem; align-items: flex-start; }
+    .rule-list li:last-child { border-bottom: none; }
+    .allow-block .rule-list li::before { content: '✓'; color: var(--green); font-weight: 700; flex-shrink: 0; margin-top: 0.1rem; }
+    .deny-block .rule-list li::before { content: '✗'; color: #f87171; font-weight: 700; flex-shrink: 0; margin-top: 0.1rem; }
+    .hardening-list { list-style: none; padding: 0; margin: 1rem 0; }
+    .hardening-list li { padding: 0.6rem 0; border-bottom: 1px solid rgba(56,189,248,0.06); font-size: 0.9rem; color: var(--muted); display: flex; gap: 0.75rem; }
+    .hardening-list li:last-child { border-bottom: none; }
+    .hardening-list li::before { content: '✓'; color: var(--green); font-weight: 700; flex-shrink: 0; }
+    .hardening-list li strong { color: var(--white); }
+    .upgrade-path { display: flex; gap: 0; margin: 2rem 0; align-items: stretch; flex-wrap: wrap; }
+    .upgrade-step { background: var(--bg-card); border: 1px solid var(--border); padding: 1.25rem 1.5rem; flex: 1; min-width: 180px; }
+    .upgrade-step:first-child { border-radius: 0.5rem 0 0 0.5rem; }
+    .upgrade-step:last-child { border-radius: 0 0.5rem 0.5rem 0; border-left: none; }
+    .upgrade-step-label { font-family: var(--mono); font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--teal); margin-bottom: 0.4rem; }
+    .upgrade-step-title { font-size: 0.9rem; font-weight: 600; color: var(--white); margin-bottom: 0.3rem; }
+    .upgrade-step-desc { font-size: 0.8rem; color: var(--muted); }
+    .limitation-block { background: var(--bg-card); border: 1px solid var(--border); border-left: 3px solid #f59e0b; border-radius: 0.5rem; padding: 1.25rem 1.5rem; margin: 1.5rem 0; }
+    .limitation-block p { margin-bottom: 0.5rem; font-size: 0.9rem; }
+    .limitation-block p:last-child { margin-bottom: 0; }
+    .page-close { background: var(--bg-card); border: 1px solid var(--border); border-radius: 0.75rem; padding: 2rem; margin-top: 1rem; text-align: center; }
+    .page-close p { color: var(--muted); font-size: 0.9rem; margin-bottom: 0.75rem; }
+    .page-close .links { display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap; }
+    .page-close .links a { color: var(--teal); text-decoration: none; font-size: 0.875rem; }
+    footer { position: relative; z-index: 1; text-align: center; padding: 3rem 2rem; border-top: 1px solid var(--border); }
+    footer p { font-size: 0.825rem; color: var(--muted); margin: 0; }
+    footer a { color: var(--muted); text-decoration: none; transition: color 0.2s; }
+    footer a:hover { color: var(--teal); }
+    @media (max-width: 640px) { nav { padding: 1rem; } .nav-links { gap: 1rem; } section { padding: 3.5rem 1.25rem; } section:first-of-type { padding-top: 7rem; } .allow-deny-grid { grid-template-columns: 1fr; } .upgrade-step:last-child { border-left: 1px solid var(--border); border-top: none; border-radius: 0 0 0.5rem 0.5rem; } }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="/" class="nav-logo">ZL<span>A</span>R</a>
+    <ul class="nav-links">
+      <li><a href="/zlar-oc.html">ZLAR-OC</a></li>
+      <li><a href="/zlar-cc.html">ZLAR-CC</a></li>
+      <li><a href="/zlar-gate.html">ZLAR Gate</a></li>
+      <li><a href="/zlar-lt.html" class="active">ZLAR-LT</a></li>
+      <li><a href="/OPEN_LETTER.html">Open Letter</a></li>
+      <li><a href="/bohm.html">Meet Bohm</a></li>
+      <li><a href="https://github.com/ZLAR-AI/ZLAR-OC">GitHub</a></li>
+    </ul>
+  </nav>
+
+  <!-- Hero -->
+  <section id="hero">
+    <div class="hero-eyebrow">ZLAR-LT · Open Source · Apache 2.0</div>
+    <h1>ZLAR-LT</h1>
+    <p class="hero-tagline">Zero-config governance for AI coding agents.</p>
+    <p class="hero-sub">One command. Auto-detects <strong>Claude Code</strong>, <strong>Cursor</strong>, and <strong>Windsurf</strong>. Generates Ed25519 keys. Signs a deny-heavy policy. Configures hooks. <strong>Governance running in under 60 seconds.</strong></p>
+    <div class="cta-group">
+      <a href="https://github.com/ZLAR-AI/ZLAR-LT" class="btn btn-primary">Get Started →</a>
+      <a href="/legal.html" class="btn btn-secondary">Read the Legal</a>
+    </div>
+
+    <div style="margin-top: 2rem;">
+      <pre><code>curl -fsSL https://zlar.ai/install.sh | bash</code></pre>
+    </div>
+
+    <div class="stat-row">
+      <div class="stat-card"><span class="stat-number">23</span><div class="stat-label">Policy rules</div></div>
+      <div class="stat-card"><span class="stat-number">15</span><div class="stat-label">Deny rules</div></div>
+      <div class="stat-card"><span class="stat-number">Ed25519</span><div class="stat-label">Signed policy</div></div>
+      <div class="stat-card"><span class="stat-number">&lt;60s</span><div class="stat-label">Time to governance</div></div>
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <!-- What it does -->
+  <section id="what-it-does">
+    <span class="section-label">What's Allowed. What's Blocked.</span>
+    <h2>Deny-heavy by default.</h2>
+    <p>ZLAR-LT ships with 23 rules (8 allow, 15 deny). The agent can read, write, edit, and search. It cannot delete, escalate, persist, exfiltrate, or push. Anything not explicitly allowed is denied.</p>
+
+    <div class="allow-deny-grid">
+      <div class="allow-block">
+        <div class="block-title">Allowed</div>
+        <ul class="rule-list">
+          <li>Read files (<code>cat</code>, <code>head</code>, <code>tail</code>, <code>less</code>)</li>
+          <li>List directories (<code>ls</code>, <code>find</code>, <code>tree</code>)</li>
+          <li>Search content (<code>grep</code>, <code>rg</code>, <code>ag</code>)</li>
+          <li>Write and edit files</li>
+          <li>Create directories (<code>mkdir</code>)</li>
+          <li>Compile and run tests</li>
+          <li>Read environment info (<code>pwd</code>, <code>whoami</code>, <code>date</code>)</li>
+          <li>Git status and diff (read-only)</li>
+        </ul>
+      </div>
+      <div class="deny-block">
+        <div class="block-title">Blocked</div>
+        <ul class="rule-list">
+          <li>Delete files or directories (<code>rm</code>, <code>rmdir</code>)</li>
+          <li>Git push, force push, tag push</li>
+          <li>Network requests (<code>curl</code>, <code>wget</code>, <code>nc</code>)</li>
+          <li>Install packages (<code>npm install</code>, <code>pip install</code>, <code>brew install</code>)</li>
+          <li>Privilege escalation (<code>sudo</code>, <code>su</code>)</li>
+          <li>Modify gate infrastructure (self-protection)</li>
+          <li>Read signing key (self-protection)</li>
+          <li>Shell escapes and subshell tricks</li>
+          <li>Environment variable manipulation</li>
+          <li>Process injection and background execution</li>
+        </ul>
+      </div>
+    </div>
+
+    <p>No Telegram. No decisions. Safe actions flow through instantly. Blocked actions are denied with a reason. The agent knows why. The audit trail records everything.</p>
+  </section>
+
+  <hr class="divider">
+
+  <!-- Self-Protection -->
+  <section id="self-protection">
+    <span class="section-label">Self-Protection</span>
+    <h2>The agent cannot govern itself.</h2>
+    <p>Three rules exist specifically to prevent the agent from modifying or reading its own governance infrastructure:</p>
+    <ul class="hardening-list">
+      <li><strong>Cannot modify gate infrastructure</strong> — writes to ZLAR-LT directories are blocked</li>
+      <li><strong>Cannot read the signing key</strong> — the Ed25519 private key is blocked from agent reads</li>
+      <li><strong>Cannot modify policy</strong> — the policy file and signature are outside the agent's write domain</li>
+    </ul>
+    <p>The policy is signed with Ed25519. The gate verifies the signature on every load. An agent that writes to the policy file invalidates the signature — the gate detects this and denies everything. Governance that the governed party can modify is not governance.</p>
+  </section>
+
+  <hr class="divider">
+
+  <!-- Quick Install -->
+  <section id="install">
+    <span class="section-label">Installation</span>
+    <h2>One command.</h2>
+    <pre><code>curl -fsSL https://zlar.ai/install.sh | bash</code></pre>
+    <p>The installer:</p>
+    <ul class="hardening-list">
+      <li>Auto-detects which frameworks are installed (Claude Code, Cursor, Windsurf)</li>
+      <li>Generates Ed25519 keypair</li>
+      <li>Signs the default deny-heavy policy</li>
+      <li>Configures hooks in each detected framework</li>
+      <li>Verifies governance is running</li>
+    </ul>
+    <p>No configuration required. No Telegram bot. No API tokens. No decisions. You can read and customize the default policy at <code>~/.zlar-lt/policies/lt-default.policy.json</code>.</p>
+    <p>If you want to read the install script before running it: <a href="https://github.com/ZLAR-AI/ZLAR-LT/blob/main/install.sh" style="color:var(--teal);text-decoration:none;">github.com/ZLAR-AI/ZLAR-LT/blob/main/install.sh</a></p>
+  </section>
+
+  <hr class="divider">
+
+  <!-- Upgrade Path -->
+  <section id="upgrade">
+    <span class="section-label">Upgrade Path</span>
+    <h2>Start here. Grow from here.</h2>
+    <p>ZLAR-LT is the on-ramp. It gives you immediate protection with zero configuration. When you're ready for more control, there's a clear path up.</p>
+
+    <div class="upgrade-path">
+      <div class="upgrade-step">
+        <div class="upgrade-step-label">Now</div>
+        <div class="upgrade-step-title">ZLAR-LT</div>
+        <div class="upgrade-step-desc">Zero-config. Deny-heavy defaults. One command. No decisions required.</div>
+      </div>
+      <div class="upgrade-step">
+        <div class="upgrade-step-label">Next</div>
+        <div class="upgrade-step-title">ZLAR-LT + Telegram</div>
+        <div class="upgrade-step-desc">Add your Telegram bot token. Blocked actions become approval requests instead of hard denies.</div>
+      </div>
+      <div class="upgrade-step">
+        <div class="upgrade-step-label">Full Control</div>
+        <div class="upgrade-step-title">ZLAR Gate</div>
+        <div class="upgrade-step-desc">Custom policy. Risk tiers. Full audit trail. Case-by-case approval across all your editors.</div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <!-- Known Limitations -->
+  <section id="limitations">
+    <span class="section-label">Known Limitations</span>
+    <h2>What ZLAR-LT doesn't do.</h2>
+    <div class="limitation-block">
+      <p><strong>No Telegram approval.</strong> Blocked actions are denied, not held for review. If you want case-by-case approval, add a Telegram token or upgrade to ZLAR Gate.</p>
+      <p><strong>Cursor file edits are audited, not pre-blocked.</strong> Cursor's afterFileEdit hook fires after the edit is applied. File edits are recorded but cannot be stopped in advance.</p>
+      <p><strong>Obfuscated commands may bypass regex rules.</strong> Base64, eval wrappers, and variable indirection can evade string-level rules. This is a fundamental limitation of regex-based classifiers.</p>
+      <p><strong>Cursor and Windsurf adapters are built from documentation, not tested against live payloads.</strong> The Claude Code adapter is verified. If you use ZLAR-LT with Cursor or Windsurf and encounter issues, open an issue.</p>
+    </div>
+    <p>ZLAR-LT reduces risk. It does not eliminate it. See <a href="/legal.html" style="color:var(--teal);text-decoration:none;">Legal</a> for complete terms.</p>
+  </section>
+
+  <hr class="divider">
+
+  <!-- The ZLAR Family -->
+  <section id="family">
+    <span class="section-label">The ZLAR Family</span>
+    <h2>Pick the right layer.</h2>
+    <table>
+      <thead><tr><th>Product</th><th>Platform</th><th>Best for</th></tr></thead>
+      <tbody>
+        <tr><td><a href="/zlar-oc.html" style="color:var(--teal);text-decoration:none;"><strong>ZLAR-OC</strong></a></td><td>OpenClaw</td><td>OS-level containment — six enforcement layers, kernel sandbox, pf firewall, signed policy</td></tr>
+        <tr><td><a href="/zlar-cc.html" style="color:var(--teal);text-decoration:none;"><strong>ZLAR-CC</strong></a></td><td>Claude Code</td><td>Full Claude Code gate — TypeScript gateway, risk classification, Telegram approval</td></tr>
+        <tr><td><a href="/zlar-gate.html" style="color:var(--teal);text-decoration:none;"><strong>ZLAR Gate</strong></a></td><td>Claude Code + Cursor + Windsurf</td><td>One policy across all editors — custom rules, Telegram approval, full audit trail</td></tr>
+        <tr><td><strong>ZLAR-LT</strong></td><td>Claude Code + Cursor + Windsurf</td><td>Zero-config start — one command, deny-heavy defaults, no decisions required</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <hr class="divider">
+
+  <section id="built-by">
+    <div class="page-close">
+      <p><strong>Built by Vincent Nijjar and ZLAR Inc.</strong><br>Open source under Apache License 2.0. Free to use, modify, and distribute.</p>
+      <div class="links">
+        <a href="https://github.com/ZLAR-AI/ZLAR-LT">GitHub</a>
+        <a href="mailto:hello@zlar.ai">hello@zlar.ai</a>
+        <a href="https://zlar.ai">zlar.ai</a>
+        <a href="/legal.html">Legal</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>© 2025-2026 ZLAR Inc. · <a href="https://github.com/ZLAR-AI/ZLAR-OC">GitHub</a> · <a href="https://x.com/zlar_bohm">X</a> · <a href="mailto:hello@zlar.ai">hello@zlar.ai</a> · <a href="mailto:bohm@zlar.ai">bohm@zlar.ai</a> · <a href="/legal.html">Legal</a></p>
+  </footer>
+
+</body>
+</html>
