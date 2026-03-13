@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ZLAR-CC — ZLAR for Claude Code</title>
+  <meta name="description" content="Human-governed AI coding. No speed lost. ZLAR-CC intercepts every Claude Code tool call, classifies risk, and routes the 5% that matter to your Telegram for approval.">
+  <meta property="og:title" content="ZLAR-CC — ZLAR for Claude Code">
+  <meta property="og:description" content="95% of actions flow through instantly. The 5% that matter wait for your approval. Hook-based. Deterministic classifier. Ed25519 signed policy.">
+  <meta property="og:image" content="https://zlar.ai/assets/social-preview.png">
+  <meta property="og:url" content="https://zlar.ai/zlar-cc.html">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@zlar_bohm">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🚦</text></svg>">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #080c14; --bg-card: #0d1520;
+      --border: rgba(56, 189, 248, 0.12);
+      --teal: #38bdf8; --teal-dim: rgba(56, 189, 248, 0.6);
+      --green: #4ade80; --white: #f1f5f9; --muted: #64748b;
+      --font: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+      --mono: 'SF Mono', 'Fira Code', 'Cascadia Code', monospace;
+    }
+    html { scroll-behavior: smooth; }
+    body { background: var(--bg); color: var(--white); font-family: var(--font); line-height: 1.6; overflow-x: hidden; }
+    body::before {
+      content: ''; position: fixed; inset: 0;
+      background-image: radial-gradient(circle at 20% 20%, rgba(56,189,248,0.04) 0%, transparent 50%), radial-gradient(circle at 80% 80%, rgba(74,222,128,0.03) 0%, transparent 50%), linear-gradient(rgba(56,189,248,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(56,189,248,0.03) 1px, transparent 1px);
+      background-size: 100% 100%, 100% 100%, 48px 48px, 48px 48px;
+      pointer-events: none; z-index: 0;
+    }
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 1rem 2rem; background: rgba(8,12,20,0.85); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); }
+    .nav-logo { font-size: 1.1rem; font-weight: 700; letter-spacing: 0.05em; color: var(--white); text-decoration: none; }
+    .nav-logo span { color: var(--teal); }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a { color: var(--muted); text-decoration: none; font-size: 0.875rem; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--white); }
+    .nav-links a.active { color: var(--teal); }
+    section { position: relative; z-index: 1; max-width: 860px; margin: 0 auto; padding: 5rem 2rem; }
+    section:first-of-type { padding-top: 10rem; }
+    .hero-eyebrow { display: inline-block; font-family: var(--mono); font-size: 0.75rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--teal); border: 1px solid var(--border); padding: 0.35rem 0.85rem; border-radius: 2rem; margin-bottom: 1.5rem; }
+    h1 { font-size: clamp(2.5rem, 6vw, 4rem); font-weight: 800; line-height: 1.1; letter-spacing: -0.03em; margin-bottom: 0.75rem; color: var(--white); }
+    h2 { font-size: clamp(1.4rem, 3vw, 2rem); font-weight: 700; letter-spacing: -0.02em; margin-bottom: 1rem; color: var(--white); }
+    h3 { font-size: 1.1rem; font-weight: 600; color: var(--white); margin-bottom: 0.75rem; }
+    .hero-tagline { font-size: clamp(1.1rem, 2.5vw, 1.5rem); color: var(--muted); margin-bottom: 1.5rem; font-weight: 400; line-height: 1.4; }
+    .hero-sub { font-size: 1.05rem; color: var(--muted); max-width: 640px; margin-bottom: 2.5rem; line-height: 1.8; }
+    .hero-sub strong { color: var(--white); }
+    .cta-group { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .btn { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.75rem 1.5rem; border-radius: 0.5rem; font-size: 0.9rem; font-weight: 600; text-decoration: none; transition: all 0.2s; }
+    .btn-primary { background: var(--teal); color: #080c14; }
+    .btn-primary:hover { background: #7dd3fc; }
+    .btn-secondary { background: transparent; color: var(--white); border: 1px solid var(--border); }
+    .btn-secondary:hover { border-color: var(--teal-dim); color: var(--teal); }
+    .section-label { font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--teal); margin-bottom: 0.75rem; display: block; }
+    p { color: var(--muted); line-height: 1.8; margin-bottom: 1rem; }
+    p strong { color: var(--white); }
+    .divider { border: none; border-top: 1px solid var(--border); margin: 0; }
+    /* Tables */
+    table { width: 100%; border-collapse: collapse; margin: 1.5rem 0; font-size: 0.875rem; }
+    th { text-align: left; padding: 0.65rem 1rem; background: var(--bg-card); color: var(--teal); font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; border-bottom: 1px solid var(--border); }
+    td { padding: 0.65rem 1rem; border-bottom: 1px solid rgba(56,189,248,0.06); color: var(--muted); vertical-align: top; }
+    td strong { color: var(--white); }
+    tr:last-child td { border-bottom: none; }
+    /* Code */
+    pre { background: var(--bg-card); border: 1px solid var(--border); border-radius: 0.5rem; padding: 1.25rem 1.5rem; overflow-x: auto; margin: 1.5rem 0; }
+    code { font-family: var(--mono); font-size: 0.875rem; color: var(--teal); line-height: 1.7; }
+    pre code { color: #94a3b8; }
+    pre code .comment { color: var(--muted); }
+    /* Cards */
+    .card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 0.75rem; padding: 1.75rem; margin-bottom: 1rem; }
+    /* Stats */
+    .stat-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1rem; margin: 2rem 0; }
+    .stat-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 0.75rem; padding: 1.5rem; text-align: center; }
+    .stat-number { font-size: 2.5rem; font-weight: 800; color: var(--teal); letter-spacing: -0.03em; display: block; }
+    .stat-label { font-size: 0.8rem; color: var(--muted); margin-top: 0.25rem; }
+    /* Stage blocks */
+    .stage-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin: 1.5rem 0; }
+    .stage-block { background: var(--bg-card); border: 1px solid var(--border); border-radius: 0.75rem; padding: 1.5rem; }
+    .stage-label { font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--teal); margin-bottom: 0.5rem; display: block; }
+    .stage-title { font-size: 1rem; font-weight: 700; color: var(--white); margin-bottom: 0.75rem; }
+    .stage-block ul { color: var(--muted); padding-left: 1.25rem; font-size: 0.875rem; }
+    .stage-block li { margin-bottom: 0.35rem; line-height: 1.6; }
+    /* Footer close */
+    .page-close { background: var(--bg-card); border: 1px solid var(--border); border-radius: 0.75rem; padding: 2rem; margin-top: 1rem; text-align: center; }
+    .page-close p { color: var(--muted); font-size: 0.9rem; margin-bottom: 0.75rem; }
+    .page-close .links { display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap; }
+    .page-close .links a { color: var(--teal); text-decoration: none; font-size: 0.875rem; }
+    .page-close .links a:hover { text-decoration: underline; }
+    footer { position: relative; z-index: 1; text-align: center; padding: 3rem 2rem; border-top: 1px solid var(--border); }
+    footer p { font-size: 0.825rem; color: var(--muted); margin: 0; }
+    footer a { color: var(--muted); text-decoration: none; transition: color 0.2s; }
+    footer a:hover { color: var(--teal); }
+    @media (max-width: 640px) { nav { padding: 1rem; } .nav-links { gap: 1.25rem; } section { padding: 3.5rem 1.25rem; } section:first-of-type { padding-top: 7rem; } .stage-grid { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="/" class="nav-logo">ZL<span>A</span>R</a>
+    <ul class="nav-links">
+      <li><a href="/zlar-oc.html">ZLAR-OC</a></li>
+      <li><a href="/zlar-cc.html" class="active">ZLAR-CC</a></li>
+      <li><a href="/OPEN_LETTER.html">Open Letter</a></li>
+      <li><a href="/bohm.html">Meet Bohm</a></li>
+      <li><a href="https://github.com/ZLAR-AI/ZLAR-OC">GitHub</a></li>
+    </ul>
+  </nav>
+
+  <!-- Hero -->
+  <section id="hero">
+    <div class="hero-eyebrow">ZLAR-CC · Open Source · Apache 2.0</div>
+    <h1>ZLAR-CC</h1>
+    <p class="hero-tagline">Human-governed AI coding. No speed lost.</p>
+    <p class="hero-sub">
+      You gave Claude Code bypass permissions because the default permission prompts slow you down. Good.
+      <strong>ZLAR-CC gives you the speed back — and adds a gate where it matters.</strong>
+    </p>
+    <div class="cta-group">
+      <a href="https://github.com/ZLAR-AI/ClaudeCode_ZLAR-CC" class="btn btn-primary">View on GitHub →</a>
+      <a href="/legal.html" class="btn btn-secondary">Read the Legal</a>
+    </div>
+
+    <div class="stat-row" style="margin-top: 3rem;">
+      <div class="stat-card"><span class="stat-number">10</span><div class="stat-label">Tools intercepted</div></div>
+      <div class="stat-card"><span class="stat-number">95%</span><div class="stat-label">Pass through instantly</div></div>
+      <div class="stat-card"><span class="stat-number">Ed25519</span><div class="stat-label">Signed policy</div></div>
+      <div class="stat-card"><span class="stat-number">Fail-closed</span><div class="stat-label">If it breaks, it stops</div></div>
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <!-- The Problem -->
+  <section id="problem">
+    <span class="section-label">The Problem</span>
+    <h2>No middle ground built in.</h2>
+    <p>Claude Code with bypass permissions is powerful. It can write files, execute shell commands, install packages, and modify your system — all without asking.</p>
+    <p>That's the point. That's why you enabled it.</p>
+    <p>But there's no middle ground built in. It's either full friction (approve everything) or no friction (approve nothing). Every tool call gets the same treatment regardless of whether it's reading a file or running <code>rm -rf /</code>.</p>
+    <p><strong>ZLAR-CC creates the middle ground that doesn't exist.</strong></p>
+  </section>
+
+  <hr class="divider">
+
+  <!-- How It Works -->
+  <section id="how-it-works">
+    <span class="section-label">How It Works</span>
+    <h2>A gate with no intelligence.</h2>
+    <p>ZLAR-CC hooks into Claude Code's PreToolUse protocol. Every tool call — all 10 of them — passes through a deterministic gate before execution.</p>
+    <p><strong>The gate has no intelligence.</strong> It doesn't use AI. It doesn't make judgment calls. It classifies, matches against your policy, and either passes instantly or halts for your approval.</p>
+
+    <table>
+      <thead><tr><th>What happens</th><th>How</th></tr></thead>
+      <tbody>
+        <tr><td>Tool call intercepted</td><td>PreToolUse hook, fail-closed</td></tr>
+        <tr><td>Risk classified</td><td>Two-stage deterministic classifier</td></tr>
+        <tr><td>Policy matched</td><td>Your rules, Ed25519 signed</td></tr>
+        <tr><td>Low risk</td><td>Passes instantly — no delay</td></tr>
+        <tr><td><strong>High risk</strong></td><td><strong>Halts. You get a Telegram message. You approve or deny.</strong></td></tr>
+      </tbody>
+    </table>
+
+    <p><strong>95% of actions flow through instantly.</strong> The 5% that matter — destructive commands, sensitive file access, network operations — wait for you.</p>
+  </section>
+
+  <hr class="divider">
+
+  <!-- The 10 Tools -->
+  <section id="tools">
+    <span class="section-label">Coverage</span>
+    <h2>Every tool. Every time.</h2>
+
+    <table>
+      <thead><tr><th>Tool</th><th>What it does</th><th>Example risk</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Bash</strong></td><td>Shell commands</td><td><code>rm -rf</code>, <code>curl</code>, <code>chmod</code></td></tr>
+        <tr><td><strong>Read</strong></td><td>File reads</td><td>Credentials, private keys</td></tr>
+        <tr><td><strong>Write</strong></td><td>File creation</td><td>Overwriting configs</td></tr>
+        <tr><td><strong>Edit</strong></td><td>File modification</td><td>Changing source code</td></tr>
+        <tr><td><strong>Glob</strong></td><td>File search</td><td>Reconnaissance</td></tr>
+        <tr><td><strong>Grep</strong></td><td>Content search</td><td>Scanning for secrets</td></tr>
+        <tr><td><strong>WebFetch</strong></td><td>HTTP requests</td><td>Data exfiltration</td></tr>
+        <tr><td><strong>TodoRead</strong></td><td>Task reading</td><td>Low risk</td></tr>
+        <tr><td><strong>TodoWrite</strong></td><td>Task writing</td><td>Low risk</td></tr>
+        <tr><td><strong>NotebookEdit</strong></td><td>Jupyter edits</td><td>Code injection</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <hr class="divider">
+
+  <!-- Two-Stage Classifier -->
+  <section id="classifier">
+    <span class="section-label">Risk Classifier</span>
+    <h2>Two-stage. Deterministic. Same input, same output, always.</h2>
+
+    <div class="stage-grid">
+      <div class="stage-block">
+        <span class="stage-label">Stage 1 — Boundedness</span>
+        <div class="stage-title">Five binary checks. Any true = Tier 4.</div>
+        <ul>
+          <li>Unbounded scope? (e.g., <code>find / -delete</code>)</li>
+          <li>Unbounded depth? (e.g., recursive without limit)</li>
+          <li>Crosses trust boundary? (network access, external comms)</li>
+          <li>Modifies execution environment? (<code>chmod</code>, env vars)</li>
+          <li>Self-referential? (modifying its own policy or config)</li>
+        </ul>
+      </div>
+      <div class="stage-block">
+        <span class="stage-label">Stage 2 — Scoring</span>
+        <div class="stage-title">Three axes, each scored 1–4.</div>
+        <ul>
+          <li><strong>Irreversibility</strong> — can this be undone?</li>
+          <li><strong>Consequence</strong> — what's the blast radius?</li>
+          <li><strong>Scope</strong> — how many systems does this touch?</li>
+        </ul>
+        <p style="margin-top: 0.75rem; margin-bottom: 0; font-size: 0.875rem;"><code>tier = max(all axes)</code></p>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <!-- Your Rules -->
+  <section id="policy">
+    <span class="section-label">Policy</span>
+    <h2>AI writes code. Humans write rules.</h2>
+    <p>The policy file is yours. You write it. You sign it with Ed25519. The AI cannot modify the rules that govern it.</p>
+
+    <pre><code><span class="comment"># Example: allow reads, gate writes, block destructive commands</span>
+rules:
+  - pattern: "cat *"
+    action: allow
+  - pattern: "rm *"
+    action: deny
+  - pattern: "git push *"
+    action: hold  <span class="comment"># sends to Telegram for approval</span></code></pre>
+
+    <p>No machine learning. No inference. No heuristics. String matching against human-authored rules.</p>
+  </section>
+
+  <hr class="divider">
+
+  <!-- Fail-Closed -->
+  <section id="fail-closed">
+    <span class="section-label">Reliability</span>
+    <h2>Fail-closed by design.</h2>
+    <p>If something breaks, everything stops. Not everything continues.</p>
+
+    <table>
+      <thead><tr><th>Scenario</th><th>What happens</th></tr></thead>
+      <tbody>
+        <tr><td>Gateway unreachable</td><td>All actions denied</td></tr>
+        <tr><td>Unknown tool</td><td>Denied</td></tr>
+        <tr><td>Policy signature invalid</td><td>All actions denied</td></tr>
+        <tr><td>Classifier error</td><td>Denied</td></tr>
+        <tr><td>Telegram down</td><td>High-risk actions wait (configurable timeout)</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <hr class="divider">
+
+  <!-- Quick Start -->
+  <section id="quickstart">
+    <span class="section-label">Quick Start</span>
+    <h2>Up in minutes.</h2>
+
+    <pre><code>git clone https://github.com/ZLAR-AI/ClaudeCode_ZLAR-CC.git
+cd ClaudeCode_ZLAR-CC
+npm install && npm run build
+cp .env.example .env       <span class="comment"># add your Telegram bot token</span>
+npm run keygen             <span class="comment"># generate Ed25519 keypair</span>
+npm run sign-policy        <span class="comment"># sign your policy</span>
+npm run dev:gateway        <span class="comment"># start the gate</span></code></pre>
+
+    <p>Then add the hook to your Claude Code settings. See the <a href="https://github.com/ZLAR-AI/ClaudeCode_ZLAR-CC" style="color: var(--teal); text-decoration: none;">README</a> for full setup.</p>
+  </section>
+
+  <hr class="divider">
+
+  <!-- ZLAR Family -->
+  <section id="family">
+    <span class="section-label">The ZLAR Family</span>
+    <h2>Part of the ZLAR family.</h2>
+    <p>Same thesis: intelligence above, enforcement below. Same company. Same license. Different surfaces.</p>
+
+    <table>
+      <thead><tr><th>Product</th><th>Platform</th><th>Enforcement</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><strong>ZLAR-OC</strong></td>
+          <td>OpenClaw</td>
+          <td>OS-level — user isolation, kernel sandbox, firewall, gate daemon, signed policy, audit trail</td>
+        </tr>
+        <tr>
+          <td><strong>ZLAR-CC</strong></td>
+          <td>Claude Code</td>
+          <td>Hook-level — PreToolUse intercept, two-stage classifier, signed policy, Telegram approval</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p><a href="/zlar-oc.html" style="color: var(--teal); text-decoration: none;">Learn about ZLAR-OC →</a></p>
+  </section>
+
+  <hr class="divider">
+
+  <!-- Built by -->
+  <section id="built-by">
+    <div class="page-close">
+      <p><strong>Built by Vincent Nijjar and ZLAR Inc.</strong><br>Open source under Apache License 2.0. Free to use, modify, and distribute.</p>
+      <div class="links">
+        <a href="https://github.com/ZLAR-AI/ClaudeCode_ZLAR-CC">GitHub</a>
+        <a href="mailto:hello@zlar.ai">hello@zlar.ai</a>
+        <a href="https://zlar.ai">zlar.ai</a>
+        <a href="/legal.html">Legal</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>© 2025-2026 ZLAR Inc. · <a href="https://github.com/ZLAR-AI/ZLAR-OC">GitHub</a> · <a href="https://x.com/vincentnijjar">X</a> · <a href="mailto:hello@zlar.ai">hello@zlar.ai</a> · <a href="mailto:bohm@zlar.ai">bohm@zlar.ai</a> · <a href="/legal.html">Legal</a></p>
+  </footer>
+
+</body>
+</html>
