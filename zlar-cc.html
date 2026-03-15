@@ -171,26 +171,32 @@
 
   <hr class="divider">
 
-  <!-- The 10 Tools -->
+  <!-- Tools Coverage -->
   <section id="tools">
     <span class="section-label">Coverage</span>
     <h2>Every tool. Every time.</h2>
 
     <table>
-      <thead><tr><th>Tool</th><th>What it does</th><th>Example risk</th></tr></thead>
+      <thead><tr><th>Tool</th><th>What it does</th><th>Default</th></tr></thead>
       <tbody>
-        <tr><td><strong>Bash</strong></td><td>Shell commands</td><td><code>rm -rf</code>, <code>curl</code>, <code>chmod</code></td></tr>
-        <tr><td><strong>Read</strong></td><td>File reads</td><td>Credentials, private keys</td></tr>
-        <tr><td><strong>Write</strong></td><td>File creation</td><td>Overwriting configs</td></tr>
-        <tr><td><strong>Edit</strong></td><td>File modification</td><td>Changing source code</td></tr>
-        <tr><td><strong>Glob</strong></td><td>File search</td><td>Reconnaissance</td></tr>
-        <tr><td><strong>Grep</strong></td><td>Content search</td><td>Scanning for secrets</td></tr>
-        <tr><td><strong>WebFetch</strong></td><td>HTTP requests</td><td>Data exfiltration</td></tr>
-        <tr><td><strong>TodoRead</strong></td><td>Task reading</td><td>Low risk</td></tr>
-        <tr><td><strong>TodoWrite</strong></td><td>Task writing</td><td>Low risk</td></tr>
-        <tr><td><strong>NotebookEdit</strong></td><td>Jupyter edits</td><td>Code injection</td></tr>
+        <tr><td><strong>Bash</strong></td><td>Shell commands</td><td>Always gated</td></tr>
+        <tr><td><strong>Read</strong></td><td>File reads</td><td>Sensitive paths gated</td></tr>
+        <tr><td><strong>Write</strong></td><td>File creation</td><td>Policy-dependent</td></tr>
+        <tr><td><strong>Edit</strong></td><td>File modification</td><td>Policy-dependent</td></tr>
+        <tr><td><strong>Glob / Grep</strong></td><td>File search</td><td>Sensitive paths gated</td></tr>
+        <tr><td><strong>WebFetch / WebSearch</strong></td><td>Network requests</td><td>Always gated</td></tr>
+        <tr><td><strong>NotebookEdit</strong></td><td>Jupyter edits</td><td>Policy-dependent</td></tr>
+        <tr><td><strong>Task / Agent</strong></td><td>Sub-agent spawning</td><td>Always gated</td></tr>
+        <tr><td><strong>TodoWrite, AskUserQuestion, EnterPlanMode&hellip;</strong></td><td>Internal tools</td><td>&#9889; Pass-through — zero overhead</td></tr>
+        <tr><td><strong>mcp__&lt;server&gt;__&lt;tool&gt;</strong></td><td>Third-party MCP</td><td>&#x1F6A6; Ask by default</td></tr>
       </tbody>
     </table>
+
+    <p><strong>MCP tools classified.</strong> Every call to a third-party MCP server triggers an approval request. Governance follows the tool, not just the model.</p>
+
+    <p><strong>Internal tools pass instantly.</strong> TodoWrite, AskUserQuestion, plan mode — conversation-internal tools have zero governance overhead. The gate only fires when it matters.</p>
+
+    <p><strong>Denied-by distinction.</strong> Every deny includes <code>denied_by</code>: <code>[human]</code>, <code>[timeout]</code>, <code>[policy]</code>, <code>[rate_limit]</code>, or <code>[gate_error]</code>. Your agent knows exactly why it was blocked.</p>
   </section>
 
   <hr class="divider">
