@@ -1,6 +1,6 @@
 #!/bin/bash
 # ═══════════════════════════════════════════════════════════════════════════════
-# ZLAR-LT — Zero-Config Install
+# ZLAR — Zero-Config Install
 #
 # curl -fsSL https://zlar.ai/install.sh | bash
 #
@@ -14,8 +14,8 @@
 # Strict mode (bash-3 safe: no pipefail in POSIX sh)
 set -eu
 
-ZLAR_LT_VERSION="1.0.0"
-INSTALL_DIR="${HOME}/.zlar-lt"
+ZLAR_VERSION="1.0.0"
+INSTALL_DIR="${HOME}/.zlar"
 
 # ─── Colors (bash-3 safe) ────────────────────────────────────────────────────
 
@@ -36,7 +36,7 @@ step() { printf "\n${BOLD}%s${NC}\n\n" "$*"; }
 
 printf "\n"
 printf "${BOLD}═══════════════════════════════════════════════════${NC}\n"
-printf "${BOLD}  ZLAR-LT — Zero-Config Agent Governance${NC}\n"
+printf "${BOLD}  ZLAR — Zero-Config Agent Governance${NC}\n"
 printf "${BOLD}  One command. Your rules. Under 60 seconds.${NC}\n"
 printf "${BOLD}═══════════════════════════════════════════════════${NC}\n"
 printf "\n"
@@ -129,13 +129,13 @@ if [ -d "${INSTALL_DIR}" ]; then
     if [ -f "${INSTALL_DIR}/VERSION" ]; then
         EXISTING_VERSION=$(cat "${INSTALL_DIR}/VERSION" 2>/dev/null || echo "unknown")
     fi
-    fail "ZLAR-LT is already installed at ${INSTALL_DIR} (version: ${EXISTING_VERSION:-unknown})"
+    fail "ZLAR is already installed at ${INSTALL_DIR} (version: ${EXISTING_VERSION:-unknown})"
     printf "       To reinstall: ${BOLD}curl -fsSL https://zlar.ai/uninstall.sh | bash${NC} then re-run install\n"
-    printf "       To upgrade: ${BOLD}~/.zlar-lt/bin/zlar-lt version${NC} to check current version\n"
+    printf "       To upgrade: ${BOLD}~/.zlar/bin/zlar version${NC} to check current version\n"
     exit 1
 fi
 
-ok "No existing ZLAR-LT installation found"
+ok "No existing ZLAR installation found"
 
 # Check if any framework already has ZLAR hooks (Gate or CC)
 EXISTING_ZLAR=0
@@ -191,7 +191,7 @@ fi
 TOTAL_FRAMEWORKS=$((HAS_CC + HAS_CURSOR + HAS_WINDSURF))
 if [ "${TOTAL_FRAMEWORKS}" -eq 0 ]; then
     warn "No supported frameworks detected"
-    printf "       ZLAR-LT will install anyway. You can configure hooks manually later.\n"
+    printf "       ZLAR will install anyway. You can configure hooks manually later.\n"
     printf "       Supported: Claude Code, Cursor, Windsurf\n"
 fi
 
@@ -215,27 +215,27 @@ fi
 
 if [ -z "${SCRIPT_SOURCE_DIR}" ]; then
     # Download from GitHub release
-    GITHUB_REPO="ZLAR-AI/ZLAR-LT"
-    TARBALL_URL="https://github.com/${GITHUB_REPO}/releases/latest/download/zlar-lt-${ZLAR_LT_VERSION}.tar.gz"
+    GITHUB_REPO="ZLAR-AI/ZLAR"
+    TARBALL_URL="https://github.com/${GITHUB_REPO}/releases/latest/download/zlar-${ZLAR_VERSION}.tar.gz"
 
-    info "Downloading ZLAR-LT v${ZLAR_LT_VERSION}..."
+    info "Downloading ZLAR v${ZLAR_VERSION}..."
 
     TMPDIR_DL=$(mktemp -d)
     trap "rm -rf '${TMPDIR_DL}'" EXIT
 
-    if curl -fsSL "${TARBALL_URL}" -o "${TMPDIR_DL}/zlar-lt.tar.gz" 2>/dev/null; then
-        tar xzf "${TMPDIR_DL}/zlar-lt.tar.gz" -C "${TMPDIR_DL}" 2>/dev/null
-        SCRIPT_SOURCE_DIR="${TMPDIR_DL}/zlar-lt"
+    if curl -fsSL "${TARBALL_URL}" -o "${TMPDIR_DL}/zlar.tar.gz" 2>/dev/null; then
+        tar xzf "${TMPDIR_DL}/zlar.tar.gz" -C "${TMPDIR_DL}" 2>/dev/null
+        SCRIPT_SOURCE_DIR="${TMPDIR_DL}/zlar"
         ok "Downloaded and extracted"
     else
         # Fallback: clone repo
         info "Release tarball not found — cloning from GitHub..."
         if command -v git >/dev/null 2>&1; then
-            git clone --depth 1 "https://github.com/${GITHUB_REPO}.git" "${TMPDIR_DL}/zlar-lt" 2>/dev/null
-            SCRIPT_SOURCE_DIR="${TMPDIR_DL}/zlar-lt"
+            git clone --depth 1 "https://github.com/${GITHUB_REPO}.git" "${TMPDIR_DL}/zlar" 2>/dev/null
+            SCRIPT_SOURCE_DIR="${TMPDIR_DL}/zlar"
             ok "Cloned from GitHub"
         else
-            fail "Cannot download ZLAR-LT. Install git or download manually from:"
+            fail "Cannot download ZLAR. Install git or download manually from:"
             printf "       https://github.com/${GITHUB_REPO}\n"
             exit 1
         fi
@@ -254,7 +254,7 @@ mkdir -p "${INSTALL_DIR}/var/log/sessions"
 # Copy core files
 cp "${SCRIPT_SOURCE_DIR}/bin/zlar-gate"   "${INSTALL_DIR}/bin/zlar-gate"
 cp "${SCRIPT_SOURCE_DIR}/bin/zlar-policy" "${INSTALL_DIR}/bin/zlar-policy"
-cp "${SCRIPT_SOURCE_DIR}/bin/zlar-lt"     "${INSTALL_DIR}/bin/zlar-lt"
+cp "${SCRIPT_SOURCE_DIR}/bin/zlar"     "${INSTALL_DIR}/bin/zlar"
 
 # Copy uninstall script
 cp "${SCRIPT_SOURCE_DIR}/uninstall.sh"    "${INSTALL_DIR}/uninstall.sh"
@@ -272,16 +272,16 @@ cp "${SCRIPT_SOURCE_DIR}/etc/policies/lt-default.policy.json" "${INSTALL_DIR}/et
 
 # Create .env (empty — Telegram disabled by default)
 if [ ! -f "${INSTALL_DIR}/.env" ]; then
-    printf "# ZLAR-LT environment — Telegram is optional\n# Uncomment and fill in to enable Telegram approval:\n# ZLAR_TELEGRAM_TOKEN=your_bot_token_here\n" > "${INSTALL_DIR}/.env"
+    printf "# ZLAR environment — Telegram is optional\n# Uncomment and fill in to enable Telegram approval:\n# ZLAR_TELEGRAM_TOKEN=your_bot_token_here\n" > "${INSTALL_DIR}/.env"
 fi
 
 # Version file
-printf "%s\n" "${ZLAR_LT_VERSION}" > "${INSTALL_DIR}/VERSION"
+printf "%s\n" "${ZLAR_VERSION}" > "${INSTALL_DIR}/VERSION"
 
 # Make scripts executable
 chmod +x "${INSTALL_DIR}/bin/zlar-gate"
 chmod +x "${INSTALL_DIR}/bin/zlar-policy"
-chmod +x "${INSTALL_DIR}/bin/zlar-lt"
+chmod +x "${INSTALL_DIR}/bin/zlar"
 chmod +x "${INSTALL_DIR}/adapters/claude-code/hook.sh"
 chmod +x "${INSTALL_DIR}/adapters/cursor/hook.sh"
 chmod +x "${INSTALL_DIR}/adapters/windsurf/hook.sh"
@@ -365,7 +365,7 @@ if [ "${HAS_CC}" -eq 1 ]; then
             jq -n --arg cmd "${CC_HOOK}" \
                 '{"hooks":{"PreToolUse":[{"matcher":".*","hooks":[{"type":"command","command":$cmd,"timeout":310}]}]}}' \
                 > "${CC_SETTINGS}"
-            ok "Claude Code: created settings.json with ZLAR-LT hooks"
+            ok "Claude Code: created settings.json with ZLAR hooks"
             FRAMEWORKS_CONFIGURED=$((FRAMEWORKS_CONFIGURED + 1))
         fi
     fi
@@ -391,7 +391,7 @@ if [ "${HAS_CURSOR}" -eq 1 ]; then
                 }' "${CURSOR_HOOKS}" > "${TEMP}" 2>/dev/null
             if [ -s "${TEMP}" ]; then
                 mv "${TEMP}" "${CURSOR_HOOKS}"
-                ok "Cursor: ZLAR-LT hooks added to existing hooks.json"
+                ok "Cursor: ZLAR hooks added to existing hooks.json"
                 FRAMEWORKS_CONFIGURED=$((FRAMEWORKS_CONFIGURED + 1))
             else
                 rm -f "${TEMP}"
@@ -403,7 +403,7 @@ if [ "${HAS_CURSOR}" -eq 1 ]; then
                 "beforeReadFile": [{"command": $cmd, "timeout": 310}],
                 "beforeMCPExecution": [{"command": $cmd, "timeout": 310}]
             }' > "${CURSOR_HOOKS}"
-            ok "Cursor: created hooks.json with ZLAR-LT hooks"
+            ok "Cursor: created hooks.json with ZLAR hooks"
             FRAMEWORKS_CONFIGURED=$((FRAMEWORKS_CONFIGURED + 1))
         fi
     fi
@@ -430,7 +430,7 @@ if [ "${HAS_WINDSURF}" -eq 1 ]; then
                 }' "${WS_HOOKS}" > "${TEMP}" 2>/dev/null
             if [ -s "${TEMP}" ]; then
                 mv "${TEMP}" "${WS_HOOKS}"
-                ok "Windsurf: ZLAR-LT hooks added to existing hooks.json"
+                ok "Windsurf: ZLAR hooks added to existing hooks.json"
                 FRAMEWORKS_CONFIGURED=$((FRAMEWORKS_CONFIGURED + 1))
             else
                 rm -f "${TEMP}"
@@ -443,15 +443,15 @@ if [ "${HAS_WINDSURF}" -eq 1 ]; then
                 "pre_read_code": [{"command": $cmd, "timeout": 310}],
                 "pre_mcp_tool_use": [{"command": $cmd, "timeout": 310}]
             }' > "${WS_HOOKS}"
-            ok "Windsurf: created hooks.json with ZLAR-LT hooks"
+            ok "Windsurf: created hooks.json with ZLAR hooks"
             FRAMEWORKS_CONFIGURED=$((FRAMEWORKS_CONFIGURED + 1))
         fi
     fi
 fi
 
 if [ "${TOTAL_FRAMEWORKS}" -eq 0 ]; then
-    info "No frameworks to configure — install ZLAR-LT hooks when you install an editor"
-    printf "       Run: ${BOLD}~/.zlar-lt/bin/zlar-lt status${NC} to see detected frameworks\n"
+    info "No frameworks to configure — install ZLAR hooks when you install an editor"
+    printf "       Run: ${BOLD}~/.zlar/bin/zlar status${NC} to see detected frameworks\n"
 fi
 
 # ═══════════════════════════════════════════════════════════════════════════════
@@ -496,10 +496,10 @@ fi
 
 printf "\n"
 printf "${BOLD}═══════════════════════════════════════════════════${NC}\n"
-printf "${BOLD}  ZLAR-LT installed.${NC}\n"
+printf "${BOLD}  ZLAR installed.${NC}\n"
 printf "${BOLD}═══════════════════════════════════════════════════${NC}\n"
 printf "\n"
-printf "  ${BOLD}Version:${NC}     ${ZLAR_LT_VERSION}\n"
+printf "  ${BOLD}Version:${NC}     ${ZLAR_VERSION}\n"
 printf "  ${BOLD}Location:${NC}    ${INSTALL_DIR}\n"
 printf "  ${BOLD}Frameworks:${NC}  ${FRAMEWORKS_CONFIGURED} configured\n"
 printf "\n"
@@ -518,21 +518,21 @@ printf "    ✗  crontab, launchctl (persistence)\n"
 printf "    ✗  .ssh writes, .env writes\n"
 printf "    ✗  MCP tools (unknown domain)\n"
 printf "    ✗  Unknown/compound commands\n"
-printf "    ✗  Writes/edits to ~/.zlar-lt/ (self-protection)\n"
+printf "    ✗  Writes/edits to ~/.zlar/ (self-protection)\n"
 printf "    ✗  Reading the signing key\n"
 printf "\n"
 printf "  ${BOLD}Upgrade path:${NC}\n"
 printf "    Want case-by-case approval instead of blanket deny?\n"
-printf "    Run: ${BOLD}~/.zlar-lt/bin/zlar-lt telegram${NC}\n"
+printf "    Run: ${BOLD}~/.zlar/bin/zlar telegram${NC}\n"
 printf "    This enables Telegram approval for denied actions.\n"
 printf "\n"
 printf "  ${BOLD}Commands:${NC}\n"
-printf "    ${DIM}~/.zlar-lt/bin/zlar-lt status${NC}     — what's governed\n"
-printf "    ${DIM}~/.zlar-lt/bin/zlar-lt audit${NC}      — recent decisions\n"
-printf "    ${DIM}~/.zlar-lt/bin/zlar-lt policy${NC}     — current rules\n"
-printf "    ${DIM}~/.zlar-lt/bin/zlar-lt uninstall${NC}  — clean removal\n"
+printf "    ${DIM}~/.zlar/bin/zlar status${NC}     — what's governed\n"
+printf "    ${DIM}~/.zlar/bin/zlar audit${NC}      — recent decisions\n"
+printf "    ${DIM}~/.zlar/bin/zlar policy${NC}     — current rules\n"
+printf "    ${DIM}~/.zlar/bin/zlar uninstall${NC}  — clean removal\n"
 printf "\n"
-printf "  Open your editor. ZLAR-LT is governing every tool call.\n"
+printf "  Open your editor. ZLAR is governing every tool call.\n"
 printf "\n"
 printf "${BOLD}═══════════════════════════════════════════════════${NC}\n"
 printf "\n"
