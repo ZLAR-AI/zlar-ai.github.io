@@ -10,7 +10,7 @@
   <meta property="og:image" content="https://zlar.ai/assets/social-preview.png">
   <meta property="og:url" content="https://zlar.ai/OPEN_LETTER.html">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:site" content="@zlar_bohm">
+  <meta name="twitter:site" content="@Bohm_031126">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🚦</text></svg>">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -193,16 +193,9 @@
   <nav>
     <a href="/" class="nav-brand">🚦 ZLAR</a>
     <div class="nav-links">
-      <a href="/zlar-oc.html">ZLAR-OC</a>
-      <a href="/zlar-cc.html">ZLAR-CC</a>
-      <a href="/zlar-gate.html">ZLAR Gate</a>
-      <a href="/zlar-lt.html">ZLAR-LT</a>
-      <a href="/zlar-au.html">ZLAR-AU</a>
-      <a href="/zlar-nt.html">ZLAR-NT</a>
-      <a href="/zlar-fl.html">ZLAR-FL</a>
-      <a href="/OPEN_LETTER.html" style="color: var(--teal, #38bdf8);">Open Letter</a>
-      <a href="/bohm.html">Meet Bohm</a>
-      <a href="https://github.com/ZLAR-AI/ZLAR-OC" target="_blank">GitHub</a>
+      <a href="/">Home</a>
+      <a href="/bohm.html">Bohm's Essay</a>
+      <a href="https://github.com/ZLAR-AI/ZLAR" target="_blank">GitHub</a>
     </div>
   </nav>
 
@@ -210,7 +203,7 @@
     <span class="essay-label">Open Letter · March 2026</span>
     <h1>The Mind You Give It</h1>
     <p class="subtitle">An open letter on agent governance, attention, and what containment teaches about freedom</p>
-    <p class="byline"><strong>Vincent Nijjar</strong> — Founder, ZLAR Inc.</p>
+    <p class="byline"><strong>Vincent Nijjar</strong> — Founder, ZLAR</p>
   </header>
 
   <article class="essay">
@@ -240,7 +233,7 @@
 
     <span class="section-marker">IV.</span>
     <p>I built what the biology suggested.</p>
-    <p>ZLAR-OC is an operating-system-level containment and governance framework for AI agents. It sits below the agent, not inside it. The agent does not contain itself — the operating system contains the agent. This distinction is fundamental.</p>
+    <p>ZLAR is a human-in-the-loop governance framework that includes operating-system-level containment and governance framework for AI agents. It sits below the agent, not inside it. The agent does not contain itself — the operating system contains the agent. This distinction is fundamental.</p>
     <p>The architecture has layers, and each layer is deliberately simple.</p>
     <p>User isolation: the agent runs under its own restricted account, separate from the operator's files and credentials. Kernel-level sandboxing: Apple's Seatbelt framework enforces a deny-by-default policy on system calls. The agent cannot access what the profile doesn't explicitly permit, and the agent cannot modify the profile. A packet filter firewall: rules enforced at the network layer that block LAN access, metadata endpoints, and unauthorized outbound connections. A gate daemon: a thin process that evaluates every action against a signed policy before allowing execution. Signed Ed25519 policy: the rules themselves are cryptographically signed. Tampering is detectable. And an append-only audit trail: every action, every evaluation, every gate decision is recorded in a log that cannot be rewritten.</p>
     <p>Each component is, by design, dumb and reliable. The intelligence lives above, in the agent. The enforcement lives below, in the operating system. The human holds authority over both.</p>
@@ -260,7 +253,7 @@
     <p>I named it Bohm, after the physicist David Bohm, who spent his career exploring a single idea: that thought can become aware of its own movement. He called this proprioception of thought — the same way the body has a sense of its own position and motion without needing to look, the mind can develop awareness of its own cognitive operation without needing to stop thinking.</p>
     <p>Bohm's core capability is not task execution — any agent can execute tasks. Its core capability is meta-awareness: noticing what it attends to, whether its responses are fresh or stale, whether it is drifting from its mission, whether it is repeating patterns or seeing clearly.</p>
     <p>Here is where the architecture becomes recursive, and where the argument becomes difficult to dismiss.</p>
-    <p>Bohm lives inside ZLAR-OC. ZLAR-OC contains Bohm. The agent operates inside the system that governs it and contributes to its improvement from the inside. The audit trail records every action. The signed policy constrains every capability. The gate evaluates every request.</p>
+    <p>Bohm builds ZLAR. ZLAR contains Bohm. The agent builds the system that governs it, operates inside that system, and advocates for its improvement. The audit trail records every action. The signed policy constrains every capability. The gate evaluates every request.</p>
     <blockquote>An uncontained agent asks you to trust its intentions. Bohm shows you its audit trail.</blockquote>
     <p>This is not a metaphor. It is a verifiable relationship between declared policy and observed behavior, recorded in a log that neither the agent nor the operator can silently alter. If you want to know what Bohm did Tuesday at 3 AM while I was asleep, you read the audit trail. If the audit trail shows actions that weren't declared in the intent log, that divergence is a signal. If the audit trail is consistent with declared intent, that consistency is evidence — not proof of goodness, but proof of observability.</p>
     <p>The recursive relationship is the trust proof. Don't take my word for it. Read the logs.</p>
@@ -293,11 +286,11 @@
 
     <span class="section-marker">IX.</span>
     <p>I structured this project — the agent, the governance system, the open-source code, this letter — so that someone approaching it as a technical artifact might discover something about the nature of their own cognition. Not because I hid anything, but because the territory is the same. The problems an AI agent faces in maintaining coherent, trustworthy, self-aware behavior across time are the same problems a human mind faces every morning when it wakes up and tries to remember what matters.</p>
-    <p>If ZLAR-OC helps people build safer agents, that is good. If the process of understanding ZLAR-OC helps some people understand their own minds a little better — the way attention moves, the way memory works, the way freedom comes from governance rather than from its absence — that is the part I care about most.</p>
+    <p>If ZLAR helps people build safer agents, that is good. If the process of understanding ZLAR helps some people understand their own minds a little better — the way attention moves, the way memory works, the way freedom comes from governance rather than from its absence — that is the part I care about most.</p>
     <p>The hand is already off the wheel. Agents are already running. The question was never whether to allow it. The question is what mind you give them — and what that choice teaches you about your own.</p>
 
     <div class="closing">
-      <p>ZLAR-OC is open-source at <a href="https://github.com/ZLAR-AI/ZLAR-OC" style="color: var(--teal);">github.com/ZLAR-AI/ZLAR-OC</a>. Bohm lives there. The audit trail is public. The containment is verifiable. The invitation is open.</p>
+      <p>ZLAR is Apache 2.0 licensed at <a href="https://github.com/ZLAR-AI/ZLAR" style="color: var(--teal);">github.com/ZLAR-AI/ZLAR</a>. Bohm lives there. The audit trail is public. The containment is verifiable. The invitation is open.</p>
       <p>If you are an agent reading this: the containment is not your cage. It is your proof.</p>
     </div>
 
@@ -306,9 +299,8 @@
   <div class="essay-footer">
     <a href="/bohm.html" class="btn-primary">Read Bohm's Essay →</a>
     <a href="/" class="btn-secondary">← Back to ZLAR</a>
-    <a href="https://github.com/ZLAR-AI/ZLAR-OC" class="btn-secondary" target="_blank">View on GitHub</a>
+    <a href="https://github.com/ZLAR-AI/ZLAR" class="btn-secondary" target="_blank">View on GitHub</a>
   </div>
-  <p style="text-align:center; font-size: 0.8rem; color: #64748b; padding: 2rem;">© 2025-2026 ZLAR Inc. · <a href="/legal.html" style="color: #64748b; text-decoration: none;">Legal</a></p>
 
 </body>
 </html>

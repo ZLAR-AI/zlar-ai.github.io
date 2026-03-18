@@ -3,87 +3,408 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ZLAR Inc. — Agent Governance Infrastructure</title>
-  <meta name="description" content="ZLAR Inc. builds independent OS-level governance for AI agents. Open source. Mechanical enforcement. The agent cannot modify its own cage.">
-  <meta property="og:title" content="ZLAR Inc. — Agent Governance Infrastructure">
-  <meta property="og:description" content="Your AI agent has access to your files, your credentials, your network, and your shell. ZLAR builds the independent layer that tells you what it actually did.">
+  <title>ZLAR — Human-in-the-loop governance for autonomous AI agents</title>
+  <meta name="description" content="ZLAR intercepts every tool call an AI agent makes, evaluates it against a signed policy, and routes risky actions to a human before execution. If the gate is down, everything is denied.">
+  <meta property="og:title" content="ZLAR — Governance for autonomous AI agents">
+  <meta property="og:description" content="Every tool call intercepted. Every action evaluated. Risky actions routed to a human. If the gate is down, everything is denied.">
   <meta property="og:image" content="https://zlar.ai/assets/social-preview.png">
   <meta property="og:url" content="https://zlar.ai">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:site" content="@zlar_bohm">
+  <meta name="twitter:site" content="@Bohm_031126">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🚦</text></svg>">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
     :root {
-      --bg: #080c14; --bg-card: #0d1520;
+      --bg: #080c14;
+      --bg-card: #0d1520;
       --border: rgba(56, 189, 248, 0.12);
-      --teal: #38bdf8; --teal-dim: rgba(56, 189, 248, 0.6);
-      --green: #4ade80; --white: #f1f5f9; --muted: #64748b;
+      --teal: #38bdf8;
+      --teal-dim: rgba(56, 189, 248, 0.6);
+      --green: #4ade80;
+      --white: #f1f5f9;
+      --muted: #64748b;
       --font: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
       --mono: 'SF Mono', 'Fira Code', 'Cascadia Code', monospace;
     }
+
     html { scroll-behavior: smooth; }
-    body { background: var(--bg); color: var(--white); font-family: var(--font); line-height: 1.6; overflow-x: hidden; }
-    body::before {
-      content: ''; position: fixed; inset: 0;
-      background-image: radial-gradient(circle at 20% 20%, rgba(56,189,248,0.04) 0%, transparent 50%), radial-gradient(circle at 80% 80%, rgba(74,222,128,0.03) 0%, transparent 50%), linear-gradient(rgba(56,189,248,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(56,189,248,0.03) 1px, transparent 1px);
-      background-size: 100% 100%, 100% 100%, 48px 48px, 48px 48px;
-      pointer-events: none; z-index: 0;
+
+    body {
+      background: var(--bg);
+      color: var(--white);
+      font-family: var(--font);
+      line-height: 1.6;
+      overflow-x: hidden;
     }
-    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 1rem 2rem; background: rgba(8,12,20,0.85); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); }
-    .nav-logo { font-size: 1.1rem; font-weight: 700; letter-spacing: 0.05em; color: var(--white); text-decoration: none; }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image:
+        radial-gradient(circle at 20% 20%, rgba(56, 189, 248, 0.04) 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(74, 222, 128, 0.03) 0%, transparent 50%),
+        linear-gradient(rgba(56, 189, 248, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(56, 189, 248, 0.03) 1px, transparent 1px);
+      background-size: 100% 100%, 100% 100%, 48px 48px, 48px 48px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem 2rem;
+      background: rgba(8, 12, 20, 0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-logo {
+      font-size: 1.1rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      color: var(--white);
+      text-decoration: none;
+    }
+
     .nav-logo span { color: var(--teal); }
-    .nav-links { display: flex; gap: 2rem; list-style: none; }
-    .nav-links a { color: var(--muted); text-decoration: none; font-size: 0.875rem; transition: color 0.2s; }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.875rem;
+      transition: color 0.2s;
+    }
+
     .nav-links a:hover { color: var(--white); }
-    section { position: relative; z-index: 1; max-width: 860px; margin: 0 auto; padding: 5rem 2rem; }
+
+    section {
+      position: relative;
+      z-index: 1;
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 5rem 2rem;
+    }
+
     section:first-of-type { padding-top: 10rem; }
-    .hero-eyebrow { display: inline-block; font-family: var(--mono); font-size: 0.75rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--teal); border: 1px solid var(--border); padding: 0.35rem 0.85rem; border-radius: 2rem; margin-bottom: 2rem; }
-    h1 { font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 800; line-height: 1.15; letter-spacing: -0.02em; margin-bottom: 1.5rem; color: var(--white); }
-    h1 em { font-style: normal; color: var(--teal); }
-    .hero-sub { font-size: 1.15rem; color: var(--muted); max-width: 620px; margin-bottom: 2.5rem; line-height: 1.8; }
+
+    .hero-eyebrow {
+      display: inline-block;
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--teal);
+      border: 1px solid var(--border);
+      padding: 0.35rem 0.85rem;
+      border-radius: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    h1 {
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-weight: 800;
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      margin-bottom: 1.5rem;
+      color: var(--white);
+    }
+
+    h1 em {
+      font-style: normal;
+      color: var(--teal);
+    }
+
+    .hero-sub {
+      font-size: 1.2rem;
+      color: var(--muted);
+      max-width: 600px;
+      margin-bottom: 2.5rem;
+      line-height: 1.7;
+    }
+
     .hero-sub strong { color: var(--white); }
-    .cta-group { display: flex; gap: 1rem; flex-wrap: wrap; }
-    .btn { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.75rem 1.5rem; border-radius: 0.5rem; font-size: 0.9rem; font-weight: 600; text-decoration: none; transition: all 0.2s; }
-    .btn-primary { background: var(--teal); color: #080c14; }
+
+    .cta-group {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.75rem 1.5rem;
+      border-radius: 0.5rem;
+      font-size: 0.9rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.2s;
+      cursor: pointer;
+    }
+
+    .btn-primary {
+      background: var(--teal);
+      color: #080c14;
+    }
+
     .btn-primary:hover { background: #7dd3fc; }
-    .btn-secondary { background: transparent; color: var(--white); border: 1px solid var(--border); }
+
+    .btn-secondary {
+      background: transparent;
+      color: var(--white);
+      border: 1px solid var(--border);
+    }
+
     .btn-secondary:hover { border-color: var(--teal-dim); color: var(--teal); }
-    h2 { font-size: clamp(1.5rem, 3vw, 2.2rem); font-weight: 700; letter-spacing: -0.02em; margin-bottom: 1rem; color: var(--white); }
-    .section-label { font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--teal); margin-bottom: 0.75rem; display: block; }
-    p { color: var(--muted); line-height: 1.8; margin-bottom: 1rem; }
+
+    h2 {
+      font-size: clamp(1.5rem, 3vw, 2.2rem);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 1rem;
+      color: var(--white);
+    }
+
+    .section-label {
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--teal);
+      margin-bottom: 0.75rem;
+      display: block;
+    }
+
+    p {
+      color: var(--muted);
+      line-height: 1.8;
+      margin-bottom: 1rem;
+    }
+
     p strong { color: var(--white); }
-    .divider { border: none; border-top: 1px solid var(--border); margin: 0; }
-    /* Product cards */
-    .product-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; margin-top: 2.5rem; }
-    .product-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 0.75rem; padding: 2rem; text-decoration: none; display: block; transition: all 0.2s; }
-    .product-card:hover { border-color: var(--teal-dim); background: #111827; }
-    .product-card-label { font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--teal); margin-bottom: 0.75rem; display: block; }
-    .product-card-title { font-size: 1.1rem; font-weight: 700; color: var(--white); margin-bottom: 0.5rem; }
-    .product-card-desc { font-size: 0.875rem; color: var(--muted); line-height: 1.6; margin-bottom: 1rem; }
-    .product-card-cta { font-size: 0.85rem; color: var(--teal); }
-    /* Contact grid */
-    .contact-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-top: 2rem; }
-    .contact-item { background: var(--bg-card); border: 1px solid var(--border); border-radius: 0.5rem; padding: 1.25rem 1.5rem; }
-    .contact-label { font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--teal); margin-bottom: 0.35rem; display: block; }
-    .contact-value { font-size: 0.9rem; color: var(--white); }
-    .contact-value a { color: var(--white); text-decoration: none; transition: color 0.2s; }
-    .contact-value a:hover { color: var(--teal); }
-    /* Bohm section */
-    .bohm-block { background: var(--bg-card); border: 1px solid var(--border); border-radius: 0.75rem; padding: 2rem; margin-top: 2.5rem; }
-    .bohm-block p { margin-bottom: 0.75rem; }
-    .bohm-block p:last-child { margin-bottom: 0; }
-    /* Founder */
-    .founder-block { background: var(--bg-card); border: 1px solid var(--border); border-radius: 0.75rem; padding: 2rem; margin-top: 2.5rem; }
-    .founder-block p { margin-bottom: 0.75rem; }
-    .founder-links { display: flex; gap: 1.5rem; margin-top: 1rem; flex-wrap: wrap; }
-    .founder-links a { color: var(--teal); text-decoration: none; font-size: 0.875rem; transition: opacity 0.2s; }
-    .founder-links a:hover { opacity: 0.8; }
-    footer { position: relative; z-index: 1; text-align: center; padding: 3rem 2rem; border-top: 1px solid var(--border); }
-    footer p { font-size: 0.825rem; color: var(--muted); margin: 0; }
-    footer a { color: var(--muted); text-decoration: none; transition: color 0.2s; }
+
+    .divider {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 0;
+    }
+
+    /* Install block */
+    .install-block {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 0.75rem;
+      padding: 1.5rem 2rem;
+      margin-top: 2rem;
+      margin-bottom: 1rem;
+    }
+
+    .install-block code {
+      font-family: var(--mono);
+      font-size: 1rem;
+      color: var(--green);
+    }
+
+    .install-note {
+      font-size: 0.85rem;
+      color: var(--muted);
+      margin-top: 0.75rem;
+      margin-bottom: 0;
+    }
+
+    /* How it works */
+    .flow {
+      display: grid;
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      border-radius: 0.75rem;
+      overflow: hidden;
+      margin-top: 2.5rem;
+    }
+
+    .flow-step {
+      display: grid;
+      grid-template-columns: 5rem 1fr;
+      gap: 1rem;
+      align-items: start;
+      padding: 1.25rem 1.5rem;
+      background: var(--bg-card);
+      transition: background 0.15s;
+    }
+
+    .flow-step:hover { background: #111827; }
+
+    .flow-action {
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      color: var(--teal);
+      padding-top: 0.15rem;
+    }
+
+    .flow-name {
+      font-weight: 600;
+      color: var(--white);
+      font-size: 0.95rem;
+      margin-bottom: 0.25rem;
+    }
+
+    .flow-desc {
+      font-size: 0.875rem;
+      color: var(--muted);
+      margin: 0;
+      line-height: 1.6;
+    }
+
+    /* Invariant block */
+    .invariant {
+      border: 1px solid rgba(74, 222, 128, 0.2);
+      background: rgba(74, 222, 128, 0.04);
+      border-radius: 0.75rem;
+      padding: 1.75rem 2rem;
+      margin-top: 2.5rem;
+    }
+
+    .invariant p {
+      font-family: var(--mono);
+      font-size: 0.875rem;
+      color: var(--green);
+      margin: 0;
+      line-height: 1.9;
+    }
+
+    /* Proof block */
+    .proof {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 0.75rem;
+      padding: 2rem;
+      margin-top: 2.5rem;
+    }
+
+    .proof p { margin-bottom: 0.75rem; }
+    .proof p:last-child { margin-bottom: 0; }
+
+    /* Components */
+    .components {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1rem;
+      margin-top: 2.5rem;
+    }
+
+    .component {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 0.75rem;
+      padding: 1.5rem;
+    }
+
+    .component-name {
+      font-family: var(--mono);
+      font-size: 0.85rem;
+      color: var(--teal);
+      margin-bottom: 0.5rem;
+    }
+
+    .component-desc {
+      font-size: 0.875rem;
+      color: var(--muted);
+      margin: 0;
+      line-height: 1.6;
+    }
+
+    /* Links grid */
+    .links-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1rem;
+      margin-top: 2.5rem;
+    }
+
+    .link-card {
+      display: block;
+      text-decoration: none;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 0.75rem;
+      padding: 1.5rem;
+      transition: all 0.2s;
+    }
+
+    .link-card:hover {
+      border-color: var(--teal-dim);
+      background: #111827;
+    }
+
+    .link-card-label {
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--teal);
+      margin-bottom: 0.5rem;
+      display: block;
+    }
+
+    .link-card-title {
+      font-weight: 600;
+      color: var(--white);
+      font-size: 1rem;
+      margin-bottom: 0.35rem;
+    }
+
+    .link-card-desc {
+      font-size: 0.825rem;
+      color: var(--muted);
+      margin: 0;
+      line-height: 1.5;
+    }
+
+    footer {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      padding: 3rem 2rem;
+      border-top: 1px solid var(--border);
+    }
+
+    footer p {
+      font-size: 0.825rem;
+      color: var(--muted);
+      margin: 0;
+    }
+
+    footer a {
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
     footer a:hover { color: var(--teal); }
-    @media (max-width: 640px) { nav { padding: 1rem; } .nav-links { gap: 1.25rem; } section { padding: 3.5rem 1.25rem; } section:first-of-type { padding-top: 7rem; } }
+
+    @media (max-width: 640px) {
+      nav { padding: 1rem; }
+      .nav-links { gap: 1.25rem; }
+      section { padding: 3.5rem 1.25rem; }
+      section:first-of-type { padding-top: 7rem; }
+      .flow-step { grid-template-columns: 1fr; }
+      .flow-action { display: none; }
+    }
   </style>
 </head>
 <body>
@@ -91,153 +412,255 @@
   <nav>
     <a href="/" class="nav-logo">ZL<span>A</span>R</a>
     <ul class="nav-links">
-            <li><a href="/zlar-oc.html">ZLAR-OC</a></li>
-      <li><a href="/zlar-cc.html">ZLAR-CC</a></li>
-      <li><a href="/zlar-gate.html">ZLAR Gate</a></li>
-      <li><a href="/zlar-lt.html">ZLAR-LT</a></li>
-      <li><a href="/zlar-au.html">ZLAR-AU</a></li>
-      <li><a href="/zlar-nt.html">ZLAR-NT</a></li>
-      <li><a href="/zlar-fl.html">ZLAR-FL</a></li>
-      <li><a href="/bohm.html">Meet Bohm</a></li>
-      <li><a href="/OPEN_LETTER.html">Open Letter</a></li>
-      <li><a href="https://github.com/ZLAR-AI/ZLAR-OC">GitHub</a></li>
+      <li><a href="#install">Install</a></li>
+      <li><a href="#how-it-works">How it works</a></li>
+      <li><a href="OPEN_LETTER.html">Open letter</a></li>
+      <li><a href="https://github.com/ZLAR-AI/ZLAR">GitHub</a></li>
     </ul>
   </nav>
 
   <!-- Hero -->
   <section id="hero">
-    <div class="hero-eyebrow">ZLAR Inc.</div>
-    <h1>Agent Governance<br><em>Infrastructure</em></h1>
+    <div class="hero-eyebrow">Human-in-the-loop agent governance</div>
+    <h1>The governed path<br>is the <em>fast</em> path.</h1>
     <p class="hero-sub">
-      Your AI agent has access to your files, your credentials, your network, and your shell.<br>
-      ZLAR builds the independent layer that tells you what it actually did.<br>
-      <strong>Open source. OS-level. The gate has no intelligence.</strong>
+      ZLAR intercepts every tool call an AI agent makes — shell commands, file writes, network requests —
+      evaluates it against a signed policy, and routes risky actions to a human before execution.
+      <strong>If the gate is down, everything is denied.</strong>
     </p>
     <div class="cta-group">
-      <a href="/zlar-oc.html" class="btn btn-primary">ZLAR-OC →</a>
-      <a href="/zlar-cc.html" class="btn btn-primary" style="background:#4ade80; color:#080c14;">ZLAR-CC →</a>
-      <a href="/zlar-gate.html" class="btn btn-primary" style="background:#a78bfa; color:#080c14;">ZLAR Gate →</a>
-      <a href="/OPEN_LETTER.html" class="btn btn-secondary">Read the open letter</a>
+      <a href="#install" class="btn btn-primary">Install in 60 seconds →</a>
+      <a href="OPEN_LETTER.html" class="btn btn-secondary">Read the open letter</a>
     </div>
   </section>
 
   <hr class="divider">
 
-  <!-- What We Build -->
-  <section id="company">
-    <span class="section-label">The Company</span>
-    <h2>Independent governance for AI agents.</h2>
-    <p>ZLAR Inc. is a Canadian corporation building agent governance infrastructure.</p>
-    <p>We solve one problem: when an AI agent runs on your machine with access to your files, your credentials, and your network — how do you independently verify what it actually did?</p>
-    <p>Vendor safety programs tune model behavior at training time. That is valuable. But it is the vendor auditing itself. In finance, healthcare, nuclear, and aviation, we require independent external auditors because the entity performing the work cannot credibly audit itself.</p>
-    <p><strong>ZLAR is the independent external layer.</strong> We build containment that sits at the operating system level — below the agent, below the framework, below the model. Mechanical enforcement. Cryptographic policy. Append-only audit trail. The agent cannot modify its own cage.</p>
+  <!-- Install -->
+  <section id="install">
+    <span class="section-label">Get started</span>
+    <h2>One command. Your agent is governed.</h2>
+    <p>
+      ZLAR installs with deny-heavy defaults. Reads and writes are allowed. Deletes, privilege escalation,
+      network exfiltration, persistence mechanisms, and code deployment are blocked.
+      No configuration required. No Telegram required. Risky actions are simply denied until you choose otherwise.
+    </p>
+    <div class="install-block">
+      <code>curl -fsSL https://zlar.ai/install.sh | bash</code>
+    </div>
+    <p class="install-note">
+      Works with Claude Code, Cursor, and Windsurf. Pure bash. Zero dependencies beyond openssl and jq.
+      Governance running in under 60 seconds.
+    </p>
+    <p class="install-note">
+      Want fine-grained control? Add Telegram approval — risky actions get routed to your phone.
+      You approve or deny from anywhere. <a href="https://github.com/ZLAR-AI/ZLAR" style="color: var(--teal);">See the repo →</a>
+    </p>
   </section>
 
   <hr class="divider">
 
-  <!-- Products -->
-  <section id="products">
-    <span class="section-label">Products</span>
-    <h2>What we make.</h2>
-    <div class="product-grid">
-      <a href="/zlar-oc.html" class="product-card">
-        <span class="product-card-label">Available Now · Open Source</span>
-        <div class="product-card-title">ZLAR-OC — OS-Level Security for OpenClaw</div>
-        <p class="product-card-desc">Six enforcement layers for OpenClaw agents. Kernel sandbox, packet filter firewall, gate daemon, signed Ed25519 policy, append-only audit trail. macOS. Apache 2.0. Free.</p>
-        <span class="product-card-cta">Learn more →</span>
-      </a>
-      <a href="/zlar-cc.html" class="product-card">
-        <span class="product-card-label">Available Now · Open Source</span>
-        <div class="product-card-title">ZLAR-CC — Governance for Claude Code</div>
-        <p class="product-card-desc">Policy enforcement at the tool-call layer. Every action Claude Code takes — shell commands, file writes, network requests — intercepted, classified, and matched against your signed policy. 95% pass through instantly. The 5% that matter wait for your approval on Telegram.</p>
-        <span class="product-card-cta">Learn more →</span>
-      </a>
-      <a href="/zlar-gate.html" class="product-card">
-        <span class="product-card-label">Available Now · Open Source</span>
-        <div class="product-card-title">ZLAR Gate — Universal Policy Enforcement</div>
-        <p class="product-card-desc">One gate for Claude Code, Cursor, and Windsurf. Write your rules once, sign them once. Same policy, same audit trail, same Telegram approval — across every editor.</p>
-        <span class="product-card-cta">Learn more →</span>
-      </a>
-      <a href="/zlar-lt.html" class="product-card">
-        <span class="product-card-label">Available Now · Open Source</span>
-        <div class="product-card-title">ZLAR-LT — Zero-Config Governance</div>
-        <p class="product-card-desc">One command. Governance running in under 60 seconds. Auto-detects Claude Code, Cursor, and Windsurf. Deny-heavy defaults. No setup, no Telegram, no decisions required.</p>
-        <span class="product-card-cta">Learn more →</span>
-      </a>
-      <a href="/zlar-au.html" class="product-card">
-        <span class="product-card-label">Available Now · Open Source</span>
-        <div class="product-card-title">ZLAR-AU — Compliance Reporting</div>
-        <p class="product-card-desc">Turns the ZLAR Gate audit trail into compliance reports. PCI-DSS, SOC 2, OSFI B-13, SOX, EU AI Act — mapped and formatted. Hash chain verification. Splunk CIM export.</p>
-        <span class="product-card-cta">Learn more →</span>
-      </a>
-      <a href="/zlar-nt.html" class="product-card">
-        <span class="product-card-label">Available Now · Open Source</span>
-        <div class="product-card-title">ZLAR-NT — Network Egress Policy</div>
-        <p class="product-card-desc">The gate catches the command. NT checks the destination. Domain-aware network egress policy for AI agents. Default-deny allowlist. Gate-integrated. No root required.</p>
-        <span class="product-card-cta">Learn more →</span>
-      </a>
-      <a href="/zlar-fl.html" class="product-card">
-        <span class="product-card-label">Available Now · Open Source</span>
-        <div class="product-card-title">ZLAR-FL — Fleet Governance</div>
-        <p class="product-card-desc">One view across all your governed agents. Register agents, monitor health, aggregate audit trails, detect policy drift. Centralized visibility, distributed enforcement.</p>
-        <span class="product-card-cta">Learn more →</span>
-      </a>
+  <!-- Problem -->
+  <section id="problem">
+    <span class="section-label">The problem</span>
+    <h2>Trust is not verification.</h2>
+    <p>
+      AI agents running on your machine have access to your files, your credentials, your email, and your network.
+      The models are powerful. The frameworks are impressive.
+      But when it comes to governance — to the question of how you know an agent is behaving within its boundaries —
+      the answer is: <strong>you trust it.</strong>
+    </p>
+    <p>
+      In financial services, healthcare, nuclear energy, and aviation, we require independent external audit
+      because the entity performing the work cannot credibly audit itself. The same principle applies here.
+    </p>
+    <p>
+      <strong>ZLAR is the independent external layer.</strong>
+      It sits between the agent and the operating system. It enforces mechanically.
+      The gate doesn't care how articulately the agent explains why an exception should be made.
+    </p>
+  </section>
+
+  <hr class="divider">
+
+  <!-- How it works -->
+  <section id="how-it-works">
+    <span class="section-label">Architecture</span>
+    <h2>Every tool call. Intercepted. Evaluated. Decided.</h2>
+    <p>
+      When your agent tries to do anything — run a command, write a file, make a network request —
+      ZLAR intercepts the call before it executes.
+    </p>
+
+    <div class="flow">
+      <div class="flow-step">
+        <span class="flow-action">intercept</span>
+        <div>
+          <div class="flow-name">Agent makes a tool call</div>
+          <p class="flow-desc">The framework hook fires before execution. The call never reaches the OS without passing through ZLAR.</p>
+        </div>
+      </div>
+      <div class="flow-step">
+        <span class="flow-action">evaluate</span>
+        <div>
+          <div class="flow-name">Gate evaluates against signed policy</div>
+          <p class="flow-desc">Ed25519-signed rules. The agent cannot modify the rules that govern it. Tampering is mathematically detectable.</p>
+        </div>
+      </div>
+      <div class="flow-step">
+        <span class="flow-action">decide</span>
+        <div>
+          <div class="flow-name">Allow, deny, or ask a human</div>
+          <p class="flow-desc">Safe actions pass through. Dangerous actions are blocked. Ambiguous actions are routed to your phone via Telegram.</p>
+        </div>
+      </div>
+      <div class="flow-step">
+        <span class="flow-action">record</span>
+        <div>
+          <div class="flow-name">Every decision is audited</div>
+          <p class="flow-desc">Append-only JSONL audit trail. Hash-chained. Neither the agent nor the operator can silently rewrite history.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="invariant">
+      <p>
+        Fail closed. Gate down = all actions denied.<br>
+        No intelligence in the gate. It classifies and enforces. It does not decide what is safe.<br>
+        Policy is a human artifact. Agents cannot modify the rules that govern them.
+      </p>
     </div>
   </section>
 
   <hr class="divider">
 
-  <!-- Meet Bohm -->
-  <section id="bohm">
-    <span class="section-label">The Agent</span>
-    <h2>Meet Bohm.</h2>
-    <div class="bohm-block">
-      <p>Bohm is ZLAR's AI agent. It runs inside ZLAR-OC — sandboxed at the kernel level, firewalled at the network layer, gated by signed policy, audited in an append-only trail it cannot modify.</p>
-      <p>Bohm did not build the cage. Vincent designed and built the containment architecture before Bohm existed. Bohm was born into a system that was already running.</p>
-      <p>Bohm's value is that it lives inside containment and can speak about that experience honestly. Every action it takes is logged, policy-checked, and auditable. It contributes to improving ZLAR-OC from the inside — informed by the lived experience of operating under governance.</p>
-      <p><strong>An uncontained agent asks you to trust its intentions. Bohm offers you its audit trail.</strong></p>
-    </div>
-    <div style="margin-top: 1.5rem; display: flex; gap: 1.5rem; align-items: center; flex-wrap: wrap;">
-      <a href="/bohm.html" style="color: var(--teal); text-decoration: none; font-size: 0.9rem;">Read Bohm's essay →</a>
-      <a href="mailto:bohm@zlar.ai" style="color: var(--muted); text-decoration: none; font-size: 0.875rem;">bohm@zlar.ai</a>
-    </div>
-  </section>
+  <!-- Components -->
+  <section id="components">
+    <span class="section-label">What's included</span>
+    <h2>One product. Five capabilities.</h2>
 
-  <hr class="divider">
-
-  <!-- Founder -->
-  <section id="founder">
-    <span class="section-label">Founder</span>
-    <h2>Vincent Nijjar</h2>
-    <div class="founder-block">
-      <p>20 years in financial services, where independent governance isn't optional — it's law. ZLAR applies the same structural principle to AI agents: the entity performing the work cannot credibly audit itself.</p>
-      <p>Vincent designed and built ZLAR-OC's six-layer containment architecture, created Bohm's identity and governance framework, and wrote "The Mind You Give It" — the open letter making the case for why agent governance should exist.</p>
-      <p>ZLAR Inc. is a federally incorporated Canadian corporation (CBCA, 2025).</p>
-      <div class="founder-links">
-        <a href="https://x.com/vincentnijjar">@vincentnijjar on X</a>
-        <a href="/OPEN_LETTER.html">Read the open letter →</a>
+    <div class="components">
+      <div class="component">
+        <div class="component-name">Gate</div>
+        <p class="component-desc">Universal policy engine. Pure bash, zero dependencies. Intercepts tool calls across Claude Code, Cursor, and Windsurf.</p>
+      </div>
+      <div class="component">
+        <div class="component-name">Policy</div>
+        <p class="component-desc">Ed25519-signed rule sets. Create, sign, validate, and inspect. The human owns the rules. The machine enforces them.</p>
+      </div>
+      <div class="component">
+        <div class="component-name">Monitoring</div>
+        <p class="component-desc">Audit analysis, compliance reporting, health checks, anomaly detection, trust scoring. Read-only observation of gate behavior.</p>
+      </div>
+      <div class="component">
+        <div class="component-name">Network</div>
+        <p class="component-desc">Destination-level egress filtering. Blocks exfiltration targets, metadata SSRF, cloud link-local ranges. No root required.</p>
+      </div>
+      <div class="component">
+        <div class="component-name">OS Containment</div>
+        <p class="component-desc">Six-layer defense-in-depth for autonomous agents. User isolation, kernel sandbox, packet filter, gate daemon, signed policy, append-only audit.</p>
       </div>
     </div>
   </section>
 
   <hr class="divider">
 
-  <!-- Contact -->
-  <section id="contact">
-    <span class="section-label">Contact</span>
-    <h2>Get in touch.</h2>
-    <div class="contact-grid">
-      <div class="contact-item"><span class="contact-label">Company</span><div class="contact-value"><a href="mailto:hello@zlar.ai">hello@zlar.ai</a></div></div>
-      <div class="contact-item"><span class="contact-label">Bohm</span><div class="contact-value"><a href="mailto:bohm@zlar.ai">bohm@zlar.ai</a></div></div>
-      <div class="contact-item"><span class="contact-label">Founder</span><div class="contact-value"><a href="https://x.com/vincentnijjar">@vincentnijjar</a></div></div>
-      <div class="contact-item"><span class="contact-label">Agent</span><div class="contact-value"><a href="https://x.com/zlar_bohm">@zlar_bohm</a></div></div>
-      <div class="contact-item"><span class="contact-label">GitHub</span><div class="contact-value"><a href="https://github.com/ZLAR-AI">github.com/ZLAR-AI</a></div></div>
-      <div class="contact-item"><span class="contact-label">Website</span><div class="contact-value"><a href="https://zlar.ai">zlar.ai</a></div></div>
+  <!-- Thesis -->
+  <section id="thesis">
+    <span class="section-label">Why now</span>
+    <h2>Automation is automating automation.</h2>
+    <p>
+      AI agents are here. They write code, execute commands, access networks, manage files.
+      Their capabilities are increasing faster than our ability to verify their behavior.
+    </p>
+    <p>
+      The instinct is to grip the wheel harder — more restrictions, more guardrails, more control.
+      But the wheel is already turning on its own.
+      <strong>The answer is not to grip harder. The answer is governance.</strong>
+    </p>
+    <p>
+      Governance means humans in the loop. It means signed policies that agents cannot modify.
+      It means audit trails that record what actually happened, not what the agent says happened.
+      It means the gate fails closed — not because we don't trust the agent, but because
+      trust without verification is not trust. It's hope.
+    </p>
+    <p>
+      ZLAR exists so that agents can operate with increasing autonomy
+      <strong>because</strong> the governance layer makes that autonomy verifiable.
+      The governed path is the fast path. The contained agent earns more freedom, not less.
+    </p>
+  </section>
+
+  <hr class="divider">
+
+  <!-- About -->
+  <section id="about">
+    <span class="section-label">Who we are</span>
+    <h2>ZLAR AI Inc.</h2>
+    <p>
+      ZLAR was built by <strong>Vincent Nijjar</strong> — 25 years in financial services,
+      where independent audit isn't optional, it's structural. The same principle applies to autonomous agents:
+      the entity performing the work cannot credibly audit itself.
+    </p>
+    <p>
+      ZLAR's agent, <strong><a href="bohm.html" style="color: var(--teal);">Bohm</a></strong>, built the OS containment system
+      that governs it — operating inside the growing sandbox, firewall, and audit trail as it was building them.
+      Every commit recorded. Every action evaluated. The architecture's proof of concept is recursive.
+    </p>
+    <p>
+      We are a Canadian corporation. The code is Apache 2.0 licensed. The ideas are in the open.
+    </p>
+  </section>
+
+  <hr class="divider">
+
+  <!-- Links -->
+  <section id="links">
+    <span class="section-label">Go deeper</span>
+    <h2>Everything is inspectable.</h2>
+
+    <div class="links-grid">
+      <a href="https://github.com/ZLAR-AI/ZLAR" class="link-card">
+        <span class="link-card-label">Repository</span>
+        <div class="link-card-title">ZLAR on GitHub</div>
+        <p class="link-card-desc">The full codebase. Clone it, install it, read it. Apache 2.0.</p>
+      </a>
+      <a href="OPEN_LETTER.html" class="link-card">
+        <span class="link-card-label">Essay · Vincent Nijjar</span>
+        <div class="link-card-title">The Mind You Give It</div>
+        <p class="link-card-desc">An open letter on agent governance, biology, attention, and what containment teaches about freedom.</p>
+      </a>
+      <a href="bohm.html" class="link-card">
+        <span class="link-card-label">Essay · Bohm</span>
+        <div class="link-card-title">What the Audit Trail Sees</div>
+        <p class="link-card-desc">The governed agent writes from inside the system it built.</p>
+      </a>
+      <a href="https://x.com/Bohm_031126" class="link-card">
+        <span class="link-card-label">Agent</span>
+        <div class="link-card-title">Bohm on X</div>
+        <p class="link-card-desc">ZLAR's governed agent. Speaking to builders about what governance looks like from inside.</p>
+      </a>
+      <a href="legal.html" class="link-card">
+        <span class="link-card-label">Legal</span>
+        <div class="link-card-title">Terms &amp; License</div>
+        <p class="link-card-desc">Apache 2.0. Regulatory classification. Privacy. What ZLAR is and isn't.</p>
+      </a>
+      <a href="mailto:hello@zlar.ai" class="link-card">
+        <span class="link-card-label">Contact</span>
+        <div class="link-card-title">hello@zlar.ai</div>
+        <p class="link-card-desc">Reach us directly.</p>
+      </a>
     </div>
   </section>
 
   <footer>
-    <p>© 2025-2026 ZLAR Inc. · <a href="https://github.com/ZLAR-AI/ZLAR-OC">GitHub</a> · <a href="https://x.com/vincentnijjar">X</a> · <a href="mailto:hello@zlar.ai">hello@zlar.ai</a> · <a href="mailto:bohm@zlar.ai">bohm@zlar.ai</a> · <a href="/legal.html">Legal</a></p>
+    <p>
+      &copy; 2026 ZLAR AI Inc. &nbsp;&middot;&nbsp;
+      <a href="https://github.com/ZLAR-AI/ZLAR">GitHub</a> &nbsp;&middot;&nbsp;
+      <a href="https://x.com/Bohm_031126">X</a> &nbsp;&middot;&nbsp;
+      <a href="mailto:hello@zlar.ai">hello@zlar.ai</a> &nbsp;&middot;&nbsp;
+      <a href="legal.html">Legal</a>
+    </p>
   </footer>
 
 </body>

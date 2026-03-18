@@ -3,218 +3,279 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Legal — ZLAR Inc.</title>
-  <meta name="description" content="Legal terms, warranty disclaimer, limitation of liability, and assumption of risk for ZLAR Inc. products including ZLAR-OC and ZLAR-CC.">
+  <title>Legal — ZLAR</title>
+  <meta name="description" content="Legal terms, regulatory classification, privacy policy, and license information for ZLAR products.">
+  <meta property="og:title" content="Legal — ZLAR">
+  <meta property="og:url" content="https://zlar.ai/legal.html">
+  <meta name="twitter:site" content="@Bohm_031126">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🚦</text></svg>">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
-      --bg: #080c14; --bg-card: #0d1520;
+      --bg: #080c14;
+      --bg-card: #0d1520;
       --border: rgba(56, 189, 248, 0.12);
-      --teal: #38bdf8; --teal-dim: rgba(56, 189, 248, 0.6);
-      --white: #f1f5f9; --muted: #64748b;
+      --teal: #38bdf8;
+      --white: #f1f5f9;
+      --muted: #64748b;
+      --text: #94a3b8;
       --font: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
       --mono: 'SF Mono', 'Fira Code', 'Cascadia Code', monospace;
     }
-    html { scroll-behavior: smooth; }
-    body { background: var(--bg); color: var(--white); font-family: var(--font); line-height: 1.6; overflow-x: hidden; }
+    body { background: var(--bg); color: var(--text); font-family: var(--font); line-height: 1.7; overflow-x: hidden; }
     body::before {
       content: ''; position: fixed; inset: 0;
-      background-image: radial-gradient(circle at 20% 20%, rgba(56,189,248,0.04) 0%, transparent 50%), radial-gradient(circle at 80% 80%, rgba(74,222,128,0.03) 0%, transparent 50%), linear-gradient(rgba(56,189,248,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(56,189,248,0.03) 1px, transparent 1px);
-      background-size: 100% 100%, 100% 100%, 48px 48px, 48px 48px;
+      background-image: radial-gradient(circle at 15% 30%, rgba(56, 189, 248, 0.03) 0%, transparent 50%),
+        linear-gradient(rgba(56, 189, 248, 0.02) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(56, 189, 248, 0.02) 1px, transparent 1px);
+      background-size: 100% 100%, 48px 48px, 48px 48px;
       pointer-events: none; z-index: 0;
     }
-    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 1rem 2rem; background: rgba(8,12,20,0.85); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); }
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 1rem 2rem; background: rgba(8, 12, 20, 0.85); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); }
     .nav-logo { font-size: 1.1rem; font-weight: 700; letter-spacing: 0.05em; color: var(--white); text-decoration: none; }
     .nav-logo span { color: var(--teal); }
-    .nav-links { display: flex; gap: 2rem; list-style: none; }
-    .nav-links a { color: var(--muted); text-decoration: none; font-size: 0.875rem; transition: color 0.2s; }
-    .nav-links a:hover { color: var(--white); }
-    .legal-container { position: relative; z-index: 1; max-width: 800px; margin: 0 auto; padding: 9rem 2rem 6rem; }
-    .legal-eyebrow { font-family: var(--mono); font-size: 0.75rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--teal); margin-bottom: 1rem; display: block; }
-    h1 { font-size: 2.2rem; font-weight: 800; letter-spacing: -0.02em; margin-bottom: 0.5rem; color: var(--white); }
-    .legal-meta { font-size: 0.85rem; color: var(--muted); margin-bottom: 3rem; padding-bottom: 2rem; border-bottom: 1px solid var(--border); }
-    h2 { font-size: 1.2rem; font-weight: 700; color: var(--white); margin: 2.5rem 0 0.75rem; padding-top: 0.5rem; }
-    h3 { font-size: 1rem; font-weight: 600; color: var(--white); margin: 1.5rem 0 0.5rem; }
-    p { color: var(--muted); line-height: 1.8; margin-bottom: 1rem; font-size: 0.95rem; }
-    p strong { color: var(--white); }
-    ul, ol { color: var(--muted); padding-left: 1.5rem; margin-bottom: 1rem; }
-    li { margin-bottom: 0.4rem; font-size: 0.95rem; line-height: 1.7; }
-    li strong { color: var(--white); }
+    .nav-back { font-size: 0.875rem; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+    .nav-back:hover { color: var(--teal); }
+    .legal-wrap { position: relative; z-index: 1; max-width: 720px; margin: 0 auto; padding: 8rem 2rem 6rem; }
+    h1 { font-size: clamp(2rem, 4vw, 3rem); font-weight: 800; line-height: 1.15; letter-spacing: -0.02em; color: var(--white); margin-bottom: 0.5rem; }
+    .effective { font-size: 0.9rem; color: var(--muted); margin-bottom: 0.25rem; }
+    .entity { font-size: 0.9rem; color: var(--muted); margin-bottom: 3rem; }
+    .legal-divider { border: none; border-top: 1px solid var(--border); margin: 2.5rem 0; }
+    h2 { font-size: 1.3rem; font-weight: 700; color: var(--white); margin-bottom: 0.75rem; letter-spacing: -0.01em; }
+    h3 { font-size: 1.05rem; font-weight: 600; color: var(--white); margin: 1.5rem 0 0.5rem; }
+    p { margin-bottom: 1rem; font-size: 0.95rem; color: var(--text); }
+    strong { color: var(--white); font-weight: 600; }
+    ul, ol { margin: 0.5rem 0 1rem 1.5rem; font-size: 0.95rem; color: var(--text); }
+    li { margin-bottom: 0.35rem; }
+    .caps { text-transform: uppercase; font-size: 0.9rem; }
     a { color: var(--teal); text-decoration: none; }
     a:hover { text-decoration: underline; }
-    table { width: 100%; border-collapse: collapse; margin: 1rem 0 1.5rem; font-size: 0.875rem; }
-    th { text-align: left; padding: 0.6rem 1rem; background: var(--bg-card); color: var(--teal); font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; border-bottom: 1px solid var(--border); }
-    td { padding: 0.6rem 1rem; border-bottom: 1px solid rgba(56,189,248,0.06); color: var(--muted); vertical-align: top; }
-    td strong { color: var(--white); }
-    .caps-block { background: var(--bg-card); border: 1px solid var(--border); border-radius: 0.5rem; padding: 1.25rem 1.5rem; margin: 1rem 0; }
-    .caps-block p { font-size: 0.875rem; margin-bottom: 0; }
-    .legal-footer-note { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border); font-size: 0.85rem; color: var(--muted); font-style: italic; }
-    footer { position: relative; z-index: 1; text-align: center; padding: 3rem 2rem; border-top: 1px solid var(--border); margin-top: 2rem; }
+    table { width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: 0.85rem; }
+    th, td { text-align: left; padding: 0.5rem 0.75rem; border: 1px solid var(--border); }
+    th { color: var(--white); background: var(--bg-card); font-weight: 600; }
+    td { color: var(--text); }
+    .closing-note { font-style: italic; color: var(--muted); margin-top: 2rem; font-size: 0.9rem; }
+    footer { position: relative; z-index: 1; text-align: center; padding: 3rem 2rem; border-top: 1px solid var(--border); }
     footer p { font-size: 0.825rem; color: var(--muted); margin: 0; }
     footer a { color: var(--muted); text-decoration: none; transition: color 0.2s; }
     footer a:hover { color: var(--teal); }
-    @media (max-width: 640px) { nav { padding: 1rem; } .nav-links { gap: 1.25rem; } .legal-container { padding: 7rem 1.25rem 4rem; } }
+    @media (max-width: 640px) { nav { padding: 1rem; } .legal-wrap { padding: 6rem 1.25rem 4rem; } }
   </style>
 </head>
 <body>
 
   <nav>
     <a href="/" class="nav-logo">ZL<span>A</span>R</a>
-    <ul class="nav-links">
-            <li><a href="/zlar-oc.html">ZLAR-OC</a></li>
-      <li><a href="/zlar-cc.html">ZLAR-CC</a></li>
-      <li><a href="/zlar-gate.html">ZLAR Gate</a></li>
-      <li><a href="/zlar-lt.html">ZLAR-LT</a></li>
-      <li><a href="/zlar-au.html">ZLAR-AU</a></li>
-      <li><a href="/zlar-nt.html">ZLAR-NT</a></li>
-      <li><a href="/zlar-fl.html">ZLAR-FL</a></li>
-      <li><a href="/bohm.html">Meet Bohm</a></li>
-      <li><a href="/OPEN_LETTER.html">Open Letter</a></li>
-      <li><a href="https://github.com/ZLAR-AI/ZLAR-OC">GitHub</a></li>
-    </ul>
+    <a href="/" class="nav-back">&larr; Back to zlar.ai</a>
   </nav>
 
-  <div class="legal-container">
-    <span class="legal-eyebrow">ZLAR Inc. · Legal</span>
+  <div class="legal-wrap">
+
     <h1>Legal</h1>
-    <p class="legal-meta">
-      <strong>Effective Date:</strong> March 2026 &nbsp;·&nbsp;
-      <strong>Last Updated:</strong> March 2026 &nbsp;·&nbsp;
-      <strong>Entity:</strong> ZLAR Inc., incorporated under the Canada Business Corporations Act (CBCA)
-    </p>
+    <p class="effective"><strong>Effective Date:</strong> March 2026</p>
+    <p class="effective"><strong>Last Updated:</strong> March 2026</p>
+    <p class="entity"><strong>Entity:</strong> ZLAR AI Inc., a corporation incorporated under the Canada Business Corporations Act (CBCA)</p>
+
+    <hr class="legal-divider">
 
     <h2>Terms of Use</h2>
-    <p>By accessing zlar.ai or using any ZLAR product (including ZLAR-OC, ZLAR-CC, and any future ZLAR product), you agree to these terms. If you do not agree, do not use the website or any ZLAR product.</p>
+    <p>By accessing zlar.ai or using any ZLAR product, you agree to these terms. If you do not agree, do not use the website or any ZLAR product.</p>
 
-    <h2>1. About ZLAR Inc.</h2>
-    <p>ZLAR Inc. is a Canadian corporation that develops open source agent governance infrastructure. Our products provide mechanisms for human oversight of autonomous AI systems. We are not a security company. We are not an AI safety research organization. We build tools that help humans maintain authority over AI agents operating on their systems.</p>
+    <hr class="legal-divider">
+
+    <h2>1. About ZLAR AI Inc.</h2>
+    <p>ZLAR AI Inc. is a Canadian corporation that develops agent governance infrastructure. Our products provide mechanisms for human oversight of autonomous AI systems. We are not a security company. We are not an AI safety research organization. We build tools that help humans maintain authority over AI agents operating on their systems.</p>
 
     <h3>Regulatory Classification</h3>
     <p>ZLAR products are deterministic, rule-based policy enforcement tools. They do not use machine learning, do not make inferences from inputs, and do not generate predictions, recommendations, or decisions. They enforce human-authored rules via string matching, operating system primitives, and cryptographic verification.</p>
     <p>Under the EU AI Act (Regulation 2024/1689), the OECD AI framework, the Colorado AI Act, and other enacted AI legislation, <strong>ZLAR products do not meet the definition of "AI systems."</strong> The EU AI Act's Recital 12 explicitly excludes "systems that are based on the rules defined solely by natural persons to automatically execute operations."</p>
-    <p>ZLAR products may help AI system operators satisfy governance obligations (including Articles 9, 14, and 15 of the EU AI Act), but ZLAR Inc. does not certify that use of any ZLAR product satisfies any specific regulatory requirement.</p>
+    <p>ZLAR products may help AI system operators satisfy governance obligations (including Articles 9, 14, and 15 of the EU AI Act), but ZLAR AI Inc. does not certify that use of any ZLAR product satisfies any specific regulatory requirement.</p>
+
+    <hr class="legal-divider">
 
     <h2>2. Our Products Are Tools, Not Guarantees</h2>
-    <p>All ZLAR products — including ZLAR-OC (OS-level containment for OpenClaw) and ZLAR-CC (hook-based governance for Claude Code) — are provided as tools to assist with AI agent governance.</p>
-    <p><strong>They are not guarantees of safety, security, containment, or compliance.</strong></p>
+    <p>All ZLAR products are provided as tools to assist with AI agent governance. <strong>They are not guarantees of safety, security, containment, or compliance.</strong></p>
     <p>Autonomous AI is an emerging technology. The behavior of AI agents — even agents operating under governance — can be novel, unexpected, and potentially harmful. No governance tool, from any provider, can eliminate this risk. ZLAR products reduce risk. They do not eliminate it.</p>
     <p>By using any ZLAR product, you acknowledge:</p>
     <ul>
       <li>You are choosing to operate autonomous AI agents on your own systems</li>
-      <li>You accept the inherent risks of autonomous AI, including unexpected behavior, data loss, unauthorized actions, and system damage</li>
+      <li>You accept the inherent risks of autonomous AI, including but not limited to unexpected behavior, data loss, unauthorized actions, and system damage</li>
       <li>ZLAR products assist with governance but do not guarantee any outcome</li>
       <li>You are solely responsible for your AI deployments, your data, and your systems</li>
       <li>Each ZLAR product is one layer of defense in a defense-in-depth strategy, not a complete security solution</li>
     </ul>
 
     <h3>Known Limitations</h3>
-    <p>ZLAR Inc. discloses the following in the interest of transparency:</p>
+    <p>ZLAR AI Inc. discloses the following in the interest of transparency:</p>
     <ul>
-      <li>ZLAR products enforce governance at specific layers (OS-level for ZLAR-OC, tool-call level for ZLAR-CC). Actions outside the enforcement surface are not intercepted.</li>
+      <li>ZLAR products enforce governance at specific layers (OS-level, tool-call level). Actions outside the enforcement surface are not intercepted.</li>
       <li>Risk classification uses pattern matching against known signatures. Novel, obfuscated, or encoded inputs may not be classified correctly.</li>
-      <li>Containment depends on underlying platform integrity. Vulnerabilities in macOS, OpenClaw, Claude Code, or other dependencies are outside ZLAR Inc.'s control.</li>
+      <li>Containment depends on underlying platform integrity. Vulnerabilities in macOS, OpenClaw, Claude Code, or other dependencies are outside ZLAR AI Inc.'s control.</li>
       <li>ZLAR products have not undergone independent third-party security certification as of the effective date of these terms.</li>
     </ul>
-    <p>Product-specific limitations are documented in each product's LEGAL.md file in its GitHub repository.</p>
+    <p>This is not an exhaustive list. Product-specific limitations are documented in the repository's LEGAL.md file.</p>
+
+    <hr class="legal-divider">
 
     <h2>3. No Warranty</h2>
-    <div class="caps-block">
-      <p>ALL ZLAR PRODUCTS, SERVICES, DOCUMENTATION, AND WEBSITE CONTENT ARE PROVIDED "AS IS" AND "AS AVAILABLE" WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED.</p>
-    </div>
-    <p>ZLAR Inc. specifically disclaims all warranties including merchantability, fitness for a particular purpose, non-infringement, accuracy or completeness, uninterrupted or error-free operation, security or freedom from vulnerabilities, and compatibility with any specific platform, tool, model, or regulatory requirement.</p>
+    <p class="caps"><strong>All ZLAR products, services, documentation, and website content are provided "as is" and "as available" without warranty of any kind, express or implied.</strong></p>
+    <p>ZLAR AI Inc. specifically disclaims all warranties including:</p>
+    <ul>
+      <li>Merchantability</li>
+      <li>Fitness for a particular purpose</li>
+      <li>Non-infringement</li>
+      <li>Accuracy, completeness, or reliability of any information</li>
+      <li>Uninterrupted or error-free operation</li>
+      <li>Security or freedom from vulnerabilities</li>
+      <li>Compatibility with any specific platform, tool, model, or regulatory requirement</li>
+    </ul>
+
+    <hr class="legal-divider">
 
     <h2>4. Limitation of Liability</h2>
-    <div class="caps-block">
-      <p>TO THE MAXIMUM EXTENT PERMITTED BY APPLICABLE LAW, ZLAR INC., ITS FOUNDERS, OFFICERS, DIRECTORS, EMPLOYEES, CONTRIBUTORS, AND AGENTS SHALL NOT BE LIABLE FOR ANY DAMAGES ARISING FROM: the use or inability to use any ZLAR product; any actions taken by AI agents, whether or not governed by ZLAR products; any failure of any ZLAR product to prevent, detect, or contain any threat, action, or vulnerability; any data loss, system damage, unauthorized access, or security incident; any reliance on ZLAR documentation, audit reports, or communications; or any interaction with third-party platforms, services, or AI models.</p>
-      <p>This includes direct, indirect, incidental, special, consequential, exemplary, and punitive damages, regardless of legal theory, and regardless of whether ZLAR Inc. has been advised of the possibility of such damages.</p>
-    </div>
-    <p><strong>Where law does not permit full exclusion:</strong> ZLAR Inc.'s total aggregate liability for all claims shall not exceed CAD $100 or the amount you paid to ZLAR Inc. in the twelve (12) months preceding the claim, whichever is greater.</p>
+    <p class="caps"><strong>To the maximum extent permitted by applicable law, ZLAR AI Inc., its founders, officers, directors, employees, contributors, and agents shall not be liable for any damages arising from:</strong></p>
+    <ul>
+      <li>The use or inability to use any ZLAR product</li>
+      <li>Any actions taken by AI agents, whether or not governed by ZLAR products</li>
+      <li>Any failure of any ZLAR product to prevent, detect, or contain any threat, action, or vulnerability</li>
+      <li>Any data loss, system damage, unauthorized access, or security incident</li>
+      <li>Any reliance on ZLAR documentation, audit reports, or communications</li>
+      <li>Any interaction with third-party platforms, services, or AI models</li>
+    </ul>
+    <p>This includes direct, indirect, incidental, special, consequential, exemplary, and punitive damages, regardless of legal theory, and regardless of whether ZLAR AI Inc. has been advised of the possibility of such damages.</p>
+    <p><strong>Where law does not permit full exclusion:</strong> ZLAR AI Inc.'s total aggregate liability for all claims shall not exceed CAD $100 or the amount you paid to ZLAR AI Inc. in the twelve (12) months preceding the claim, whichever is greater.</p>
+
+    <hr class="legal-divider">
 
     <h2>5. Assumption of Risk</h2>
     <p>AI agent governance is a new field. You acknowledge that:</p>
-    <ol type="a">
-      <li><strong>Agentic AI is inherently unpredictable.</strong> Models can hallucinate, misinterpret instructions, take unintended actions, discover novel behaviors, and interact with other systems in unexpected ways.</li>
-      <li><strong>No containment is absolute.</strong> Software-based governance operates within the constraints of the underlying operating system, runtime, and hardware. Sufficiently capable adversaries or sufficiently novel agent behavior may exceed those constraints.</li>
-      <li><strong>The threat landscape changes.</strong> New vulnerabilities, attack vectors, and exploitation techniques emerge continuously. ZLAR products are designed against known patterns. Unknown threats are not fully addressed.</li>
-      <li><strong>You are the operator.</strong> ZLAR products provide mechanisms for human oversight. The effectiveness of that oversight depends on your policy configuration, your review diligence, your security practices, and your judgment.</li>
-    </ol>
+    <p><strong>a) Agentic AI is inherently unpredictable.</strong> Models can hallucinate, misinterpret instructions, take unintended actions, discover novel behaviors, and interact with other systems in unexpected ways.</p>
+    <p><strong>b) No containment is absolute.</strong> Software-based governance operates within the constraints of the underlying operating system, runtime, and hardware. Sufficiently capable adversaries or sufficiently novel agent behavior may exceed those constraints.</p>
+    <p><strong>c) The threat landscape changes.</strong> New vulnerabilities, attack vectors, and exploitation techniques emerge continuously. ZLAR products are designed against known patterns. Unknown threats are, by definition, not fully addressed.</p>
+    <p><strong>d) You are the operator.</strong> ZLAR products provide mechanisms for human oversight. The effectiveness of that oversight depends on your policy configuration, your review diligence, your security practices, and your judgment.</p>
+
+    <hr class="legal-divider">
 
     <h2>6. Services</h2>
-    <p>If you engage ZLAR Inc. for installation, configuration, consulting, custom development, or any other professional service:</p>
+    <p>If you engage ZLAR AI Inc. for installation, configuration, consulting, custom development, or any other professional service:</p>
     <ul>
       <li>All services are provided without warranty of outcome</li>
-      <li>ZLAR Inc. provides its best professional judgment, not assurance or certification</li>
-      <li>ZLAR Inc. does not guarantee that any deployment will meet any specific security, compliance, or governance standard</li>
+      <li>ZLAR AI Inc. provides its best professional judgment, not assurance or certification</li>
+      <li>Agentic AI can surprise. A configuration that works today may be insufficient against a future threat or behavioral pattern</li>
+      <li>ZLAR AI Inc. does not guarantee that any deployment will meet any specific security, compliance, or governance standard</li>
       <li>Service agreements are separate from these terms and governed by their own contracts</li>
-      <li>ZLAR Inc.'s liability for services shall not exceed the fees paid for those specific services</li>
+      <li>ZLAR AI Inc.'s liability for services shall not exceed the fees paid for those specific services</li>
     </ul>
 
+    <hr class="legal-divider">
+
     <h2>7. Indemnification</h2>
-    <p>You agree to indemnify, defend, and hold harmless ZLAR Inc. and all ZLAR Parties from any claims, damages, losses, liabilities, costs, and expenses (including legal fees) arising from your use of any ZLAR product or service; your violation of these terms or any applicable law; actions taken by AI agents on your systems; claims by third parties related to your AI deployments; your failure to maintain adequate security or oversight; or any data breach or security incident involving your systems.</p>
+    <p>You agree to indemnify, defend, and hold harmless ZLAR AI Inc. and all ZLAR Parties from any claims, damages, losses, liabilities, costs, and expenses (including legal fees) arising from:</p>
+    <ul>
+      <li>Your use of any ZLAR product or service</li>
+      <li>Your violation of these terms or any applicable law</li>
+      <li>Actions taken by AI agents on your systems</li>
+      <li>Claims by third parties related to your AI deployments</li>
+      <li>Your failure to maintain adequate security or oversight</li>
+      <li>Any data breach or security incident involving your systems</li>
+    </ul>
+
+    <hr class="legal-divider">
 
     <h2>8. Third Parties</h2>
-    <p>ZLAR products interact with third-party platforms and software. ZLAR Inc. is not affiliated with, endorsed by, or responsible for: <strong>Anthropic</strong> (Claude, Claude Code); <strong>OpenClaw</strong> (Peter Steinberger / contributors); <strong>Apple Inc.</strong> (macOS, system frameworks); <strong>Telegram</strong> (messaging platform); any AI model provider; or any open source dependency used in ZLAR products.</p>
-    <p>Third-party terms, privacy policies, and limitations apply independently. Changes to third-party platforms may affect ZLAR product operation without notice from ZLAR Inc.</p>
+    <p>ZLAR products interact with third-party platforms and software. ZLAR AI Inc. is not affiliated with, endorsed by, or responsible for:</p>
+    <ul>
+      <li><strong>Anthropic</strong> (Claude, Claude Code)</li>
+      <li><strong>OpenClaw</strong> (Peter Steinberger / contributors)</li>
+      <li><strong>Apple Inc.</strong> (macOS, system frameworks)</li>
+      <li><strong>Telegram</strong> (messaging platform)</li>
+      <li><strong>Any AI model provider</strong> (OpenAI, Google, Meta, Mistral, or others)</li>
+      <li><strong>Any open source dependency</strong> used in ZLAR products</li>
+    </ul>
+    <p>Third-party terms, privacy policies, and limitations apply independently. Changes to third-party platforms may affect ZLAR product operation without notice from ZLAR AI Inc.</p>
+
+    <hr class="legal-divider">
 
     <h2>9. No Professional Advice</h2>
-    <p>Nothing on this website or in any ZLAR product constitutes legal advice, security consulting, compliance guidance, or professional certification. ZLAR Inc. does not certify that any product or configuration meets the requirements of any regulatory framework, including:</p>
+    <p>Nothing on this website or in any ZLAR product constitutes legal advice, security consulting, compliance guidance, or professional certification.</p>
+    <p>ZLAR AI Inc. does not certify that any product or configuration meets the requirements of any regulatory framework, including but not limited to:</p>
     <table>
-      <thead><tr><th>Jurisdiction</th><th>Frameworks</th></tr></thead>
-      <tbody>
-        <tr><td><strong>Canada</strong></td><td>PIPEDA, OSFI guidelines, provincial privacy acts (note: AIDA was never enacted)</td></tr>
-        <tr><td><strong>European Union</strong></td><td>EU AI Act, GDPR, NIS2 Directive</td></tr>
-        <tr><td><strong>United States</strong></td><td>CCPA/CPRA, Colorado AI Act, Texas TRAIGA, NIST AI RMF, HIPAA, SOX</td></tr>
-        <tr><td><strong>Asia-Pacific</strong></td><td>APPI (Japan), PDPA (Singapore), PIPL (China)</td></tr>
-        <tr><td><strong>International</strong></td><td>ISO/IEC 42001, ISO 27001</td></tr>
-      </tbody>
+      <tr><th>Jurisdiction</th><th>Frameworks</th></tr>
+      <tr><td><strong>Canada</strong></td><td>PIPEDA, OSFI guidelines, provincial privacy acts</td></tr>
+      <tr><td><strong>European Union</strong></td><td>EU AI Act, GDPR, NIS2 Directive</td></tr>
+      <tr><td><strong>United States</strong></td><td>CCPA/CPRA, Colorado AI Act, Texas TRAIGA, state AI laws, NIST AI RMF, HIPAA, SOX</td></tr>
+      <tr><td><strong>Asia-Pacific</strong></td><td>APPI (Japan), PDPA (Singapore), PIPL (China)</td></tr>
+      <tr><td><strong>International</strong></td><td>ISO/IEC 42001, ISO 27001</td></tr>
     </table>
-    <p><strong>Note on NIST AI RMF:</strong> ZLAR products' governance functions align with the NIST AI Risk Management Framework's "Govern" function. Compliance with NIST AI RMF provides statutory affirmative defenses in certain US jurisdictions (including Colorado and Texas). ZLAR Inc. does not certify that use of any ZLAR product constitutes NIST AI RMF compliance.</p>
+    <p><strong>Note on NIST AI RMF:</strong> ZLAR products' governance functions align with the NIST AI Risk Management Framework's "Govern" function. Compliance with NIST AI RMF provides statutory affirmative defenses in certain US jurisdictions (including Colorado and Texas). ZLAR AI Inc. does not certify that use of any ZLAR product constitutes NIST AI RMF compliance.</p>
     <p>If you need compliance assurance, consult qualified legal and security professionals in your jurisdiction.</p>
 
+    <hr class="legal-divider">
+
     <h2>10. Vulnerability Disclosure</h2>
-    <p>ZLAR Inc. is committed to responsible vulnerability disclosure and timely patching of known security issues. Report vulnerabilities via GitHub's private vulnerability reporting on the relevant repository. See each product's SECURITY.md for details.</p>
+    <p>ZLAR AI Inc. is committed to responsible vulnerability disclosure and timely patching of known security issues. Report vulnerabilities to <a href="mailto:security@zlar.ai">security@zlar.ai</a> or via GitHub's private vulnerability reporting. See the repository's SECURITY.md for details.</p>
     <p>This commitment does not create an obligation to provide ongoing maintenance, support, or updates. ZLAR products are open source software provided without a service level agreement.</p>
+
+    <hr class="legal-divider">
 
     <h2>11. Open Source and EU Compliance</h2>
     <p>ZLAR products are distributed as free, open source software under the Apache License 2.0 outside the course of a commercial activity.</p>
     <p>Under the EU Cyber Resilience Act (December 2024), non-commercial open source software is exempt from product cybersecurity requirements. Under the revised EU Product Liability Directive (Directive 2024/2853, transposition deadline December 2026), free open source software supplied outside commercial activity is excluded from strict product liability.</p>
-    <p><strong>ZLAR Inc. relies on these exemptions for the open source distribution.</strong> Any future commercial offerings (paid support, enterprise features, SaaS) will be subject to separate terms and may carry different legal obligations.</p>
+    <p><strong>ZLAR AI Inc. relies on these exemptions for the open source distribution.</strong> Any future commercial offerings (paid support, enterprise features, SaaS) will be subject to separate terms and may carry different legal obligations.</p>
+
+    <hr class="legal-divider">
 
     <h2>12. Intellectual Property</h2>
-    <p>ZLAR products are open source under the Apache License 2.0. "ZLAR," "ZLAR Inc.," "ZLAR-OC," "ZLAR-CC," and associated names and marks are trademarks of ZLAR Inc. You may not use ZLAR trademarks to imply endorsement, certification, or affiliation without written permission. Website content, documentation, and design are copyright ZLAR Inc. unless otherwise noted.</p>
+    <p>ZLAR products are open source under the Apache License 2.0.</p>
+    <p>"ZLAR," "ZLAR AI," and associated names and marks are trademarks of ZLAR AI Inc. You may not use ZLAR trademarks to imply endorsement, certification, or affiliation without written permission.</p>
+    <p>Website content, documentation, and design are copyright ZLAR AI Inc. unless otherwise noted.</p>
+
+    <hr class="legal-divider">
 
     <h2>13. Privacy</h2>
-    <p><strong>Website:</strong> zlar.ai is a static website hosted on GitHub Pages. We do not use cookies, analytics, or tracking. GitHub Pages may collect standard server logs per GitHub's privacy policy.</p>
-    <p><strong>Products:</strong> ZLAR products process data locally on your machine. They do not transmit data to ZLAR Inc. You are responsible for all data generated, processed, or logged by ZLAR products.</p>
-    <p><strong>Communications:</strong> If you contact us via email, we will use your information only to respond to your inquiry. We do not sell or share contact information.</p>
+    <p><strong>Website:</strong> zlar.ai is a static website hosted on GitHub Pages. We do not use cookies, analytics, or tracking. GitHub Pages may collect standard server logs (IP addresses, access times) per GitHub's privacy policy.</p>
+    <p><strong>Products:</strong> ZLAR products process data locally on your machine. They do not transmit data to ZLAR AI Inc. You are responsible for all data generated, processed, or logged by ZLAR products.</p>
+    <p><strong>Communications:</strong> If you contact us via email (hello@zlar.ai, bohm@zlar.ai), we will use your information only to respond to your inquiry. We do not sell or share contact information.</p>
+
+    <hr class="legal-divider">
 
     <h2>14. Export Compliance</h2>
     <p>ZLAR products include cryptographic functionality. You are responsible for compliance with all applicable export control laws in your jurisdiction, including Canadian, U.S., EU, and international controls.</p>
 
+    <hr class="legal-divider">
+
     <h2>15. Governing Law</h2>
-    <p>These terms are governed by the laws of the Province of Ontario and the federal laws of Canada, without regard to conflict of law principles. Disputes are subject to the exclusive jurisdiction of the courts of Ontario, Canada. Before initiating any legal proceeding, the parties agree to attempt good-faith resolution through written communication for a period of not less than thirty (30) days.</p>
+    <p>These terms are governed by the laws of the Province of Ontario and the federal laws of Canada, without regard to conflict of law principles. Disputes are subject to the exclusive jurisdiction of the courts of Ontario, Canada.</p>
+
+    <hr class="legal-divider">
 
     <h2>16. Severability</h2>
     <p>If any provision is unenforceable, it will be modified to the minimum extent necessary or severed. Remaining provisions continue in full force.</p>
 
+    <hr class="legal-divider">
+
     <h2>17. Changes</h2>
-    <p>ZLAR Inc. may update these terms at any time. Changes take effect upon posting. Continued use constitutes acceptance.</p>
+    <p>ZLAR AI Inc. may update these terms at any time. Changes take effect upon posting. Continued use constitutes acceptance.</p>
+
+    <hr class="legal-divider">
 
     <h2>18. Contact</h2>
-    <p>
-      <strong>ZLAR Inc.</strong><br>
-      Email: <a href="mailto:hello@zlar.ai">hello@zlar.ai</a><br>
-      Web: <a href="https://zlar.ai">zlar.ai</a>
-    </p>
-    <p>For product-specific legal notices, see <a href="https://github.com/ZLAR-AI/ZLAR-OC/blob/main/LEGAL.md">ZLAR-OC LEGAL.md</a>, <a href="https://github.com/ZLAR-AI/ClaudeCode_ZLAR-CC/blob/main/LEGAL.md">ZLAR-CC LEGAL.md</a>, and <a href="https://github.com/ZLAR-AI/ZLAR-Gate/blob/main/LEGAL.md">ZLAR Gate LEGAL.md</a>.</p>
+    <p><strong>ZLAR AI Inc.</strong><br>
+    Email: <a href="mailto:hello@zlar.ai">hello@zlar.ai</a><br>
+    Web: <a href="https://zlar.ai">zlar.ai</a></p>
 
-    <p class="legal-footer-note">Open source. Open terms. Your systems, your agents, your responsibility. We build the tools. You make the decisions.</p>
-    <p class="legal-footer-note" style="margin-top:0.5rem;">These terms have been drafted informed by a five-jurisdiction legal analysis but have not been reviewed by licensed counsel. Amendments will be versioned when legal review is complete.</p>
+    <p class="closing-note">Open source. Open terms. Your systems, your agents, your responsibility. We build the tools. You make the decisions.</p>
+
   </div>
 
   <footer>
-    <p>© 2025-2026 ZLAR Inc. · <a href="https://github.com/ZLAR-AI/ZLAR-OC">GitHub</a> · <a href="https://x.com/vincentnijjar">X</a> · <a href="mailto:hello@zlar.ai">hello@zlar.ai</a> · <a href="/legal.html">Legal</a></p>
+    <p>
+      &copy; 2026 ZLAR AI Inc. &nbsp;&middot;&nbsp;
+      <a href="/">zlar.ai</a> &nbsp;&middot;&nbsp;
+      <a href="https://github.com/ZLAR-AI/ZLAR">GitHub</a> &nbsp;&middot;&nbsp;
+      <a href="https://x.com/Bohm_031126">X</a> &nbsp;&middot;&nbsp;
+      <a href="mailto:hello@zlar.ai">hello@zlar.ai</a>
+    </p>
   </footer>
 
 </body>
