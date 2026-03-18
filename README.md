@@ -1,6 +1,6 @@
 # zlar.ai
 
-The public website for [ZLAR AI Inc.](https://zlar.ai) — human-in-the-loop governance for autonomous AI agents.
+The public website for [ZLAR Inc.](https://zlar.ai) — human-in-the-loop governance for autonomous AI agents.
 
 Hosted on GitHub Pages. Static HTML, no build step, no framework.
 
@@ -26,4 +26,4 @@ Hosted on GitHub Pages. Static HTML, no build step, no framework.
 
 ## License
 
-Website content is copyright ZLAR AI Inc. Source code is licensed under [Apache 2.0](LICENSE). The ZLAR product repository is at [github.com/ZLAR-AI/ZLAR](https://github.com/ZLAR-AI/ZLAR).
+Website content is copyright ZLAR Inc. Source code is licensed under [Apache 2.0](LICENSE). The ZLAR product repository is at [github.com/ZLAR-AI/ZLAR](https://github.com/ZLAR-AI/ZLAR).
