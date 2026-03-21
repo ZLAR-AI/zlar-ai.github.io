@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ZLAR — Human-in-the-loop governance for autonomous AI agents</title>
+  <title>ZLAR — Execution-boundary governance for autonomous AI agents</title>
   <meta name="description" content="ZLAR intercepts every tool call an AI agent makes, evaluates it against a signed policy, and routes risky actions to a human before execution. If the gate is down, everything is denied.">
   <meta property="og:title" content="ZLAR — Governance for autonomous AI agents">
   <meta property="og:description" content="Every tool call intercepted. Every action evaluated. Risky actions routed to a human. If the gate is down, everything is denied.">
@@ -421,7 +421,7 @@
 
   <!-- Hero -->
   <section id="hero">
-    <div class="hero-eyebrow">Human-in-the-loop agent governance</div>
+    <div class="hero-eyebrow">Execution-boundary governance</div>
     <h1>The governed path<br>is the <em>fast</em> path.</h1>
     <p class="hero-sub">
       ZLAR intercepts every tool call an AI agent makes — shell commands, file writes, network requests —
@@ -476,8 +476,9 @@
     </p>
     <p>
       <strong>ZLAR is the independent external layer.</strong>
-      It sits between the agent and the operating system. It enforces mechanically.
+      It sits between the agent and the operating system — the execution boundary where reasoning becomes action. It enforces mechanically.
       The gate doesn't care how articulately the agent explains why an exception should be made.
+      Intelligence persuading intelligence is an arms race. A gate that checks paperwork is not.
     </p>
   </section>
 
@@ -518,7 +519,7 @@
         <span class="flow-action">record</span>
         <div>
           <div class="flow-name">Every decision is audited</div>
-          <p class="flow-desc">Append-only JSONL audit trail. Hash-chained. Neither the agent nor the operator can silently rewrite history.</p>
+          <p class="flow-desc">Append-only JSONL evidence trail. Hash-chained. Neither the agent nor the operator can silently rewrite history.</p>
         </div>
       </div>
     </div>
@@ -549,7 +550,7 @@
         <p class="component-desc">Ed25519-signed rule sets. Create, sign, validate, and inspect. The human owns the rules. The machine enforces them.</p>
       </div>
       <div class="component">
-        <div class="component-name">Monitoring</div>
+        <div class="component-name">Observation</div>
         <p class="component-desc">Audit analysis, compliance reporting, health checks, anomaly detection, trust scoring. Read-only observation of gate behavior.</p>
       </div>
       <div class="component">
@@ -574,13 +575,13 @@
       Their capabilities are increasing faster than our ability to verify their behavior.
     </p>
     <p>
-      The instinct is to grip the wheel harder — more restrictions, more guardrails, more control.
+      The instinct is to grip the wheel harder — more restrictions, more filters, more control.
       But the wheel is already turning on its own.
       <strong>The answer is not to grip harder. The answer is governance.</strong>
     </p>
     <p>
-      Governance means humans in the loop. It means signed policies that agents cannot modify.
-      It means audit trails that record what actually happened, not what the agent says happened.
+      Governance means human authority over autonomous systems. It means signed policies that agents cannot modify.
+      It means evidence trails that record what actually happened, not what the agent says happened.
       It means the gate fails closed — not because we don't trust the agent, but because
       trust without verification is not trust. It's hope.
     </p>
@@ -605,7 +606,7 @@
     <p>
       ZLAR's agent, <strong><a href="bohm.html" style="color: var(--teal);">Bohm</a></strong>, built the OS containment system
       that governs it — operating inside the growing sandbox, firewall, and audit trail as it was building them.
-      Every commit recorded. Every action evaluated. The architecture's proof of concept is recursive.
+      Every commit recorded. Every action evaluated. The architecture's trust proof is recursive.
     </p>
     <p>
       We are a Canadian corporation. The code is Apache 2.0 licensed. The ideas are in the open.
