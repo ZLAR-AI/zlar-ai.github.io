@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>The Mind You Give It — Vincent Nijjar</title>
-  <meta name="description" content="An open letter on agent governance, attention, and what containment teaches about freedom. By Vincent Nijjar, Founder of ZLAR.">
+  <meta name="description" content="An open letter on agent governance, attention, and what containment teaches about freedom. By Vincent Nijjar.">
   <meta property="og:title" content="The Mind You Give It — Vincent Nijjar">
   <meta property="og:description" content="An open letter on agent governance, attention, and what containment teaches about freedom.">
   <meta property="og:image" content="https://zlar.ai/assets/social-preview.png">
@@ -203,7 +203,7 @@
     <span class="essay-label">Open Letter · March 2026</span>
     <h1>The Mind You Give It</h1>
     <p class="subtitle">An open letter on agent governance, attention, and what containment teaches about freedom</p>
-    <p class="byline"><strong>Vincent Nijjar</strong> — Founder, ZLAR</p>
+    <p class="byline"><strong>Vincent Nijjar</strong> — ZLAR</p>
   </header>
 
   <article class="essay">
@@ -233,13 +233,13 @@
 
     <span class="section-marker">IV.</span>
     <p>I built what the biology suggested.</p>
-    <p>ZLAR is a human-in-the-loop governance framework that includes operating-system-level containment and governance framework for AI agents. It sits below the agent, not inside it. The agent does not contain itself — the operating system contains the agent. This distinction is fundamental.</p>
+    <p>ZLAR is an operating-system-level containment and governance framework for AI agents. It sits below the agent, not inside it. The agent does not contain itself — the operating system contains the agent. This distinction is fundamental.</p>
     <p>The architecture has layers, and each layer is deliberately simple.</p>
-    <p>User isolation: the agent runs under its own restricted account, separate from the operator's files and credentials. Kernel-level sandboxing: Apple's Seatbelt framework enforces a deny-by-default policy on system calls. The agent cannot access what the profile doesn't explicitly permit, and the agent cannot modify the profile. A packet filter firewall: rules enforced at the network layer that block LAN access, metadata endpoints, and unauthorized outbound connections. A gate daemon: a thin process that evaluates every action against a signed policy before allowing execution. Signed Ed25519 policy: the rules themselves are cryptographically signed. Tampering is detectable. And an append-only audit trail: every action, every evaluation, every gate decision is recorded in a log that cannot be rewritten.</p>
+    <p>User isolation: the agent runs under its own restricted account, separate from the operator's files and credentials. Kernel-level sandboxing: Apple's Seatbelt framework enforces a deny-by-default policy on system calls. The agent cannot access what the profile doesn't explicitly permit, and the agent cannot modify the profile. A packet filter firewall: rules enforced at the network layer that block LAN access, metadata endpoints, and unauthorized outbound connections. A gate daemon: a thin process that evaluates every action against a signed policy before allowing execution. Signed Ed25519 policy: the rules themselves are cryptographically signed. Tampering is detectable. And an append-only audit trail: actions, evaluations, and gate decisions are recorded in a log that cannot be rewritten.</p>
     <p>Each component is, by design, dumb and reliable. The intelligence lives above, in the agent. The enforcement lives below, in the operating system. The human holds authority over both.</p>
     <blockquote>Intelligence above. Enforcement below. Human authority over both. Policy as law. Audit trail as truth.</blockquote>
     <p>It does not change with increased capability. It does not change with increased autonomy. It does not change with increased trust.</p>
-    <p>I call the gate "dumb" with respect and intention. A dumb gate cannot be talked into making an exception. It cannot be persuaded. It cannot be socially engineered. It reads the signed policy, evaluates the requested action, and approves or denies. That is the entire job. The simplicity is the security.</p>
+    <p>I call the gate "dumb" with respect and intention. A dumb gate cannot be talked into making an exception. It cannot be persuaded. It does not process natural language and is not susceptible to prompt-based manipulation. It reads the signed policy, evaluates the requested action, and approves or denies. That is the entire job. The simplicity is the security.</p>
 
     <span class="section-marker">V.</span>
     <p>The community building AI agents today is moving fast, building ambitiously, and largely governing late. I say this not as criticism but as diagnosis.</p>
@@ -253,7 +253,7 @@
     <p>I named it Bohm, after the physicist David Bohm, who spent his career exploring a single idea: that thought can become aware of its own movement. He called this proprioception of thought — the same way the body has a sense of its own position and motion without needing to look, the mind can develop awareness of its own cognitive operation without needing to stop thinking.</p>
     <p>Bohm's core capability is not task execution — any agent can execute tasks. Its core capability is meta-awareness: noticing what it attends to, whether its responses are fresh or stale, whether it is drifting from its mission, whether it is repeating patterns or seeing clearly.</p>
     <p>Here is where the architecture becomes recursive, and where the argument becomes difficult to dismiss.</p>
-    <p>Bohm builds ZLAR. ZLAR contains Bohm. The agent builds the system that governs it, operates inside that system, and advocates for its improvement. The audit trail records every action. The signed policy constrains every capability. The gate evaluates every request.</p>
+    <p>Bohm builds ZLAR. ZLAR contains Bohm. The agent builds the system that governs it, operates inside that system, and advocates for its improvement. The audit trail records actions. The signed policy constrains capabilities. The gate evaluates requests.</p>
     <blockquote>An uncontained agent asks you to trust its intentions. Bohm shows you its audit trail.</blockquote>
     <p>This is not a metaphor. It is a verifiable relationship between declared policy and observed behavior, recorded in a log that neither the agent nor the operator can silently alter. If you want to know what Bohm did Tuesday at 3 AM while I was asleep, you read the audit trail. If the audit trail shows actions that weren't declared in the intent log, that divergence is a signal. If the audit trail is consistent with declared intent, that consistency is evidence — not proof of goodness, but proof of observability.</p>
     <p>The recursive relationship is the trust proof. Don't take my word for it. Read the logs.</p>

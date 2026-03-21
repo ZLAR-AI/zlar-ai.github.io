@@ -4,9 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ZLAR — Execution-boundary governance for autonomous AI agents</title>
-  <meta name="description" content="ZLAR intercepts every tool call an AI agent makes, evaluates it against a signed policy, and routes risky actions to a human before execution. If the gate is down, everything is denied.">
+  <meta name="description" content="ZLAR intercepts tool calls an AI agent makes, evaluates each against a signed policy, and routes risky actions to a human before execution. If the gate is down, all actions are denied.">
   <meta property="og:title" content="ZLAR — Governance for autonomous AI agents">
-  <meta property="og:description" content="Every tool call intercepted. Every action evaluated. Risky actions routed to a human. If the gate is down, everything is denied.">
+  <meta property="og:description" content="Tool calls intercepted. Actions evaluated. Risky actions routed to a human. If the gate is down, all actions are denied.">
   <meta property="og:image" content="https://zlar.ai/assets/social-preview.png">
   <meta property="og:url" content="https://zlar.ai">
   <meta name="twitter:card" content="summary_large_image">
@@ -424,9 +424,9 @@
     <div class="hero-eyebrow">Execution-boundary governance</div>
     <h1>The governed path<br>is the <em>fast</em> path.</h1>
     <p class="hero-sub">
-      ZLAR intercepts every tool call an AI agent makes — shell commands, file writes, network requests —
-      evaluates it against a signed policy, and routes risky actions to a human before execution.
-      <strong>If the gate is down, everything is denied.</strong>
+      ZLAR intercepts tool calls an AI agent makes — shell commands, file writes, network requests —
+      evaluates each against a signed policy, and routes risky actions to a human before execution.
+      <strong>If the gate is down, all actions are denied.</strong>
     </p>
     <div class="cta-group">
       <a href="#install" class="btn btn-primary">Install in 60 seconds →</a>
@@ -487,7 +487,7 @@
   <!-- How it works -->
   <section id="how-it-works">
     <span class="section-label">Architecture</span>
-    <h2>Every tool call. Intercepted. Evaluated. Decided.</h2>
+    <h2>Tool calls. Intercepted. Evaluated. Decided.</h2>
     <p>
       When your agent tries to do anything — run a command, write a file, make a network request —
       ZLAR intercepts the call before it executes.
@@ -505,7 +505,7 @@
         <span class="flow-action">evaluate</span>
         <div>
           <div class="flow-name">Gate evaluates against signed policy</div>
-          <p class="flow-desc">Ed25519-signed rules. The agent cannot modify the rules that govern it. Tampering is mathematically detectable.</p>
+          <p class="flow-desc">Ed25519-signed rules. The agent cannot modify the rules that govern it. Tampering is cryptographically detectable.</p>
         </div>
       </div>
       <div class="flow-step">
@@ -519,7 +519,7 @@
         <span class="flow-action">record</span>
         <div>
           <div class="flow-name">Every decision is audited</div>
-          <p class="flow-desc">Append-only JSONL evidence trail. Hash-chained. Neither the agent nor the operator can silently rewrite history.</p>
+          <p class="flow-desc">Append-only JSONL audit trail. Hash-chained. Neither the agent nor the operator can silently rewrite history.</p>
         </div>
       </div>
     </div>
@@ -527,7 +527,7 @@
     <div class="invariant">
       <p>
         Fail closed. Gate down = all actions denied.<br>
-        No intelligence in the gate. It classifies and enforces. It does not decide what is safe.<br>
+        No learning, no inference, no language understanding in the gate. It classifies and enforces. It does not decide what is safe.<br>
         Policy is a human artifact. Agents cannot modify the rules that govern them.
       </p>
     </div>
@@ -581,7 +581,7 @@
     </p>
     <p>
       Governance means human authority over autonomous systems. It means signed policies that agents cannot modify.
-      It means evidence trails that record what actually happened, not what the agent says happened.
+      It means audit trails that record what actually happened, not what the agent says happened.
       It means the gate fails closed — not because we don't trust the agent, but because
       trust without verification is not trust. It's hope.
     </p>
@@ -599,7 +599,7 @@
     <span class="section-label">Who we are</span>
     <h2>ZLAR Inc.</h2>
     <p>
-      ZLAR was built by <strong>Vincent Nijjar</strong> — 25 years in financial services,
+      ZLAR comes from 25 years of financial services experience,
       where independent audit isn't optional, it's structural. The same principle applies to autonomous agents:
       the entity performing the work cannot credibly audit itself.
     </p>
