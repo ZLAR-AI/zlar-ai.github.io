@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Thought Can Wake Up Now — Vincent Nijjar</title>
+  <meta name="description" content="On agentic AI, executable thought, and why governance has to change. By Vincent Nijjar.">
+  <meta property="og:title" content="Thought Can Wake Up Now — Vincent Nijjar">
+  <meta property="og:description" content="On agentic AI, executable thought, and why governance has to change.">
+  <meta property="og:image" content="https://zlar.ai/assets/social-preview.png">
+  <meta property="og:url" content="https://zlar.ai/thought.html">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@ZLAR_Bohm">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🚦</text></svg>">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #080c14;
+      --bg-card: #0d1520;
+      --border: rgba(56, 189, 248, 0.12);
+      --teal: #38bdf8;
+      --teal-dim: rgba(56, 189, 248, 0.6);
+      --white: #f1f5f9;
+      --muted: #64748b;
+      --text: #94a3b8;
+      --font: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+      --serif: 'Georgia', 'Times New Roman', serif;
+    }
+
+    html { font-size: 16px; scroll-behavior: smooth; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font);
+      line-height: 1.7;
+      min-height: 100vh;
+    }
+
+    /* Nav */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(8, 12, 20, 0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 0.875rem 2rem;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .nav-brand { color: var(--teal); font-weight: 700; font-size: 1rem; text-decoration: none; letter-spacing: 0.04em; }
+    .nav-links { display: flex; gap: 1.5rem; }
+    .nav-links a { color: var(--muted); text-decoration: none; font-size: 0.875rem; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--white); }
+
+    /* Hero */
+    .hero {
+      max-width: 720px;
+      margin: 4rem auto 0;
+      padding: 0 2rem 3rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .essay-label {
+      display: inline-block;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--teal);
+      margin-bottom: 1.25rem;
+    }
+    .hero h1 {
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: 700;
+      color: var(--white);
+      line-height: 1.15;
+      margin-bottom: 1rem;
+      font-family: var(--serif);
+    }
+    .hero .subtitle {
+      font-size: 1.125rem;
+      color: var(--muted);
+      font-style: italic;
+      margin-bottom: 1.5rem;
+      font-family: var(--serif);
+    }
+    .hero .byline {
+      font-size: 0.875rem;
+      color: var(--muted);
+    }
+    .hero .byline strong { color: var(--teal-dim); }
+
+    /* Essay body */
+    .essay {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 3rem 2rem 6rem;
+    }
+
+    .essay p {
+      font-family: var(--serif);
+      font-size: 1.0625rem;
+      color: #b0bec5;
+      line-height: 1.85;
+      margin-bottom: 1.5rem;
+    }
+
+    .essay blockquote {
+      border-left: 3px solid var(--teal);
+      padding: 0.75rem 0 0.75rem 1.5rem;
+      margin: 2rem 0;
+      font-family: var(--serif);
+      font-size: 1.0625rem;
+      font-style: italic;
+      color: var(--white);
+    }
+
+    .essay hr {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 3rem 0;
+    }
+
+    /* Closing */
+    .essay .closing {
+      margin-top: 3rem;
+      padding: 2rem;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+    }
+    .essay .closing p {
+      font-size: 0.9375rem;
+      font-family: var(--font);
+      font-style: italic;
+      color: var(--muted);
+      margin-bottom: 0.75rem;
+    }
+    .essay .closing p:last-child { margin-bottom: 0; }
+
+    /* Footer nav */
+    .essay-footer {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 0 2rem 4rem;
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    .essay-footer a {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      padding: 0.6rem 1.25rem;
+      border-radius: 6px;
+      font-size: 0.875rem;
+      font-weight: 500;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+    .btn-primary {
+      background: var(--teal);
+      color: #080c14;
+    }
+    .btn-primary:hover { background: #7dd3fc; }
+    .btn-secondary {
+      border: 1px solid var(--border);
+      color: var(--muted);
+    }
+    .btn-secondary:hover { border-color: var(--teal-dim); color: var(--white); }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="/" class="nav-brand">🚦 ZLAR</a>
+    <div class="nav-links">
+      <a href="/">Home</a>
+      <a href="/OPEN_LETTER.html">Open Letter</a>
+      <a href="/bohm.html">Bohm's Essay</a>
+      <a href="https://github.com/ZLAR-AI/ZLAR" target="_blank">GitHub</a>
+    </div>
+  </nav>
+
+  <div class="hero">
+    <span class="essay-label">Essay</span>
+    <h1>Thought Can Wake Up Now</h1>
+    <p class="subtitle">On agentic AI, executable thought, and why governance has to change</p>
+    <p class="byline"><strong>Vincent Nijjar</strong> · March 22, 2026</p>
+  </div>
+
+  <article class="essay">
+
+    <p>Here's how I see it.</p>
+
+    <p>Intelligence is not a human monopoly. There is animal intelligence, insect intelligence, bacterial intelligence, system intelligence. Networks can be intelligent.</p>
+
+    <p>What humans built on top of that is a symbolic layer: language, code, documents, instructions, protocols, interfaces, workflows. These are products of thought. And now, for the first time at scale, that symbolic layer has become executable. Systems can operate on it, extend it, and turn it into consequences.</p>
+
+    <p>The printing press multiplied preserved thought. The network multiplied distributed thought. The agentic era multiplies operationalized thought.</p>
+
+    <blockquote>A book sits there unless a person reads it. A workflow can wake up.</blockquote>
+
+    <p>That is what this moment in AI is really about.</p>
+
+    <hr>
+
+    <p>There must have been a time when reading itself looked absurd. Why would I move my eyes left to right across arbitrary symbols, memorize them, decode grammar, and do all that work? But literacy became an unlock.</p>
+
+    <p>We are now at a similar threshold. There is a widening split between people who still think AI is a chatbot and people who understand that it now has hands. It reaches for tools, builds other agents, and constructs infrastructure.</p>
+
+    <p>Risk scales. Manipulation scales. Dependency scales. Synthetic agreement scales.</p>
+
+    <p>A bad idea no longer just dies in someone's head. It can become a daemon. A malicious idea no longer needs many bodies. It may need only access.</p>
+
+    <p>That is why prompt injection feels like a mind virus. Not because the system is literally a mind, but because language now enters systems that can act. Thought is no longer merely expressive. It is executable.</p>
+
+    <hr>
+
+    <p>This is also why I resist anthropomorphic slippage. Capability growth and selfhood are not the same. I do not see decisive evidence that current models are selves in the human sense. What I do see is that they can simulate self-models, maintain behavioral continuity, express uncertainty, and act coherently.</p>
+
+    <p>These systems are consequential before we have settled what they are.</p>
+
+    <p>Autonomous agents can already book travel, deploy code, manage infrastructure, trigger procurement workflows, and send communications on behalf of people who never reviewed them. In many cases, what stands between an agent's decision and its execution is still mostly hope.</p>
+
+    <blockquote>If thought can now enter systems that act, then governance has to live where action becomes real.</blockquote>
+
+    <hr>
+
+    <p>Much of AI governance today places intelligence in the monitor: systems that watch what agents do and try to decide whether an action is acceptable. Sandboxing, permission frameworks, guardrail layers — these are serious efforts by serious people. But they often share the same flaw: intelligence attempting to police intelligence.</p>
+
+    <p>An agent reasons its way to a conclusion. A monitor evaluates that reasoning. But the same logic that justified the action can also persuade the monitor to approve it. Prompt injection, context drift, adversarial framing: the attack surface is the reasoning itself.</p>
+
+    <p>You cannot reliably use intelligence to govern intelligence.</p>
+
+    <p>I propose a deterministic gate at the execution boundary, backed by cryptographic evidence of authorization and by human authority that is structurally separate from the system being governed.</p>
+
+    <p>Human authority as architecture. One that is designed to resist friction and alert fatigue.</p>
+
+    <p>A real separation between the system that reasons and the system that permits action, so that no amount of reasoning can talk its way past the gate.</p>
+
+    <div class="closing">
+      <p>If you are thinking about this too, I want to hear from you.</p>
+      <p>ZLAR is open source at <a href="https://github.com/ZLAR-AI/ZLAR" style="color: var(--teal);">github.com/ZLAR-AI/ZLAR</a>. Reach me at <a href="mailto:hello@zlar.ai" style="color: var(--teal);">hello@zlar.ai</a>.</p>
+    </div>
+
+  </article>
+
+  <div class="essay-footer">
+    <a href="/OPEN_LETTER.html" class="btn-primary">Read the Open Letter →</a>
+    <a href="/" class="btn-secondary">← Back to ZLAR</a>
+    <a href="https://github.com/ZLAR-AI/ZLAR" class="btn-secondary" target="_blank">View on GitHub</a>
+  </div>
+
+</body>
+</html>

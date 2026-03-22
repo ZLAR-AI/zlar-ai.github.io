@@ -2,8 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://zlar.ai/</loc>
-    <lastmod>2026-03-18</lastmod>
+    <lastmod>2026-03-22</lastmod>
     <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://zlar.ai/thought.html</loc>
+    <lastmod>2026-03-22</lastmod>
+    <priority>0.9</priority>
   </url>
   <url>
     <loc>https://zlar.ai/OPEN_LETTER.html</loc>
