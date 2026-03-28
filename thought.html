@@ -39,14 +39,15 @@
 
     /* Nav */
     nav {
-      position: sticky; top: 0; z-index: 100;
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
       background: rgba(8, 12, 20, 0.92);
       backdrop-filter: blur(12px);
       border-bottom: 1px solid var(--border);
       padding: 0.875rem 2rem;
       display: flex; align-items: center; justify-content: space-between;
     }
-    .nav-brand { color: var(--teal); font-weight: 700; font-size: 1rem; text-decoration: none; letter-spacing: 0.04em; }
+    .nav-logo { font-size: 1.1rem; font-weight: 700; letter-spacing: 0.05em; color: var(--white); text-decoration: none; }
+    .nav-logo span { color: var(--teal); }
     .nav-links { display: flex; gap: 1.5rem; }
     .nav-links a { color: var(--muted); text-decoration: none; font-size: 0.875rem; transition: color 0.2s; }
     .nav-links a:hover { color: var(--white); }
@@ -54,8 +55,8 @@
     /* Hero */
     .hero {
       max-width: 720px;
-      margin: 4rem auto 0;
-      padding: 0 2rem 3rem;
+      margin: 0 auto;
+      padding: 6rem 2rem 3rem;
       border-bottom: 1px solid var(--border);
     }
     .essay-label {
@@ -164,12 +165,21 @@
       color: var(--muted);
     }
     .btn-secondary:hover { border-color: var(--teal-dim); color: var(--white); }
+
+    footer {
+      text-align: center;
+      padding: 3rem 2rem;
+      border-top: 1px solid var(--border);
+    }
+    footer p { font-size: 0.825rem; color: var(--muted); margin: 0; }
+    footer a { color: var(--muted); text-decoration: none; transition: color 0.2s; }
+    footer a:hover { color: var(--teal); }
   </style>
 </head>
 <body>
 
   <nav>
-    <a href="/" class="nav-brand">🚦 ZLAR</a>
+    <a href="/" class="nav-logo">ZL<span>A</span>R</a>
     <div class="nav-links">
       <a href="/">Home</a>
       <a href="https://github.com/ZLAR-AI/ZLAR" target="_blank">GitHub</a>
@@ -235,7 +245,7 @@
 
     <div class="closing">
       <p>If you are thinking about this too, I want to hear from you.</p>
-      <p>ZLAR is open source at <a href="https://github.com/ZLAR-AI/ZLAR" style="color: var(--teal);">github.com/ZLAR-AI/ZLAR</a>. Reach me at <a href="mailto:hello@zlar.ai" style="color: var(--teal);">hello@zlar.ai</a>.</p>
+      <p>ZLAR is open source at <a href="https://github.com/ZLAR-AI/ZLAR" style="color: var(--teal);">github.com/ZLAR-AI/ZLAR</a>. Reach me at <a href="mailto:vincent@zlar.ai" style="color: var(--teal);">vincent@zlar.ai</a>.</p>
     </div>
 
   </article>
@@ -244,6 +254,17 @@
     <a href="/" class="btn-primary">← Back to ZLAR</a>
     <a href="https://github.com/ZLAR-AI/ZLAR" class="btn-secondary" target="_blank">View on GitHub</a>
   </div>
+
+  <footer>
+    <p>
+      &copy; 2026 ZLAR Inc. &nbsp;&middot;&nbsp;
+      <a href="/">zlar.ai</a> &nbsp;&middot;&nbsp;
+      <a href="https://github.com/ZLAR-AI/ZLAR">GitHub</a> &nbsp;&middot;&nbsp;
+      <a href="https://x.com/vincentnijjar">X</a> &nbsp;&middot;&nbsp;
+      <a href="https://www.linkedin.com/in/vincentnijjar/">LinkedIn</a> &nbsp;&middot;&nbsp;
+      <a href="mailto:vincent@zlar.ai">vincent@zlar.ai</a>
+    </p>
+  </footer>
 
 </body>
 </html>
