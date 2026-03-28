@@ -9,8 +9,7 @@ Hosted on GitHub Pages. Static HTML, no build step, no framework.
 | Page | Path | Description |
 |------|------|-------------|
 | Homepage | `index.html` | Product overview, install, architecture, thesis |
-| Open Letter | `OPEN_LETTER.html` | Vincent Nijjar's open letter to the industry |
-| Bohm | `bohm.html` | Essay: "What the Audit Trail Sees" |
+| Thought | `thought.html` | Essay: "Thought Can Wake Up Now" |
 | Legal | `legal.html` | Terms, privacy, regulatory classification, license |
 
 ## Assets
@@ -18,7 +17,6 @@ Hosted on GitHub Pages. Static HTML, no build step, no framework.
 | File | Usage |
 |------|-------|
 | `assets/social-preview.png` | OG image for social sharing |
-| `assets/bohm-avatar.png` | Bohm's visual identity |
 
 ## Installer
 
