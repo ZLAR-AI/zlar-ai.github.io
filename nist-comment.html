@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Public Comment on NCCoE Concept Paper — ZLAR</title>
+  <meta name="description" content="ZLAR's public comment on the NIST NCCoE concept paper on AI agent identity and authorization. Execution-boundary governance for agentic systems.">
+  <meta property="og:title" content="Public Comment on NCCoE Concept Paper — ZLAR">
+  <meta property="og:description" content="The missing layer in agentic systems is execution-boundary governance. ZLAR's public comment to NIST NCCoE.">
+  <meta property="og:image" content="https://zlar.ai/assets/social-preview.png">
+  <meta property="og:url" content="https://zlar.ai/nist-comment.html">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@vincentnijjar">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🚦</text></svg>">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #080c14;
+      --bg-card: #0d1520;
+      --border: rgba(56, 189, 248, 0.12);
+      --teal: #38bdf8;
+      --teal-dim: rgba(56, 189, 248, 0.6);
+      --white: #f1f5f9;
+      --muted: #64748b;
+      --text: #94a3b8;
+      --font: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+      --mono: 'SF Mono', 'Fira Code', 'Cascadia Code', monospace;
+      --serif: 'Georgia', 'Times New Roman', serif;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--serif);
+      line-height: 1.8;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image:
+        radial-gradient(circle at 15% 30%, rgba(56, 189, 248, 0.03) 0%, transparent 50%),
+        linear-gradient(rgba(56, 189, 248, 0.02) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(56, 189, 248, 0.02) 1px, transparent 1px);
+      background-size: 100% 100%, 48px 48px, 48px 48px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem 2rem;
+      background: rgba(8, 12, 20, 0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      font-family: var(--font);
+    }
+
+    .nav-logo {
+      font-size: 1.1rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      color: var(--white);
+      text-decoration: none;
+    }
+
+    .nav-logo span { color: var(--teal); }
+
+    .nav-back {
+      font-size: 0.875rem;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .nav-back:hover { color: var(--teal); }
+
+    .page-wrap {
+      position: relative;
+      z-index: 1;
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 8rem 2rem 6rem;
+    }
+
+    .byline {
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--teal);
+      margin-bottom: 2.5rem;
+      display: block;
+    }
+
+    h1 {
+      font-family: var(--font);
+      font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+      font-weight: 800;
+      line-height: 1.2;
+      letter-spacing: -0.02em;
+      color: var(--white);
+      margin-bottom: 0.75rem;
+    }
+
+    .subtitle {
+      font-family: var(--font);
+      font-size: 1.1rem;
+      color: var(--muted);
+      margin-bottom: 3rem;
+      font-style: italic;
+    }
+
+    .essay-divider {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 2.5rem 0;
+    }
+
+    p {
+      margin-bottom: 1.5rem;
+      font-size: 1.05rem;
+      color: var(--text);
+    }
+
+    strong {
+      color: var(--white);
+      font-weight: 600;
+    }
+
+    em { color: #cbd5e1; }
+
+    h2 {
+      font-family: var(--font);
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--white);
+      margin: 3rem 0 1rem;
+      letter-spacing: -0.01em;
+    }
+
+    a { color: var(--teal); text-decoration: none; transition: color 0.2s; }
+    a:hover { text-decoration: underline; }
+
+    .doc-card {
+      display: block;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 0.5rem;
+      padding: 1.25rem 1.5rem;
+      margin-bottom: 0.75rem;
+      text-decoration: none;
+      transition: border-color 0.2s, background 0.2s;
+    }
+
+    .doc-card:hover {
+      border-color: var(--teal-dim);
+      background: rgba(56, 189, 248, 0.04);
+      text-decoration: none;
+    }
+
+    .doc-card-title {
+      font-family: var(--font);
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--white);
+      margin-bottom: 0.25rem;
+    }
+
+    .doc-card-meta {
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      color: var(--muted);
+    }
+
+    .source-section {
+      margin-top: 3rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--border);
+    }
+
+    .source-section h2 {
+      margin-top: 0;
+    }
+
+    .closing {
+      margin-top: 4rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--border);
+    }
+
+    .closing p {
+      font-size: 0.925rem;
+      color: var(--muted);
+    }
+
+    .closing a {
+      color: var(--teal);
+      text-decoration: none;
+    }
+
+    .closing a:hover { text-decoration: underline; }
+
+    footer {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      padding: 3rem 2rem;
+      border-top: 1px solid var(--border);
+      font-family: var(--font);
+    }
+
+    footer p { font-size: 0.825rem; color: var(--muted); margin: 0; }
+    footer a { color: var(--muted); text-decoration: none; transition: color 0.2s; }
+    footer a:hover { color: var(--teal); }
+
+    @media (max-width: 640px) {
+      nav { padding: 1rem; }
+      .page-wrap { padding: 6rem 1.25rem 4rem; }
+      .doc-card { padding: 1rem 1.25rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="/" class="nav-logo">ZL<span>A</span>R</a>
+    <a href="/" class="nav-back">&larr; Back to zlar.ai</a>
+  </nav>
+
+  <article class="page-wrap">
+
+    <span class="byline">Vincent Nijjar &middot; March 26, 2026</span>
+
+    <h1>Public Comment on NCCoE Concept Paper</h1>
+    <p class="subtitle">Execution-Boundary Governance for AI Agents</p>
+
+    <hr class="essay-divider">
+
+    <p>
+      On March 26, 2026, ZLAR founder Vincent Nijjar submitted a public comment to the
+      <strong>NIST National Cybersecurity Center of Excellence (NCCoE)</strong> in response to their
+      concept paper on accelerating the adoption of software and AI agent identity and authorization.
+    </p>
+
+    <p>
+      The comment argues that while current standards address agent identity, authentication,
+      and delegated authority, they leave an architectural gap at the point that matters most:
+      <em>the moment of action</em>. Authenticated is not authorized. Delegated is not governed.
+      Reasoning is not execution.
+    </p>
+
+    <p>
+      The comment proposes that NCCoE demonstration architectures include per-action authorization
+      at the moment of execution, non-bypassable enforcement outside the agent process,
+      bounded human-to-agent delegation, verifiable governance receipts, tamper-evident auditability,
+      and prompt-injection containment through external policy enforcement.
+    </p>
+
+    <h2>Documents</h2>
+
+    <a href="docs/nccoe-public-comment.pdf" class="doc-card">
+      <div class="doc-card-title">Public Comment &mdash; Full Text</div>
+      <div class="doc-card-meta">PDF &middot; 3 pages</div>
+    </a>
+
+    <a href="docs/appendix-zlar-map.pdf" class="doc-card">
+      <div class="doc-card-title">Appendix: ZLAR Mapping to NCCoE Questions</div>
+      <div class="doc-card-meta">PDF</div>
+    </a>
+
+    <a href="docs/glossary-nist.pdf" class="doc-card">
+      <div class="doc-card-title">ZLAR Glossary &mdash; NIST Vocabulary Translation</div>
+      <div class="doc-card-meta">PDF</div>
+    </a>
+
+    <div class="source-section">
+      <h2>Source Document</h2>
+      <p>
+        This comment responds to the NCCoE concept paper:<br>
+        <a href="https://www.nccoe.nist.gov/sites/default/files/2026-02/accelerating-the-adoption-of-software-and-ai-agent-identity-and-authorization-concept-paper.pdf" target="_blank" rel="noopener">
+          Accelerating the Adoption of Software and AI Agent Identity and Authorization &mdash; Concept Paper
+        </a>
+        <br><span style="font-size: 0.9rem; color: var(--muted);">NIST NCCoE &middot; February 2026</span>
+      </p>
+    </div>
+
+    <div class="closing">
+      <p>
+        <a href="https://github.com/ZLAR-AI/ZLAR">ZLAR on GitHub</a> &nbsp;&middot;&nbsp;
+        <a href="/">zlar.ai</a> &nbsp;&middot;&nbsp;
+        <a href="mailto:vincent@zlar.ai">vincent@zlar.ai</a>
+      </p>
+    </div>
+
+  </article>
+
+  <footer>
+    <p>
+      &copy; 2026 ZLAR AI Inc. &nbsp;&middot;&nbsp;
+      <a href="/">zlar.ai</a> &nbsp;&middot;&nbsp;
+      <a href="https://github.com/ZLAR-AI/ZLAR">GitHub</a> &nbsp;&middot;&nbsp;
+      <a href="https://x.com/vincentnijjar">X</a> &nbsp;&middot;&nbsp;
+      <a href="mailto:vincent@zlar.ai">vincent@zlar.ai</a>
+    </p>
+  </footer>
+
+</body>
+</html>

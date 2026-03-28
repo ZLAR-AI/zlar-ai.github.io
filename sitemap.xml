@@ -11,6 +11,11 @@
     <priority>0.9</priority>
   </url>
   <url>
+    <loc>https://zlar.ai/nist-comment.html</loc>
+    <lastmod>2026-03-28</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://zlar.ai/legal.html</loc>
     <lastmod>2026-03-18</lastmod>
     <priority>0.5</priority>
