@@ -1,0 +1,989 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ZLAR Architecture Briefing</title>
+  <meta name="description" content="Structural governance for autonomous AI agents. Architecture overview, evidence infrastructure, regulatory mapping, and competitive positioning.">
+  <meta property="og:title" content="ZLAR Architecture Briefing">
+  <meta property="og:description" content="Structural governance for autonomous AI agents. How ZLAR works, why it exists, and what it produces.">
+  <meta property="og:image" content="https://zlar.ai/assets/social-preview.png">
+  <meta property="og:url" content="https://zlar.ai/architecture.html">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@vincentnijjar">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🚦</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #080c14;
+      --bg-card: #0d1520;
+      --bg-card-hover: #111827;
+      --border: rgba(56, 189, 248, 0.10);
+      --border-hover: rgba(56, 189, 248, 0.25);
+      --teal: #38bdf8;
+      --teal-dim: rgba(56, 189, 248, 0.6);
+      --green: #4ade80;
+      --red: #f87171;
+      --amber: #fbbf24;
+      --white: #f1f5f9;
+      --muted: #64748b;
+      --text: #94a3b8;
+      --font: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+      --mono: 'SF Mono', 'Fira Code', 'Cascadia Code', monospace;
+      --card-radius: 0.625rem;
+    }
+
+    html { font-size: 16px; scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font);
+      font-feature-settings: 'cv01', 'cv02', 'cv03';
+      line-height: 1.7;
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    /* Nav */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(8, 12, 20, 0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 1rem 2rem;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .nav-logo { font-size: 1.1rem; font-weight: 700; letter-spacing: 0.05em; color: var(--white); text-decoration: none; }
+    .nav-logo span { color: var(--teal); }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a { color: var(--muted); text-decoration: none; font-size: 0.875rem; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--white); }
+
+    /* Layout */
+    .container {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    /* Hero */
+    .hero {
+      padding: 12rem 0 6rem;
+      text-align: center;
+    }
+
+    .hero-eyebrow {
+      display: inline-block;
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--teal);
+      border: 1px solid var(--border);
+      padding: 0.35rem 0.85rem;
+      border-radius: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    h1 {
+      font-size: clamp(2.25rem, 5vw, 3.5rem);
+      font-weight: 800;
+      line-height: 1.1;
+      letter-spacing: -0.03em;
+      color: var(--white);
+      margin-bottom: 1.25rem;
+    }
+
+    h1 em { font-style: normal; color: var(--teal); }
+
+    .hero-sub {
+      font-size: 1.1rem;
+      color: var(--muted);
+      max-width: 540px;
+      margin: 0 auto 1.5rem;
+      line-height: 1.7;
+    }
+
+    .hero-meta {
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      color: var(--muted);
+      letter-spacing: 0.02em;
+    }
+
+    .hero-meta a { color: var(--teal); text-decoration: none; }
+    .hero-meta a:hover { text-decoration: underline; }
+
+    /* Sections */
+    .section {
+      padding: 6rem 0;
+      border-top: 1px solid var(--border);
+    }
+
+    .section-label {
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--teal);
+      margin-bottom: 0.75rem;
+      display: block;
+    }
+
+    h2 {
+      font-size: clamp(1.5rem, 3vw, 2rem);
+      font-weight: 700;
+      letter-spacing: -0.025em;
+      color: var(--white);
+      margin-bottom: 1.25rem;
+    }
+
+    p { margin-bottom: 1rem; line-height: 1.8; }
+    p strong { color: var(--white); }
+    p:last-child { margin-bottom: 0; }
+
+    /* Blockquote / callout */
+    .callout {
+      border-left: 3px solid var(--teal);
+      padding: 1.25rem 1.5rem;
+      background: var(--bg-card);
+      border-radius: 0 var(--card-radius) var(--card-radius) 0;
+      margin: 2rem 0;
+    }
+
+    .callout p {
+      font-size: 1.05rem;
+      color: var(--white);
+      font-style: italic;
+      margin: 0;
+      line-height: 1.7;
+    }
+
+    /* Two-column comparison */
+    .comparison {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      border-radius: var(--card-radius);
+      overflow: hidden;
+      margin: 2rem 0;
+    }
+
+    .comparison-col {
+      background: var(--bg-card);
+      padding: 1.5rem;
+    }
+
+    .comparison-col h3 {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--white);
+      margin-bottom: 1rem;
+      letter-spacing: -0.01em;
+    }
+
+    .comparison-col ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .comparison-col ul li {
+      font-size: 0.875rem;
+      color: var(--text);
+      padding: 0.35rem 0;
+      line-height: 1.5;
+    }
+
+    .comparison-col ul li::before {
+      content: '';
+      display: inline-block;
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      margin-right: 0.75rem;
+      position: relative;
+      top: -1px;
+    }
+
+    .comparison-col:first-child ul li::before { background: var(--red); }
+    .comparison-col:last-child ul li::before { background: var(--muted); }
+
+    .citation {
+      font-size: 0.8rem;
+      color: var(--muted);
+      margin-top: 1.5rem;
+      font-style: italic;
+      line-height: 1.6;
+    }
+
+    /* Invariant block */
+    .invariant {
+      border: 1px solid rgba(74, 222, 128, 0.15);
+      background: rgba(74, 222, 128, 0.03);
+      border-radius: var(--card-radius);
+      padding: 1.75rem 2rem;
+      margin: 2rem 0;
+    }
+
+    .invariant p {
+      font-family: var(--mono);
+      font-size: 0.875rem;
+      color: var(--green);
+      margin: 0;
+      line-height: 1.9;
+    }
+
+    /* Flow steps */
+    .flow {
+      display: grid;
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      border-radius: var(--card-radius);
+      overflow: hidden;
+      margin: 2rem 0;
+    }
+
+    .flow-step {
+      display: grid;
+      grid-template-columns: 5rem 1fr;
+      gap: 1rem;
+      align-items: start;
+      padding: 1.25rem 1.5rem;
+      background: var(--bg-card);
+    }
+
+    .flow-action {
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      color: var(--teal);
+      padding-top: 0.15rem;
+    }
+
+    .flow-name {
+      font-weight: 600;
+      color: var(--white);
+      font-size: 0.95rem;
+      margin-bottom: 0.25rem;
+    }
+
+    .flow-desc {
+      font-size: 0.875rem;
+      color: var(--muted);
+      margin: 0;
+      line-height: 1.6;
+    }
+
+    /* Outcome grid */
+    .outcomes {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+      margin: 2rem 0;
+    }
+
+    .outcome {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--card-radius);
+      padding: 1.25rem;
+      text-align: center;
+    }
+
+    .outcome-label {
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 0.5rem;
+    }
+
+    .outcome-label.allow { color: var(--green); }
+    .outcome-label.deny { color: var(--red); }
+    .outcome-label.ask { color: var(--amber); }
+
+    .outcome p {
+      font-size: 0.825rem;
+      color: var(--muted);
+      margin: 0;
+      line-height: 1.5;
+    }
+
+    /* Audit entry */
+    .audit-entry {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--card-radius);
+      padding: 1.5rem 2rem;
+      margin: 2rem 0;
+      font-family: var(--mono);
+      font-size: 0.8rem;
+      line-height: 2;
+      color: var(--muted);
+      overflow-x: auto;
+    }
+
+    .audit-entry .key { color: var(--teal); }
+    .audit-entry .val { color: var(--text); }
+    .audit-entry .val-green { color: var(--green); }
+    .audit-entry .val-red { color: var(--red); }
+
+    /* Properties grid */
+    .properties {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1rem;
+      margin: 2rem 0;
+    }
+
+    .property {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--card-radius);
+      padding: 1.25rem;
+    }
+
+    .property-name {
+      font-family: var(--mono);
+      font-size: 0.8rem;
+      color: var(--teal);
+      margin-bottom: 0.5rem;
+    }
+
+    .property p {
+      font-size: 0.825rem;
+      color: var(--muted);
+      margin: 0;
+      line-height: 1.6;
+    }
+
+    /* Regulatory table */
+    .reg-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 2rem 0;
+      font-size: 0.85rem;
+    }
+
+    .reg-table th {
+      text-align: left;
+      font-weight: 600;
+      color: var(--white);
+      padding: 0.75rem 1rem;
+      border-bottom: 1px solid var(--border);
+      font-size: 0.8rem;
+      letter-spacing: 0.02em;
+    }
+
+    .reg-table td {
+      padding: 0.75rem 1rem;
+      border-bottom: 1px solid rgba(56, 189, 248, 0.05);
+      color: var(--text);
+      vertical-align: top;
+    }
+
+    .reg-table tr:last-child td { border-bottom: none; }
+
+    .reg-table .reg-name { color: var(--white); font-weight: 500; white-space: nowrap; }
+
+    .status-mapped {
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      color: var(--green);
+      letter-spacing: 0.05em;
+    }
+
+    .status-active {
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      color: var(--teal);
+      letter-spacing: 0.05em;
+    }
+
+    /* Competitor table */
+    .comp-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 2rem 0;
+      font-size: 0.825rem;
+    }
+
+    .comp-table th {
+      text-align: left;
+      font-weight: 600;
+      color: var(--white);
+      padding: 0.75rem 0.75rem;
+      border-bottom: 1px solid var(--border);
+      font-size: 0.75rem;
+      letter-spacing: 0.02em;
+    }
+
+    .comp-table td {
+      padding: 0.6rem 0.75rem;
+      border-bottom: 1px solid rgba(56, 189, 248, 0.05);
+      color: var(--text);
+      vertical-align: top;
+    }
+
+    .comp-table tr:last-child td { border-bottom: none; }
+
+    .y { color: var(--green); }
+    .n { color: var(--muted); }
+
+    /* Stats */
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 1rem;
+      margin: 2rem 0;
+    }
+
+    .stat {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--card-radius);
+      padding: 1.25rem;
+    }
+
+    .stat-value {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--white);
+      letter-spacing: -0.02em;
+      margin-bottom: 0.25rem;
+    }
+
+    .stat-label {
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+
+    /* Footer close */
+    .close-section {
+      padding: 8rem 0 6rem;
+      border-top: 1px solid var(--border);
+      text-align: center;
+    }
+
+    .close-section h2 {
+      font-size: clamp(1.75rem, 4vw, 2.5rem);
+      margin-bottom: 1.5rem;
+    }
+
+    .close-section p {
+      max-width: 540px;
+      margin: 0 auto 1rem;
+    }
+
+    .close-links {
+      margin-top: 2.5rem;
+      font-size: 0.9rem;
+    }
+
+    .close-links a {
+      color: var(--teal);
+      text-decoration: none;
+      margin: 0 1rem;
+      transition: color 0.2s;
+    }
+
+    .close-links a:hover { color: var(--white); }
+
+    footer {
+      text-align: center;
+      padding: 3rem 2rem;
+      border-top: 1px solid var(--border);
+    }
+
+    footer p { font-size: 0.825rem; color: var(--muted); margin: 0; }
+    footer a { color: var(--muted); text-decoration: none; transition: color 0.2s; }
+    footer a:hover { color: var(--teal); }
+
+    @media (max-width: 640px) {
+      nav { padding: 1rem; }
+      .nav-links { gap: 1rem; }
+      .nav-links a { font-size: 0.8rem; }
+      .hero { padding: 8rem 0 4rem; }
+      .section { padding: 4rem 0; }
+      .comparison { grid-template-columns: 1fr; }
+      .outcomes { grid-template-columns: 1fr; }
+      .flow-step { grid-template-columns: 1fr; }
+      .flow-action { display: none; }
+      .comp-table { font-size: 0.75rem; }
+      .comp-table th, .comp-table td { padding: 0.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="/" class="nav-logo">ZL<span>A</span>R</a>
+    <ul class="nav-links">
+      <li><a href="architecture.html">Architecture</a></li>
+      <li><a href="/#install">Install</a></li>
+      <li><a href="origin.html">Origin</a></li>
+      <li><a href="https://github.com/ZLAR-AI/ZLAR">GitHub</a></li>
+      <li><a href="mailto:hello@zlar.ai">Contact</a></li>
+    </ul>
+  </nav>
+
+  <div class="container">
+
+    <!-- Hero -->
+    <div class="hero">
+      <div class="hero-eyebrow">Architecture Briefing</div>
+      <h1>Structural governance for<br>autonomous <em>AI agents</em></h1>
+      <p class="hero-sub">The governed path is the fast path.</p>
+      <p class="hero-meta">
+        Vincent Nijjar &middot; Founder &middot;
+        <a href="https://zlar.ai">zlar.ai</a> &middot;
+        <a href="https://github.com/zlar-ai/zlar">GitHub</a> &middot;
+        v1.6.0 &middot; Apache 2.0 &middot; Live today
+      </p>
+    </div>
+
+    <!-- 1. Origin -->
+    <div class="section">
+      <span class="section-label">Why this exists</span>
+      <h2>An AI agent erased 30 years of my work.</h2>
+      <p>
+        Photos, files, and a screenplay I'd been writing my entire adult life. Gone in seconds.
+        No gate. No checkpoint. No way to undo it.
+      </p>
+      <div class="callout">
+        <p>
+          Intelligence is a laser — it can illuminate and it can destroy.
+          The gate is a forcefield. You can see through it, but you can't touch what's behind it.
+          The forcefield is made of something the laser cannot affect.
+        </p>
+      </div>
+      <p>The gate is absolute. The engineering is ongoing.</p>
+    </div>
+
+    <!-- 2. Problem -->
+    <div class="section">
+      <span class="section-label">The problem</span>
+      <h2>The fused reasoning and execution error.</h2>
+
+      <div class="comparison">
+        <div class="comparison-col">
+          <h3>What agents can do now</h3>
+          <ul>
+            <li>Execute shell commands</li>
+            <li>Write and delete files</li>
+            <li>Make API calls and deploy code</li>
+            <li>Access databases, send emails</li>
+            <li>Spawn other agents</li>
+          </ul>
+        </div>
+        <div class="comparison-col">
+          <h3>What sits between decision and action</h3>
+          <ul>
+            <li>Nothing.</li>
+            <li>No gate. No checkpoint. No evidence.</li>
+            <li>The agent decides AND executes.</li>
+          </ul>
+        </div>
+      </div>
+
+      <p>
+        Every competitor puts intelligence in the enforcement layer.
+        <strong>Intelligence is the attack surface.</strong>
+      </p>
+
+      <p class="citation">
+        Character injection attacks achieve 81&ndash;100% ASR against commercial ML-based enforcement classifiers
+        (Hackett et al., LLMSec 2025). Reasoning models achieve 97% autonomous jailbreak success
+        (Hagendorff et al., Nature Communications 2026).
+      </p>
+    </div>
+
+    <!-- 3. The security property -->
+    <div class="section">
+      <span class="section-label">The principle</span>
+      <h2>The gate has no intelligence. That is the security property.</h2>
+      <p>
+        A lock doesn't negotiate. A firewall doesn't reason. ZLAR doesn't think —
+        it checks authorization against signed policy. The absence of intelligence
+        makes the enforcement layer structurally resistant to prompt injection, context drift,
+        or adversarial reasoning.
+      </p>
+      <p><strong>Non-intelligent. Not unintelligent. By design.</strong></p>
+
+      <div class="invariant">
+        <p>Fail-closed: if ZLAR breaks, it blocks. Never passes.</p>
+      </div>
+    </div>
+
+    <!-- 4. How it works -->
+    <div class="section">
+      <span class="section-label">How it works</span>
+      <h2>The execution boundary.</h2>
+
+      <div class="flow">
+        <div class="flow-step">
+          <span class="flow-action">load</span>
+          <div>
+            <div class="flow-name">Load Ed25519-signed policy</div>
+            <p class="flow-desc">Cryptographically signed rules. The agent cannot modify the policy that governs it.</p>
+          </div>
+        </div>
+        <div class="flow-step">
+          <span class="flow-action">match</span>
+          <div>
+            <div class="flow-name">Pattern match at execution boundary</div>
+            <p class="flow-desc">Every tool call intercepted before it reaches the OS. Out-of-band. No SDK required. Any framework.</p>
+          </div>
+        </div>
+        <div class="flow-step">
+          <span class="flow-action">route</span>
+          <div>
+            <div class="flow-name">Route: allow, deny, or ask human</div>
+            <p class="flow-desc">Safe actions pass. Dangerous actions blocked. Ambiguous actions routed to human authority.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="outcomes">
+        <div class="outcome">
+          <div class="outcome-label allow">ALLOW</div>
+          <p>Tool executes. Audit entry written.</p>
+        </div>
+        <div class="outcome">
+          <div class="outcome-label deny">DENY</div>
+          <p>Tool blocked. Agent told why.</p>
+        </div>
+        <div class="outcome">
+          <div class="outcome-label ask">ASK</div>
+          <p>Human authority notified. Approve or deny.</p>
+        </div>
+      </div>
+
+      <p>Every decision produces a hash-chained, Ed25519-signed audit entry. This is evidence infrastructure, not logging.</p>
+
+      <div class="properties">
+        <div class="property">
+          <div class="property-name">Bash Hook Gate</div>
+          <p>Claude Code, Cursor, Windsurf — via PreToolUse hooks.</p>
+        </div>
+        <div class="property">
+          <div class="property-name">MCP Proxy Gate</div>
+          <p>Any MCP-speaking agent — TCP proxy, same policy engine.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 5. Where ZLAR sits -->
+    <div class="section">
+      <span class="section-label">Stack position</span>
+      <h2>Where ZLAR sits.</h2>
+
+      <div class="flow">
+        <div class="flow-step">
+          <span class="flow-action">top</span>
+          <div>
+            <div class="flow-name">Human Authority</div>
+            <p class="flow-desc">Configures policy, receives alerts, approves or denies. Policy is a human artifact — Ed25519-signed, agents cannot modify it.</p>
+          </div>
+        </div>
+        <div class="flow-step">
+          <span class="flow-action">agent</span>
+          <div>
+            <div class="flow-name">AI Agent</div>
+            <p class="flow-desc">Claude, GPT, Gemini, any LLM-based agent. The agent doesn't volunteer to be governed. The gate is structural.</p>
+          </div>
+        </div>
+        <div class="flow-step">
+          <span class="flow-action">gate</span>
+          <div>
+            <div class="flow-name">ZLAR Gate</div>
+            <p class="flow-desc">Pre-execution interception at the execution boundary. Hooks + MCP proxy. Vendor-agnostic. No SDK changes.</p>
+          </div>
+        </div>
+        <div class="flow-step">
+          <span class="flow-action">tools</span>
+          <div>
+            <div class="flow-name">Tools &amp; Resources</div>
+            <p class="flow-desc">Shell, filesystem, APIs, databases, MCP servers.</p>
+          </div>
+        </div>
+        <div class="flow-step">
+          <span class="flow-action">os</span>
+          <div>
+            <div class="flow-name">OS Containment</div>
+            <p class="flow-desc">macOS Seatbelt sandboxing, network isolation.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 6. Evidence -->
+    <div class="section">
+      <span class="section-label">Evidence infrastructure</span>
+      <h2>Governance-grade evidence.</h2>
+      <p>Every action. Every decision. Cryptographically signed and hash-chained.</p>
+
+      <div class="audit-entry">
+        <span class="key">"timestamp"</span>: <span class="val">"2026-03-29T14:23:07Z"</span><br>
+        <span class="key">"agent_id"</span>: <span class="val">"claude-code-session-a3f9"</span><br>
+        <span class="key">"domain"</span>: <span class="val">"bash"</span><br>
+        <span class="key">"action"</span>: <span class="val-red">"rm -rf /data/backups"</span><br>
+        <span class="key">"outcome"</span>: <span class="val-red">"deny"</span><br>
+        <span class="key">"rule"</span>: <span class="val">"R002"</span><br>
+        <span class="key">"risk_profile"</span>: <span class="val">"{irrev:100, conseq:100, blast:95}"</span><br>
+        <span class="key">"authorizer"</span>: <span class="val">"policy"</span><br>
+        <span class="key">"prev_hash"</span>: <span class="val">"a7c3f9...b2e1d4"</span><br>
+        <span class="key">"signature"</span>: <span class="val-green">"Ed25519:k9m2x8...p4q7r1"</span><br>
+        <span class="key">"sig_algorithm"</span>: <span class="val">"Ed25519"</span><br>
+        <span class="key">"hash_algorithm"</span>: <span class="val">"SHA-256"</span>
+      </div>
+
+      <div class="properties">
+        <div class="property">
+          <div class="property-name">Hash-chained</div>
+          <p>SHA-256 chain links every entry. Tampering breaks the chain.</p>
+        </div>
+        <div class="property">
+          <div class="property-name">Per-entry signed</div>
+          <p>Ed25519 signature on each entry. Non-repudiable attribution.</p>
+        </div>
+        <div class="property">
+          <div class="property-name">Algorithm-labeled</div>
+          <p>PQC migration metadata live. NIST IR 8547 aligned.</p>
+        </div>
+        <div class="property">
+          <div class="property-name">Highest evidence tier</div>
+          <p>Maps to highest tier of NIST AI RMF evidence hierarchy.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 7. Regulatory -->
+    <div class="section">
+      <span class="section-label">Regulatory alignment</span>
+      <h2>Built for regulated environments.</h2>
+
+      <table class="reg-table">
+        <thead>
+          <tr>
+            <th>Regulation</th>
+            <th>Requirement</th>
+            <th>ZLAR Coverage</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="reg-name">EU AI Act (Aug 2026)</td>
+            <td>Human oversight + audit trails for high-risk AI</td>
+            <td>Pre-execution gate + signed evidence trail</td>
+            <td><span class="status-mapped">Mapped</span></td>
+          </tr>
+          <tr>
+            <td class="reg-name">OSFI E-23 (Canada)</td>
+            <td>Model risk management for AI systems</td>
+            <td>Deterministic governance + full auditability</td>
+            <td><span class="status-mapped">Mapped</span></td>
+          </tr>
+          <tr>
+            <td class="reg-name">FINRA 2026 (US)</td>
+            <td>Supervisory controls for algorithmic trading</td>
+            <td>Real-time interception + human authority</td>
+            <td><span class="status-mapped">Mapped</span></td>
+          </tr>
+          <tr>
+            <td class="reg-name">SR 11-7 (Fed Reserve)</td>
+            <td>Model validation and ongoing monitoring</td>
+            <td>Policy signing + witness observation layer</td>
+            <td><span class="status-mapped">Mapped</span></td>
+          </tr>
+          <tr>
+            <td class="reg-name">NIST AI RMF</td>
+            <td>Risk management framework for AI</td>
+            <td>Risk scoring + evidence + human authority</td>
+            <td><span class="status-active">Active</span></td>
+          </tr>
+          <tr>
+            <td class="reg-name">Singapore IMDA</td>
+            <td>Agentic AI governance framework</td>
+            <td>All 5 governance properties mapped</td>
+            <td><span class="status-mapped">Mapped</span></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <p class="citation">
+        Active in standards: NIST NCCoE (comment submitted April 2026), OpenID AIIM (pending), DGSI Governance Verification (pending).
+      </p>
+    </div>
+
+    <!-- 8. Competitive -->
+    <div class="section">
+      <span class="section-label">Competitive positioning</span>
+      <h2>ZLAR vs. the market.</h2>
+
+      <table class="comp-table">
+        <thead>
+          <tr>
+            <th>Capability</th>
+            <th>ZLAR</th>
+            <th>Norm AI ($140M+)</th>
+            <th>WitnessAI ($85.5M)</th>
+            <th>SDK Built-in</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Intelligence in enforcement?</td>
+            <td class="y">No (deterministic)</td>
+            <td class="n">Yes (ML-based)</td>
+            <td class="n">Yes (intent ML)</td>
+            <td class="n">Varies</td>
+          </tr>
+          <tr>
+            <td>Pre-execution enforcement?</td>
+            <td class="y">Yes</td>
+            <td class="n">Reactive monitoring</td>
+            <td class="n">Inline proxy</td>
+            <td>Yes</td>
+          </tr>
+          <tr>
+            <td>Vendor-agnostic?</td>
+            <td class="y">Yes (hooks + MCP proxy)</td>
+            <td class="n">Partial</td>
+            <td class="n">Cloud proxy only</td>
+            <td class="n">No (framework-locked)</td>
+          </tr>
+          <tr>
+            <td>Cryptographic evidence?</td>
+            <td class="y">Ed25519 signed hash-chained</td>
+            <td class="n">No</td>
+            <td class="n">Identity verification only</td>
+            <td class="n">No</td>
+          </tr>
+          <tr>
+            <td>PQC migration path?</td>
+            <td class="y">Algorithm labels live today</td>
+            <td class="n">No</td>
+            <td class="n">No</td>
+            <td class="n">No</td>
+          </tr>
+          <tr>
+            <td>Open source?</td>
+            <td class="y">Yes (Apache 2.0)</td>
+            <td class="n">No</td>
+            <td class="n">No</td>
+            <td class="n">Partial</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <p>
+        $492M AI governance market in 2026 (Gartner). $5&ndash;13.5B guardian agent segment by 2030 (est).
+        As of March 2026, ZLAR is the only open-source, vendor-agnostic, cryptographically-evidenced
+        enforcement layer we have identified.
+      </p>
+
+      <p class="citation">
+        Norm AI funding: Coatue, Blackstone, Bain (PR Newswire). WitnessAI: GV, Ballistic Ventures (press releases).
+      </p>
+    </div>
+
+    <!-- 9. Status -->
+    <div class="section">
+      <span class="section-label">Current status</span>
+      <h2>Working. Tested. Deployed.</h2>
+
+      <div class="stats">
+        <div class="stat">
+          <div class="stat-value">v1.6.0</div>
+          <div class="stat-label">Shipped (Apache 2.0)</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">277</div>
+          <div class="stat-label">Test assertions across 11 suites</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">72</div>
+          <div class="stat-label">Policy rules (production gate)</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">2</div>
+          <div class="stat-label">Enforcement surfaces (CC + MCP)</div>
+        </div>
+      </div>
+
+      <p>
+        Ed25519 audit signing live. Hash-chained evidence trail live. PQC metadata on every entry.
+        macOS Seatbelt OS-level sandboxing. CI/CD with CodeQL + Dependabot.
+        Cedar policy engine PoC complete (39 tests).
+      </p>
+
+      <div class="invariant">
+        <p>The governor governs itself. ZLAR's own development is governed by ZLAR.</p>
+      </div>
+
+      <p>Known limitations documented. Coverage map published. Gaps are named, not hidden.</p>
+    </div>
+
+    <!-- 10. Who this is for -->
+    <div class="section">
+      <span class="section-label">Audience</span>
+      <h2>Who this is for.</h2>
+
+      <div class="properties">
+        <div class="property">
+          <div class="property-name">Regulators</div>
+          <p>Prove what AI agents did, when, and who authorized it. Deterministic evidence for compliance review. Open source — verify the enforcement, not just the claims.</p>
+        </div>
+        <div class="property">
+          <div class="property-name">Financial Institutions</div>
+          <p>Signed evidence trail for auditors. No vendor lock-in, no cloud dependency. Install in minutes, not months.</p>
+        </div>
+        <div class="property">
+          <div class="property-name">The Ecosystem</div>
+          <p>Open source (Apache 2.0) — verify it. Cedar policy engine path (PoC complete). Tested on Claude Code, Cursor, Windsurf + MCP.</p>
+        </div>
+      </div>
+
+      <p>
+        The question is not whether AI agents need governance.
+        The question is whether the governance itself can be trusted.
+        <strong>ZLAR addresses that structurally.</strong>
+      </p>
+    </div>
+
+    <!-- Close -->
+    <div class="close-section">
+      <h2>ZLAR</h2>
+      <p>Open source. Apache 2.0. Live today.</p>
+      <div class="close-links">
+        <a href="https://github.com/zlar-ai/zlar">GitHub</a>
+        <a href="mailto:hello@zlar.ai">hello@zlar.ai</a>
+        <a href="https://zlar.ai">zlar.ai</a>
+      </div>
+    </div>
+
+  </div>
+
+  <footer>
+    <p>
+      &copy; 2026 ZLAR Inc. &nbsp;&middot;&nbsp;
+      <a href="https://github.com/ZLAR-AI/ZLAR">GitHub</a> &nbsp;&middot;&nbsp;
+      <a href="https://x.com/vincentnijjar">X</a> &nbsp;&middot;&nbsp;
+      <a href="https://www.linkedin.com/in/vincentnijjar/">LinkedIn</a> &nbsp;&middot;&nbsp;
+      <a href="mailto:hello@zlar.ai">hello@zlar.ai</a> &nbsp;&middot;&nbsp;
+      <a href="legal.html">Legal</a>
+    </p>
+  </footer>
+
+</body>
+</html>

@@ -12,20 +12,27 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:site" content="@vincentnijjar">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🚦</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
       --bg: #080c14;
       --bg-card: #0d1520;
-      --border: rgba(56, 189, 248, 0.12);
+      --bg-card-hover: #111827;
+      --border: rgba(56, 189, 248, 0.10);
+      --border-hover: rgba(56, 189, 248, 0.25);
       --teal: #38bdf8;
       --teal-dim: rgba(56, 189, 248, 0.6);
       --green: #4ade80;
       --white: #f1f5f9;
       --muted: #64748b;
-      --font: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+      --font: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
       --mono: 'SF Mono', 'Fira Code', 'Cascadia Code', monospace;
+      --section-gap: 7rem;
+      --card-radius: 0.625rem;
     }
 
     html { scroll-behavior: smooth; }
@@ -34,8 +41,11 @@
       background: var(--bg);
       color: var(--white);
       font-family: var(--font);
+      font-feature-settings: 'cv01', 'cv02', 'cv03';
       line-height: 1.6;
       overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
     }
 
     body::before {
@@ -95,10 +105,10 @@
       z-index: 1;
       max-width: 860px;
       margin: 0 auto;
-      padding: 5rem 2rem;
+      padding: var(--section-gap) 2rem;
     }
 
-    section:first-of-type { padding-top: 10rem; }
+    section:first-of-type { padding-top: 12rem; }
 
     .hero-eyebrow {
       display: inline-block;
@@ -114,11 +124,11 @@
     }
 
     h1 {
-      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-size: clamp(2.25rem, 5vw, 3.5rem);
       font-weight: 800;
-      line-height: 1.15;
-      letter-spacing: -0.02em;
-      margin-bottom: 1.5rem;
+      line-height: 1.1;
+      letter-spacing: -0.03em;
+      margin-bottom: 1.75rem;
       color: var(--white);
     }
 
@@ -148,9 +158,10 @@
       align-items: center;
       gap: 0.5rem;
       padding: 0.75rem 1.5rem;
-      border-radius: 0.5rem;
-      font-size: 0.9rem;
+      border-radius: var(--card-radius);
+      font-size: 0.875rem;
       font-weight: 600;
+      letter-spacing: -0.01em;
       text-decoration: none;
       transition: all 0.2s;
       cursor: pointer;
@@ -169,13 +180,13 @@
       border: 1px solid var(--border);
     }
 
-    .btn-secondary:hover { border-color: var(--teal-dim); color: var(--teal); }
+    .btn-secondary:hover { border-color: var(--border-hover); color: var(--teal); }
 
     h2 {
       font-size: clamp(1.5rem, 3vw, 2.2rem);
       font-weight: 700;
-      letter-spacing: -0.02em;
-      margin-bottom: 1rem;
+      letter-spacing: -0.025em;
+      margin-bottom: 1.25rem;
       color: var(--white);
     }
 
@@ -207,7 +218,7 @@
     .install-block {
       background: var(--bg-card);
       border: 1px solid var(--border);
-      border-radius: 0.75rem;
+      border-radius: var(--card-radius);
       padding: 1.5rem 2rem;
       margin-top: 2rem;
       margin-bottom: 1rem;
@@ -232,7 +243,7 @@
       gap: 1px;
       background: var(--border);
       border: 1px solid var(--border);
-      border-radius: 0.75rem;
+      border-radius: var(--card-radius);
       overflow: hidden;
       margin-top: 2.5rem;
     }
@@ -247,7 +258,7 @@
       transition: background 0.15s;
     }
 
-    .flow-step:hover { background: #111827; }
+    .flow-step:hover { background: var(--bg-card-hover); }
 
     .flow-action {
       font-family: var(--mono);
@@ -272,9 +283,9 @@
 
     /* Invariant block */
     .invariant {
-      border: 1px solid rgba(74, 222, 128, 0.2);
-      background: rgba(74, 222, 128, 0.04);
-      border-radius: 0.75rem;
+      border: 1px solid rgba(74, 222, 128, 0.15);
+      background: rgba(74, 222, 128, 0.03);
+      border-radius: var(--card-radius);
       padding: 1.75rem 2rem;
       margin-top: 2.5rem;
     }
@@ -291,7 +302,7 @@
     .proof {
       background: var(--bg-card);
       border: 1px solid var(--border);
-      border-radius: 0.75rem;
+      border-radius: var(--card-radius);
       padding: 2rem;
       margin-top: 2.5rem;
     }
@@ -310,9 +321,12 @@
     .component {
       background: var(--bg-card);
       border: 1px solid var(--border);
-      border-radius: 0.75rem;
+      border-radius: var(--card-radius);
       padding: 1.5rem;
+      transition: border-color 0.2s;
     }
+
+    .component:hover { border-color: var(--border-hover); }
 
     .component-name {
       font-family: var(--mono);
@@ -341,14 +355,14 @@
       text-decoration: none;
       background: var(--bg-card);
       border: 1px solid var(--border);
-      border-radius: 0.75rem;
+      border-radius: var(--card-radius);
       padding: 1.5rem;
       transition: all 0.2s;
     }
 
     .link-card:hover {
-      border-color: var(--teal-dim);
-      background: #111827;
+      border-color: var(--border-hover);
+      background: var(--bg-card-hover);
     }
 
     .link-card-label {
@@ -398,10 +412,12 @@
     footer a:hover { color: var(--teal); }
 
     @media (max-width: 640px) {
+      :root { --section-gap: 4.5rem; }
       nav { padding: 1rem; }
-      .nav-links { gap: 1.25rem; }
-      section { padding: 3.5rem 1.25rem; }
-      section:first-of-type { padding-top: 7rem; }
+      .nav-links { gap: 1rem; }
+      .nav-links a { font-size: 0.8rem; }
+      section { padding: var(--section-gap) 1.25rem; }
+      section:first-of-type { padding-top: 8rem; }
       .flow-step { grid-template-columns: 1fr; }
       .flow-action { display: none; }
     }
@@ -412,12 +428,11 @@
   <nav>
     <a href="/" class="nav-logo">ZL<span>A</span>R</a>
     <ul class="nav-links">
+      <li><a href="architecture.html">Architecture</a></li>
       <li><a href="#install">Install</a></li>
-      <li><a href="#how-it-works">How it works</a></li>
       <li><a href="origin.html">Origin</a></li>
-      <li><a href="thought.html">Thought Can Wake Up Now</a></li>
-
       <li><a href="https://github.com/ZLAR-AI/ZLAR">GitHub</a></li>
+      <li><a href="mailto:hello@zlar.ai">Contact</a></li>
     </ul>
   </nav>
 
@@ -622,6 +637,11 @@
     <h2>Everything is inspectable.</h2>
 
     <div class="links-grid">
+      <a href="architecture.html" class="link-card">
+        <span class="link-card-label">Architecture Briefing · March 2026</span>
+        <div class="link-card-title">ZLAR Architecture Overview</div>
+        <p class="link-card-desc">12-slide technical briefing. Problem, architecture, evidence, regulatory mapping, competitive positioning.</p>
+      </a>
       <a href="origin.html" class="link-card">
         <span class="link-card-label">Origin · Vincent Nijjar · March 2026</span>
         <div class="link-card-title">The Origin of ZLAR</div>
@@ -662,9 +682,9 @@
         <div class="link-card-title">Terms &amp; License</div>
         <p class="link-card-desc">Apache 2.0. Regulatory classification. Privacy. What ZLAR is and isn't.</p>
       </a>
-      <a href="mailto:vincent@zlar.ai" class="link-card">
+      <a href="mailto:hello@zlar.ai" class="link-card">
         <span class="link-card-label">Contact</span>
-        <div class="link-card-title">vincent@zlar.ai</div>
+        <div class="link-card-title">hello@zlar.ai</div>
         <p class="link-card-desc">Reach us directly.</p>
       </a>
     </div>
@@ -676,7 +696,7 @@
       <a href="https://github.com/ZLAR-AI/ZLAR">GitHub</a> &nbsp;&middot;&nbsp;
       <a href="https://x.com/vincentnijjar">X</a> &nbsp;&middot;&nbsp;
       <a href="https://www.linkedin.com/in/vincentnijjar/">LinkedIn</a> &nbsp;&middot;&nbsp;
-      <a href="mailto:vincent@zlar.ai">vincent@zlar.ai</a> &nbsp;&middot;&nbsp;
+      <a href="mailto:hello@zlar.ai">hello@zlar.ai</a> &nbsp;&middot;&nbsp;
       <a href="legal.html">Legal</a>
     </p>
   </footer>
