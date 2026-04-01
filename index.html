@@ -411,8 +411,32 @@
 
     footer a:hover { color: var(--teal); }
 
+    /* Top banner */
+    .top-banner {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 200;
+      background: rgba(56, 189, 248, 0.1);
+      border-bottom: 1px solid rgba(56, 189, 248, 0.2);
+      padding: 0.5rem 2rem;
+      text-align: center;
+    }
+    .top-banner a {
+      color: var(--teal);
+      text-decoration: none;
+      font-size: 0.8125rem;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+    .top-banner a:hover { color: #7dd3fc; }
+    .top-banner + nav { top: 33px; }
+    .top-banner ~ section:first-of-type { padding-top: 14rem; }
+
     @media (max-width: 640px) {
       :root { --section-gap: 4.5rem; }
+      .top-banner { padding: 0.4rem 1rem; }
+      .top-banner a { font-size: 0.7rem; }
+      .top-banner ~ section:first-of-type { padding-top: 10rem; }
       nav { padding: 1rem; }
       .nav-links { gap: 1rem; }
       .nav-links a { font-size: 0.8rem; }
@@ -425,14 +449,16 @@
 </head>
 <body>
 
+  <div class="top-banner">
+    <a href="fail-open.html">March 31: A packaging error exposed 512,000 lines of source code. Here's what a deterministic gate would have done. &rarr;</a>
+  </div>
+
   <nav>
     <a href="/" class="nav-logo">ZL<span>A</span>R</a>
     <ul class="nav-links">
-      <li><a href="architecture.html">Architecture</a></li>
       <li><a href="#install">Install</a></li>
-      <li><a href="proof-interactive.html">Interactive Proof</a></li>
-      <li><a href="proof.html">Proof</a></li>
-      <li><a href="fail-open.html">The Lock Swings Open</a></li>
+      <li><a href="proof-interactive.html">Proof</a></li>
+      <li><a href="architecture.html">Architecture</a></li>
       <li><a href="origin.html">Origin</a></li>
       <li><a href="https://github.com/ZLAR-AI/ZLAR">GitHub</a></li>
       <li><a href="mailto:hello@zlar.ai">Contact</a></li>
@@ -474,7 +500,14 @@
     </p>
     <p class="install-note">
       Want fine-grained control? Add Telegram approval — risky actions get routed to your phone.
-      You approve or deny from anywhere. <a href="https://github.com/ZLAR-AI/ZLAR" style="color: var(--teal);">See the repo →</a>
+      You approve or deny from anywhere. <a href="https://github.com/ZLAR-AI/ZLAR" style="color: var(--teal);">See the repo &rarr;</a>
+    </p>
+    <div class="install-block" style="margin-top: 1.5rem;">
+      <code>bash demos/proof-of-enforcement.sh</code>
+    </div>
+    <p class="install-note">
+      Verify the enforcement claim yourself. 16 tests, all 9 terminal states.
+      <a href="proof-interactive.html" style="color: var(--teal);">See the interactive walkthrough &rarr;</a>
     </p>
   </section>
 
