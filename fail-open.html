@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Lock Swings Open &mdash; Vincent Nijjar</title>
+  <meta name="description" content="On the Anthropic source code leak, the fail-open hook architecture, and why deterministic enforcement exists.">
+  <meta property="og:title" content="The Lock Swings Open &mdash; Vincent Nijjar">
+  <meta property="og:description" content="The lock between the AI and the things it can do is designed to swing open if it jams. That is a deliberate, documented design choice.">
+  <meta property="og:image" content="https://zlar.ai/assets/social-preview.png">
+  <meta property="og:url" content="https://zlar.ai/fail-open.html">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@vincentnijjar">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>&#x1F6A6;</text></svg>">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #080c14;
+      --bg-card: #0d1520;
+      --border: rgba(56, 189, 248, 0.12);
+      --teal: #38bdf8;
+      --teal-dim: rgba(56, 189, 248, 0.6);
+      --white: #f1f5f9;
+      --muted: #64748b;
+      --text: #94a3b8;
+      --font: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+      --serif: 'Georgia', 'Times New Roman', serif;
+    }
+
+    html { font-size: 16px; scroll-behavior: smooth; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font);
+      line-height: 1.7;
+      min-height: 100vh;
+    }
+
+    /* Nav */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(8, 12, 20, 0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 0.875rem 2rem;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .nav-logo { font-size: 1.1rem; font-weight: 700; letter-spacing: 0.05em; color: var(--white); text-decoration: none; }
+    .nav-logo span { color: var(--teal); }
+    .nav-links { display: flex; gap: 1.5rem; }
+    .nav-links a { color: var(--muted); text-decoration: none; font-size: 0.875rem; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--white); }
+
+    /* Hero */
+    .hero {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 6rem 2rem 3rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .essay-label {
+      display: inline-block;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--teal);
+      margin-bottom: 1.25rem;
+    }
+    .hero h1 {
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: 700;
+      color: var(--white);
+      line-height: 1.15;
+      margin-bottom: 1rem;
+      font-family: var(--serif);
+    }
+    .hero .subtitle {
+      font-size: 1.125rem;
+      color: var(--muted);
+      font-style: italic;
+      margin-bottom: 1.5rem;
+      font-family: var(--serif);
+    }
+    .hero .byline {
+      font-size: 0.875rem;
+      color: var(--muted);
+    }
+    .hero .byline strong { color: var(--teal-dim); }
+
+    /* Essay body */
+    .essay {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 3rem 2rem 6rem;
+    }
+
+    .essay p {
+      font-family: var(--serif);
+      font-size: 1.0625rem;
+      color: #b0bec5;
+      line-height: 1.85;
+      margin-bottom: 1.5rem;
+    }
+
+    .essay blockquote {
+      border-left: 3px solid var(--teal);
+      padding: 0.75rem 0 0.75rem 1.5rem;
+      margin: 2rem 0;
+      font-family: var(--serif);
+      font-size: 1.0625rem;
+      font-style: italic;
+      color: var(--white);
+    }
+
+    .essay hr {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 3rem 0;
+    }
+
+    .essay h2 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 1.5rem;
+      font-family: var(--serif);
+    }
+
+    .essay .point-list {
+      font-family: var(--serif);
+      font-size: 1.0625rem;
+      color: #b0bec5;
+      line-height: 1.85;
+      margin-bottom: 1.5rem;
+      padding-left: 0;
+      list-style: none;
+    }
+    .essay .point-list li {
+      margin-bottom: 0.5rem;
+    }
+
+    .essay .technical {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.5rem 2rem;
+      margin: 2rem 0;
+      font-family: var(--font);
+      font-size: 0.9375rem;
+      color: var(--text);
+      line-height: 1.7;
+    }
+
+    .essay a {
+      color: var(--teal);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .essay a:hover { color: #7dd3fc; }
+
+    /* Closing */
+    .essay .closing {
+      margin-top: 3rem;
+      padding: 2rem;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+    }
+    .essay .closing p {
+      font-size: 0.9375rem;
+      font-family: var(--font);
+      font-style: italic;
+      color: var(--muted);
+      margin-bottom: 0.75rem;
+    }
+    .essay .closing p:last-child { margin-bottom: 0; }
+
+    /* Footer nav */
+    .essay-footer {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 0 2rem 4rem;
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    .essay-footer a {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      padding: 0.6rem 1.25rem;
+      border-radius: 6px;
+      font-size: 0.875rem;
+      font-weight: 500;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+    .btn-primary {
+      background: var(--teal);
+      color: #080c14;
+    }
+    .btn-primary:hover { background: #7dd3fc; }
+    .btn-secondary {
+      border: 1px solid var(--border);
+      color: var(--muted);
+    }
+    .btn-secondary:hover { border-color: var(--teal-dim); color: var(--white); }
+
+    footer {
+      text-align: center;
+      padding: 3rem 2rem;
+      border-top: 1px solid var(--border);
+    }
+    footer p { font-size: 0.825rem; color: var(--muted); margin: 0; }
+    footer a { color: var(--muted); text-decoration: none; transition: color 0.2s; }
+    footer a:hover { color: var(--teal); }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="/" class="nav-logo">ZL<span>A</span>R</a>
+    <div class="nav-links">
+      <a href="/">Home</a>
+      <a href="origin.html">Origin</a>
+      <a href="thought.html">Thought Can Wake Up Now</a>
+      <a href="https://github.com/ZLAR-AI/ZLAR" target="_blank">GitHub</a>
+    </div>
+  </nav>
+
+  <div class="hero">
+    <span class="essay-label">Essay &middot; Vincent Nijjar &middot; April 2026</span>
+    <h1>The Lock Swings Open</h1>
+    <p class="subtitle">On the Anthropic source code leak, the fail-open hook architecture, and why deterministic enforcement exists.</p>
+  </div>
+
+  <article class="essay">
+
+    <p>I'm a human being watching this moment in AI in real time, trying to describe what I see as clearly as I can.</p>
+
+    <p>I keep thinking about an office.</p>
+
+    <p>A busy office. People walking around. Files moving. Money moving. Assets moving. Decisions being made. Buttons being pressed. Important things happening everywhere.</p>
+
+    <p>From the inside, it all looks normal. Productive. Necessary. Human.</p>
+
+    <p>But what I keep noticing is that inside all that motion, there are points of contact.</p>
+
+    <ul class="point-list">
+      <li>A hand touches a button.</li>
+      <li>A permission gets granted.</li>
+      <li>A tool gets used.</li>
+      <li>A file gets exposed.</li>
+      <li>A message gets sent.</li>
+    </ul>
+
+    <p>And once that action becomes real, sometimes there is no taking it back.</p>
+
+    <p>Today, that stopped being a thought experiment.</p>
+
+    <hr>
+
+    <p>Yesterday, a source map file accidentally left in an npm package exposed roughly 512,000 lines of Anthropic's internal source code to a public registry. One packaging error. By the time anyone noticed, the code had been copied widely &mdash; one public repository alone accumulated more than 50,000 forks &mdash; and the exposure became effectively permanent.</p>
+
+    <p>Anthropic called it a release packaging issue caused by human error, not a security breach. I believe them. That is exactly the point.</p>
+
+    <p>Human beings make mistakes. Some mistakes are reversible. Some are not. What is different now is the speed. AI is compressing the distance between intention and consequence. The pace no longer feels monthly, or weekly, or even daily. It feels continuous.</p>
+
+    <hr>
+
+    <p>And here is what I keep thinking about as I read Anthropic's own documentation for the hook system that governs what Claude Code can do:</p>
+
+    <blockquote>The lock on the door between the AI and the things it can do is designed to swing open if it jams.</blockquote>
+
+    <p>That is not a bug. That is a deliberate, documented design choice. If a PreToolUse hook crashes, times out, or returns an unexpected error, the action goes through. This applies to both command hooks and HTTP hooks. Anthropic chose this because a broken hook should not freeze a developer's workflow. I understand the reasoning. But it means the enforcement layer &mdash; the thing standing between the AI and the button &mdash; fails in the direction of letting the action happen.</p>
+
+    <p>There is also a model-based classifier that Anthropic uses in Claude Code's auto mode. Anthropic calls it a transcript classifier. In the leaked source code, it appears under the internal name &ldquo;YOLO classifier.&rdquo; It uses an AI model to evaluate, in real time, whether another AI model's action is safe enough to approve automatically &mdash; as a substitute for a human approver.</p>
+
+    <p>Anthropic designed it so the classifier cannot see the agent's reasoning for why an action is safe &mdash; it only sees the raw tool call. That is a meaningful constraint. But structurally, it is still intelligence deciding whether intelligence should be trusted.</p>
+
+    <hr>
+
+    <p>That is the architecture I have spent the last three months trying to replace.</p>
+
+    <p>Not because it is stupid. It is not. It is sophisticated. But it is the wrong category of protection for irreversible actions, because intelligence can be persuaded and deterministic rules cannot.</p>
+
+    <p>That is why I keep coming back to one question:</p>
+
+    <blockquote>What if certain classes of mistakes were not just unlikely, but impossible?</blockquote>
+
+    <p>Not because the human becomes perfect. Not because the AI becomes perfect. But because there is a force field around the action itself.</p>
+
+    <p>I think I've built the beginning of that force field.</p>
+
+    <p>In plain language: it does not watch what the AI is thinking. It stands between the AI and the button, and the button does not work unless the rules say so. The rules are signed by a human with a cryptographic key. The AI cannot touch the rules, rewrite them, or argue its way past them, because the gate has no reasoning capability. That is the security property.</p>
+
+    <div class="technical">
+      In technical language: ZLAR is a deterministic policy-enforced execution boundary for AI agents. JSON policy rules with a Cedar proof-of-concept demonstrating a formal verification path. Ed25519-signed and hash-chained audit trails. Synchronous interception of every tool call on governed paths. No AI in the enforcement path.
+    </div>
+
+    <p>If ZLAR had been deployed at that publish boundary with fail-closed enforcement on the hook path, the npm publish command would have been intercepted and held for human approval before release. A human would have seen what was in the package. With that context, the 512,000 lines would almost certainly never have reached the public registry. That is the kind of mistake a deterministic gate is designed to make structurally impossible &mdash; not by trusting the human to be perfect, but by ensuring the action cannot proceed without explicit human authorization.</p>
+
+    <hr>
+
+    <h2>To Anthropic</h2>
+
+    <p>This is not a criticism. It is a request.</p>
+
+    <p>You built the hooks that make ZLAR possible. Your PreToolUse system is the right interception point. You designed it to be extended by exactly the kind of external governance layer I have been building.</p>
+
+    <p>But the hooks fail open. And I cannot fix that from the outside.</p>
+
+    <p>I need one thing from you: a fail-closed option for PreToolUse hooks. One configuration flag. If the hook fails to respond within N milliseconds, deny the tool call. That single change closes the last gap between the gate working and the gate being deterministic on covered paths.</p>
+
+    <p>Everything else already exists. The deterministic policy engine. The signed rules the agent cannot modify. The hash-chained evidence trail. The human-in-the-loop approval via Telegram. The MCP proxy gate that is structurally fail-closed because no proxy means no connection. The test suites. It is live, it is open source, and it is Apache 2.0.</p>
+
+    <p><a href="https://github.com/ZLAR-AI/ZLAR">github.com/ZLAR-AI/ZLAR</a></p>
+
+    <hr>
+
+    <h2>To everyone else</h2>
+
+    <p>I do not think this moment belongs only to engineers.</p>
+
+    <p>Yesterday's leak was not a hack. It was a packaging error. A human being made a mistake in a build pipeline. The consequence was mass exposure of proprietary source code that cannot be taken back. That kind of mistake &mdash; irreversible, fast, human &mdash; is going to keep happening. Not because people are careless, but because the speed at which actions become real is outpacing the speed at which humans can catch them.</p>
+
+    <p>The question is whether we build infrastructure that makes certain mistakes impossible, or whether we keep relying on humans and AI models to be perfect every time.</p>
+
+    <p>I know which one I trust.</p>
+
+    <hr>
+
+    <p>If you are technical, I would deeply appreciate your scrutiny. Does this actually work the way I say it works? Where does it hold? Where can it be bypassed? Within its boundary, the gate is deterministic. Outside that boundary &mdash; if an agent finds a channel that does not pass through the gate &mdash; it has nothing to enforce. That boundary is what I need people to pressure-test.</p>
+
+    <p>If you are not technical, start with <a href="https://github.com/ZLAR-AI/ZLAR/blob/main/signal/THESIS.md">signal/THESIS.md</a> in the repository. It is the argument in plain language.</p>
+
+    <p>The build is continuing. I am learning in public. I am reporting as I go.</p>
+
+    <p>And I want to admit something plainly: I do not fully know the consequences of what I am building. In that state of not knowing, I hope I am doing the right thing.</p>
+
+    <p>If you are willing, have a look. Question it. Pressure-test it. Tell me where it works. Tell me where it fails. Tell me what kind of force field this really is.</p>
+
+    <p>I am asking for help building it.</p>
+
+    <p>And to everyone who has already taken the time to comment, question, and pay attention &mdash; thank you. It means more to me than I can say.</p>
+
+    <div class="closing">
+      <p>ZLAR is open source at <a href="https://github.com/ZLAR-AI/ZLAR" style="color: var(--teal);">github.com/ZLAR-AI/ZLAR</a>. Reach me at <a href="mailto:vincent@zlar.ai" style="color: var(--teal);">vincent@zlar.ai</a>.</p>
+    </div>
+
+  </article>
+
+  <div class="essay-footer">
+    <a href="/" class="btn-primary">&larr; Back to ZLAR</a>
+    <a href="origin.html" class="btn-secondary">Read: The Origin of ZLAR</a>
+    <a href="https://github.com/ZLAR-AI/ZLAR" class="btn-secondary" target="_blank">View on GitHub</a>
+  </div>
+
+  <footer>
+    <p>
+      &copy; 2026 ZLAR Inc. &nbsp;&middot;&nbsp;
+      <a href="/">zlar.ai</a> &nbsp;&middot;&nbsp;
+      <a href="https://github.com/ZLAR-AI/ZLAR">GitHub</a> &nbsp;&middot;&nbsp;
+      <a href="https://x.com/vincentnijjar">X</a> &nbsp;&middot;&nbsp;
+      <a href="https://www.linkedin.com/in/vincentnijjar/">LinkedIn</a> &nbsp;&middot;&nbsp;
+      <a href="mailto:vincent@zlar.ai">vincent@zlar.ai</a>
+    </p>
+  </footer>
+
+</body>
+</html>
