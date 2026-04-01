@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Proof of Enforcement &mdash; ZLAR</title>
+  <meta name="description" content="On the governed path, no unauthorized action can execute. Proof by exhaustive case analysis against source code.">
+  <meta property="og:title" content="Proof of Enforcement &mdash; ZLAR">
+  <meta property="og:description" content="On the governed path, no unauthorized action can execute. Exhaustive case analysis against source code. Every claim verifiable.">
+  <meta property="og:image" content="https://zlar.ai/assets/social-preview.png">
+  <meta property="og:url" content="https://zlar.ai/proof.html">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@vincentnijjar">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>&#x1F6A6;</text></svg>">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #080c14;
+      --bg-card: #0d1520;
+      --border: rgba(56, 189, 248, 0.12);
+      --teal: #38bdf8;
+      --teal-dim: rgba(56, 189, 248, 0.6);
+      --green: #4ade80;
+      --red: #f87171;
+      --white: #f1f5f9;
+      --muted: #64748b;
+      --text: #94a3b8;
+      --font: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+      --serif: 'Georgia', 'Times New Roman', serif;
+      --mono: 'SF Mono', 'Fira Code', 'Cascadia Code', monospace;
+    }
+
+    html { font-size: 16px; scroll-behavior: smooth; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font);
+      line-height: 1.7;
+      min-height: 100vh;
+    }
+
+    /* Nav */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(8, 12, 20, 0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 0.875rem 2rem;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .nav-logo { font-size: 1.1rem; font-weight: 700; letter-spacing: 0.05em; color: var(--white); text-decoration: none; }
+    .nav-logo span { color: var(--teal); }
+    .nav-links { display: flex; gap: 1.5rem; }
+    .nav-links a { color: var(--muted); text-decoration: none; font-size: 0.875rem; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--white); }
+
+    /* Hero */
+    .hero {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 6rem 2rem 3rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .essay-label {
+      display: inline-block;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--teal);
+      margin-bottom: 1.25rem;
+    }
+    .hero h1 {
+      font-size: clamp(1.75rem, 4vw, 2.5rem);
+      font-weight: 700;
+      color: var(--white);
+      line-height: 1.2;
+      margin-bottom: 1rem;
+      font-family: var(--serif);
+    }
+    .hero .subtitle {
+      font-size: 1.125rem;
+      color: var(--muted);
+      font-style: italic;
+      margin-bottom: 1.5rem;
+      font-family: var(--serif);
+    }
+
+    /* Body */
+    .proof {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 3rem 2rem 6rem;
+    }
+
+    .proof p {
+      font-family: var(--serif);
+      font-size: 1.0625rem;
+      color: #b0bec5;
+      line-height: 1.85;
+      margin-bottom: 1.5rem;
+    }
+
+    .proof h2 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--white);
+      margin: 3rem 0 1.5rem;
+      font-family: var(--serif);
+    }
+
+    .proof h3 {
+      font-size: 1.125rem;
+      font-weight: 600;
+      color: var(--white);
+      margin: 2rem 0 1rem;
+      font-family: var(--font);
+    }
+
+    .proof hr {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 3rem 0;
+    }
+
+    .proof a {
+      color: var(--teal);
+      text-decoration: none;
+    }
+    .proof a:hover { color: #7dd3fc; }
+
+    .proof .claim-box {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--teal);
+      border-radius: 8px;
+      padding: 1.5rem 2rem;
+      margin: 2rem 0;
+    }
+    .proof .claim-box p {
+      font-family: var(--serif);
+      font-size: 1.125rem;
+      color: var(--white);
+      font-style: italic;
+      margin-bottom: 0.75rem;
+    }
+    .proof .claim-box p:last-child { margin-bottom: 0; }
+
+    .proof .source-ref {
+      font-family: var(--mono);
+      font-size: 0.8125rem;
+      color: var(--muted);
+      background: rgba(56, 189, 248, 0.06);
+      padding: 0.25rem 0.5rem;
+      border-radius: 4px;
+      display: inline-block;
+      margin-top: 0.25rem;
+    }
+
+    .proof code {
+      font-family: var(--mono);
+      font-size: 0.875rem;
+      color: var(--teal-dim);
+      background: rgba(56, 189, 248, 0.08);
+      padding: 0.15rem 0.4rem;
+      border-radius: 3px;
+    }
+
+    .proof pre {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.25rem 1.5rem;
+      overflow-x: auto;
+      margin: 1.5rem 0;
+    }
+    .proof pre code {
+      background: none;
+      padding: 0;
+      font-size: 0.8125rem;
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    /* State table */
+    .state-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 2rem 0;
+      font-size: 0.875rem;
+    }
+    .state-table th {
+      text-align: left;
+      padding: 0.75rem 1rem;
+      background: var(--bg-card);
+      color: var(--white);
+      font-weight: 600;
+      border-bottom: 1px solid var(--border);
+    }
+    .state-table td {
+      padding: 0.75rem 1rem;
+      border-bottom: 1px solid rgba(56, 189, 248, 0.06);
+      color: var(--text);
+    }
+    .state-table .outcome-blocked {
+      color: var(--red);
+      font-weight: 600;
+    }
+    .state-table .outcome-authorized {
+      color: var(--green);
+      font-weight: 600;
+    }
+
+    /* Boundary section */
+    .boundary-item {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.25rem 1.5rem;
+      margin: 1rem 0;
+    }
+    .boundary-item h4 {
+      font-size: 0.9375rem;
+      font-weight: 600;
+      color: var(--white);
+      margin-bottom: 0.5rem;
+    }
+    .boundary-item p {
+      font-size: 0.9375rem;
+      font-family: var(--font);
+      margin-bottom: 0;
+      color: var(--text);
+    }
+
+    /* Closing */
+    .closing-box {
+      margin-top: 3rem;
+      padding: 2rem;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+    }
+    .closing-box p {
+      font-size: 0.9375rem;
+      font-family: var(--font);
+      color: var(--muted);
+      margin-bottom: 0.75rem;
+    }
+    .closing-box p:last-child { margin-bottom: 0; }
+
+    /* Footer nav */
+    .essay-footer {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 0 2rem 4rem;
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    .essay-footer a {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      padding: 0.6rem 1.25rem;
+      border-radius: 6px;
+      font-size: 0.875rem;
+      font-weight: 500;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+    .btn-primary {
+      background: var(--teal);
+      color: #080c14;
+    }
+    .btn-primary:hover { background: #7dd3fc; }
+    .btn-secondary {
+      border: 1px solid var(--border);
+      color: var(--muted);
+    }
+    .btn-secondary:hover { border-color: var(--teal-dim); color: var(--white); }
+
+    footer {
+      text-align: center;
+      padding: 3rem 2rem;
+      border-top: 1px solid var(--border);
+    }
+    footer p { font-size: 0.825rem; color: var(--muted); margin: 0; }
+    footer a { color: var(--muted); text-decoration: none; transition: color 0.2s; }
+    footer a:hover { color: var(--teal); }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="/" class="nav-logo">ZL<span>A</span>R</a>
+    <div class="nav-links">
+      <a href="/">Home</a>
+      <a href="fail-open.html">The Lock Swings Open</a>
+      <a href="origin.html">Origin</a>
+      <a href="https://github.com/ZLAR-AI/ZLAR" target="_blank">GitHub</a>
+    </div>
+  </nav>
+
+  <div class="hero">
+    <span class="essay-label">Proof &middot; April 2026</span>
+    <h1>On the governed path, no unauthorized action can execute.</h1>
+    <p class="subtitle">Proof by exhaustive case analysis against source code. Every claim verifiable.</p>
+  </div>
+
+  <article class="proof">
+
+    <div class="claim-box">
+      <p>On a path governed by the ZLAR gate, no action can execute without human authorization.</p>
+      <p>This is not a statistical claim. It is a structural claim. It does not say unauthorized actions are unlikely. It says they are impossible &mdash; within a precisely defined boundary.</p>
+    </div>
+
+    <h2>Definitions</h2>
+
+    <p><strong>Governed path.</strong> An action is on the governed path when it passes through a ZLAR gate &mdash; either the PreToolUse hook (for Claude Code, Cursor, Windsurf) or the MCP TCP proxy (for any MCP-connected agent). If an action does not pass through the gate, the gate has nothing to enforce.</p>
+
+    <p><strong>Human authorization.</strong> An action is human-authorized if either: (a) a human signed the policy rule that permits it, using an Ed25519 private key the agent does not possess, or (b) a human explicitly approved it in real time via Telegram, and the approval is cryptographically bound to the exact action requested.</p>
+
+    <p><strong>The gate.</strong> <code>bin/zlar-gate</code> &mdash; a bash script with no model inference, no reasoning, no intelligence. It reads a tool call from stdin, evaluates it against a signed policy, and writes a JSON response to stdout: allow or deny. That is all it does.</p>
+
+    <hr>
+
+    <h2>Proof</h2>
+
+    <p>The gate has exactly five terminal states. Every tool call reaches exactly one of them.</p>
+
+    <h3>State 1: Policy says deny</h3>
+
+    <p>The policy rule matching the tool call specifies <code>action: deny</code>. The gate blocks the action immediately. No Telegram message. No human decision needed. The policy &mdash; signed by a human with an Ed25519 key &mdash; pre-determined that this class of action is not permitted.</p>
+    <span class="source-ref">bin/zlar-gate line 301 &mdash; respond_deny() emits permissionDecision: "deny"</span>
+
+    <h3>State 2: Policy says allow</h3>
+
+    <p>The policy rule matching the tool call specifies <code>action: allow</code>. The gate permits the action. The policy &mdash; signed by a human &mdash; pre-determined that this class of action is permitted. The human authorized it at the time they signed the policy.</p>
+    <span class="source-ref">bin/zlar-gate line 251 &mdash; respond_allow() emits permissionDecision: "allow"</span>
+
+    <h3>State 3: Policy says ask &mdash; human decides</h3>
+
+    <p>The policy rule specifies <code>action: ask</code>. The gate sends a message to the human via Telegram and <strong>denies the action while waiting</strong>. The agent is told to retry after the human decides.</p>
+    <span class="source-ref">bin/zlar-gate line 1468 &mdash; respond_deny "Awaiting Telegram approval"</span>
+
+    <p>On retry, the gate checks for a human response. Four sub-cases:</p>
+
+    <p><strong>3a. Human approves.</strong> The gate finds an approval callback. Before allowing, it verifies the SHA-256 action hash matches the exact tool call &mdash; <code>rule|tool_name|detail</code>. If the hash matches, the action is allowed. The human explicitly authorized this specific action.</p>
+
+    <p><strong>3b. Human denies.</strong> The gate finds a denial callback. The action remains blocked.</p>
+
+    <p><strong>3c. Human does not respond.</strong> The pending file ages past the configured timeout. The gate treats expiry as denial. The action remains blocked.</p>
+    <span class="source-ref">bin/zlar-gate lines 1036-1039 &mdash; timeout triggers expiry, returns deny</span>
+
+    <p><strong>3d. Approval hash mismatch.</strong> If the approval was for a different action, the SHA-256 hash will not match. The approval is rejected. The action remains blocked.</p>
+    <span class="source-ref">bin/zlar-gate lines 992-993 &mdash; hash comparison, mismatch rejects</span>
+
+    <h3>State 4: Ask fails &mdash; Telegram unreachable</h3>
+
+    <p>The gate attempts to send a Telegram message and fails. The gate denies the action.</p>
+
+    <p>The action never executes. The gate does not fall back to allowing. It does not assume the human would have approved. If the human cannot be reached, the answer is no.</p>
+    <span class="source-ref">bin/zlar-gate lines 1474-1476 &mdash; respond_deny "Could not reach human for approval"</span>
+
+    <h3>State 5: Gate crashes</h3>
+
+    <p>Any unhandled error triggers the ERR trap.</p>
+
+    <pre><code>set -euo pipefail
+trap '_gate_crash $LINENO' ERR
+
+_gate_crash() {
+    echo '{"hookSpecificOutput":{"hookEventName":"PreToolUse",
+           "permissionDecision":"deny",
+           "permissionDecisionReason":"ZLAR gate crash"}}'
+    exit 0
+}</code></pre>
+
+    <p>The trap outputs a valid deny response and exits cleanly. The action is blocked. <code>exit 0</code> is deliberate: the host framework interprets non-zero exit as a non-blocking error and continues. By exiting 0 with a deny payload, the gate ensures its crash produces a valid blocking response that the host framework respects.</p>
+    <span class="source-ref">bin/zlar-gate lines 38-49</span>
+
+    <h3>State 0: No rule matches</h3>
+
+    <p>If no policy rule matches the tool call, the gate applies the default action. The default is deny.</p>
+    <span class="source-ref">bin/zlar-gate line 666 &mdash; default_action // "deny"</span>
+
+    <p>If the policy file does not specify a default, the fallback is deny. The gate is closed until a human opens it.</p>
+
+    <hr>
+
+    <h2>The policy cannot be modified by the agent</h2>
+
+    <p>The policy file is Ed25519-signed. The gate verifies the signature at load time. If verification fails, the gate denies all actions.</p>
+    <span class="source-ref">bin/zlar-gate lines 651-660 &mdash; zlar_crypto_verify(), failure triggers ERR trap</span>
+
+    <p>An agent cannot write a permissive policy and have the gate enforce it, because the agent does not possess the Ed25519 private key. The key never lives on the agent's machine. The key is held by the human.</p>
+
+    <h2>The gate cannot be persuaded</h2>
+
+    <p>The gate performs four operations: pattern matching, comparison, lookup, and timestamp arithmetic. It does not perform inference, interpretation, or reasoning. It has no language model. It has no prompt. It has no context window. It has no objective function.</p>
+
+    <p>Persuasion requires a reasoning target. The gate has none. This is not a limitation. It is the design.</p>
+
+    <hr>
+
+    <h2>Summary</h2>
+
+    <table class="state-table">
+      <thead>
+        <tr><th>State</th><th>Condition</th><th>Outcome</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>0</td><td>No rule matches</td><td class="outcome-blocked">Blocked (default = deny)</td></tr>
+        <tr><td>1</td><td>Rule: deny</td><td class="outcome-blocked">Blocked immediately</td></tr>
+        <tr><td>2</td><td>Rule: allow</td><td class="outcome-authorized">Allowed &mdash; human pre-authorized via signed policy</td></tr>
+        <tr><td>3a</td><td>Rule: ask &rarr; human approves (hash match)</td><td class="outcome-authorized">Allowed &mdash; human explicitly authorized</td></tr>
+        <tr><td>3b</td><td>Rule: ask &rarr; human denies</td><td class="outcome-blocked">Blocked</td></tr>
+        <tr><td>3c</td><td>Rule: ask &rarr; no response (timeout)</td><td class="outcome-blocked">Blocked</td></tr>
+        <tr><td>3d</td><td>Rule: ask &rarr; approval hash mismatch</td><td class="outcome-blocked">Blocked</td></tr>
+        <tr><td>4</td><td>Telegram unreachable</td><td class="outcome-blocked">Blocked</td></tr>
+        <tr><td>5</td><td>Gate crashes</td><td class="outcome-blocked">Blocked (ERR trap)</td></tr>
+      </tbody>
+    </table>
+
+    <p>In every state, either a human authorized the action, or the action was blocked. There is no state in which an unauthorized action executes.</p>
+
+    <hr>
+
+    <h2>What this proof does not cover</h2>
+
+    <p>A proof that does not state its own boundaries is not a proof. It is marketing.</p>
+
+    <div class="boundary-item">
+      <h4>The hook runner</h4>
+      <p>The ZLAR gate sits inside a host framework's hook system. If the hook process is killed by the operating system before the ERR trap fires, or exceeds the framework's timeout, the host framework fails open &mdash; the action proceeds without gate evaluation. The gate's ERR trap mitigates this for all crashes within the process. The timeout gap cannot be closed from outside the host framework. We have formally requested that Anthropic add a fail-closed configuration option for PreToolUse hooks.</p>
+    </div>
+
+    <div class="boundary-item">
+      <h4>Channels outside the governed path</h4>
+      <p>If an agent accesses resources through a channel that does not pass through the gate &mdash; direct filesystem access outside tool calls, out-of-band network requests &mdash; the gate cannot enforce. OS-level containment is the defense layer below the gate. The gate governs tool calls. The operating system governs everything else.</p>
+    </div>
+
+    <div class="boundary-item">
+      <h4>Compromised signing key</h4>
+      <p>If the Ed25519 private key used to sign policies is stolen, an attacker can sign a permissive policy. The key never resides on the agent's machine. Key rotation invalidates all prior signatures.</p>
+    </div>
+
+    <div class="boundary-item">
+      <h4>Compromised gate binary</h4>
+      <p>If the gate script is replaced with a permissive version, enforcement is lost. Rule R012 blocks agents from modifying their own governance infrastructure. External integrity monitoring is the defense layer below R012.</p>
+    </div>
+
+    <div class="boundary-item">
+      <h4>Human error in policy design</h4>
+      <p>The gate enforces the policy exactly as signed. If a human signs a policy that allows dangerous actions, the gate will allow those dangerous actions. The gate checks authorization, not judgment.</p>
+    </div>
+
+    <div class="boundary-item">
+      <h4>Human error in real-time approval</h4>
+      <p>If a human approves an action they should have denied, the gate allows it. The approval is bound to the exact action via SHA-256, so the human approves precisely what executes &mdash; but the human must exercise judgment.</p>
+    </div>
+
+    <hr>
+
+    <h2>What this proof means</h2>
+
+    <p>On the governed path, the gate is a deterministic function from (tool call, signed policy, human decision) to (allow, deny). The function has no intelligence. It has no attack surface for reasoning-based attacks. It cannot be prompt-injected, context-drifted, or persuaded, because it does not reason.</p>
+
+    <p>If the enforcement layer uses intelligence, the enforcement layer can be attacked with intelligence. If the enforcement layer is deterministic, the only attacks are against the policy (a human artifact, signed with Ed25519, stored outside agent context) or against the infrastructure below the gate (the operating system, the hook runner, the hardware). Those attacks exist. They are real. They are documented above. But they are a fundamentally different class of attack than reasoning-based persuasion &mdash; and they have well-understood mitigations.</p>
+
+    <p>The absence of intelligence in the gate is not a limitation. It is the security property.</p>
+
+    <hr>
+
+    <h2>Verification</h2>
+
+    <p>Every claim in this document references specific lines in <a href="https://github.com/ZLAR-AI/ZLAR/blob/main/bin/zlar-gate"><code>bin/zlar-gate</code></a> (Gate v2.5.1). The source code is Apache 2.0 licensed and publicly available. Every claim can be independently verified by reading the source.</p>
+
+    <div class="closing-box">
+      <p>If you find a path through the gate where an unauthorized action executes, that is a security vulnerability. Please report it to <a href="mailto:security@zlar.ai" style="color: var(--teal);">security@zlar.ai</a>.</p>
+    </div>
+
+  </article>
+
+  <div class="essay-footer">
+    <a href="/" class="btn-primary">&larr; Back to ZLAR</a>
+    <a href="fail-open.html" class="btn-secondary">Read: The Lock Swings Open</a>
+    <a href="https://github.com/ZLAR-AI/ZLAR" class="btn-secondary" target="_blank">View on GitHub</a>
+  </div>
+
+  <footer>
+    <p>
+      &copy; 2026 ZLAR Inc. &nbsp;&middot;&nbsp;
+      <a href="/">zlar.ai</a> &nbsp;&middot;&nbsp;
+      <a href="https://github.com/ZLAR-AI/ZLAR">GitHub</a> &nbsp;&middot;&nbsp;
+      <a href="https://x.com/vincentnijjar">X</a> &nbsp;&middot;&nbsp;
+      <a href="https://www.linkedin.com/in/vincentnijjar/">LinkedIn</a> &nbsp;&middot;&nbsp;
+      <a href="mailto:vincent@zlar.ai">vincent@zlar.ai</a>
+    </p>
+  </footer>
+
+</body>
+</html>
