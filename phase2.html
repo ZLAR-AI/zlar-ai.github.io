@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My AI Governance System Has a Hilarious and Frightening Flaw — Vincent Nijjar</title>
+  <meta name="description" content="The gate controls possibility. The recorder records reality. But if the policy is wrong, damage is guaranteed. Phase 2 begins.">
+  <meta property="og:title" content="My AI Governance System Has a Hilarious and Frightening Flaw — Vincent Nijjar">
+  <meta property="og:description" content="Inside the system, ZLAR is absolute. Outside the system, ZLAR does not exist. That boundary changes everything.">
+  <meta property="og:image" content="https://zlar.ai/assets/social-preview.png">
+  <meta property="og:url" content="https://zlar.ai/phase2.html">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@vincentnijjar">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🚦</text></svg>">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #080c14;
+      --bg-card: #0d1520;
+      --border: rgba(56, 189, 248, 0.12);
+      --teal: #38bdf8;
+      --teal-dim: rgba(56, 189, 248, 0.6);
+      --white: #f1f5f9;
+      --muted: #64748b;
+      --text: #94a3b8;
+      --font: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+      --serif: 'Georgia', 'Times New Roman', serif;
+    }
+
+    html { font-size: 16px; scroll-behavior: smooth; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font);
+      line-height: 1.7;
+      min-height: 100vh;
+    }
+
+    /* Nav */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(8, 12, 20, 0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 0.875rem 2rem;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .nav-logo { font-size: 1.1rem; font-weight: 700; letter-spacing: 0.05em; color: var(--white); text-decoration: none; }
+    .nav-logo span { color: var(--teal); }
+    .nav-links { display: flex; gap: 1.5rem; }
+    .nav-links a { color: var(--muted); text-decoration: none; font-size: 0.875rem; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--white); }
+
+    /* Hero */
+    .hero {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 6rem 2rem 3rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .essay-label {
+      display: inline-block;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--teal);
+      margin-bottom: 1.25rem;
+    }
+    .hero h1 {
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: 700;
+      color: var(--white);
+      line-height: 1.15;
+      margin-bottom: 1rem;
+      font-family: var(--serif);
+    }
+    .hero .subtitle {
+      font-size: 1.125rem;
+      color: var(--muted);
+      font-style: italic;
+      margin-bottom: 1.5rem;
+      font-family: var(--serif);
+    }
+
+    /* Essay body */
+    .essay {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 3rem 2rem 6rem;
+    }
+
+    .essay p {
+      font-family: var(--serif);
+      font-size: 1.0625rem;
+      color: #b0bec5;
+      line-height: 1.85;
+      margin-bottom: 1.5rem;
+    }
+
+    .essay blockquote {
+      border-left: 3px solid var(--teal);
+      padding: 0.75rem 0 0.75rem 1.5rem;
+      margin: 2rem 0;
+      font-family: var(--serif);
+      font-size: 1.0625rem;
+      font-style: italic;
+      color: var(--white);
+    }
+
+    .essay hr {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 3rem 0;
+    }
+
+    .essay .closing {
+      margin-top: 3rem;
+      padding: 2rem;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+    }
+    .essay .closing p {
+      font-size: 0.9375rem;
+      font-family: var(--font);
+      font-style: italic;
+      color: var(--muted);
+      margin-bottom: 0.75rem;
+    }
+    .essay .closing p:last-child { margin-bottom: 0; }
+
+    /* Footer nav */
+    .essay-footer {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 0 2rem 4rem;
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    .essay-footer a {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      padding: 0.6rem 1.25rem;
+      border-radius: 6px;
+      font-size: 0.875rem;
+      font-weight: 500;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+    .btn-primary {
+      background: var(--teal);
+      color: #080c14;
+    }
+    .btn-primary:hover { background: #7dd3fc; }
+    .btn-secondary {
+      border: 1px solid var(--border);
+      color: var(--muted);
+    }
+    .btn-secondary:hover { border-color: var(--teal-dim); color: var(--white); }
+
+    footer {
+      text-align: center;
+      padding: 3rem 2rem;
+      border-top: 1px solid var(--border);
+    }
+    footer p { font-size: 0.825rem; color: var(--muted); margin: 0; }
+    footer a { color: var(--muted); text-decoration: none; transition: color 0.2s; }
+    footer a:hover { color: var(--teal); }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="/" class="nav-logo">ZL<span>A</span>R</a>
+    <div class="nav-links">
+      <a href="/">Home</a>
+      <a href="origin.html">Origin</a>
+      <a href="fail-open.html">The Leak</a>
+      <a href="https://github.com/ZLAR-AI/ZLAR" target="_blank">GitHub</a>
+    </div>
+  </nav>
+
+  <div class="hero">
+    <span class="essay-label">Phase 2 &middot; Vincent Nijjar &middot; April 2026</span>
+    <h1>My AI Governance System Has a Hilarious and Frightening Flaw</h1>
+    <p class="subtitle">The gate controls possibility. The recorder records reality. But if the policy is wrong, damage is guaranteed.</p>
+  </div>
+
+  <article class="essay">
+
+    <p>Every door is locked by default. The agent cannot try and be stopped. There is no door to knock on. There is no inspection. The only way a door opens is if policy explicitly unlocks it. So the agent has no choice but to meet the gate. That's the first thing.</p>
+
+    <p>The second thing: everything that passes through or is blocked &mdash; it's recorded by an instrument designed to record things as they actually happened.</p>
+
+    <p>So: the gate controls possibility. The recorder records reality.</p>
+
+    <hr>
+
+    <p>People on LinkedIn are helping me build through public comments or DMs. They keep saying: architecture is fine but what if it's a bad policy? And I keep thinking &mdash; why are people not finding this build a holy shit moment? Why is the architecture alone not exciting?</p>
+
+    <p>But I think I finally understand my confusion. And confusion matters. Because if there's no clarity here, I can't see the boundary between the space inside the force field and the space outside it. But I see it now.</p>
+
+    <p>Inside the system, ZLAR is absolute. Outside the system, ZLAR does not exist. That's the boundary. I've been defending the inside. People keep pointing at the outside. They're right and I've been missing that till now.</p>
+
+    <hr>
+
+    <p>Now I see what I've actually built: a system that ensures only authorized outcomes occur. Not good outcomes. Authorized ones.</p>
+
+    <p>Before ZLAR, when something goes wrong, we say: it slipped through. After ZLAR, we can only say: we explicitly allowed this. Every outcome traces back to a human decision. Even the policy is a human decision.</p>
+
+    <p>If the policy is wrong, damage is guaranteed. ZLAR will authorize and fully record the damage with no stopping it. This is a hilarious and frightening flaw. I'm glad people pointed it out to me.</p>
+
+    <hr>
+
+    <p>So here's where I am now then.</p>
+
+    <p>I'm looking to build policy design because if people trust the policy, they'll trust the system.</p>
+
+    <blockquote>Phase 2 begins now.</blockquote>
+
+    <div class="closing">
+      <p>ZLAR is open source at <a href="https://github.com/ZLAR-AI/ZLAR" style="color: var(--teal);">github.com/ZLAR-AI/ZLAR</a>. Reach me at <a href="mailto:vincent@zlar.ai" style="color: var(--teal);">vincent@zlar.ai</a>.</p>
+    </div>
+
+  </article>
+
+  <div class="essay-footer">
+    <a href="/" class="btn-primary">&larr; Back to ZLAR</a>
+    <a href="origin.html" class="btn-secondary">Read: Origin</a>
+    <a href="fail-open.html" class="btn-secondary">Read: The Leak</a>
+    <a href="https://github.com/ZLAR-AI/ZLAR" class="btn-secondary" target="_blank">View on GitHub</a>
+  </div>
+
+  <footer>
+    <p>
+      &copy; 2026 ZLAR Inc. &nbsp;&middot;&nbsp;
+      <a href="/">zlar.ai</a> &nbsp;&middot;&nbsp;
+      <a href="https://github.com/ZLAR-AI/ZLAR">GitHub</a> &nbsp;&middot;&nbsp;
+      <a href="https://x.com/vincentnijjar">X</a> &nbsp;&middot;&nbsp;
+      <a href="https://www.linkedin.com/in/vincentnijjar/">LinkedIn</a> &nbsp;&middot;&nbsp;
+      <a href="mailto:vincent@zlar.ai">vincent@zlar.ai</a>
+    </p>
+  </footer>
+
+</body>
+</html>
