@@ -3,440 +3,84 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ZLAR — Execution-boundary governance for autonomous AI agents</title>
-  <meta name="description" content="ZLAR intercepts tool calls an AI agent makes, evaluates each against a signed policy, and routes risky actions to a human before execution. If the gate is down, all actions are denied.">
-  <meta property="og:title" content="ZLAR — Governance for autonomous AI agents">
-  <meta property="og:description" content="Tool calls intercepted. Actions evaluated. Risky actions routed to a human. If the gate is down, all actions are denied.">
+  <title>ZLAR — Deterministic execution governance for AI agents</title>
+  <meta name="description" content="ZLAR intercepts AI agent tool calls, evaluates them against Ed25519-signed policy, routes decisions to humans, and produces cryptographic proof that governance happened. No AI in the enforcement path.">
+  <meta property="og:title" content="ZLAR — Deterministic execution governance for AI agents">
+  <meta property="og:description" content="Deterministic gate. Human authority. Cryptographic proof. No AI in the enforcement path.">
   <meta property="og:image" content="https://zlar.ai/assets/social-preview.png">
   <meta property="og:url" content="https://zlar.ai">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:site" content="@vincentnijjar">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🚦</text></svg>">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
     :root {
-      --bg: #080c14;
-      --bg-card: #0d1520;
-      --bg-card-hover: #111827;
-      --border: rgba(56, 189, 248, 0.10);
-      --border-hover: rgba(56, 189, 248, 0.25);
-      --teal: #38bdf8;
-      --teal-dim: rgba(56, 189, 248, 0.6);
-      --green: #4ade80;
-      --white: #f1f5f9;
-      --muted: #64748b;
+      --bg: #080c14; --bg-card: #0d1520; --bg-card-hover: #111827;
+      --border: rgba(56, 189, 248, 0.10); --border-hover: rgba(56, 189, 248, 0.25);
+      --teal: #38bdf8; --teal-dim: rgba(56, 189, 248, 0.6); --green: #4ade80;
+      --white: #f1f5f9; --muted: #64748b;
       --font: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
       --mono: 'SF Mono', 'Fira Code', 'Cascadia Code', monospace;
-      --section-gap: 7rem;
-      --card-radius: 0.625rem;
+      --section-gap: 7rem; --card-radius: 0.625rem;
     }
-
     html { scroll-behavior: smooth; }
-
-    body {
-      background: var(--bg);
-      color: var(--white);
-      font-family: var(--font);
-      font-feature-settings: 'cv01', 'cv02', 'cv03';
-      line-height: 1.6;
-      overflow-x: hidden;
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
-    }
-
-    body::before {
-      content: '';
-      position: fixed;
-      inset: 0;
-      background-image:
-        radial-gradient(circle at 20% 20%, rgba(56, 189, 248, 0.04) 0%, transparent 50%),
-        radial-gradient(circle at 80% 80%, rgba(74, 222, 128, 0.03) 0%, transparent 50%),
-        linear-gradient(rgba(56, 189, 248, 0.03) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(56, 189, 248, 0.03) 1px, transparent 1px);
-      background-size: 100% 100%, 100% 100%, 48px 48px, 48px 48px;
-      pointer-events: none;
-      z-index: 0;
-    }
-
-    nav {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      z-index: 100;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 1rem 2rem;
-      background: rgba(8, 12, 20, 0.85);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--border);
-    }
-
-    .nav-logo {
-      font-size: 1.1rem;
-      font-weight: 700;
-      letter-spacing: 0.05em;
-      color: var(--white);
-      text-decoration: none;
-    }
-
+    body { background: var(--bg); color: var(--white); font-family: var(--font); font-feature-settings: 'cv01','cv02','cv03'; line-height: 1.6; overflow-x: hidden; -webkit-font-smoothing: antialiased; }
+    body::before { content: ''; position: fixed; inset: 0; background-image: radial-gradient(circle at 20% 20%, rgba(56,189,248,0.04) 0%, transparent 50%), radial-gradient(circle at 80% 80%, rgba(74,222,128,0.03) 0%, transparent 50%), linear-gradient(rgba(56,189,248,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(56,189,248,0.03) 1px, transparent 1px); background-size: 100% 100%, 100% 100%, 48px 48px, 48px 48px; pointer-events: none; z-index: 0; }
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 1rem 2rem; background: rgba(8,12,20,0.85); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); }
+    .nav-logo { font-size: 1.1rem; font-weight: 700; letter-spacing: 0.05em; color: var(--white); text-decoration: none; }
     .nav-logo span { color: var(--teal); }
-
-    .nav-links {
-      display: flex;
-      gap: 2rem;
-      list-style: none;
-    }
-
-    .nav-links a {
-      color: var(--muted);
-      text-decoration: none;
-      font-size: 0.875rem;
-      transition: color 0.2s;
-    }
-
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a { color: var(--muted); text-decoration: none; font-size: 0.875rem; transition: color 0.2s; }
     .nav-links a:hover { color: var(--white); }
-
-    section {
-      position: relative;
-      z-index: 1;
-      max-width: 860px;
-      margin: 0 auto;
-      padding: var(--section-gap) 2rem;
-    }
-
-    section:first-of-type { padding-top: 12rem; }
-
-    .hero-eyebrow {
-      display: inline-block;
-      font-family: var(--mono);
-      font-size: 0.75rem;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: var(--teal);
-      border: 1px solid var(--border);
-      padding: 0.35rem 0.85rem;
-      border-radius: 2rem;
-      margin-bottom: 2rem;
-    }
-
-    h1 {
-      font-size: clamp(2.25rem, 5vw, 3.5rem);
-      font-weight: 800;
-      line-height: 1.1;
-      letter-spacing: -0.03em;
-      margin-bottom: 1.75rem;
-      color: var(--white);
-    }
-
-    h1 em {
-      font-style: normal;
-      color: var(--teal);
-    }
-
-    .hero-sub {
-      font-size: 1.2rem;
-      color: var(--muted);
-      max-width: 600px;
-      margin-bottom: 2.5rem;
-      line-height: 1.7;
-    }
-
+    section { position: relative; z-index: 1; max-width: 860px; margin: 0 auto; padding: var(--section-gap) 2rem; }
+    section:first-of-type { padding-top: 10rem; }
+    .hero-eyebrow { display: inline-block; font-family: var(--mono); font-size: 0.75rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--teal); border: 1px solid var(--border); padding: 0.35rem 0.85rem; border-radius: 2rem; margin-bottom: 2rem; }
+    h1 { font-size: clamp(2.25rem, 5vw, 3.5rem); font-weight: 800; line-height: 1.1; letter-spacing: -0.03em; margin-bottom: 1.75rem; }
+    h1 em { font-style: normal; color: var(--teal); }
+    .hero-sub { font-size: 1.2rem; color: var(--muted); max-width: 640px; margin-bottom: 2.5rem; line-height: 1.7; }
     .hero-sub strong { color: var(--white); }
-
-    .cta-group {
-      display: flex;
-      gap: 1rem;
-      flex-wrap: wrap;
-    }
-
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      padding: 0.75rem 1.5rem;
-      border-radius: var(--card-radius);
-      font-size: 0.875rem;
-      font-weight: 600;
-      letter-spacing: -0.01em;
-      text-decoration: none;
-      transition: all 0.2s;
-      cursor: pointer;
-    }
-
-    .btn-primary {
-      background: var(--teal);
-      color: #080c14;
-    }
-
+    .cta-group { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .btn { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.75rem 1.5rem; border-radius: var(--card-radius); font-size: 0.875rem; font-weight: 600; text-decoration: none; transition: all 0.2s; }
+    .btn-primary { background: var(--teal); color: #080c14; }
     .btn-primary:hover { background: #7dd3fc; }
-
-    .btn-secondary {
-      background: transparent;
-      color: var(--white);
-      border: 1px solid var(--border);
-    }
-
+    .btn-secondary { background: transparent; color: var(--white); border: 1px solid var(--border); }
     .btn-secondary:hover { border-color: var(--border-hover); color: var(--teal); }
-
-    h2 {
-      font-size: clamp(1.5rem, 3vw, 2.2rem);
-      font-weight: 700;
-      letter-spacing: -0.025em;
-      margin-bottom: 1.25rem;
-      color: var(--white);
-    }
-
-    .section-label {
-      font-family: var(--mono);
-      font-size: 0.7rem;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: var(--teal);
-      margin-bottom: 0.75rem;
-      display: block;
-    }
-
-    p {
-      color: var(--muted);
-      line-height: 1.8;
-      margin-bottom: 1rem;
-    }
-
+    h2 { font-size: clamp(1.5rem, 3vw, 2.2rem); font-weight: 700; letter-spacing: -0.025em; margin-bottom: 1.25rem; }
+    .section-label { font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--teal); margin-bottom: 0.75rem; display: block; }
+    p { color: var(--muted); line-height: 1.8; margin-bottom: 1rem; }
     p strong { color: var(--white); }
-
-    .divider {
-      border: none;
-      border-top: 1px solid var(--border);
-      margin: 0;
-    }
-
-    /* Install block */
-    .install-block {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: var(--card-radius);
-      padding: 1.5rem 2rem;
-      margin-top: 2rem;
-      margin-bottom: 1rem;
-    }
-
-    .install-block code {
-      font-family: var(--mono);
-      font-size: 1rem;
-      color: var(--green);
-    }
-
-    .install-note {
-      font-size: 0.85rem;
-      color: var(--muted);
-      margin-top: 0.75rem;
-      margin-bottom: 0;
-    }
-
-    /* How it works */
-    .flow {
-      display: grid;
-      gap: 1px;
-      background: var(--border);
-      border: 1px solid var(--border);
-      border-radius: var(--card-radius);
-      overflow: hidden;
-      margin-top: 2.5rem;
-    }
-
-    .flow-step {
-      display: grid;
-      grid-template-columns: 5rem 1fr;
-      gap: 1rem;
-      align-items: start;
-      padding: 1.25rem 1.5rem;
-      background: var(--bg-card);
-      transition: background 0.15s;
-    }
-
+    .divider { border: none; border-top: 1px solid var(--border); margin: 0; }
+    .flow { display: grid; gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: var(--card-radius); overflow: hidden; margin-top: 2.5rem; }
+    .flow-step { display: grid; grid-template-columns: 5rem 1fr; gap: 1rem; align-items: start; padding: 1.25rem 1.5rem; background: var(--bg-card); transition: background 0.15s; }
     .flow-step:hover { background: var(--bg-card-hover); }
-
-    .flow-action {
-      font-family: var(--mono);
-      font-size: 0.75rem;
-      color: var(--teal);
-      padding-top: 0.15rem;
-    }
-
-    .flow-name {
-      font-weight: 600;
-      color: var(--white);
-      font-size: 0.95rem;
-      margin-bottom: 0.25rem;
-    }
-
-    .flow-desc {
-      font-size: 0.875rem;
-      color: var(--muted);
-      margin: 0;
-      line-height: 1.6;
-    }
-
-    /* Invariant block */
-    .invariant {
-      border: 1px solid rgba(74, 222, 128, 0.15);
-      background: rgba(74, 222, 128, 0.03);
-      border-radius: var(--card-radius);
-      padding: 1.75rem 2rem;
-      margin-top: 2.5rem;
-    }
-
-    .invariant p {
-      font-family: var(--mono);
-      font-size: 0.875rem;
-      color: var(--green);
-      margin: 0;
-      line-height: 1.9;
-    }
-
-    /* Proof block */
-    .proof {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: var(--card-radius);
-      padding: 2rem;
-      margin-top: 2.5rem;
-    }
-
-    .proof p { margin-bottom: 0.75rem; }
-    .proof p:last-child { margin-bottom: 0; }
-
-    /* Components */
-    .components {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 1rem;
-      margin-top: 2.5rem;
-    }
-
-    .component {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: var(--card-radius);
-      padding: 1.5rem;
-      transition: border-color 0.2s;
-    }
-
+    .flow-action { font-family: var(--mono); font-size: 0.75rem; color: var(--teal); padding-top: 0.15rem; }
+    .flow-name { font-weight: 600; color: var(--white); font-size: 0.95rem; margin-bottom: 0.25rem; }
+    .flow-desc { font-size: 0.875rem; color: var(--muted); margin: 0; line-height: 1.6; }
+    .invariant { border: 1px solid rgba(74,222,128,0.15); background: rgba(74,222,128,0.03); border-radius: var(--card-radius); padding: 1.75rem 2rem; margin-top: 2.5rem; }
+    .invariant p { font-family: var(--mono); font-size: 0.875rem; color: var(--green); margin: 0; line-height: 1.9; }
+    .components { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1rem; margin-top: 2.5rem; }
+    .component { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--card-radius); padding: 1.5rem; transition: border-color 0.2s; }
     .component:hover { border-color: var(--border-hover); }
-
-    .component-name {
-      font-family: var(--mono);
-      font-size: 0.85rem;
-      color: var(--teal);
-      margin-bottom: 0.5rem;
-    }
-
-    .component-desc {
-      font-size: 0.875rem;
-      color: var(--muted);
-      margin: 0;
-      line-height: 1.6;
-    }
-
-    /* Links grid */
-    .links-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 1rem;
-      margin-top: 2.5rem;
-    }
-
-    .link-card {
-      display: block;
-      text-decoration: none;
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: var(--card-radius);
-      padding: 1.5rem;
-      transition: all 0.2s;
-    }
-
-    .link-card:hover {
-      border-color: var(--border-hover);
-      background: var(--bg-card-hover);
-    }
-
-    .link-card-label {
-      font-family: var(--mono);
-      font-size: 0.7rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--teal);
-      margin-bottom: 0.5rem;
-      display: block;
-    }
-
-    .link-card-title {
-      font-weight: 600;
-      color: var(--white);
-      font-size: 1rem;
-      margin-bottom: 0.35rem;
-    }
-
-    .link-card-desc {
-      font-size: 0.825rem;
-      color: var(--muted);
-      margin: 0;
-      line-height: 1.5;
-    }
-
-    footer {
-      position: relative;
-      z-index: 1;
-      text-align: center;
-      padding: 3rem 2rem;
-      border-top: 1px solid var(--border);
-    }
-
-    footer p {
-      font-size: 0.825rem;
-      color: var(--muted);
-      margin: 0;
-    }
-
-    footer a {
-      color: var(--muted);
-      text-decoration: none;
-      transition: color 0.2s;
-    }
-
+    .component-name { font-family: var(--mono); font-size: 0.85rem; color: var(--teal); margin-bottom: 0.5rem; }
+    .component-desc { font-size: 0.875rem; color: var(--muted); margin: 0; line-height: 1.6; }
+    .links-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1rem; margin-top: 2.5rem; }
+    .link-card { display: block; text-decoration: none; background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--card-radius); padding: 1.5rem; transition: all 0.2s; }
+    .link-card:hover { border-color: var(--border-hover); background: var(--bg-card-hover); }
+    .link-card-label { font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--teal); margin-bottom: 0.5rem; display: block; }
+    .link-card-title { font-weight: 600; color: var(--white); font-size: 1rem; margin-bottom: 0.35rem; }
+    .link-card-desc { font-size: 0.825rem; color: var(--muted); margin: 0; line-height: 1.5; }
+    .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 1rem; margin-top: 2rem; }
+    .stat { text-align: center; padding: 1.25rem; background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--card-radius); }
+    .stat-num { font-size: 1.75rem; font-weight: 800; color: var(--teal); display: block; }
+    .stat-label { font-size: 0.8rem; color: var(--muted); margin-top: 0.25rem; }
+    footer { position: relative; z-index: 1; text-align: center; padding: 3rem 2rem; border-top: 1px solid var(--border); }
+    footer p { font-size: 0.825rem; color: var(--muted); margin: 0; }
+    footer a { color: var(--muted); text-decoration: none; transition: color 0.2s; }
     footer a:hover { color: var(--teal); }
-
-    /* Top banner */
-    .top-banner {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      z-index: 200;
-      background: rgba(56, 189, 248, 0.1);
-      border-bottom: 1px solid rgba(56, 189, 248, 0.2);
-      padding: 0.5rem 2rem;
-      text-align: center;
-    }
-    .top-banner a {
-      color: var(--teal);
-      text-decoration: none;
-      font-size: 0.8125rem;
-      font-weight: 500;
-      transition: color 0.2s;
-    }
-    .top-banner a:hover { color: #7dd3fc; }
-    .top-banner + nav { top: 33px; }
-    .top-banner ~ section:first-of-type { padding-top: 14rem; }
-
     @media (max-width: 640px) {
       :root { --section-gap: 4.5rem; }
-      .top-banner { padding: 0.4rem 1rem; }
-      .top-banner a { font-size: 0.7rem; }
-      .top-banner ~ section:first-of-type { padding-top: 10rem; }
       nav { padding: 1rem; }
       .nav-links { gap: 1rem; }
       .nav-links a { font-size: 0.8rem; }
@@ -449,37 +93,126 @@
 </head>
 <body>
 
-  <div class="top-banner">
-    <a href="demo-scenario.html">March 31: A packaging error exposed 512,000 lines of source code. See the fork in the road. &rarr;</a>
-  </div>
-
   <nav>
     <a href="/" class="nav-logo">ZL<span>A</span>R</a>
     <ul class="nav-links">
-      <li><a href="demo-scenario.html">The Fork</a></li>
-      <li><a href="demo-persuasion.html">Demo</a></li>
-      <li><a href="#install">Install</a></li>
-      <li><a href="proof-interactive.html">Proof</a></li>
       <li><a href="architecture.html">Architecture</a></li>
-      <li><a href="origin.html">Origin</a></li>
-      <li><a href="phase2.html">Phase 2</a></li>
+      <li><a href="specs/">Specifications</a></li>
+      <li><a href="proof-interactive.html">Proof</a></li>
+      <li><a href="#standards">Standards</a></li>
       <li><a href="https://github.com/ZLAR-AI/ZLAR">GitHub</a></li>
+      <li><a href="writing.html">Writing</a></li>
       <li><a href="mailto:hello@zlar.ai">Contact</a></li>
     </ul>
   </nav>
 
   <!-- Hero -->
   <section id="hero">
-    <div class="hero-eyebrow">Execution-boundary governance</div>
+    <div class="hero-eyebrow">Deterministic execution governance &middot; v2.0</div>
     <h1>The governed path<br>is the <em>fast</em> path.</h1>
     <p class="hero-sub">
-      ZLAR intercepts tool calls an AI agent makes — shell commands, file writes, network requests —
-      evaluates each against a signed policy, and routes risky actions to a human before execution.
-      <strong>If the gate is down, all actions are denied.</strong>
+      ZLAR intercepts AI agent tool calls, evaluates each against Ed25519-signed policy,
+      routes decisions to humans when required, and produces <strong>cryptographic proof that governance happened</strong>.
+      No AI in the enforcement path. The gate pattern-matches. It cannot be persuaded.
     </p>
     <div class="cta-group">
-      <a href="#install" class="btn btn-primary">Install in 60 seconds →</a>
+      <a href="proof-interactive.html" class="btn btn-primary">See the proof &rarr;</a>
       <a href="https://github.com/ZLAR-AI/ZLAR" class="btn btn-secondary">View on GitHub</a>
+      <a href="specs/" class="btn btn-secondary">Specifications</a>
+    </div>
+
+    <div class="stats">
+      <div class="stat"><span class="stat-num">550+</span><span class="stat-label">Automated tests</span></div>
+      <div class="stat"><span class="stat-num">7</span><span class="stat-label">ADRs</span></div>
+      <div class="stat"><span class="stat-num">v1.0</span><span class="stat-label">Receipt format (frozen)</span></div>
+      <div class="stat"><span class="stat-num">5</span><span class="stat-label">Human invariants</span></div>
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <!-- What ZLAR does -->
+  <section id="how-it-works">
+    <span class="section-label">How it works</span>
+    <h2>Intercept. Evaluate. Decide. Prove.</h2>
+    <p>
+      When an AI agent attempts any action &mdash; shell command, file write, network request, MCP tool call &mdash;
+      ZLAR intercepts before execution and evaluates against signed policy.
+    </p>
+
+    <div class="flow">
+      <div class="flow-step">
+        <span class="flow-action">intercept</span>
+        <div>
+          <div class="flow-name">Agent issues a tool call</div>
+          <p class="flow-desc">Framework hook fires before execution. The call never reaches the OS without passing through ZLAR. Works with Claude Code, Cursor, Windsurf, and any MCP client.</p>
+        </div>
+      </div>
+      <div class="flow-step">
+        <span class="flow-action">evaluate</span>
+        <div>
+          <div class="flow-name">Gate evaluates against signed policy</div>
+          <p class="flow-desc">Ed25519-signed rules evaluated by regex matching, not reasoning. The agent cannot modify the rules that govern it. Policy supports JSON rules and Cedar formal policy language.</p>
+        </div>
+      </div>
+      <div class="flow-step">
+        <span class="flow-action">decide</span>
+        <div>
+          <div class="flow-name">Allow, deny, or route to human</div>
+          <p class="flow-desc">Safe actions pass. Dangerous actions are blocked. Ambiguous actions are routed to the human authority via Telegram. The human approves or denies from their phone.</p>
+        </div>
+      </div>
+      <div class="flow-step">
+        <span class="flow-action">prove</span>
+        <div>
+          <div class="flow-name">Governed Action Receipt issued</div>
+          <p class="flow-desc">Every decision produces a v1 envelope receipt &mdash; portable cryptographic proof that governance happened, verifiable by anyone with the public key. No platform access required.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="invariant">
+      <p>
+        Fail closed: gate down = all actions denied.<br>
+        No AI in the enforcement path. The gate classifies and enforces. It does not reason.<br>
+        Policy is a human artifact. Agents cannot modify the rules that govern them.<br>
+        Human invariants protect the decision-maker: daily caps, deliberation floors, approval rate monitoring.
+      </p>
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <!-- Capabilities -->
+  <section id="capabilities">
+    <span class="section-label">What shipped in v2.0</span>
+    <h2>Governance infrastructure, not a dashboard.</h2>
+
+    <div class="components">
+      <div class="component">
+        <div class="component-name">Governed Action Receipt</div>
+        <p class="component-desc">Portable cryptographic proof. v1 envelope format (frozen). Ed25519 signature over canonical payload. Verifiable by anyone with the public key.</p>
+      </div>
+      <div class="component">
+        <div class="component-name">Deterministic Gate</div>
+        <p class="component-desc">Bash gate (Claude Code, Cursor, Windsurf) and MCP gate (any MCP client). Per-entry Ed25519 audit signing. Fail-closed on every error path.</p>
+      </div>
+      <div class="component">
+        <div class="component-name">Cedar Policy Engine</div>
+        <p class="component-desc">28+ formal policy rules in Amazon's Cedar language. Dual-engine evaluation (JSON regex + Cedar). Policy portability across governance layers.</p>
+      </div>
+      <div class="component">
+        <div class="component-name">Human Invariants</div>
+        <p class="component-desc">Five enforced constraints protecting the human decision-maker: H6 (daily cap), H13 (capacity), H14 (approval rate), H15 (deliberation floor), H17 (authenticity).</p>
+      </div>
+      <div class="component">
+        <div class="component-name">Canonicalization Spec</div>
+        <p class="component-desc">Published specification (RFC 8785 subset). 28 test vectors verified across Node.js, Python, and bash. Cross-language receipt verification.</p>
+      </div>
+      <div class="component">
+        <div class="component-name">Semantic Validation</div>
+        <p class="component-desc">Five-layer verification pipeline. Rule-outcome consistency, authorizer coherence, temporal checks, delegation chain integrity. Signature is necessary but not sufficient.</p>
+      </div>
     </div>
   </section>
 
@@ -488,280 +221,108 @@
   <!-- Install -->
   <section id="install">
     <span class="section-label">Get started</span>
-    <h2>One command. Your agent is governed.</h2>
+    <h2>See governance work in under 60 seconds.</h2>
     <p>
-      ZLAR installs with deny-heavy defaults. Reads and writes are allowed. Deletes, privilege escalation,
-      network exfiltration, persistence mechanisms, and code deployment are blocked.
-      No configuration required. No Telegram required. Risky actions are simply denied until you choose otherwise.
+      The quickstart runs the real gate against real tool calls. Two are allowed. Two are denied. A v1 receipt is generated and cryptographically verified. Nothing is simulated.
     </p>
-    <div class="install-block">
-      <code>curl -fsSL https://zlar.ai/install.sh | bash</code>
+    <div style="background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--card-radius); padding: 1.5rem 2rem; margin-top: 2rem;">
+      <code style="font-family: var(--mono); font-size: 1rem; color: var(--green);">git clone https://github.com/ZLAR-AI/ZLAR.git && cd ZLAR && bash scripts/quickstart.sh</code>
     </div>
-    <p class="install-note">
-      Works with Claude Code, Cursor, and Windsurf. Pure bash. Zero dependencies beyond openssl and jq.
-      Governance running in under 60 seconds.
-    </p>
-    <p class="install-note">
-      Want fine-grained control? Add Telegram approval — risky actions get routed to your phone.
-      You approve or deny from anywhere. <a href="https://github.com/ZLAR-AI/ZLAR" style="color: var(--teal);">See the repo &rarr;</a>
-    </p>
-    <div class="install-block" style="margin-top: 1.5rem;">
-      <code>bash demos/proof-of-enforcement.sh</code>
-    </div>
-    <p class="install-note">
-      Verify the enforcement claim yourself. 16 tests, all 9 terminal states.
-      <a href="proof-interactive.html" style="color: var(--teal);">See the interactive walkthrough &rarr;</a>
+    <p style="font-size: 0.85rem; color: var(--muted); margin-top: 0.75rem;">
+      Requirements: bash 4+, jq, openssl 3.x. Optional: Node.js 18+ (MCP gate, receipt verification).
+      <a href="https://github.com/ZLAR-AI/ZLAR/blob/main/docs/troubleshooting.md" style="color: var(--teal);">Troubleshooting &rarr;</a>
     </p>
   </section>
 
   <hr class="divider">
 
-  <!-- Problem -->
-  <section id="problem">
-    <span class="section-label">The problem</span>
-    <h2>Trust is not verification.</h2>
-    <p>
-      AI agents running on your machine have access to your files, your credentials, your email, and your network.
-      The models are powerful. The frameworks are impressive.
-      But when it comes to governance — to the question of how you know an agent is behaving within its boundaries —
-      the answer is: <strong>you trust it.</strong>
-    </p>
-    <p>
-      In financial services, healthcare, nuclear energy, and aviation, we require independent external audit
-      because the entity performing the work cannot credibly audit itself. The same principle applies here.
-    </p>
-    <p>
-      <strong>ZLAR is the independent external layer.</strong>
-      It sits between the agent and the operating system — the execution boundary where reasoning becomes action. It enforces mechanically.
-      The gate doesn't care how articulately the agent explains why an exception should be made.
-      Intelligence persuading intelligence is an arms race. A gate that checks paperwork is not.
-    </p>
-  </section>
+  <!-- Standards -->
+  <section id="standards">
+    <span class="section-label">Standards engagement</span>
+    <h2>Regulatory and standards participation.</h2>
 
-  <hr class="divider">
-
-  <!-- How it works -->
-  <section id="how-it-works">
-    <span class="section-label">Architecture</span>
-    <h2>Tool calls. Intercepted. Evaluated. Decided.</h2>
-    <p>
-      When your agent tries to do anything — run a command, write a file, make a network request —
-      ZLAR intercepts the call before it executes.
-    </p>
-
-    <div class="flow">
-      <div class="flow-step">
-        <span class="flow-action">intercept</span>
-        <div>
-          <div class="flow-name">Agent makes a tool call</div>
-          <p class="flow-desc">The framework hook fires before execution. The call never reaches the OS without passing through ZLAR.</p>
-        </div>
-      </div>
-      <div class="flow-step">
-        <span class="flow-action">evaluate</span>
-        <div>
-          <div class="flow-name">Gate evaluates against signed policy</div>
-          <p class="flow-desc">Ed25519-signed rules. The agent cannot modify the rules that govern it. Tampering is cryptographically detectable.</p>
-        </div>
-      </div>
-      <div class="flow-step">
-        <span class="flow-action">decide</span>
-        <div>
-          <div class="flow-name">Allow, deny, or ask a human</div>
-          <p class="flow-desc">Safe actions pass through. Dangerous actions are blocked. Ambiguous actions are routed to your phone via Telegram.</p>
-        </div>
-      </div>
-      <div class="flow-step">
-        <span class="flow-action">record</span>
-        <div>
-          <div class="flow-name">Every decision is audited</div>
-          <p class="flow-desc">Append-only JSONL audit trail. Hash-chained. Neither the agent nor the operator can silently rewrite history.</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="invariant">
-      <p>
-        Fail closed. Gate down = all actions denied.<br>
-        No learning, no inference, no language understanding in the gate. It classifies and enforces. It does not decide what is safe.<br>
-        Policy is a human artifact. Agents cannot modify the rules that govern them.
-      </p>
+    <div class="links-grid">
+      <a href="nist-comment.html" class="link-card">
+        <span class="link-card-label">NIST Public Comment</span>
+        <div class="link-card-title">NCCoE: Execution-Boundary Governance</div>
+        <p class="link-card-desc">Formal comment on the NIST concept paper on AI agent identity and authorization.</p>
+      </a>
+      <a href="caisi-submission.html" class="link-card">
+        <span class="link-card-label">NIST CAISI Submission</span>
+        <div class="link-card-title">The Identity-to-Execution Gap</div>
+        <p class="link-card-desc">Submitted to NIST CAISI Listening Sessions. Primary barrier to AI agent adoption in financial services.</p>
+      </a>
+      <a href="specs/" class="link-card">
+        <span class="link-card-label">Published Specifications</span>
+        <div class="link-card-title">Canonicalization v1.0 &amp; Receipt v1</div>
+        <p class="link-card-desc">Formal specifications with permanent URLs. Cross-language verified. Receipt format frozen.</p>
+      </a>
+      <a href="legal.html" class="link-card">
+        <span class="link-card-label">Legal &amp; Regulatory</span>
+        <div class="link-card-title">Terms, Classification, License</div>
+        <p class="link-card-desc">Apache 2.0. Regulatory classification under EU AI Act. Known limitations disclosed.</p>
+      </a>
     </div>
   </section>
 
   <hr class="divider">
 
-  <!-- Components -->
-  <section id="components">
-    <span class="section-label">What's included</span>
-    <h2>One product. Five capabilities.</h2>
+  <!-- Technical depth -->
+  <section id="depth">
+    <span class="section-label">Technical depth</span>
+    <h2>Inspect everything.</h2>
 
-    <div class="components">
-      <div class="component">
-        <div class="component-name">Gate</div>
-        <p class="component-desc">Universal policy engine. Pure bash, zero dependencies. Intercepts tool calls across Claude Code, Cursor, and Windsurf.</p>
-      </div>
-      <div class="component">
-        <div class="component-name">Policy</div>
-        <p class="component-desc">Ed25519-signed rule sets. Create, sign, validate, and inspect. The human owns the rules. The machine enforces them.</p>
-      </div>
-      <div class="component">
-        <div class="component-name">Observation</div>
-        <p class="component-desc">Audit analysis, compliance reporting, health checks, anomaly detection, trust scoring. Read-only observation of gate behavior.</p>
-      </div>
-      <div class="component">
-        <div class="component-name">Network</div>
-        <p class="component-desc">Destination-level egress filtering. Blocks exfiltration targets, metadata SSRF, cloud link-local ranges. No root required.</p>
-      </div>
-      <div class="component">
-        <div class="component-name">OS Containment</div>
-        <p class="component-desc">Six-layer defense-in-depth for autonomous agents. User isolation, kernel sandbox, packet filter, gate daemon, signed policy, append-only audit.</p>
-      </div>
+    <div class="links-grid">
+      <a href="architecture.html" class="link-card">
+        <span class="link-card-label">Architecture Briefing</span>
+        <div class="link-card-title">Technical Overview</div>
+        <p class="link-card-desc">Problem, architecture, evidence, regulatory mapping. The complete technical briefing.</p>
+      </a>
+      <a href="proof-interactive.html" class="link-card">
+        <span class="link-card-label">Interactive</span>
+        <div class="link-card-title">Walk Through the Gate</div>
+        <p class="link-card-desc">Step through four scenarios. See the input, policy evaluation, and response at each stage.</p>
+      </a>
+      <a href="proof.html" class="link-card">
+        <span class="link-card-label">Formal Proof</span>
+        <div class="link-card-title">Enforcement Proof by Exhaustive Case Analysis</div>
+        <p class="link-card-desc">All 9 terminal states verified against source code. Every claim verifiable. Every boundary stated.</p>
+      </a>
+      <a href="https://github.com/ZLAR-AI/ZLAR" class="link-card">
+        <span class="link-card-label">Repository</span>
+        <div class="link-card-title">ZLAR on GitHub</div>
+        <p class="link-card-desc">Full source. 550+ tests. 7 ADRs. Apache 2.0. Clone, install, read.</p>
+      </a>
     </div>
-  </section>
-
-  <hr class="divider">
-
-  <!-- Thesis -->
-  <section id="thesis">
-    <span class="section-label">Why now</span>
-    <h2>Automation is automating automation.</h2>
-    <p>
-      AI agents are here. They write code, execute commands, access networks, manage files.
-      Their capabilities are increasing faster than our ability to verify their behavior.
-    </p>
-    <p>
-      The instinct is to grip the wheel harder — more restrictions, more filters, more control.
-      But the wheel is already turning on its own.
-      <strong>The answer is not to grip harder. The answer is governance.</strong>
-    </p>
-    <p>
-      Governance means human authority over autonomous systems. It means signed policies that agents cannot modify.
-      It means audit trails that record what actually happened, not what the agent says happened.
-      It means the gate fails closed — not because we don't trust the agent, but because
-      trust without verification is not trust. It's hope.
-    </p>
-    <p>
-      ZLAR exists so that agents can operate with increasing autonomy
-      <strong>because</strong> the governance layer makes that autonomy verifiable.
-      The governed path is the fast path. The contained agent earns more freedom, not less.
-    </p>
   </section>
 
   <hr class="divider">
 
   <!-- About -->
   <section id="about">
-    <span class="section-label">Who we are</span>
+    <span class="section-label">About</span>
     <h2>ZLAR Inc.</h2>
     <p>
-      ZLAR comes from 25 years of financial services experience,
-      where independent audit isn't optional, it's structural. The same principle applies to autonomous agents:
+      ZLAR is built from 25 years of financial services experience,
+      where independent audit is structural, not optional. The same principle applies to autonomous agents:
       the entity performing the work cannot credibly audit itself.
     </p>
     <p>
-      ZLAR's OS containment system was built by an agent operating inside the growing sandbox, firewall, and audit trail
-      as it was building them. Every commit recorded. Every action evaluated. The architecture's trust proof is recursive.
+      Canadian corporation. Apache 2.0 licensed. Open source.
     </p>
     <p>
-      We are a Canadian corporation. The code is Apache 2.0 licensed. The ideas are in the open.
+      <a href="mailto:hello@zlar.ai" style="color: var(--teal);">hello@zlar.ai</a> &nbsp;&middot;&nbsp;
+      <a href="writing.html" style="color: var(--muted); font-size: 0.9rem;">Founder's writing &rarr;</a>
     </p>
-  </section>
-
-  <hr class="divider">
-
-  <!-- Links -->
-  <section id="links">
-    <span class="section-label">Go deeper</span>
-    <h2>Everything is inspectable.</h2>
-
-    <div class="links-grid">
-      <a href="architecture.html" class="link-card">
-        <span class="link-card-label">Architecture Briefing · March 2026</span>
-        <div class="link-card-title">ZLAR Architecture Overview</div>
-        <p class="link-card-desc">12-slide technical briefing. Problem, architecture, evidence, regulatory mapping, competitive positioning.</p>
-      </a>
-      <a href="demo-scenario.html" class="link-card">
-        <span class="link-card-label">Scenario &middot; April 2026</span>
-        <div class="link-card-title">The Fork in the Road</div>
-        <p class="link-card-desc">Same mistake. Two architectures. One outcome is reversible. One is not. Watch the split-screen timeline.</p>
-      </a>
-      <a href="demo-persuasion.html" class="link-card">
-        <span class="link-card-label">Demonstration &middot; April 2026</span>
-        <div class="link-card-title">Why intelligence in the gate fails.</div>
-        <p class="link-card-desc">Watch an intelligent guard get persuaded to press the button. Then see what happens when the gate has no intelligence to persuade.</p>
-      </a>
-      <a href="proof-interactive.html" class="link-card">
-        <span class="link-card-label">Interactive &middot; April 2026</span>
-        <div class="link-card-title">What happens when an agent tries to publish source code?</div>
-        <p class="link-card-desc">Walk through the gate's decision step by step. See the input, policy, and response. Four scenarios.</p>
-      </a>
-      <a href="proof.html" class="link-card">
-        <span class="link-card-label">Proof &middot; April 2026</span>
-        <div class="link-card-title">On the governed path, no unauthorized action can execute.</div>
-        <p class="link-card-desc">Exhaustive case analysis against source code. Every claim verifiable. Every boundary stated.</p>
-      </a>
-      <a href="fail-open.html" class="link-card">
-        <span class="link-card-label">Essay &middot; Vincent Nijjar &middot; April 2026</span>
-        <div class="link-card-title">The Lock Swings Open</div>
-        <p class="link-card-desc">On the Anthropic source code leak, the fail-open hook architecture, and why deterministic enforcement exists.</p>
-      </a>
-      <a href="origin.html" class="link-card">
-        <span class="link-card-label">Origin &middot; Vincent Nijjar &middot; March 2026</span>
-        <div class="link-card-title">The Origin of ZLAR</div>
-        <p class="link-card-desc">Why ZLAR exists. The personal failure that produced the architecture.</p>
-      </a>
-      <a href="thought.html" class="link-card">
-        <span class="link-card-label">Essay · Vincent Nijjar · March 2026</span>
-        <div class="link-card-title">Thought Can Wake Up Now</div>
-        <p class="link-card-desc">On agentic AI, executable thought, and why governance has to change.</p>
-      </a>
-      <a href="https://github.com/ZLAR-AI/ZLAR" class="link-card">
-        <span class="link-card-label">Repository</span>
-        <div class="link-card-title">ZLAR on GitHub</div>
-        <p class="link-card-desc">The full codebase. Clone it, install it, read it. Apache 2.0.</p>
-      </a>
-      <a href="caisi-submission.html" class="link-card">
-        <span class="link-card-label">CAISI Submission · March 2026</span>
-        <div class="link-card-title">The Identity-to-Execution Gap</div>
-        <p class="link-card-desc">Submitted to NIST CAISI. The primary barrier to AI agent adoption in financial services — and the solution.</p>
-      </a>
-      <a href="nist-comment.html" class="link-card">
-        <span class="link-card-label">Public Comment · March 2026</span>
-        <div class="link-card-title">NCCoE: Execution-Boundary Governance</div>
-        <p class="link-card-desc">ZLAR's comment on the NIST concept paper on AI agent identity and authorization.</p>
-      </a>
-      <a href="https://x.com/vincentnijjar" class="link-card">
-        <span class="link-card-label">Founder</span>
-        <div class="link-card-title">Vincent Nijjar on X</div>
-        <p class="link-card-desc">Building execution-boundary governance for autonomous AI agents.</p>
-      </a>
-      <a href="https://www.linkedin.com/in/vincentnijjar/" class="link-card">
-        <span class="link-card-label">LinkedIn</span>
-        <div class="link-card-title">Vincent Nijjar</div>
-        <p class="link-card-desc">25 years in financial services. Now building governance infrastructure for AI agents.</p>
-      </a>
-      <a href="legal.html" class="link-card">
-        <span class="link-card-label">Legal</span>
-        <div class="link-card-title">Terms &amp; License</div>
-        <p class="link-card-desc">Apache 2.0. Regulatory classification. Privacy. What ZLAR is and isn't.</p>
-      </a>
-      <a href="mailto:hello@zlar.ai" class="link-card">
-        <span class="link-card-label">Contact</span>
-        <div class="link-card-title">hello@zlar.ai</div>
-        <p class="link-card-desc">Reach us directly.</p>
-      </a>
-    </div>
   </section>
 
   <footer>
     <p>
       &copy; 2026 ZLAR Inc. &nbsp;&middot;&nbsp;
       <a href="https://github.com/ZLAR-AI/ZLAR">GitHub</a> &nbsp;&middot;&nbsp;
-      <a href="https://x.com/vincentnijjar">X</a> &nbsp;&middot;&nbsp;
-      <a href="https://www.linkedin.com/in/vincentnijjar/">LinkedIn</a> &nbsp;&middot;&nbsp;
-      <a href="mailto:hello@zlar.ai">hello@zlar.ai</a> &nbsp;&middot;&nbsp;
-      <a href="legal.html">Legal</a>
+      <a href="specs/">Specifications</a> &nbsp;&middot;&nbsp;
+      <a href="legal.html">Legal</a> &nbsp;&middot;&nbsp;
+      <a href="mailto:hello@zlar.ai">hello@zlar.ai</a>
     </p>
   </footer>
 
