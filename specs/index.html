@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ZLAR Specifications</title>
+  <meta name="description" content="ZLAR published specifications: canonicalization, receipt format, and verification protocol.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #080c14; --bg-card: #0d1520; --bg-card-hover: #111827;
+      --border: rgba(56, 189, 248, 0.10); --border-hover: rgba(56, 189, 248, 0.25);
+      --teal: #38bdf8; --green: #4ade80; --white: #f1f5f9; --muted: #64748b;
+      --font: 'Inter', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+      --mono: 'SF Mono', 'Fira Code', monospace;
+    }
+    html { scroll-behavior: smooth; }
+    body { background: var(--bg); color: var(--white); font-family: var(--font); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+    .container { max-width: 56rem; margin: 0 auto; padding: 4rem 1.5rem; }
+    h1 { font-size: 2.5rem; font-weight: 800; margin-bottom: 0.5rem; }
+    .subtitle { color: var(--muted); font-size: 1.1rem; margin-bottom: 3rem; }
+    .spec-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 0.625rem; padding: 2rem; margin-bottom: 1.5rem; transition: border-color 0.2s; }
+    .spec-card:hover { border-color: var(--border-hover); }
+    .spec-card h2 { font-size: 1.3rem; font-weight: 700; margin-bottom: 0.5rem; }
+    .spec-card h2 a { color: var(--teal); text-decoration: none; }
+    .spec-card h2 a:hover { text-decoration: underline; }
+    .spec-card .version { display: inline-block; background: rgba(56, 189, 248, 0.1); color: var(--teal); padding: 0.15rem 0.6rem; border-radius: 4px; font-size: 0.85rem; font-weight: 600; margin-bottom: 0.75rem; }
+    .spec-card .status { display: inline-block; background: rgba(74, 222, 128, 0.1); color: var(--green); padding: 0.15rem 0.6rem; border-radius: 4px; font-size: 0.85rem; font-weight: 600; margin-bottom: 0.75rem; margin-left: 0.5rem; }
+    .spec-card p { color: var(--muted); font-size: 0.95rem; }
+    .back { color: var(--muted); text-decoration: none; font-size: 0.9rem; display: inline-block; margin-bottom: 2rem; }
+    .back:hover { color: var(--teal); }
+    .nav { display: flex; gap: 2rem; margin-bottom: 2rem; }
+    .nav a { color: var(--muted); text-decoration: none; font-size: 0.9rem; }
+    .nav a:hover { color: var(--teal); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="nav">
+      <a href="/">Home</a>
+      <a href="https://github.com/ZLAR-AI/ZLAR">GitHub</a>
+    </div>
+
+    <h1>Specifications</h1>
+    <p class="subtitle">Published specifications for ZLAR governance infrastructure. Permanent URLs for standards references.</p>
+
+    <div class="spec-card">
+      <span class="version">v1.0</span>
+      <span class="status">Stable</span>
+      <h2><a href="/specs/canonicalization">Canonicalization Specification</a></h2>
+      <p>Defines the canonical form for ZLAR JSON structures. Adopts RFC 8785 (JCS) with a constrained schema that eliminates known cross-language failure modes. No floats, ASCII-only property names, string-encoded timestamps. Verified across Node.js, Python, and bash with 28 test vectors.</p>
+    </div>
+
+    <div class="spec-card">
+      <span class="version">v1.0</span>
+      <span class="status">Frozen</span>
+      <h2><a href="/specs/receipt-v1">Governed Action Receipt v1</a></h2>
+      <p>Envelope format for portable governance proof. Base64url-encoded canonical payload, Ed25519 signature, integer version field. No algorithm negotiation. Verifiers never re-canonicalize. The receipt that goes to auditors, regulators, and counterparties.</p>
+    </div>
+
+    <div class="spec-card">
+      <span class="version">v1.0</span>
+      <span class="status">Stable</span>
+      <h2><a href="https://github.com/ZLAR-AI/ZLAR/blob/main/docs/adr/ADR-001-deterministic-enforcement.md">ADR-001: Deterministic Enforcement</a></h2>
+      <p>Why no AI in the enforcement path. The gate pattern-matches against signed rules. It has no opinions. This is why it cannot be persuaded.</p>
+    </div>
+
+    <div class="spec-card">
+      <span class="version">v1.0</span>
+      <span class="status">Stable</span>
+      <h2><a href="https://github.com/ZLAR-AI/ZLAR/blob/main/docs/adr/ADR-007-receipt-v1-envelope.md">ADR-007: Receipt v1 Envelope Format</a></h2>
+      <p>The format freeze decision. Versioned protocol, envelope signing, no algorithm negotiation, post-quantum transition path via version bump.</p>
+    </div>
+  </div>
+</body>
+</html>

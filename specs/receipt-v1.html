@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ZLAR Governed Action Receipt v1</title>
+  <meta name="description" content="Envelope format for portable governance proof. Ed25519 signed, integer version, no algorithm negotiation.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #080c14; --bg-card: #0d1520; --border: rgba(56, 189, 248, 0.10);
+      --teal: #38bdf8; --green: #4ade80; --white: #f1f5f9; --muted: #64748b;
+      --font: 'Inter', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+      --mono: 'SF Mono', 'Fira Code', monospace;
+    }
+    body { background: var(--bg); color: var(--white); font-family: var(--font); line-height: 1.7; -webkit-font-smoothing: antialiased; }
+    .container { max-width: 52rem; margin: 0 auto; padding: 4rem 1.5rem; }
+    .nav { display: flex; gap: 2rem; margin-bottom: 2rem; }
+    .nav a { color: var(--muted); text-decoration: none; font-size: 0.9rem; }
+    .nav a:hover { color: var(--teal); }
+    h1 { font-size: 2rem; font-weight: 800; margin-bottom: 0.25rem; }
+    .meta { color: var(--muted); font-size: 0.9rem; margin-bottom: 2.5rem; }
+    .meta span { display: inline-block; background: rgba(74, 222, 128, 0.1); color: var(--green); padding: 0.1rem 0.5rem; border-radius: 4px; font-weight: 600; margin-right: 0.75rem; }
+    .meta .frozen { background: rgba(251, 191, 36, 0.1); color: #fbbf24; }
+    h2 { font-size: 1.35rem; font-weight: 700; margin-top: 2.5rem; margin-bottom: 0.75rem; color: var(--teal); }
+    h3 { font-size: 1.1rem; font-weight: 600; margin-top: 1.75rem; margin-bottom: 0.5rem; }
+    p, li { color: #cbd5e1; font-size: 0.95rem; margin-bottom: 0.75rem; }
+    ul, ol { padding-left: 1.5rem; margin-bottom: 1rem; }
+    li { margin-bottom: 0.4rem; }
+    code { font-family: var(--mono); background: rgba(56, 189, 248, 0.08); padding: 0.15rem 0.4rem; border-radius: 3px; font-size: 0.88rem; color: var(--teal); }
+    pre { background: var(--bg-card); border: 1px solid var(--border); border-radius: 0.5rem; padding: 1.25rem; overflow-x: auto; margin-bottom: 1.25rem; }
+    pre code { background: none; padding: 0; color: var(--white); font-size: 0.85rem; }
+    table { width: 100%; border-collapse: collapse; margin-bottom: 1.25rem; }
+    th, td { text-align: left; padding: 0.6rem 0.8rem; border-bottom: 1px solid var(--border); font-size: 0.9rem; }
+    th { color: var(--teal); font-weight: 600; }
+    td { color: #cbd5e1; }
+    .note { background: rgba(56, 189, 248, 0.05); border-left: 3px solid var(--teal); padding: 1rem 1.25rem; border-radius: 0 0.5rem 0.5rem 0; margin-bottom: 1.25rem; }
+    .note p { margin-bottom: 0; }
+    .warn { background: rgba(251, 191, 36, 0.05); border-left: 3px solid #fbbf24; }
+    strong { color: var(--white); }
+    hr { border: none; border-top: 1px solid var(--border); margin: 2.5rem 0; }
+    a { color: var(--teal); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="nav">
+      <a href="/">Home</a>
+      <a href="/specs/">Specifications</a>
+      <a href="https://github.com/ZLAR-AI/ZLAR/blob/main/etc/receipt-v1.schema.json">Schema</a>
+      <a href="https://github.com/ZLAR-AI/ZLAR/blob/main/docs/adr/ADR-007-receipt-v1-envelope.md">ADR-007</a>
+    </div>
+
+    <h1>Governed Action Receipt v1</h1>
+    <div class="meta">
+      <span>v1</span> <span class="frozen">Frozen</span>
+      Envelope format &mdash; April 2026
+    </div>
+
+    <p>A Governed Action Receipt is portable cryptographic proof that an AI agent action was evaluated by deterministic policy and decided by the stated authority. Anyone with the public key can verify. No platform access required.</p>
+
+    <div class="warn note">
+      <p><strong>Format frozen.</strong> The v1 schema is committed. Changes require a version bump to v2. See <a href="https://github.com/ZLAR-AI/ZLAR/blob/main/docs/adr/ADR-007-receipt-v1-envelope.md">ADR-007</a> for the decision record.</p>
+    </div>
+
+    <h2>Design Principles</h2>
+    <ul>
+      <li><strong>Versioned protocol, not algorithm negotiation.</strong> <code>v:1</code> determines the entire cryptographic construction: Ed25519 + SHA-256 + ZLAR canonical JSON. No <code>alg</code> field. The version IS the algorithm.</li>
+      <li><strong>Envelope signing.</strong> The payload is base64url-encoded canonical bytes. The signature covers those exact bytes. Verifiers never re-canonicalize.</li>
+      <li><strong>No extension mechanism.</strong> Strict schema. Version bump for changes.</li>
+      <li><strong>Post-quantum path.</strong> v2 = composite ML-DSA-65+Ed25519 via version bump. No negotiation, no downgrade.</li>
+    </ul>
+
+    <h2>Envelope Structure</h2>
+    <pre><code>{
+  "v":       1,
+  "id":      "69d3c106c939654ef325...",
+  "kid":     "88aaeeaca05eba4d",
+  "iat":     1712412000,
+  "type":    "governed-action",
+  "payload": "eyJ0b29sIjoiQmFzaCIs...",
+  "sig":     "qpAqou278Yks...",
+  "prev":    null
+}</code></pre>
+
+    <table>
+      <thead><tr><th>Field</th><th>Type</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td><code>v</code></td><td>integer</td><td>Format version. <code>1</code> = Ed25519 + SHA-256 + ZLAR canonical JSON. Reject unknown versions.</td></tr>
+        <tr><td><code>id</code></td><td>string</td><td>Unique receipt identifier. Hex timestamp + random bytes.</td></tr>
+        <tr><td><code>kid</code></td><td>string</td><td>Key identifier. First 16 chars of SHA-256 of the public key file.</td></tr>
+        <tr><td><code>iat</code></td><td>integer</td><td>Issued-at as Unix epoch seconds.</td></tr>
+        <tr><td><code>type</code></td><td>string</td><td>Receipt type. v1 supports <code>"governed-action"</code> only.</td></tr>
+        <tr><td><code>payload</code></td><td>string</td><td>Base64url-encoded (no padding) UTF-8 bytes of canonical JSON payload.</td></tr>
+        <tr><td><code>sig</code></td><td>string</td><td>Base64url-encoded Ed25519 signature.</td></tr>
+        <tr><td><code>prev</code></td><td>string|null</td><td>SHA-256 of previous receipt for chain linking, or null.</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Payload Structure</h2>
+    <p>The payload is canonical JSON (per <a href="/specs/canonicalization">Canonicalization Spec v1.0</a>) containing all governance fields:</p>
+
+    <table>
+      <thead><tr><th>Field</th><th>Type</th><th>Required</th></tr></thead>
+      <tbody>
+        <tr><td><code>tool</code></td><td>string</td><td>Yes</td></tr>
+        <tr><td><code>domain</code></td><td>string</td><td>Yes</td></tr>
+        <tr><td><code>detail_hash</code></td><td>string (hex64)</td><td>Yes</td></tr>
+        <tr><td><code>outcome</code></td><td>enum</td><td>Yes</td></tr>
+        <tr><td><code>rule</code></td><td>string</td><td>Yes</td></tr>
+        <tr><td><code>authorizer</code></td><td>enum</td><td>Yes</td></tr>
+        <tr><td><code>ts</code></td><td>string (ISO 8601)</td><td>Yes</td></tr>
+        <tr><td><code>policy_version</code></td><td>string</td><td>Yes</td></tr>
+        <tr><td><code>manifest_agent_id</code></td><td>string|null</td><td>Yes</td></tr>
+        <tr><td><code>manifest_principal</code></td><td>string|null</td><td>Yes</td></tr>
+        <tr><td><code>delegation_chain</code></td><td>array</td><td>Yes</td></tr>
+        <tr><td><code>audit_event_id</code></td><td>string</td><td>Yes</td></tr>
+        <tr><td><code>audit_prev_hash</code></td><td>string</td><td>Yes</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Verification Protocol</h2>
+    <ol>
+      <li>Parse the envelope JSON. Check <code>v === 1</code>.</li>
+      <li>Base64url-decode the <code>payload</code> field to get raw UTF-8 bytes.</li>
+      <li>SHA-256 hash those bytes. Output as lowercase hex string (64 characters).</li>
+      <li>Base64url-decode <code>sig</code> to get the 64-byte Ed25519 signature.</li>
+      <li>Verify: Ed25519 over the hex string bytes using the public key identified by <code>kid</code>.</li>
+      <li>If valid, parse the payload bytes as JSON to read the governance fields.</li>
+    </ol>
+
+    <div class="note">
+      <p><strong>No re-canonicalization.</strong> The verifier hashes the stored payload bytes directly. It never needs to know the canonicalization rules. This eliminates the cross-language canonicalization divergence that is the primary failure mode of inline-signed JSON formats.</p>
+    </div>
+
+    <h2>Verify a Receipt</h2>
+    <pre><code># Clone the repo
+git clone https://github.com/ZLAR-AI/ZLAR.git
+
+# Verify any receipt (v0 or v1)
+node bin/zlar-verify receipt.json --pubkey key.pub --verbose</code></pre>
+
+    <h2>What a Valid Receipt Proves</h2>
+    <ol>
+      <li>A specific action was attempted by an AI agent</li>
+      <li>Deterministic policy was evaluated against that action</li>
+      <li>The decision was made by the stated authority (policy rule or human)</li>
+      <li>The record has not been tampered with since creation</li>
+      <li>The receipt is anchored to the ZLAR audit hash chain</li>
+    </ol>
+
+    <hr>
+
+    <p style="color: var(--muted); font-size: 0.85rem;">
+      Permanent URL: <code>https://zlar.ai/specs/receipt-v1</code><br>
+      Schema: <a href="https://github.com/ZLAR-AI/ZLAR/blob/main/etc/receipt-v1.schema.json">etc/receipt-v1.schema.json</a><br>
+      Payload schema: <a href="https://github.com/ZLAR-AI/ZLAR/blob/main/etc/receipt-v1-payload.schema.json">etc/receipt-v1-payload.schema.json</a><br>
+      Decision record: <a href="https://github.com/ZLAR-AI/ZLAR/blob/main/docs/adr/ADR-007-receipt-v1-envelope.md">ADR-007</a><br>
+      License: Apache 2.0 &mdash; ZLAR Inc.
+    </p>
+  </div>
+</body>
+</html>

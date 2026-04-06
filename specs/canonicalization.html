@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ZLAR Canonicalization Specification v1.0</title>
+  <meta name="description" content="Formal specification for ZLAR JSON canonicalization. RFC 8785 subset with constrained schema. Cross-language verified.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #080c14; --bg-card: #0d1520; --border: rgba(56, 189, 248, 0.10);
+      --teal: #38bdf8; --green: #4ade80; --white: #f1f5f9; --muted: #64748b;
+      --font: 'Inter', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+      --mono: 'SF Mono', 'Fira Code', monospace;
+    }
+    body { background: var(--bg); color: var(--white); font-family: var(--font); line-height: 1.7; -webkit-font-smoothing: antialiased; }
+    .container { max-width: 52rem; margin: 0 auto; padding: 4rem 1.5rem; }
+    .nav { display: flex; gap: 2rem; margin-bottom: 2rem; }
+    .nav a { color: var(--muted); text-decoration: none; font-size: 0.9rem; }
+    .nav a:hover { color: var(--teal); }
+    h1 { font-size: 2rem; font-weight: 800; margin-bottom: 0.25rem; }
+    .meta { color: var(--muted); font-size: 0.9rem; margin-bottom: 2.5rem; }
+    .meta span { display: inline-block; background: rgba(74, 222, 128, 0.1); color: var(--green); padding: 0.1rem 0.5rem; border-radius: 4px; font-weight: 600; margin-right: 0.75rem; }
+    h2 { font-size: 1.35rem; font-weight: 700; margin-top: 2.5rem; margin-bottom: 0.75rem; color: var(--teal); }
+    h3 { font-size: 1.1rem; font-weight: 600; margin-top: 1.75rem; margin-bottom: 0.5rem; }
+    p, li { color: #cbd5e1; font-size: 0.95rem; margin-bottom: 0.75rem; }
+    ul, ol { padding-left: 1.5rem; margin-bottom: 1rem; }
+    li { margin-bottom: 0.4rem; }
+    code { font-family: var(--mono); background: rgba(56, 189, 248, 0.08); padding: 0.15rem 0.4rem; border-radius: 3px; font-size: 0.88rem; color: var(--teal); }
+    pre { background: var(--bg-card); border: 1px solid var(--border); border-radius: 0.5rem; padding: 1.25rem; overflow-x: auto; margin-bottom: 1.25rem; }
+    pre code { background: none; padding: 0; color: var(--white); font-size: 0.88rem; }
+    table { width: 100%; border-collapse: collapse; margin-bottom: 1.25rem; }
+    th, td { text-align: left; padding: 0.6rem 0.8rem; border-bottom: 1px solid var(--border); font-size: 0.9rem; }
+    th { color: var(--teal); font-weight: 600; }
+    td { color: #cbd5e1; }
+    .note { background: rgba(56, 189, 248, 0.05); border-left: 3px solid var(--teal); padding: 1rem 1.25rem; border-radius: 0 0.5rem 0.5rem 0; margin-bottom: 1.25rem; }
+    .note p { margin-bottom: 0; }
+    strong { color: var(--white); }
+    hr { border: none; border-top: 1px solid var(--border); margin: 2.5rem 0; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="nav">
+      <a href="/">Home</a>
+      <a href="/specs/">Specifications</a>
+      <a href="https://github.com/ZLAR-AI/ZLAR/blob/main/docs/canonicalization-spec.md">Source</a>
+    </div>
+
+    <h1>Canonicalization Specification</h1>
+    <div class="meta">
+      <span>v1.0</span> <span>Stable</span>
+      ZLAR Canonicalization Specification &mdash; April 2026
+    </div>
+
+    <p>This specification defines the canonical form for ZLAR Governed Action Receipts and audit trail entries. All implementations that produce or verify signatures over ZLAR JSON structures must follow this specification.</p>
+
+    <div class="note">
+      <p>This specification adopts <strong>RFC 8785</strong> (JSON Canonicalization Scheme) with a constrained schema that eliminates its known failure modes. Any ZLAR-canonical JSON is also RFC 8785-canonical.</p>
+    </div>
+
+    <h2>Overview</h2>
+    <p>ZLAR uses JSON structures signed with Ed25519 over their SHA-256 hash. For signatures to verify across implementations (bash, Node.js, Python, Go, Rust), every implementation must produce byte-identical canonical output for the same logical data.</p>
+
+    <p>The canonical form is computed by:</p>
+    <ol>
+      <li>Recursively sorting all object keys</li>
+      <li>Serializing as compact JSON with no whitespace between tokens</li>
+      <li>Encoding as UTF-8 bytes</li>
+    </ol>
+
+    <h2>Schema Constraints</h2>
+    <p>ZLAR canonical form applies to JSON structures that conform to these type restrictions:</p>
+
+    <h3>Allowed types</h3>
+    <ul>
+      <li><strong>Strings</strong> (UTF-8, any content)</li>
+      <li><strong>Integers</strong> (no fractional part, within safe range: -(2<sup>53</sup>-1) to 2<sup>53</sup>-1)</li>
+      <li><strong>Booleans</strong> (<code>true</code>, <code>false</code>)</li>
+      <li><strong>Null</strong> (<code>null</code>)</li>
+      <li><strong>Arrays</strong> (preserving element order)</li>
+      <li><strong>Nested objects</strong> (keys recursively sorted)</li>
+    </ul>
+
+    <h3>Prohibited types</h3>
+    <ul>
+      <li><strong>Floating-point numbers</strong> (numbers with fractional parts)</li>
+      <li><strong>Non-ASCII characters in property names</strong> (U+0080 and above)</li>
+    </ul>
+
+    <div class="note">
+      <p><strong>Rationale:</strong> Floating-point serialization is the primary source of cross-language canonicalization failures. JavaScript's <code>JSON.stringify(100.0)</code> produces <code>"100"</code>. Python's <code>json.dumps(100.0)</code> produces <code>"100.0"</code>. Eliminating floats from the schema eliminates this entire vulnerability class.</p>
+    </div>
+
+    <h2>Key Ordering</h2>
+    <p>Object keys must be sorted recursively at all nesting levels by <strong>Unicode code point order</strong>. For the constrained ZLAR schema (ASCII-only keys), this is identical to lexicographic byte order, UTF-16 code unit order (RFC 8785), and ASCII alphabetical order.</p>
+
+    <h2>Number Representation</h2>
+    <p>Integers must be serialized as decimal digits with no leading zeros, no trailing zeros, no decimal point, and no exponent notation. Negative zero must serialize as <code>0</code>.</p>
+
+    <h2>String Serialization</h2>
+    <p>Strings follow standard JSON escaping (RFC 8259). All non-ASCII characters must be output as literal UTF-8 bytes, not escaped to <code>\uXXXX</code>. This matches JavaScript's <code>JSON.stringify()</code> and RFC 8785.</p>
+
+    <h2>Signing Protocol</h2>
+    <ol>
+      <li><strong>Remove</strong> the signature field from the structure</li>
+      <li><strong>Canonicalize</strong> per this specification &rarr; UTF-8 bytes</li>
+      <li><strong>Hash</strong> with SHA-256 &rarr; lowercase hex string (64 characters)</li>
+      <li><strong>Sign</strong> the hex string bytes with Ed25519</li>
+      <li><strong>Encode</strong> the 64-byte signature as base64 (v0) or base64url (v1)</li>
+    </ol>
+
+    <h2>Implementation Guidance</h2>
+    <table>
+      <thead><tr><th>Language</th><th>Recommended Implementation</th></tr></thead>
+      <tbody>
+        <tr><td>Node.js/TypeScript</td><td><code>canonicalize</code> npm package (erdtman) or recursive key-sort + <code>JSON.stringify</code></td></tr>
+        <tr><td>Python</td><td><code>rfc8785</code> package (Trail of Bits) or recursive key-sort + <code>json.dumps(ensure_ascii=False, separators=(',',':'))</code></td></tr>
+        <tr><td>Go</td><td><code>gowebpki/jcs</code></td></tr>
+        <tr><td>Java</td><td><code>titanium-jcs</code> or <code>erdtman/java-json-canonicalization</code></td></tr>
+        <tr><td>Rust</td><td><code>serde_json_canonicalizer</code> (not <code>serde_jcs</code> &mdash; confirmed UTF-16 sorting bug)</td></tr>
+        <tr><td>Bash</td><td><code>jq -S -c '.'</code> (valid for ZLAR-constrained structures only)</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Test Vectors</h2>
+    <p>28 test vectors are published at <a href="https://github.com/ZLAR-AI/ZLAR/blob/main/tests/fixtures/canonicalization-vectors.json" style="color: var(--teal);">tests/fixtures/canonicalization-vectors.json</a>. Verified across Node.js, Python, and bash/jq. Implementations must produce byte-identical output for every vector.</p>
+
+    <hr>
+
+    <p style="color: var(--muted); font-size: 0.85rem;">
+      Permanent URL: <code>https://zlar.ai/specs/canonicalization</code><br>
+      Source: <a href="https://github.com/ZLAR-AI/ZLAR/blob/main/docs/canonicalization-spec.md" style="color: var(--teal);">docs/canonicalization-spec.md</a><br>
+      License: Apache 2.0 &mdash; ZLAR Inc.
+    </p>
+  </div>
+</body>
+</html>
