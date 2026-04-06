@@ -527,10 +527,11 @@
   <nav>
     <a href="/" class="nav-logo">ZL<span>A</span>R</a>
     <ul class="nav-links">
-      <li><a href="architecture.html">Architecture</a></li>
-      <li><a href="/#install">Install</a></li>
-      <li><a href="origin.html">Origin</a></li>
+      <li><a href="architecture.html" style="color: var(--white);">Architecture</a></li>
+      <li><a href="specs/">Specifications</a></li>
+      <li><a href="proof-interactive.html">Proof</a></li>
       <li><a href="https://github.com/ZLAR-AI/ZLAR">GitHub</a></li>
+      <li><a href="writing.html">Writing</a></li>
       <li><a href="mailto:hello@zlar.ai">Contact</a></li>
     </ul>
   </nav>
@@ -546,7 +547,7 @@
         Vincent Nijjar &middot; Founder &middot;
         <a href="https://zlar.ai">zlar.ai</a> &middot;
         <a href="https://github.com/zlar-ai/zlar">GitHub</a> &middot;
-        v1.6.0 &middot; Apache 2.0 &middot; Live today
+        v2.0.0 &middot; Apache 2.0 &middot; Live today
       </p>
     </div>
 
@@ -560,12 +561,12 @@
       </p>
       <div class="callout">
         <p>
-          Intelligence is a laser — it can illuminate and it can destroy.
-          The gate is a forcefield. You can see through it, but you can't touch what's behind it.
-          The forcefield is made of something the laser cannot affect.
+          An enforcement layer that uses reasoning to evaluate actions can be subverted by reasoning-based attacks.
+          The gate uses no reasoning. It pattern-matches against signed rules.
+          The absence of intelligence in the gate is the security property.
         </p>
       </div>
-      <p>The gate is absolute. The engineering is ongoing.</p>
+      <p>The architecture is sound. The engineering continues.</p>
     </div>
 
     <!-- 2. Problem -->
@@ -835,8 +836,8 @@
           <tr>
             <th>Capability</th>
             <th>ZLAR</th>
-            <th>Norm AI ($140M+)</th>
-            <th>WitnessAI ($85.5M)</th>
+            <th>Norm AI</th>
+            <th>WitnessAI</th>
             <th>SDK Built-in</th>
           </tr>
         </thead>
@@ -888,12 +889,8 @@
 
       <p>
         $492M AI governance market in 2026 (Gartner). $5&ndash;13.5B guardian agent segment by 2030 (est).
-        As of March 2026, ZLAR is the only open-source, vendor-agnostic, cryptographically-evidenced
-        enforcement layer we have identified.
-      </p>
-
-      <p class="citation">
-        Norm AI funding: Coatue, Blackstone, Bain (PR Newswire). WitnessAI: GV, Ballistic Ventures (press releases).
+        ZLAR is open-source, vendor-agnostic, and produces cryptographic evidence of governance decisions.
+        The architectural comparison above reflects publicly available product documentation as of April 2026.
       </p>
     </div>
 
@@ -904,16 +901,16 @@
 
       <div class="stats">
         <div class="stat">
-          <div class="stat-value">v1.6.0</div>
+          <div class="stat-value">v2.0.0</div>
           <div class="stat-label">Shipped (Apache 2.0)</div>
         </div>
         <div class="stat">
-          <div class="stat-value">277</div>
-          <div class="stat-label">Test assertions across 11 suites</div>
+          <div class="stat-value">550+</div>
+          <div class="stat-label">Test assertions across 18 suites</div>
         </div>
         <div class="stat">
-          <div class="stat-value">72</div>
-          <div class="stat-label">Policy rules (production gate)</div>
+          <div class="stat-value">7</div>
+          <div class="stat-label">Architecture Decision Records</div>
         </div>
         <div class="stat">
           <div class="stat-value">2</div>
@@ -922,9 +919,9 @@
       </div>
 
       <p>
-        Ed25519 audit signing live. Hash-chained evidence trail live. PQC metadata on every entry.
-        macOS Seatbelt OS-level sandboxing. CI/CD with CodeQL + Dependabot.
-        Cedar policy engine PoC complete (39 tests).
+        Governed Action Receipt v1 (format frozen). Canonicalization spec v1.0 (cross-language verified).
+        Semantic validation pipeline. Human invariant enforcement. Cedar formal policy evaluation (28+ rules).
+        Per-entry Ed25519 audit signing. CI/CD with CodeQL + Dependabot.
       </p>
 
       <div class="invariant">
@@ -950,7 +947,7 @@
         </div>
         <div class="property">
           <div class="property-name">The Ecosystem</div>
-          <p>Open source (Apache 2.0) — verify it. Cedar policy engine path (PoC complete). Tested on Claude Code, Cursor, Windsurf + MCP.</p>
+          <p>Open source (Apache 2.0) — verify it. Cedar formal policy evaluation shipped (28+ rules). Published specifications at <a href="specs/" style="color: var(--teal);">zlar.ai/specs/</a>. Tested on Claude Code, Cursor, Windsurf + MCP.</p>
         </div>
       </div>
 
