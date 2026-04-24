@@ -60,6 +60,20 @@
     .links-row { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border); font-size: 0.9rem; }
     .links-row a { margin-right: 1.5rem; }
     footer { position: relative; z-index: 1; text-align: center; padding: 3rem 2rem; border-top: 1px solid var(--border); color: var(--muted); font-size: 0.825rem; }
+
+    @media (max-width: 640px) {
+      nav { padding: 0.75rem 1rem; flex-wrap: wrap; row-gap: 0.5rem; }
+      .nav-links { gap: 0.6rem; flex-wrap: wrap; row-gap: 0.35rem; justify-content: flex-end; }
+      .nav-links a { font-size: 0.78rem; white-space: nowrap; }
+      main { padding: 10rem 1.25rem 3rem; }
+      .artifact pre { font-size: 0.72rem; white-space: pre-wrap; word-break: break-all; line-height: 1.5; }
+      .cmd { font-size: 0.78rem; white-space: pre-wrap; word-break: break-word; }
+    }
+    @media (max-width: 380px) {
+      nav { flex-direction: column; align-items: flex-start; }
+      .nav-links { justify-content: flex-start; width: 100%; }
+      main { padding-top: 13rem; }
+    }
   </style>
 </head>
 <body>

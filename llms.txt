@@ -1,0 +1,45 @@
+# ZLAR
+
+> Human-in-the-loop governance infrastructure for autonomous AI agents. ZLAR intercepts agent tool calls, evaluates them against Ed25519-signed policy, routes decisions to humans when required, and produces cryptographic proof that governance happened. No AI in the enforcement path.
+
+ZLAR is open source (Apache 2.0) and is the deterministic layer in an agent governance stack. It is not monitoring, not trust scoring, not orchestration. It governs actions that flow through it; actions that do not flow through it are not governed — stated in doctrine, not hidden as a limitation.
+
+The authority order for any claim about ZLAR: live signed artifacts in the repo > doctrine canon > public website copy. If the website and the repo disagree, trust the repo.
+
+## Canon — read these first
+
+- [ZLAR-DNA.md](https://github.com/ZLAR-AI/ZLAR/blob/main/doctrine/ZLAR-DNA.md): the architectural and doctrinal canon. What ZLAR is, what it protects, how it works, why it is architected this way. Start here.
+- [SCOPE.md](https://github.com/ZLAR-AI/ZLAR/blob/main/doctrine/SCOPE.md): the public boundary of ZLAR's governance claim. Names what ZLAR governs, what it does not govern (upstream of the contact boundary, un-routed paths, out-of-SDK sub-runtimes), and the rules for any public claim made about ZLAR.
+- [FRAMINGS.md](https://github.com/ZLAR-AI/ZLAR/blob/main/doctrine/FRAMINGS.md): conceptual vocabulary, superseded terms, copy doctrine.
+- [IMPLEMENTATION-TERMS.md](https://github.com/ZLAR-AI/ZLAR/blob/main/doctrine/IMPLEMENTATION-TERMS.md): engineering-near vocabulary and live mechanism names.
+
+## Architecture
+
+- [ADR-010 Interception Coverage Model](https://github.com/ZLAR-AI/ZLAR/blob/main/docs/adr/ADR-010-interception-coverage.md): the definitive treatment of what counts as governed.
+- [Architecture page](https://zlar.ai/architecture.html): diagrammatic overview for readers, with the same claims as the doctrine.
+- [Proof of enforcement](https://zlar.ai/proof.html): exhaustive case analysis of every terminal state, verified against source.
+
+## Verifiable evidence
+
+- [Verify a receipt](https://zlar.ai/receipt-verify.html): a real Governed Action Receipt (v1 envelope) the reader can verify end-to-end with only the public key and `bin/zlar-verify`. No platform access required.
+- [Receipt v1 specification](https://github.com/ZLAR-AI/ZLAR/blob/main/spec/governed-action-receipt-v1.md): the signed record format.
+
+## Roadmap — design, not yet shipped
+
+- [Delegation envelope](https://github.com/ZLAR-AI/ZLAR/blob/main/doctrine/roadmap/delegation-envelope.md): the named plan for governing handoffs to out-of-SDK sub-runtimes. Today those are outside ZLAR's perimeter; this closes that case.
+
+## Regulatory participation
+
+- [NIST public comment](https://zlar.ai/nist-comment.html): formal comment on the NIST NCCoE concept paper on AI agent identity and authorization.
+- [NIST CAISI submission](https://zlar.ai/caisi-submission.html): the identity-to-execution gap in AI agent adoption for financial services.
+
+## Repository
+
+- [github.com/ZLAR-AI/ZLAR](https://github.com/ZLAR-AI/ZLAR): full source. Apache 2.0. Clone, install, read. Contact: hello@zlar.ai.
+
+## What ZLAR deliberately does not have
+
+- No AI in the enforcement path. The gate pattern-matches signed rules; it does not reason about actions.
+- No trust scoring. Actions are allowed or denied on signed policy, not on agent reputation.
+- No monitoring dashboard as the product. Governance happens at the contact boundary, before the action is real, not in a dashboard that watches after the fact.
+- No platform dependency. Receipts are verifiable with only the public key — no ZLAR server required.

@@ -508,10 +508,10 @@
     footer a:hover { color: var(--teal); }
 
     @media (max-width: 640px) {
-      nav { padding: 1rem; }
-      .nav-links { gap: 1rem; }
-      .nav-links a { font-size: 0.8rem; }
-      .hero { padding: 8rem 0 4rem; }
+      nav { padding: 0.75rem 1rem; flex-wrap: wrap; row-gap: 0.5rem; }
+      .nav-links { gap: 0.6rem; flex-wrap: wrap; row-gap: 0.35rem; justify-content: flex-end; }
+      .nav-links a { font-size: 0.78rem; white-space: nowrap; }
+      .hero { padding: 10rem 0 4rem; }
       .section { padding: 4rem 0; }
       .comparison { grid-template-columns: 1fr; }
       .outcomes { grid-template-columns: 1fr; }
@@ -519,6 +519,11 @@
       .flow-action { display: none; }
       .comp-table { font-size: 0.75rem; }
       .comp-table th, .comp-table td { padding: 0.5rem; }
+    }
+    @media (max-width: 380px) {
+      nav { flex-direction: column; align-items: flex-start; }
+      .nav-links { justify-content: flex-start; width: 100%; }
+      .hero { padding-top: 13rem; }
     }
   </style>
 </head>

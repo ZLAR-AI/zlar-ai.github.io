@@ -1,73 +1,93 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://zlar.ai/explainer.html</loc>
-    <lastmod>2026-04-03</lastmod>
-    <priority>1.0</priority>
-  </url>
-  <url>
     <loc>https://zlar.ai/</loc>
-    <lastmod>2026-04-03</lastmod>
+    <lastmod>2026-04-24</lastmod>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://zlar.ai/architecture.html</loc>
-    <lastmod>2026-03-31</lastmod>
+    <lastmod>2026-04-24</lastmod>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://zlar.ai/origin.html</loc>
-    <lastmod>2026-03-29</lastmod>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://zlar.ai/thought.html</loc>
-    <lastmod>2026-03-22</lastmod>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://zlar.ai/phase2.html</loc>
-    <lastmod>2026-04-01</lastmod>
+    <loc>https://zlar.ai/receipt-verify.html</loc>
+    <lastmod>2026-04-24</lastmod>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://zlar.ai/proof.html</loc>
-    <lastmod>2026-03-31</lastmod>
+    <lastmod>2026-04-01</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://zlar.ai/proof-interactive.html</loc>
-    <lastmod>2026-03-31</lastmod>
+    <lastmod>2026-04-01</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://zlar.ai/explainer.html</loc>
+    <lastmod>2026-04-03</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://zlar.ai/phase2.html</loc>
+    <lastmod>2026-04-01</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://zlar.ai/demo-scenario.html</loc>
-    <lastmod>2026-03-31</lastmod>
-    <priority>0.8</priority>
+    <lastmod>2026-04-01</lastmod>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://zlar.ai/demo-persuasion.html</loc>
-    <lastmod>2026-03-31</lastmod>
-    <priority>0.8</priority>
+    <lastmod>2026-04-01</lastmod>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://zlar.ai/fail-open.html</loc>
-    <lastmod>2026-03-22</lastmod>
-    <priority>0.8</priority>
+    <lastmod>2026-04-01</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://zlar.ai/thought.html</loc>
+    <lastmod>2026-03-29</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://zlar.ai/origin.html</loc>
+    <lastmod>2026-03-29</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://zlar.ai/writing.html</loc>
+    <lastmod>2026-04-24</lastmod>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://zlar.ai/caisi-submission.html</loc>
     <lastmod>2026-03-29</lastmod>
-    <priority>0.8</priority>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://zlar.ai/nist-comment.html</loc>
     <lastmod>2026-03-28</lastmod>
-    <priority>0.8</priority>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://zlar.ai/specs/</loc>
+    <lastmod>2026-04-01</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://zlar.ai/llms.txt</loc>
+    <lastmod>2026-04-24</lastmod>
+    <priority>0.6</priority>
   </url>
   <url>
     <loc>https://zlar.ai/legal.html</loc>
-    <lastmod>2026-03-18</lastmod>
+    <lastmod>2026-03-28</lastmod>
     <priority>0.5</priority>
   </url>
 </urlset>
