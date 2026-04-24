@@ -1,6 +1,6 @@
 # zlar.ai
 
-The public website for [ZLAR Inc.](https://zlar.ai) — execution-boundary governance for autonomous AI agents.
+The public website for [ZLAR Inc.](https://zlar.ai) — contact-boundary governance for autonomous AI agents.
 
 Hosted on GitHub Pages. Static HTML, no build step, no framework.
 
