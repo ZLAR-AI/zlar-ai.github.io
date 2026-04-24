@@ -97,6 +97,7 @@
     <a href="/" class="nav-logo">ZL<span>A</span>R</a>
     <ul class="nav-links">
       <li><a href="architecture.html">Architecture</a></li>
+      <li><a href="#scope">Scope</a></li>
       <li><a href="specs/">Specifications</a></li>
       <li><a href="proof-interactive.html">Proof</a></li>
       <li><a href="#standards">Standards</a></li>
@@ -179,6 +180,52 @@
         Human invariants protect the decision-maker: daily caps, deliberation floors, approval rate monitoring.
       </p>
     </div>
+  </section>
+
+  <hr class="divider">
+
+  <!-- Scope -->
+  <section id="scope">
+    <span class="section-label">Scope</span>
+    <h2>What ZLAR governs &mdash; and what it doesn't.</h2>
+    <p>
+      ZLAR governs actions that flow through it. Actions that do not flow through it are not governed. This is not a hidden limitation. It is the scope boundary, stated in doctrine.
+    </p>
+    <p>
+      Within the governed path: cryptographically verifiable evidence for every intercepted action, signed policy, human authority routed when policy calls for it, fail-closed on every error path. The claim is structural and holds when the agent is adversarial, misaligned, or buggy.
+    </p>
+
+    <div class="flow">
+      <div class="flow-step">
+        <span class="flow-action">outside</span>
+        <div>
+          <div class="flow-name">Upstream of the contact boundary</div>
+          <p class="flow-desc">ZLAR does not govern the model, the prompt, or the reasoning trace. Governing upstream is governance theater. Governance happens at the contact.</p>
+        </div>
+      </div>
+      <div class="flow-step">
+        <span class="flow-action">outside</span>
+        <div>
+          <div class="flow-name">Un-routed paths</div>
+          <p class="flow-desc">Capabilities the deployment has not routed through a ZLAR interception surface reach effect without crossing the gate. Those belong to sandboxes, network controls, and OS permissions.</p>
+        </div>
+      </div>
+      <div class="flow-step">
+        <span class="flow-action">outside</span>
+        <div>
+          <div class="flow-name">Out-of-SDK sub-runtimes</div>
+          <p class="flow-desc">When the local process delegates to a sub-runtime that is not a ZLAR-mediated worker, ZLAR sees neither the handoff nor the sub-runtime's actions. A delegation-envelope gate is the named plan; not yet shipped.</p>
+        </div>
+      </div>
+    </div>
+
+    <p style="margin-top: 2rem;">
+      Closing these gaps is the deployment owner's job. A deployment that leaves un-routed capabilities has ZLAR running, not ZLAR governing.
+    </p>
+    <p style="font-size: 0.9rem; margin-top: 1rem;">
+      <a href="https://github.com/ZLAR-AI/ZLAR/blob/main/doctrine/SCOPE.md" style="color: var(--teal);">doctrine/SCOPE.md</a> &nbsp;&middot;&nbsp;
+      <a href="https://github.com/ZLAR-AI/ZLAR/blob/main/docs/adr/ADR-010-interception-coverage.md" style="color: var(--teal);">ADR-010 Interception Coverage</a>
+    </p>
   </section>
 
   <hr class="divider">
@@ -287,6 +334,11 @@
         <span class="link-card-label">Formal Proof</span>
         <div class="link-card-title">Enforcement Proof by Exhaustive Case Analysis</div>
         <p class="link-card-desc">All 9 terminal states verified against source code. Every claim verifiable. Every boundary stated.</p>
+      </a>
+      <a href="https://github.com/ZLAR-AI/ZLAR/tree/main/doctrine" class="link-card">
+        <span class="link-card-label">Doctrine Suite</span>
+        <div class="link-card-title">DNA, SCOPE, FRAMINGS, IMPLEMENTATION</div>
+        <p class="link-card-desc">The architectural canon. What ZLAR is, what it governs, how public claims are framed, how doctrine becomes code.</p>
       </a>
       <a href="https://github.com/ZLAR-AI/ZLAR" class="link-card">
         <span class="link-card-label">Repository</span>
