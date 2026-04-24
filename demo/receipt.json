@@ -1,0 +1,10 @@
+{
+  "v": 1,
+  "id": "000069eb686d4ea342fe654a6b42d212ef750197a2d8",
+  "kid": "bd8cbe32df788172",
+  "iat": 1777035373,
+  "type": "governed-action",
+  "payload": "eyJhdWRpdF9ldmVudF9pZCI6ImRlbW8tcmVjZWlwdC12ZXJpZnktMDAxIiwiYXVkaXRfcHJldl9oYXNoIjoiZ2VuZXNpcyIsImF1dGhvcml6ZXIiOiJwb2xpY3kiLCJkZWxlZ2F0aW9uX2NoYWluIjpbXSwiZGV0YWlsX2hhc2giOiI0Y2Q0NjU3NDQwMzUwNjcwMjhiY2UyMWFmYjY5OTVhZWY4N2M1MTEwNTUyOTI2NmZhNWEyMjJiYjNkNDdhYmIyIiwiZG9tYWluIjoid3JpdGUiLCJtYW5pZmVzdF9hZ2VudF9pZCI6bnVsbCwibWFuaWZlc3RfcHJpbmNpcGFsIjpudWxsLCJvdXRjb21lIjoiZGVueSIsInBvbGljeV92ZXJzaW9uIjoiMS4wLjAiLCJydWxlIjoiUjAzMiIsInRvb2wiOiJXcml0ZSIsInRzIjoiMjAyNi0wNC0yNFQxMjo1NjoxMy4wMDBaIn0",
+  "sig": "w7Oqctyi1mHnogRJyR6bXZNwWwBBppsHHAKDcAy5lw3ZF6ZIQeHvLgJHalX0Z6R935fgG_tQCeDH2BFjfZ-eBQ",
+  "prev": null
+}

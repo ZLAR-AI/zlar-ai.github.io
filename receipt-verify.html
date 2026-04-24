@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Verify a Governed Action Receipt &mdash; ZLAR</title>
+  <meta name="description" content="A real ZLAR Governed Action Receipt (v1). Cryptographically verifiable in one command with only the public key. No platform access required.">
+  <meta property="og:title" content="Verify a Governed Action Receipt &mdash; ZLAR">
+  <meta property="og:description" content="A real ZLAR Governed Action Receipt (v1). Cryptographically verifiable in one command with only the public key. No platform access required.">
+  <meta property="og:image" content="https://zlar.ai/assets/social-preview.png">
+  <meta property="og:url" content="https://zlar.ai/receipt-verify.html">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>&#x1F6A6;</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #080c14; --bg-card: #0d1520; --bg-card-hover: #111827;
+      --border: rgba(56, 189, 248, 0.10); --border-hover: rgba(56, 189, 248, 0.25);
+      --teal: #38bdf8; --teal-dim: rgba(56, 189, 248, 0.6); --green: #4ade80;
+      --red: #f87171;
+      --white: #f1f5f9; --muted: #64748b;
+      --font: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+      --mono: 'SF Mono', 'Fira Code', 'Cascadia Code', monospace;
+      --card-radius: 0.625rem;
+    }
+    html { scroll-behavior: smooth; font-size: 16px; }
+    body { background: var(--bg); color: var(--white); font-family: var(--font); line-height: 1.7; -webkit-font-smoothing: antialiased; }
+    body::before { content: ''; position: fixed; inset: 0; background-image: radial-gradient(circle at 20% 20%, rgba(56,189,248,0.04) 0%, transparent 50%), radial-gradient(circle at 80% 80%, rgba(74,222,128,0.03) 0%, transparent 50%); pointer-events: none; z-index: 0; }
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 1rem 2rem; background: rgba(8,12,20,0.85); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); }
+    .nav-logo { font-size: 1.1rem; font-weight: 700; letter-spacing: 0.05em; color: var(--white); text-decoration: none; }
+    .nav-logo span { color: var(--teal); }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a { color: var(--muted); text-decoration: none; font-size: 0.875rem; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--white); }
+    main { position: relative; z-index: 1; max-width: 820px; margin: 0 auto; padding: 8rem 2rem 4rem; }
+    .eyebrow { display: inline-block; font-family: var(--mono); font-size: 0.75rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--teal); border: 1px solid var(--border); padding: 0.35rem 0.85rem; border-radius: 2rem; margin-bottom: 1.5rem; }
+    h1 { font-size: clamp(2rem, 4.5vw, 3rem); font-weight: 800; line-height: 1.15; letter-spacing: -0.03em; margin-bottom: 1.25rem; }
+    h1 em { font-style: normal; color: var(--teal); }
+    .hero-sub { font-size: 1.1rem; color: var(--muted); max-width: 640px; margin-bottom: 2.5rem; }
+    h2 { font-size: clamp(1.35rem, 2.5vw, 1.75rem); font-weight: 700; letter-spacing: -0.02em; margin-top: 3.5rem; margin-bottom: 1rem; }
+    .section-label { font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--teal); display: block; margin-top: 3.5rem; margin-bottom: 0.5rem; }
+    p { color: var(--muted); line-height: 1.8; margin-bottom: 1rem; }
+    p strong { color: var(--white); }
+    a { color: var(--teal); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .artifact { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--card-radius); padding: 1.25rem 1.5rem; margin: 1rem 0; overflow-x: auto; }
+    .artifact pre { font-family: var(--mono); font-size: 0.82rem; color: var(--white); line-height: 1.6; white-space: pre; }
+    .artifact-label { font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.75rem; display: block; }
+    .cmd { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--card-radius); padding: 1rem 1.25rem; font-family: var(--mono); font-size: 0.88rem; color: var(--green); margin: 1rem 0; overflow-x: auto; white-space: nowrap; }
+    .cmd .muted { color: var(--muted); }
+    .outcome-valid { font-family: var(--mono); color: var(--green); font-weight: 700; }
+    ul.proof-list { list-style: none; margin: 1rem 0 1rem 0; padding: 0; }
+    ul.proof-list li { color: var(--muted); padding: 0.5rem 0 0.5rem 1.5rem; border-left: 2px solid var(--border); padding-left: 1rem; margin-left: 0.5rem; line-height: 1.7; }
+    ul.proof-list li::before { content: '—'; color: var(--teal); margin-right: 0.5rem; }
+    .callout { border: 1px solid rgba(74,222,128,0.15); background: rgba(74,222,128,0.03); border-radius: var(--card-radius); padding: 1.25rem 1.5rem; margin: 2rem 0; }
+    .callout p { color: var(--white); margin-bottom: 0.5rem; }
+    .callout p:last-child { margin-bottom: 0; color: var(--muted); font-size: 0.9rem; }
+    .links-row { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border); font-size: 0.9rem; }
+    .links-row a { margin-right: 1.5rem; }
+    footer { position: relative; z-index: 1; text-align: center; padding: 3rem 2rem; border-top: 1px solid var(--border); color: var(--muted); font-size: 0.825rem; }
+  </style>
+</head>
+<body>
+  <nav>
+    <a href="/" class="nav-logo">ZL<span>A</span>R</a>
+    <ul class="nav-links">
+      <li><a href="architecture.html">Architecture</a></li>
+      <li><a href="/#scope">Scope</a></li>
+      <li><a href="specs/">Specifications</a></li>
+      <li><a href="proof-interactive.html">Proof</a></li>
+      <li><a href="https://github.com/ZLAR-AI/ZLAR">GitHub</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <span class="eyebrow">Governed Action Receipt &middot; v1</span>
+    <h1>Verify a real <em>signed</em> receipt.</h1>
+    <p class="hero-sub">
+      Every ZLAR decision &mdash; allow, deny, or human-authorized &mdash; produces a signed receipt. The receipt below is a real v1 envelope generated by the reference implementation against a simulated write to <code style="font-family: var(--mono); color: var(--teal); font-size: 0.95em;">/etc/sudoers</code>. The gate denied it under rule R032. The record is signed and verifiable with only the public key and <code style="font-family: var(--mono); color: var(--teal); font-size: 0.95em;">bin/zlar-verify</code>. No call to a ZLAR server is required.
+    </p>
+
+    <span class="section-label">The receipt</span>
+    <h2>A v1 envelope.</h2>
+    <p>
+      <code style="font-family: var(--mono); color: var(--teal);">receipt.json</code> is the full artifact. The <strong>payload</strong> field is a canonical JSON object base64-encoded; the <strong>sig</strong> field is an Ed25519 signature over that payload. The audit event's operational detail (the path, the attempted content) is hashed into <code style="font-family: var(--mono); color: var(--teal);">detail_hash</code> and does not appear in the envelope &mdash; the dual-layer receipt architecture preserves chain verifiability without exposing content.
+    </p>
+    <div class="artifact">
+      <span class="artifact-label">demo/receipt.json</span>
+<pre>{
+  "v": 1,
+  "id": "000069eb686d4ea342fe654a6b42d212ef750197a2d8",
+  "kid": "bd8cbe32df788172",
+  "iat": 1777035373,
+  "type": "governed-action",
+  "payload": "eyJhdWRpdF9ldmVudF9pZCI6ImRlbW8tcmVjZWlwdC12ZXJpZnktMDAxIiwiYXVkaXRfcHJldl9oYXNoIjoiZ2VuZXNpcyIsImF1dGhvcml6ZXIiOiJwb2xpY3kiLCJkZWxlZ2F0aW9uX2NoYWluIjpbXSwiZGV0YWlsX2hhc2giOiI0Y2Q0NjU3NDQwMzUwNjcwMjhiY2UyMWFmYjY5OTVhZWY4N2M1MTEwNTUyOTI2NmZhNWEyMjJiYjNkNDdhYmIyIiwiZG9tYWluIjoid3JpdGUiLCJtYW5pZmVzdF9hZ2VudF9pZCI6bnVsbCwibWFuaWZlc3RfcHJpbmNpcGFsIjpudWxsLCJvdXRjb21lIjoiZGVueSIsInBvbGljeV92ZXJzaW9uIjoiMS4wLjAiLCJydWxlIjoiUjAzMiIsInRvb2wiOiJXcml0ZSIsInRzIjoiMjAyNi0wNC0yNFQxMjo1NjoxMy4wMDBaIn0",
+  "sig": "w7Oqctyi1mHnogRJyR6bXZNwWwBBppsHHAKDcAy5lw3ZF6ZIQeHvLgJHalX0Z6R935fgG_tQCeDH2BFjfZ-eBQ",
+  "prev": null
+}</pre>
+    </div>
+    <p style="font-size: 0.88rem;">
+      Raw file: <a href="demo/receipt.json">demo/receipt.json</a>
+    </p>
+
+    <span class="section-label">The public key</span>
+    <h2>Ed25519, PEM, 113 bytes.</h2>
+    <p>
+      The key that signed the receipt. Verification requires nothing else. No ZLAR infrastructure, no network call, no account.
+    </p>
+    <div class="artifact">
+      <span class="artifact-label">demo/receipt-signing.pub</span>
+<pre>-----BEGIN PUBLIC KEY-----
+MCowBQYDK2VwAyEAKMpK9MhgPiyZExlIOf6fL98C5baux+xWD4+DEL7IR8U=
+-----END PUBLIC KEY-----</pre>
+    </div>
+    <p style="font-size: 0.88rem;">
+      Raw file: <a href="demo/receipt-signing.pub">demo/receipt-signing.pub</a>
+    </p>
+
+    <span class="section-label">Verify it yourself</span>
+    <h2>One clone, one command.</h2>
+    <div class="cmd">git clone https://github.com/ZLAR-AI/ZLAR.git &amp;&amp; cd ZLAR</div>
+    <div class="cmd">bin/zlar-verify <span class="muted">path/to/</span>receipt.json --pubkey <span class="muted">path/to/</span>receipt-signing.pub --verbose</div>
+
+    <p>Expected output:</p>
+    <div class="artifact">
+<pre><span class="outcome-valid">VALID</span>
+
+Verified. Action "Write" in domain "write" was deny by policy at 2026-04-24T12:56:13.000Z.
+
+--- Receipt Details ---
+  ID:         000069eb686d4ea342fe654a6b42d212ef750197a2d8
+  Version:    v1 (v1)
+  Tool:       Write
+  Domain:     write
+  Outcome:    deny
+  Rule:       R032
+  Authorizer: policy
+  Timestamp:  2026-04-24T12:56:13.000Z
+  Policy:     1.0.0
+  Audit ID:   demo-receipt-verify-001
+  Signed by:  bd8cbe32df788172 (Ed25519)</pre>
+    </div>
+
+    <span class="section-label">What this receipt proves</span>
+    <h2>Five structural facts.</h2>
+    <ul class="proof-list">
+      <li>A specific action (write to <code style="font-family: var(--mono); color: var(--teal);">/etc/sudoers</code>) was attempted through an interception surface that reports to the gate.</li>
+      <li>Deterministic policy evaluated the attempt. Rule R032 matched. No AI was involved in the decision &mdash; the gate pattern-matches signed rules.</li>
+      <li>The authorizer was policy, not a human. A human-authorized receipt would name the approver's signing key.</li>
+      <li>The record is cryptographically sealed. Any modification to the payload invalidates the signature.</li>
+      <li>The receipt is anchored to the audit chain via <code style="font-family: var(--mono); color: var(--teal);">audit_prev_hash</code> (here "genesis" &mdash; the first entry). A production chain links each receipt to the previous receipt's hash; reordering or dropping a receipt breaks the chain and is detectable.</li>
+    </ul>
+    <p>
+      The receipt does <strong>not</strong> prove the policy was correct, or that the agent had good intentions. It proves the governance event happened: a decision was made by the stated authority, against signed rules, at the stated time, and the record has not been tampered with since.
+    </p>
+
+    <span class="section-label">About these keys</span>
+    <h2>Demo keys, throwaway, reproducible.</h2>
+    <div class="callout">
+      <p><strong>The key above is a throwaway signing pair generated for this page.</strong></p>
+      <p>It is published here so the reader can verify the receipt end-to-end with only public materials. Real ZLAR deployments sign with their own operational keys &mdash; which live with the deployment owner, not with ZLAR Inc. A production deployment's public key is whatever the deployment owner chooses to publish for third-party verification.</p>
+    </div>
+    <p>
+      The project's operational signing keys are scheduled to rotate from software-rooted to hardware-rooted (YubiKey) in a planned maintenance window. During the overlap, verifiers will accept both keys, and the changeover will be announced with the new fingerprint. This page is not affected by that rotation &mdash; it uses demo keys, not operational keys.
+    </p>
+    <p style="font-size: 0.9rem;">
+      Reproduce this receipt yourself: <code style="font-family: var(--mono); color: var(--teal);">bash scripts/quickstart.sh</code> generates fresh keys, runs the real gate against four tool calls, and verifies a v1 receipt. Nothing is simulated.
+    </p>
+
+    <div class="links-row">
+      <a href="https://github.com/ZLAR-AI/ZLAR/blob/main/doctrine/SCOPE.md">doctrine/SCOPE.md</a>
+      <a href="https://github.com/ZLAR-AI/ZLAR/blob/main/spec/governed-action-receipt-v1.md">Receipt v1 spec</a>
+      <a href="https://github.com/ZLAR-AI/ZLAR/blob/main/bin/zlar-verify">bin/zlar-verify source</a>
+      <a href="/">Home</a>
+    </div>
+  </main>
+
+  <footer>
+    &copy; 2026 ZLAR Inc. &middot; Apache 2.0 &middot; <a href="legal.html">Legal</a>
+  </footer>
+</body>
+</html>
