@@ -114,7 +114,7 @@
 
   <!-- Hero -->
   <section id="hero">
-    <div class="hero-eyebrow">Deterministic execution governance &middot; v3.1.1 &middot; Receipt spec v1.0 published</div>
+    <div class="hero-eyebrow">Deterministic execution governance &middot; v3.2.0 &middot; Human-Attention Canary v1 shipped</div>
     <h1>The governed path<br>is the <em>fast</em> path.</h1>
     <p class="hero-sub">
       ZLAR intercepts AI agent tool calls, evaluates each against Ed25519-signed policy,
@@ -128,7 +128,7 @@
     </div>
 
     <div class="stats">
-      <div class="stat"><span class="stat-num">1,422</span><span class="stat-label">Test assertions</span></div>
+      <div class="stat"><span class="stat-num">1,499</span><span class="stat-label">Test assertions</span></div>
       <div class="stat"><span class="stat-num">12</span><span class="stat-label">ADRs</span></div>
       <div class="stat"><span class="stat-num">v1.0</span><span class="stat-label">Receipt format (published)</span></div>
       <div class="stat"><span class="stat-num">5</span><span class="stat-label">Human invariants</span></div>
@@ -182,7 +182,7 @@
         Fail closed: gate down = all actions denied.<br>
         No AI in the enforcement path. The gate classifies and enforces. It does not reason.<br>
         Policy is a human artifact. Agents cannot modify the rules that govern them.<br>
-        Human invariants protect the decision-maker: daily caps, deliberation floors, response-time variance monitoring.
+        Human invariants protect the decision-maker: daily caps, deliberation floors, authenticity checks. Rubber-stamping trips a canary; Tier 2 blocks the question until the human re-engages.
       </p>
     </div>
   </section>
@@ -322,6 +322,10 @@
         <p class="component-desc">Five enforced constraints protecting the human decision-maker: H6 (daily cap), H13 (capacity), H14 (response-time variance), H15 (deliberation floor), H17 (authenticity).</p>
       </div>
       <div class="component">
+        <div class="component-name">Human-Attention Canary</div>
+        <p class="component-desc">Monitors the human decision-maker for response-time variance. Tier 1 advisory banner warns of rubber-stamping patterns. Tier 2 triggers a blocking preconfirm interrupt before the main ask. Resets on recovery.</p>
+      </div>
+      <div class="component">
         <div class="component-name">Canonicalization Spec</div>
         <p class="component-desc">Published specification (RFC 8785 subset). 28 test vectors verified across Node.js, Python, and bash. Cross-language receipt verification.</p>
       </div>
@@ -417,7 +421,7 @@
       <a href="https://github.com/ZLAR-AI/ZLAR" class="link-card">
         <span class="link-card-label">Repository</span>
         <div class="link-card-title">ZLAR on GitHub</div>
-        <p class="link-card-desc">Full source. 1,422 test assertions. 12 ADRs. Apache 2.0. Clone, install, read.</p>
+        <p class="link-card-desc">Full source. 1,499 test assertions. 12 ADRs. Apache 2.0. Clone, install, read.</p>
       </a>
     </div>
   </section>
