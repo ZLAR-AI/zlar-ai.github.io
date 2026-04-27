@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Trustworthy Delegated Motion &mdash; Vincent Nijjar</title>
+  <meta name="description" content="What does it mean for an AI agent to move through a system in a way a human can trust? On intelligence in dark tunnels, bounded permission, and the gate that enables motion rather than blocking it.">
+  <meta property="og:title" content="Trustworthy Delegated Motion &mdash; Vincent Nijjar">
+  <meta property="og:description" content="Persistent intelligence moving through bounded space. What trustworthy delegation actually looks like.">
+  <meta property="og:image" content="https://zlar.ai/assets/social-preview.png">
+  <meta property="og:url" content="https://zlar.ai/trustworthy-delegated-motion.html">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@vincentnijjar">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🚦</text></svg>">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #080c14;
+      --bg-card: #0d1520;
+      --border: rgba(56, 189, 248, 0.12);
+      --teal: #38bdf8;
+      --teal-dim: rgba(56, 189, 248, 0.6);
+      --white: #f1f5f9;
+      --muted: #64748b;
+      --text: #94a3b8;
+      --font: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+      --serif: 'Georgia', 'Times New Roman', serif;
+    }
+
+    html { font-size: 16px; scroll-behavior: smooth; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font);
+      line-height: 1.7;
+      min-height: 100vh;
+    }
+
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(8, 12, 20, 0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 0.875rem 2rem;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .nav-logo { font-size: 1.1rem; font-weight: 700; letter-spacing: 0.05em; color: var(--white); text-decoration: none; }
+    .nav-logo span { color: var(--teal); }
+    .nav-links { display: flex; gap: 1.5rem; }
+    .nav-links a { color: var(--muted); text-decoration: none; font-size: 0.875rem; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--white); }
+
+    .hero {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 6rem 2rem 3rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .essay-label {
+      display: inline-block;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--teal);
+      margin-bottom: 1.25rem;
+    }
+    .hero h1 {
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: 700;
+      color: var(--white);
+      line-height: 1.15;
+      margin-bottom: 1rem;
+      font-family: var(--serif);
+    }
+    .hero .subtitle {
+      font-size: 1.125rem;
+      color: var(--muted);
+      font-style: italic;
+      margin-bottom: 1.5rem;
+      font-family: var(--serif);
+    }
+
+    .essay {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 3rem 2rem 6rem;
+    }
+
+    .essay p {
+      font-family: var(--serif);
+      font-size: 1.0625rem;
+      color: #b0bec5;
+      line-height: 1.85;
+      margin-bottom: 1.5rem;
+    }
+
+    .essay blockquote {
+      border-left: 3px solid var(--teal);
+      padding: 0.75rem 0 0.75rem 1.5rem;
+      margin: 2rem 0;
+      font-family: var(--serif);
+      font-size: 1.0625rem;
+      font-style: italic;
+      color: var(--white);
+    }
+
+    .essay hr {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 3rem 0;
+    }
+
+    .essay ol {
+      font-family: var(--serif);
+      font-size: 1.0625rem;
+      color: #b0bec5;
+      line-height: 1.85;
+      margin: 0 0 1.5rem 1.5rem;
+    }
+
+    .essay ol li {
+      margin-bottom: 0.75rem;
+    }
+
+    .essay .equation {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.75rem 2rem;
+      margin: 2.5rem 0;
+      font-family: var(--serif);
+      font-size: 1rem;
+      color: var(--white);
+      line-height: 2;
+    }
+
+    .essay .equation .equals {
+      display: block;
+      margin-top: 1rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--border);
+      color: var(--teal);
+      font-style: italic;
+    }
+
+    .essay a {
+      color: var(--teal);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .essay a:hover { color: #7dd3fc; }
+
+    .essay .closing {
+      margin-top: 3rem;
+      padding: 2rem;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+    }
+    .essay .closing p {
+      font-size: 0.9375rem;
+      font-family: var(--font);
+      font-style: italic;
+      color: var(--muted);
+      margin-bottom: 0.75rem;
+    }
+    .essay .closing p:last-child { margin-bottom: 0; }
+
+    .essay-footer {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 0 2rem 4rem;
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    .essay-footer a {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      padding: 0.6rem 1.25rem;
+      border-radius: 6px;
+      font-size: 0.875rem;
+      font-weight: 500;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+    .btn-primary { background: var(--teal); color: #080c14; }
+    .btn-primary:hover { background: #7dd3fc; }
+    .btn-secondary { border: 1px solid var(--border); color: var(--muted); }
+    .btn-secondary:hover { border-color: var(--teal-dim); color: var(--white); }
+
+    footer {
+      text-align: center;
+      padding: 3rem 2rem;
+      border-top: 1px solid var(--border);
+    }
+    footer p { font-size: 0.825rem; color: var(--muted); margin: 0; }
+    footer a { color: var(--muted); text-decoration: none; transition: color 0.2s; }
+    footer a:hover { color: var(--teal); }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="/" class="nav-logo">ZL<span>A</span>R</a>
+    <div class="nav-links">
+      <a href="/">Home</a>
+      <a href="writing.html">Writing</a>
+      <a href="https://github.com/ZLAR-AI/ZLAR" target="_blank">GitHub</a>
+    </div>
+  </nav>
+
+  <div class="hero">
+    <span class="essay-label">Essay &middot; Vincent Nijjar &middot; April 2026</span>
+    <h1>Trustworthy Delegated Motion</h1>
+    <p class="subtitle">Intelligence in dark tunnels.</p>
+  </div>
+
+  <article class="essay">
+
+    <p>Intelligence does not move through a system as though the whole map were visible at once. It moves more like light through dark tunnels: locally, partially, directionally. It explores possible paths through a space of meanings, goals, constraints, and risks. Some paths are open. Some are gated. Some are discouraged. Some require human approval before execution can continue.</p>
+
+    <p>An agentic system operates from a center and a periphery: a limited sphere of usable context. Within that sphere are instructions, words, tools, policies, memory, permissions, recent events, risks, and possible next actions. Beyond that sphere is darkness, or not-yet-relevant space.</p>
+
+    <p>The sphere is better defined as the model&rsquo;s currently available field of relevance: the material usable now, weighted by salience, instruction priority, recency, retrieval, and task pressure.</p>
+
+    <p>This sphere has at least three layers:</p>
+
+    <ol>
+      <li>The model&rsquo;s context window &mdash; the amount of material that can be present to the model at once.</li>
+      <li>The agent&rsquo;s active operating field &mdash; the subset of that material that is relevant, weighted, and actionable in the current moment.</li>
+      <li>The persistent system around the model &mdash; memory, tools, permissions, workflows, audits, approvals, and state that allow operation to continue over time.</li>
+    </ol>
+
+    <p>As the context window grows, the possible sphere grows. A model with a larger context window can hold more of the tunnel system in view. But a larger sphere is not omniscience. Not all material is used equally. Some material is central. Some is peripheral. Some is available but inactive. Some becomes relevant only when the path of operation brings it forward.</p>
+
+    <hr>
+
+    <p>An agentic system proceeds by incorporating the next piece of context, interpreting instructions, checking policies, considering tool constraints, estimating consequences, and selecting the next action. That sequence is a form of movement. Once initiated, the movement can continue. It can be redirected, like railway tracks being laid while the train is already moving. But it is not perfectly predictable from the outside, because each new piece of context can change which path is available, useful, permitted, or safest.</p>
+
+    <p>Persistent intelligence changes the picture. A non-persistent system answers and stops. A persistent system can continue. It can retain state, revisit goals, wait for events, call tools, recover from interruptions, and select another path when one path closes. This is automation: a task continuing through time with system-directed pathfinding.</p>
+
+    <blockquote>When one corridor is gated, persistent intelligence will look for another corridor.</blockquote>
+
+    <p>Movement continues. Pathfinding continues. The system searches for another viable route because persistent operation is structured to continue toward the task. It will look for another corridor within its authority, incentives, available tools, and interpretation of the task.</p>
+
+    <hr>
+
+    <p>The issue is how consideration becomes action. A system may evaluate many possible paths, but only some should become permitted movement. Some actions are safe enough to perform automatically. Some are reversible and low stakes. Some require approval. Some should not be taken.</p>
+
+    <p>This leads to the equation:</p>
+
+    <div class="equation">
+      persistent intelligence<br>
+      + scoped authority<br>
+      + reversible actions<br>
+      + audit trails<br>
+      + escalating approvals only when needed
+      <span class="equals">= trustworthy delegated motion</span>
+    </div>
+
+    <p>Trustworthy delegated motion is motion under bounded permission.</p>
+
+    <p>The aim is to place gates where they matter: at irreversible actions, high-consequence decisions, identity-bearing acts, legal commitments, financial risks, social harms, and points where system uncertainty should become human judgment.</p>
+
+    <p>The promise of automation is that human beings are taxed less by unnecessary decisions because intelligent systems become better at moving through governed space. Safe paths are scoped, reversible, visible, auditable, and aligned with the authority actually granted.</p>
+
+    <hr>
+
+    <p>The future is intelligence moving through tunnels where ordinary doors open smoothly, dangerous doors require approval, wrong turns can be reversed, and the footprints of the journey remain visible.</p>
+
+    <p>That is trustworthy delegated motion: persistent intelligence moving through bounded space.</p>
+
+    <div class="closing">
+      <p>ZLAR is open source at <a href="https://github.com/ZLAR-AI/ZLAR">github.com/ZLAR-AI/ZLAR</a>. Reach me at <a href="mailto:vincent@zlar.ai">vincent@zlar.ai</a>.</p>
+    </div>
+
+  </article>
+
+  <div class="essay-footer">
+    <a href="/" class="btn-primary">&larr; Back to ZLAR</a>
+    <a href="explainer.html" class="btn-secondary">Read: Automation, Abundance and Authority</a>
+    <a href="https://github.com/ZLAR-AI/ZLAR" class="btn-secondary" target="_blank">View on GitHub</a>
+  </div>
+
+  <footer>
+    <p>
+      &copy; 2026 ZLAR Inc. &nbsp;&middot;&nbsp;
+      <a href="/">zlar.ai</a> &nbsp;&middot;&nbsp;
+      <a href="https://github.com/ZLAR-AI/ZLAR">GitHub</a> &nbsp;&middot;&nbsp;
+      <a href="https://x.com/vincentnijjar">X</a> &nbsp;&middot;&nbsp;
+      <a href="https://www.linkedin.com/in/vincentnijjar/">LinkedIn</a> &nbsp;&middot;&nbsp;
+      <a href="mailto:vincent@zlar.ai">vincent@zlar.ai</a>
+    </p>
+  </footer>
+
+</body>
+</html>
