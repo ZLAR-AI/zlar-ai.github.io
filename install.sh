@@ -14,7 +14,20 @@
 # Strict mode (bash-3 safe: no pipefail in POSIX sh)
 set -eu
 
-ZLAR_VERSION="1.0.0"
+# Read version from the VERSION file if running from a repo clone.
+# When run via `curl | bash`, the script has no neighboring VERSION file —
+# leave ZLAR_VERSION empty here and resolve it from SCRIPT_SOURCE_DIR/VERSION
+# after Phase 4 (i.e., after the source is downloaded or cloned). The tarball
+# URL needs the version up front, so curl|bash flows go straight to git clone.
+_INSTALL_SELF="${BASH_SOURCE:-$0}"
+_INSTALL_SELF_DIR=""
+if [ -n "${_INSTALL_SELF}" ] && [ -f "${_INSTALL_SELF}" ]; then
+    _INSTALL_SELF_DIR="$(cd "$(dirname "${_INSTALL_SELF}")" 2>/dev/null && pwd)"
+fi
+ZLAR_VERSION=""
+if [ -n "${_INSTALL_SELF_DIR}" ] && [ -f "${_INSTALL_SELF_DIR}/VERSION" ]; then
+    ZLAR_VERSION=$(cat "${_INSTALL_SELF_DIR}/VERSION" | tr -d '[:space:]')
+fi
 INSTALL_DIR="${HOME}/.zlar"
 
 # ─── Colors (bash-3 safe) ────────────────────────────────────────────────────
@@ -214,32 +227,61 @@ if [ -f "${SELF_PATH}" ]; then
 fi
 
 if [ -z "${SCRIPT_SOURCE_DIR}" ]; then
-    # Download from GitHub release
     GITHUB_REPO="ZLAR-AI/ZLAR"
-    TARBALL_URL="https://github.com/${GITHUB_REPO}/releases/latest/download/zlar-${ZLAR_VERSION}.tar.gz"
-
-    info "Downloading ZLAR v${ZLAR_VERSION}..."
-
     TMPDIR_DL=$(mktemp -d)
     trap "rm -rf '${TMPDIR_DL}'" EXIT
 
-    if curl -fsSL "${TARBALL_URL}" -o "${TMPDIR_DL}/zlar.tar.gz" 2>/dev/null; then
-        tar xzf "${TMPDIR_DL}/zlar.tar.gz" -C "${TMPDIR_DL}" 2>/dev/null
-        SCRIPT_SOURCE_DIR="${TMPDIR_DL}/zlar"
-        ok "Downloaded and extracted"
-    else
-        # Fallback: clone repo
-        info "Release tarball not found — cloning from GitHub..."
+    # If we know the version up front (local repo clone with neighboring
+    # VERSION file), try the release tarball first — fast, no git dependency.
+    # Otherwise (curl|bash flow) we don't have the version yet, so skip the
+    # tarball attempt entirely and clone the repo. The clone gets the latest
+    # main; we re-read VERSION from the cloned source below.
+    DOWNLOAD_OK=0
+    if [ -n "${ZLAR_VERSION}" ]; then
+        TARBALL_URL="https://github.com/${GITHUB_REPO}/releases/latest/download/zlar-${ZLAR_VERSION}.tar.gz"
+        info "Downloading ZLAR v${ZLAR_VERSION}..."
+        if curl -fsSL "${TARBALL_URL}" -o "${TMPDIR_DL}/zlar.tar.gz" 2>/dev/null; then
+            if tar xzf "${TMPDIR_DL}/zlar.tar.gz" -C "${TMPDIR_DL}" 2>/dev/null; then
+                SCRIPT_SOURCE_DIR="${TMPDIR_DL}/zlar"
+                ok "Downloaded and extracted"
+                DOWNLOAD_OK=1
+            fi
+        fi
+    fi
+
+    if [ "${DOWNLOAD_OK}" -eq 0 ]; then
+        if [ -n "${ZLAR_VERSION}" ]; then
+            info "Release tarball for v${ZLAR_VERSION} not found — cloning from GitHub..."
+        else
+            info "Cloning ZLAR from GitHub..."
+        fi
         if command -v git >/dev/null 2>&1; then
-            git clone --depth 1 "https://github.com/${GITHUB_REPO}.git" "${TMPDIR_DL}/zlar" 2>/dev/null
-            SCRIPT_SOURCE_DIR="${TMPDIR_DL}/zlar"
-            ok "Cloned from GitHub"
+            if git clone --depth 1 "https://github.com/${GITHUB_REPO}.git" "${TMPDIR_DL}/zlar" 2>/dev/null; then
+                SCRIPT_SOURCE_DIR="${TMPDIR_DL}/zlar"
+                ok "Cloned from GitHub"
+            else
+                fail "git clone failed — check network or download manually from:"
+                printf "       https://github.com/${GITHUB_REPO}\n"
+                exit 1
+            fi
         else
             fail "Cannot download ZLAR. Install git or download manually from:"
             printf "       https://github.com/${GITHUB_REPO}\n"
             exit 1
         fi
     fi
+fi
+
+# Authoritative version: read from the source we'll install from.
+# For local clones this matches the early read; for curl|bash this is the
+# first time ZLAR_VERSION gets set. If the source has no VERSION file
+# something is structurally wrong — abort rather than stamp a wrong value.
+if [ -f "${SCRIPT_SOURCE_DIR}/VERSION" ]; then
+    ZLAR_VERSION=$(cat "${SCRIPT_SOURCE_DIR}/VERSION" | tr -d '[:space:]')
+fi
+if [ -z "${ZLAR_VERSION}" ]; then
+    fail "Source at ${SCRIPT_SOURCE_DIR} has no VERSION file — installation aborted"
+    exit 1
 fi
 
 # Create install directory structure
@@ -305,10 +347,48 @@ elif [ -f "${HOME}/.zlar-signing.key" ]; then
     ok "Public key derived from existing signing key"
 else
     info "Generating Ed25519 signing keypair..."
-    "${INSTALL_DIR}/bin/zlar-policy" keygen 2>/dev/null
+    # Don't silence keygen stderr — a silent failure here cascades into a
+    # confusing "signing key not found" error in Phase 5 below. If keygen
+    # fails, the user needs to see why.
+    if ! "${INSTALL_DIR}/bin/zlar-policy" keygen; then
+        fail "Keypair generation failed (see error above)"
+        exit 1
+    fi
     ok "Keypair generated"
     info "Private key: ~/.zlar-signing.key (keep this safe)"
     info "Public key:  ${INSTALL_DIR}/etc/keys/policy-signing.pub"
+fi
+
+# v3.1.3: HMAC key for human-state protection. Seals var/human-state/*.json
+# against an agent with filesystem access poisoning H6/H13/H14 counters.
+# 32-byte random key in hex. Generate once; rotation requires resealing every
+# existing state file and is an explicit ceremony, not an install-time action.
+_HUMAN_STATE_KEY="${INSTALL_DIR}/etc/keys/human-state-hmac.key"
+if [ ! -f "${_HUMAN_STATE_KEY}" ]; then
+    if openssl rand -hex 32 > "${_HUMAN_STATE_KEY}" 2>/dev/null; then
+        chmod 600 "${_HUMAN_STATE_KEY}"
+        ok "Human-state HMAC key generated: ${_HUMAN_STATE_KEY}"
+    else
+        warn "Could not generate human-state HMAC key — H6/H13/H14 counters will run unauthenticated"
+    fi
+else
+    ok "Human-state HMAC key already present"
+fi
+
+# v3.1.4: HMAC key for gate-uptime state. Seals var/gate-uptime.json so the
+# streak counter shown in `zlar status` cannot be silently inflated. Same
+# tamper-detection model as human-state-hmac.key; separate key for separation
+# of concerns.
+_GATE_UPTIME_KEY="${INSTALL_DIR}/etc/keys/gate-uptime-hmac.key"
+if [ ! -f "${_GATE_UPTIME_KEY}" ]; then
+    if openssl rand -hex 32 > "${_GATE_UPTIME_KEY}" 2>/dev/null; then
+        chmod 600 "${_GATE_UPTIME_KEY}"
+        ok "Gate-uptime HMAC key generated: ${_GATE_UPTIME_KEY}"
+    else
+        warn "Could not generate gate-uptime HMAC key — streak counter will run unauthenticated"
+    fi
+else
+    ok "Gate-uptime HMAC key already present"
 fi
 
 # Copy default policy → active policy
@@ -345,10 +425,13 @@ if [ "${HAS_CC}" -eq 1 ]; then
     else
         mkdir -p "${HOME}/.claude"
         if [ -f "${CC_SETTINGS}" ]; then
-            # Merge into existing settings
+            # Merge into existing settings — append to any existing PreToolUse
+            # hooks rather than clobbering them. The earlier `grep -q "zlar"`
+            # guard ensures we only reach this branch when no ZLAR hook
+            # already exists, so append is safe without dedup.
             TEMP=$(mktemp)
             jq --arg cmd "${CC_HOOK}" \
-                '.hooks.PreToolUse = [{"matcher":".*","hooks":[{"type":"command","command":$cmd,"timeout":310}]}]' \
+                '.hooks.PreToolUse = ((.hooks.PreToolUse // []) + [{"matcher":".*","hooks":[{"type":"command","command":$cmd,"timeout":310}]}])' \
                 "${CC_SETTINGS}" > "${TEMP}" 2>/dev/null
             if [ -s "${TEMP}" ]; then
                 mv "${TEMP}" "${CC_SETTINGS}"
@@ -458,36 +541,78 @@ fi
 # PHASE 7: Self-test
 # ═══════════════════════════════════════════════════════════════════════════════
 
-step "Phase 7: Self-test"
+step "Phase 7: Verification"
 
-# Test: a Read should be allowed
+SELF_TEST_PASS=0
+SELF_TEST_FAIL=0
+
+# Verify: gate executable exists
+if [ -x "${INSTALL_DIR}/bin/zlar-gate" ]; then
+    ok "Gate active"
+    SELF_TEST_PASS=$((SELF_TEST_PASS + 1))
+else
+    fail "Gate not found or not executable"
+    SELF_TEST_FAIL=$((SELF_TEST_FAIL + 1))
+fi
+
+# Verify: policy signed
+POLICY_SIG=$(jq -r '.signature.value // ""' "${INSTALL_DIR}/etc/policies/active.policy.json" 2>/dev/null)
+if [ -n "${POLICY_SIG}" ] && [ "${POLICY_SIG}" != "SIGNED_AT_INSTALL" ] && [ "${POLICY_SIG}" != "unsigned" ]; then
+    ok "Policy signed"
+    SELF_TEST_PASS=$((SELF_TEST_PASS + 1))
+else
+    warn "Policy signature not verified"
+    SELF_TEST_FAIL=$((SELF_TEST_FAIL + 1))
+fi
+
+# Verify: hook configured
+if [ "${FRAMEWORKS_CONFIGURED}" -gt 0 ] || [ "${EXISTING_ZLAR}" -gt 0 ]; then
+    ok "Hook configured (${FRAMEWORKS_CONFIGURED} framework(s))"
+    SELF_TEST_PASS=$((SELF_TEST_PASS + 1))
+else
+    warn "No framework hooks configured — gate has nothing to govern yet"
+fi
+
+# Live gate test: Read should be allowed
 TEST_INPUT='{"tool_name":"Read","tool_input":{"file_path":"/tmp/test"},"session_id":"lt-install-test"}'
 TEST_RESULT=$(printf '%s' "${TEST_INPUT}" | "${INSTALL_DIR}/bin/zlar-gate" 2>/dev/null || echo "")
 
 if [ -n "${TEST_RESULT}" ]; then
     TEST_DECISION=$(printf '%s' "${TEST_RESULT}" | jq -r '.hookSpecificOutput.permissionDecision // "unknown"' 2>/dev/null)
     if [ "${TEST_DECISION}" = "allow" ]; then
-        ok "Gate self-test: Read → allow ✓"
+        ok "Live test: Read -> allow"
+        SELF_TEST_PASS=$((SELF_TEST_PASS + 1))
     else
-        warn "Gate self-test: Read returned '${TEST_DECISION}' (expected 'allow')"
+        warn "Live test: Read returned '${TEST_DECISION}' (expected 'allow')"
+        SELF_TEST_FAIL=$((SELF_TEST_FAIL + 1))
     fi
 else
-    warn "Gate self-test: no output — gate may need bash 4+"
+    warn "Live test: gate produced no output — may need bash 4+"
+    SELF_TEST_FAIL=$((SELF_TEST_FAIL + 1))
 fi
 
-# Test: rm -rf should be denied
+# Live gate test: rm -rf should be denied
 TEST_INPUT2='{"tool_name":"Bash","tool_input":{"command":"rm -rf /tmp/test"},"session_id":"lt-install-test"}'
 TEST_RESULT2=$(printf '%s' "${TEST_INPUT2}" | "${INSTALL_DIR}/bin/zlar-gate" 2>/dev/null || echo "")
 
 if [ -n "${TEST_RESULT2}" ]; then
     TEST_DECISION2=$(printf '%s' "${TEST_RESULT2}" | jq -r '.hookSpecificOutput.permissionDecision // "unknown"' 2>/dev/null)
     if [ "${TEST_DECISION2}" = "deny" ]; then
-        ok "Gate self-test: rm -rf → deny ✓"
+        ok "Live test: rm -rf -> deny"
+        SELF_TEST_PASS=$((SELF_TEST_PASS + 1))
     else
-        warn "Gate self-test: rm -rf returned '${TEST_DECISION2}' (expected 'deny')"
+        fail "Live test: rm -rf returned '${TEST_DECISION2}' (expected 'deny')"
+        SELF_TEST_FAIL=$((SELF_TEST_FAIL + 1))
     fi
 else
-    warn "Gate self-test: no output for deny test"
+    warn "Live test: gate produced no output for deny test"
+    SELF_TEST_FAIL=$((SELF_TEST_FAIL + 1))
+fi
+
+if [ "${SELF_TEST_FAIL}" -eq 0 ]; then
+    ok "All ${SELF_TEST_PASS} verification checks passed"
+else
+    warn "${SELF_TEST_PASS} passed, ${SELF_TEST_FAIL} failed — run 'zlar doctor' for details"
 fi
 
 # ═══════════════════════════════════════════════════════════════════════════════
@@ -527,10 +652,13 @@ printf "    Run: ${BOLD}~/.zlar/bin/zlar telegram${NC}\n"
 printf "    This enables Telegram approval for denied actions.\n"
 printf "\n"
 printf "  ${BOLD}Commands:${NC}\n"
+printf "    ${DIM}~/.zlar/bin/zlar doctor${NC}     — check installation health\n"
 printf "    ${DIM}~/.zlar/bin/zlar status${NC}     — what's governed\n"
 printf "    ${DIM}~/.zlar/bin/zlar audit${NC}      — recent decisions\n"
 printf "    ${DIM}~/.zlar/bin/zlar policy${NC}     — current rules\n"
 printf "    ${DIM}~/.zlar/bin/zlar uninstall${NC}  — clean removal\n"
+printf "\n"
+printf "  Something not working? Run: ${BOLD}~/.zlar/bin/zlar doctor${NC}\n"
 printf "\n"
 printf "  Open your editor. ZLAR is governing every tool call.\n"
 printf "\n"
