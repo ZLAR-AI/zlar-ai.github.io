@@ -114,10 +114,10 @@
 
   <!-- Hero -->
   <section id="hero">
-    <div class="hero-eyebrow">Deterministic execution governance &middot; v3.3.11 &middot; Trust Lane in single-maintainer validation</div>
+    <div class="hero-eyebrow">Deterministic execution governance &middot; v3.3.13 &middot; Trust Lane in single-maintainer validation</div>
     <h1>The governed path<br>is the <em>fast</em> path.</h1>
     <p class="hero-sub">
-      ZLAR intercepts AI agent tool calls, evaluates each against Ed25519-signed policy,
+      ZLAR intercepts routed AI agent tool calls, evaluates each against Ed25519-signed policy,
       routes decisions to humans when required, and produces <strong>cryptographic proof that governance happened</strong>.
       No AI in the enforcement path. The gate pattern-matches. It cannot be persuaded.
     </p>
@@ -142,8 +142,8 @@
     <span class="section-label">How it works</span>
     <h2>Intercept. Evaluate. Decide. Prove.</h2>
     <p>
-      When an AI agent attempts any action &mdash; shell command, file write, network request, MCP tool call &mdash;
-      ZLAR intercepts before execution and evaluates against signed policy.
+      When an AI agent attempts an action through a configured ZLAR surface &mdash; shell command, file write, network request, MCP tool call &mdash;
+      ZLAR intercepts before execution or upstream delivery and evaluates against signed policy.
     </p>
 
     <div class="flow">
@@ -151,7 +151,7 @@
         <span class="flow-action">intercept</span>
         <div>
           <div class="flow-name">Agent issues a tool call</div>
-          <p class="flow-desc">Framework hook fires before execution. The call never reaches the OS without passing through ZLAR. Works with Claude Code, Cursor, Windsurf, and any MCP client.</p>
+          <p class="flow-desc">Framework hook or routed MCP path fires before execution. On configured surfaces, the call reaches the OS or upstream server only after ZLAR evaluates it.</p>
         </div>
       </div>
       <div class="flow-step">
@@ -171,15 +171,15 @@
       <div class="flow-step">
         <span class="flow-action">prove</span>
         <div>
-          <div class="flow-name">Governed Action Receipt issued</div>
-          <p class="flow-desc">Every decision produces a v1 envelope receipt &mdash; portable cryptographic proof that governance happened, verifiable by anyone with the public key. No platform access required.</p>
+          <div class="flow-name">Governance evidence recorded</div>
+          <p class="flow-desc">Governed decisions are audit-recorded; signed v1 envelope receipts can be generated for eligible decisions and verified by anyone with the public key. No platform access required.</p>
         </div>
       </div>
     </div>
 
     <div class="invariant">
       <p>
-        Fail closed: gate down = all actions denied.<br>
+        Fail closed: gate down = routed actions denied.<br>
         No AI in the enforcement path. The gate classifies and enforces. It does not reason.<br>
         Policy is a human artifact. Agents cannot modify the rules that govern them.<br>
         Human invariants protect the decision-maker: daily caps, deliberation floors, authenticity checks. Rubber-stamping trips a canary; Tier 2 blocks the question until the human re-engages.

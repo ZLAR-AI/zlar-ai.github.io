@@ -372,11 +372,11 @@ _gate_crash() {
     echo '{"hookSpecificOutput":{"hookEventName":"PreToolUse",
            "permissionDecision":"deny",
            "permissionDecisionReason":"ZLAR gate crash"}}'
-    exit 0
+    exit 2
 }</code></pre>
 
-    <p>The trap outputs a valid deny response and exits cleanly. The action is blocked. <code>exit 0</code> is deliberate: the host framework interprets non-zero exit as a non-blocking error and continues. By exiting 0 with a deny payload, the gate ensures its crash produces a valid blocking response that the host framework respects.</p>
-    <span class="source-ref">bin/zlar-gate lines 38-49</span>
+    <p>The trap outputs a valid deny response and pairs it with the documented blocking exit code. The action is blocked. The JSON deny payload carries the decision; <code>exit 2</code> carries the hook-contract signal.</p>
+    <span class="source-ref">bin/zlar-gate crash and deny response helpers</span>
 
     <h3>State 0: No rule matches</h3>
 
@@ -389,8 +389,8 @@ _gate_crash() {
 
     <h2>The policy cannot be modified by the agent</h2>
 
-    <p>The policy file is Ed25519-signed. The gate verifies the signature at load time. If verification fails, the gate denies all actions.</p>
-    <span class="source-ref">bin/zlar-gate lines 651-660 &mdash; zlar_crypto_verify(), failure triggers ERR trap</span>
+    <p>The policy file is Ed25519-signed. The gate verifies the signature at load time. If verification fails, the gate denies routed actions instead of loading an untrusted policy.</p>
+    <span class="source-ref">bin/zlar-gate policy verification path</span>
 
     <p>An agent cannot write a permissive policy and have the gate enforce it, because the agent does not possess the Ed25519 private key. The key never lives on the agent's machine. The key is held by the human.</p>
 

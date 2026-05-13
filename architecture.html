@@ -552,7 +552,7 @@
         Vincent Nijjar &middot; Founder &middot;
         <a href="https://zlar.ai">zlar.ai</a> &middot;
         <a href="https://github.com/ZLAR-AI/ZLAR">GitHub</a> &middot;
-        v3.3.11 &middot; Apache 2.0 &middot; Live (single-maintainer)
+        v3.3.13 &middot; Apache 2.0 &middot; Live (single-maintainer)
       </p>
     </div>
 
@@ -673,7 +673,7 @@
         </div>
       </div>
 
-      <p>Every decision produces a hash-chained, Ed25519-signed audit entry. This is evidence infrastructure, not logging.</p>
+      <p>Governed decisions are written to a hash-chained, Ed25519-signed audit trail. This is evidence infrastructure, not logging.</p>
 
       <div class="properties">
         <div class="property">
@@ -682,7 +682,7 @@
         </div>
         <div class="property">
           <div class="property-name">MCP Proxy Gate</div>
-          <p>Any MCP-speaking agent — TCP proxy, same policy engine.</p>
+          <p>Routed MCP-speaking clients — proxy path, same policy engine.</p>
         </div>
       </div>
     </div>
@@ -711,7 +711,7 @@
           <span class="flow-action">gate</span>
           <div>
             <div class="flow-name">ZLAR Gate</div>
-            <p class="flow-desc">Pre-execution interception at the contact boundary. Hooks + MCP proxy. Vendor-agnostic. No SDK changes.</p>
+            <p class="flow-desc">Pre-execution interception at the contact boundary. Configured hooks + routed MCP proxy. Vendor-agnostic. No SDK changes.</p>
           </div>
         </div>
         <div class="flow-step">
@@ -735,7 +735,7 @@
     <div class="section">
       <span class="section-label">Evidence infrastructure</span>
       <h2>Governance-grade evidence.</h2>
-      <p>Every action. Every decision. Cryptographically signed and hash-chained.</p>
+      <p>Routed actions. Governed decisions. Audit-recorded, signed, and hash-chained.</p>
 
       <div class="audit-entry">
         <span class="key">"timestamp"</span>: <span class="val">"2026-03-29T14:23:07Z"</span><br>
@@ -906,7 +906,7 @@
 
       <div class="stats">
         <div class="stat">
-          <div class="stat-value">v3.3.11</div>
+          <div class="stat-value">v3.3.13</div>
           <div class="stat-label">Shipped (Apache 2.0)</div>
         </div>
         <div class="stat">
