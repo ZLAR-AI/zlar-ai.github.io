@@ -3,462 +3,279 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ZLAR — Deterministic execution governance for AI agents</title>
-  <meta name="description" content="ZLAR intercepts AI agent tool calls, evaluates them against Ed25519-signed policy, routes decisions to humans, and produces cryptographic proof that governance happened. No AI in the enforcement path.">
-  <meta property="og:title" content="ZLAR — Deterministic execution governance for AI agents">
-  <meta property="og:description" content="Deterministic gate. Human authority. Cryptographic proof. No AI in the enforcement path.">
-  <meta property="og:image" content="https://zlar.ai/assets/social-preview.png">
+  <title>ZLAR - Execution-Boundary Governance for Agentic AI</title>
+  <meta name="description" content="ZLAR is execution-boundary governance for agentic AI: a consent boundary between artificial cognition and worldly consequence, with receipts and coverage reports for routed actions.">
+  <meta property="og:title" content="ZLAR - Execution-Boundary Governance for Agentic AI">
+  <meta property="og:description" content="I built a boundary between artificial cognition and worldly consequence. Try the proof pack and ask for the receipt.">
   <meta property="og:url" content="https://zlar.ai">
   <meta name="twitter:card" content="summary_large_image">
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🚦</text></svg>">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    :root {
-      --bg: #080c14; --bg-card: #0d1520; --bg-card-hover: #111827;
-      --border: rgba(56, 189, 248, 0.10); --border-hover: rgba(56, 189, 248, 0.25);
-      --teal: #38bdf8; --teal-dim: rgba(56, 189, 248, 0.6); --green: #4ade80;
-      --white: #f1f5f9; --muted: #64748b;
-      --font: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
-      --mono: 'SF Mono', 'Fira Code', 'Cascadia Code', monospace;
-      --section-gap: 7rem; --card-radius: 0.625rem;
-    }
-    html { scroll-behavior: smooth; }
-    body { background: var(--bg); color: var(--white); font-family: var(--font); font-feature-settings: 'cv01','cv02','cv03'; line-height: 1.6; overflow-x: hidden; -webkit-font-smoothing: antialiased; }
-    body::before { content: ''; position: fixed; inset: 0; background-image: radial-gradient(circle at 20% 20%, rgba(56,189,248,0.04) 0%, transparent 50%), radial-gradient(circle at 80% 80%, rgba(74,222,128,0.03) 0%, transparent 50%), linear-gradient(rgba(56,189,248,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(56,189,248,0.03) 1px, transparent 1px); background-size: 100% 100%, 100% 100%, 48px 48px, 48px 48px; pointer-events: none; z-index: 0; }
-    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 1rem 2rem; background: rgba(8,12,20,0.85); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); }
-    .nav-logo { font-size: 1.1rem; font-weight: 700; letter-spacing: 0.05em; color: var(--white); text-decoration: none; }
-    .nav-logo span { color: var(--teal); }
-    .nav-links { display: flex; gap: 2rem; list-style: none; }
-    .nav-links a { color: var(--muted); text-decoration: none; font-size: 0.875rem; transition: color 0.2s; }
-    .nav-links a:hover { color: var(--white); }
-    section { position: relative; z-index: 1; max-width: 860px; margin: 0 auto; padding: var(--section-gap) 2rem; }
-    section:first-of-type { padding-top: 10rem; }
-    .hero-eyebrow { display: inline-block; font-family: var(--mono); font-size: 0.75rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--teal); border: 1px solid var(--border); padding: 0.35rem 0.85rem; border-radius: 2rem; margin-bottom: 2rem; }
-    h1 { font-size: clamp(2.25rem, 5vw, 3.5rem); font-weight: 800; line-height: 1.1; letter-spacing: -0.03em; margin-bottom: 1.75rem; }
-    h1 em { font-style: normal; color: var(--teal); }
-    .hero-sub { font-size: 1.2rem; color: var(--muted); max-width: 640px; margin-bottom: 2.5rem; line-height: 1.7; }
-    .hero-sub strong { color: var(--white); }
-    .cta-group { display: flex; gap: 1rem; flex-wrap: wrap; }
-    .btn { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.75rem 1.5rem; border-radius: var(--card-radius); font-size: 0.875rem; font-weight: 600; text-decoration: none; transition: all 0.2s; }
-    .btn-primary { background: var(--teal); color: #080c14; }
-    .btn-primary:hover { background: #7dd3fc; }
-    .btn-secondary { background: transparent; color: var(--white); border: 1px solid var(--border); }
-    .btn-secondary:hover { border-color: var(--border-hover); color: var(--teal); }
-    h2 { font-size: clamp(1.5rem, 3vw, 2.2rem); font-weight: 700; letter-spacing: -0.025em; margin-bottom: 1.25rem; }
-    .section-label { font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--teal); margin-bottom: 0.75rem; display: block; }
-    p { color: var(--muted); line-height: 1.8; margin-bottom: 1rem; }
-    p strong { color: var(--white); }
-    .divider { border: none; border-top: 1px solid var(--border); margin: 0; }
-    .flow { display: grid; gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: var(--card-radius); overflow: hidden; margin-top: 2.5rem; }
-    .flow-step { display: grid; grid-template-columns: 5rem 1fr; gap: 1rem; align-items: start; padding: 1.25rem 1.5rem; background: var(--bg-card); transition: background 0.15s; }
-    .flow-step:hover { background: var(--bg-card-hover); }
-    .flow-action { font-family: var(--mono); font-size: 0.75rem; color: var(--teal); padding-top: 0.15rem; }
-    .flow-name { font-weight: 600; color: var(--white); font-size: 0.95rem; margin-bottom: 0.25rem; }
-    .flow-desc { font-size: 0.875rem; color: var(--muted); margin: 0; line-height: 1.6; }
-    .invariant { border: 1px solid rgba(74,222,128,0.15); background: rgba(74,222,128,0.03); border-radius: var(--card-radius); padding: 1.75rem 2rem; margin-top: 2.5rem; }
-    .invariant p { font-family: var(--mono); font-size: 0.875rem; color: var(--green); margin: 0; line-height: 1.9; }
-    .components { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1rem; margin-top: 2.5rem; }
-    .component { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--card-radius); padding: 1.5rem; transition: border-color 0.2s; }
-    .component:hover { border-color: var(--border-hover); }
-    .component-name { font-family: var(--mono); font-size: 0.85rem; color: var(--teal); margin-bottom: 0.5rem; }
-    .component-desc { font-size: 0.875rem; color: var(--muted); margin: 0; line-height: 1.6; }
-    .links-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1rem; margin-top: 2.5rem; }
-    .link-card { display: block; text-decoration: none; background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--card-radius); padding: 1.5rem; transition: all 0.2s; }
-    .link-card:hover { border-color: var(--border-hover); background: var(--bg-card-hover); }
-    .link-card-label { font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--teal); margin-bottom: 0.5rem; display: block; }
-    .link-card-title { font-weight: 600; color: var(--white); font-size: 1rem; margin-bottom: 0.35rem; }
-    .link-card-desc { font-size: 0.825rem; color: var(--muted); margin: 0; line-height: 1.5; }
-    .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 1rem; margin-top: 2rem; }
-    .stat { text-align: center; padding: 1.25rem; background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--card-radius); }
-    .stat-num { font-size: 1.75rem; font-weight: 800; color: var(--teal); display: block; }
-    .stat-label { font-size: 0.8rem; color: var(--muted); margin-top: 0.25rem; }
-    footer { position: relative; z-index: 1; text-align: center; padding: 3rem 2rem; border-top: 1px solid var(--border); }
-    footer p { font-size: 0.825rem; color: var(--muted); margin: 0; }
-    footer a { color: var(--muted); text-decoration: none; transition: color 0.2s; }
-    footer a:hover { color: var(--teal); }
-    @media (max-width: 640px) {
-      :root { --section-gap: 4.5rem; }
-      nav { padding: 0.75rem 1rem; flex-wrap: wrap; row-gap: 0.5rem; }
-      .nav-links { gap: 0.6rem; flex-wrap: wrap; row-gap: 0.35rem; justify-content: flex-end; }
-      .nav-links a { font-size: 0.78rem; white-space: nowrap; }
-      section { padding: var(--section-gap) 1.25rem; }
-      section:first-of-type { padding-top: 11rem; }
-      .flow-step { grid-template-columns: 1fr; }
-      .flow-action { display: none; }
-    }
-    @media (max-width: 380px) {
-      nav { flex-direction: column; align-items: flex-start; }
-      .nav-links { justify-content: flex-start; width: 100%; }
-      section:first-of-type { padding-top: 13rem; }
-    }
-  </style>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;650;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="zlar.css">
 </head>
 <body>
-
-  <nav>
-    <a href="/" class="nav-logo">ZL<span>A</span>R</a>
-    <ul class="nav-links">
-      <li><a href="architecture.html">Architecture</a></li>
-      <li><a href="#scope">Scope</a></li>
-      <li><a href="specs/">Specifications</a></li>
-      <li><a href="proof-interactive.html">Proof</a></li>
-      <li><a href="#standards">Standards</a></li>
-      <li><a href="https://github.com/ZLAR-AI/ZLAR">GitHub</a></li>
-      <li><a href="writing.html">Writing</a></li>
-      <li><a href="mailto:hello@zlar.ai">Contact</a></li>
-    </ul>
+  <nav class="site-nav">
+    <a class="brand" href="/">ZL<span>A</span>R</a>
+    <div class="nav-links">
+      <a class="primary-link" href="proof-pack.html">Try Proof Pack</a>
+      <a href="execution-boundary.html">Boundary</a>
+      <a href="open-memo.html">Open Memo</a>
+      <a href="affected.html">Affected?</a>
+      <a href="boundaries.html">Boundaries</a>
+      <a href="archive.html">Archive</a>
+      <a href="https://github.com/ZLAR-AI/ZLAR">GitHub</a>
+    </div>
   </nav>
 
-  <!-- Hero -->
-  <section id="hero">
-    <div class="hero-eyebrow">Deterministic execution governance &middot; v3.3.13 &middot; Trust Lane in single-maintainer validation</div>
-    <h1>The governed path<br>is the <em>fast</em> path.</h1>
-    <p class="hero-sub">
-      ZLAR intercepts routed AI agent tool calls, evaluates each against Ed25519-signed policy,
-      routes decisions to humans when required, and produces <strong>cryptographic proof that governance happened</strong>.
-      No AI in the enforcement path. The gate pattern-matches. It cannot be persuaded.
-    </p>
-    <div class="cta-group">
-      <a href="proof-interactive.html" class="btn btn-primary">See the proof &rarr;</a>
-      <a href="https://github.com/ZLAR-AI/ZLAR" class="btn btn-secondary">View on GitHub</a>
-      <a href="specs/" class="btn btn-secondary">Specifications</a>
-    </div>
-
-    <div class="stats">
-      <div class="stat"><span class="stat-num">1,710</span><span class="stat-label">Test assertions</span></div>
-      <div class="stat"><span class="stat-num">12</span><span class="stat-label">ADRs</span></div>
-      <div class="stat"><span class="stat-num">v1.0</span><span class="stat-label">Receipt format (published)</span></div>
-      <div class="stat"><span class="stat-num">5</span><span class="stat-label">Human invariants</span></div>
-    </div>
-  </section>
-
-  <hr class="divider">
-
-  <!-- What ZLAR does -->
-  <section id="how-it-works">
-    <span class="section-label">How it works</span>
-    <h2>Intercept. Evaluate. Decide. Prove.</h2>
-    <p>
-      When an AI agent attempts an action through a configured ZLAR surface &mdash; shell command, file write, network request, MCP tool call &mdash;
-      ZLAR intercepts before execution or upstream delivery and evaluates against signed policy.
-    </p>
-
-    <div class="flow">
-      <div class="flow-step">
-        <span class="flow-action">intercept</span>
+  <main>
+    <header class="hero">
+      <div class="wrap hero-grid">
         <div>
-          <div class="flow-name">Agent issues a tool call</div>
-          <p class="flow-desc">Framework hook or routed MCP path fires before execution. On configured surfaces, the call reaches the OS or upstream server only after ZLAR evaluates it.</p>
+          <span class="eyebrow">Execution-boundary governance</span>
+          <h1>I built a boundary between artificial cognition and worldly consequence.</h1>
+          <p class="lede">
+            ZLAR is execution-boundary governance for agentic AI. It is a consent boundary for artificial agency: the place where an agent's plans, tool calls, edits, and requests must cross a separate authority before they become action.
+          </p>
+          <div class="button-row">
+            <a class="button primary" href="proof-pack.html">Try the Proof Pack</a>
+            <a class="button secondary" href="execution-boundary.html">Read the founder essay</a>
+          </div>
+        </div>
+        <div class="diagram" aria-label="Cognition to ZLAR boundary to consequence diagram">
+          <div class="label">The governing question</div>
+          <p><strong>Who or what is allowed to turn cognition into action?</strong></p>
+          <div class="boundary-diagram">
+            <div class="node">
+              <strong>Artificial cognition</strong>
+              <p>Plans, code, tool calls, requests, messages, proposed changes.</p>
+            </div>
+            <div class="arrow">-&gt;</div>
+            <div class="gate-node">ZLAR<br>boundary</div>
+            <div class="arrow">-&gt;</div>
+            <div class="node">
+              <strong>Worldly consequence</strong>
+              <p>Files changed, systems called, records moved, approvals made.</p>
+            </div>
+          </div>
         </div>
       </div>
-      <div class="flow-step">
-        <span class="flow-action">evaluate</span>
-        <div>
-          <div class="flow-name">Gate evaluates against signed policy</div>
-          <p class="flow-desc">Ed25519-signed rules evaluated by regex matching, not reasoning. The agent cannot modify the rules that govern it. Policy supports JSON rules and Cedar formal policy language.</p>
-        </div>
-      </div>
-      <div class="flow-step">
-        <span class="flow-action">decide</span>
-        <div>
-          <div class="flow-name">Allow, deny, or route to human</div>
-          <p class="flow-desc">Safe actions pass. Dangerous actions are blocked. Ambiguous actions are routed to the human authority via Telegram. The human approves or denies from their phone.</p>
-        </div>
-      </div>
-      <div class="flow-step">
-        <span class="flow-action">prove</span>
-        <div>
-          <div class="flow-name">Governance evidence recorded</div>
-          <p class="flow-desc">Governed decisions are audit-recorded; signed v1 envelope receipts can be generated for eligible decisions and verified by anyone with the public key. No platform access required.</p>
-        </div>
-      </div>
-    </div>
+    </header>
 
-    <div class="invariant">
+    <section class="section">
+      <div class="wrap two-col">
+        <div class="section-intro">
+          <span class="eyebrow">What ZLAR is</span>
+          <h2>A deterministic boundary where intention becomes action.</h2>
+          <p>
+            An agent may generate plans, code, messages, edits, requests, and tool calls. Consequence crosses into the world through a separate, signed, deterministic authority.
+          </p>
+          <p>
+            ZLAR evaluates routed actions against human-signed policy, allows routine actions, denies forbidden actions, routes consequential actions to a human when required, and produces evidence that the governance event happened.
+          </p>
+        </div>
+        <div class="quote-panel">
+          <p>
+            ZLAR is not a smarter judge inside the model. It is the boundary outside the model.
+          </p>
+          <p>
+            The absence of AI in the enforcement path is the point.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="wrap">
+        <div class="section-intro">
+          <span class="eyebrow">Try the Proof Pack</span>
+          <h2>Run the verifier against a fake/scratch evidence bundle.</h2>
+          <p>
+            The first self-serve path is not a sales page. It is a small proof pack with scratch artifacts: a manifest, coverage report, receipt summary, hashes, and a verifier script. Download it, run the checks, and see exactly what the proof path claims.
+          </p>
+        </div>
+        <div class="proof-anatomy" aria-label="Proof Pack anatomy diagram">
+          <div class="small-node status-routed">
+            <strong>Manifest</strong>
+            <p>Names the pack type, claim ceiling, included files, and hashes.</p>
+          </div>
+          <div class="small-node status-routed">
+            <strong>Coverage</strong>
+            <p>Shows routed, blocked, disclosed, and out-of-scope surfaces.</p>
+          </div>
+          <div class="small-node status-blocked">
+            <strong>Receipt summary</strong>
+            <p>Shows the governed decision evidence without raw private detail.</p>
+          </div>
+          <div class="small-node status-disclosed">
+            <strong>Verifier</strong>
+            <p>Checks hash integrity, safe claim ceiling, and disclosure flags.</p>
+          </div>
+          <div class="small-node status-out">
+            <strong>Non-claims</strong>
+            <p>Names what this proof path does not govern.</p>
+          </div>
+        </div>
+        <div class="button-row">
+          <a class="button primary" href="proof-pack.html">Open the demo</a>
+        </div>
+        <div class="disclosure">
+          <h3>Disclosure</h3>
+          <p>
+            The public proof pack is fake/scratch evidence for a bounded v3.3.15 path. It demonstrates the shape of verification; it is not a production deployment record and not external attestation. Release state: <a href="https://github.com/ZLAR-AI/ZLAR/releases/tag/v3.3.15">ZLAR v3.3.15</a>.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="wrap two-col">
+        <div>
+          <span class="eyebrow">Governed Action Receipt</span>
+          <h2>If an AI agent affected you, ask for the receipt.</h2>
+          <p>
+            A receipt is the portable record of a governed action: what was attempted, what policy applied, who or what authorized it, when the decision happened, and whether the record still verifies.
+          </p>
+          <p>
+            The affected person may never have been in the approval loop. The receipt is how they can ask what happened anyway.
+          </p>
+          <div class="button-row">
+            <a class="button secondary" href="affected.html">How to ask</a>
+          </div>
+        </div>
+        <div class="receipt-card" aria-label="Receipt card">
+          <header>
+            <span>governed-action receipt</span>
+            <span>v1</span>
+          </header>
+          <div class="receipt-row"><span>outcome</span><span>authorized | denied | allow | deny</span></div>
+          <div class="receipt-row"><span>authorizer</span><span>policy | human | gate | timeout</span></div>
+          <div class="receipt-row"><span>policy</span><span>signed human-authored rule set</span></div>
+          <div class="receipt-row"><span>evidence</span><span>signature, hash chain, timestamp</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="wrap">
+        <div class="section-intro">
+          <span class="eyebrow">Coverage Report</span>
+          <h2>Show where the boundary held and where it ended.</h2>
+          <p>
+            A receipt proves one governed decision. A coverage report explains the perimeter of the run. It names the surfaces that were routed, the bypass sentinels that were blocked, the limitations that were disclosed, and the surfaces outside this proof path.
+          </p>
+        </div>
+        <div class="coverage-map" aria-label="Coverage map diagram">
+          <div class="small-node status-routed">
+            <strong>Routed</strong>
+            <p>Evidence exists that this action surface crossed the ZLAR gate.</p>
+          </div>
+          <div class="small-node status-blocked">
+            <strong>Blocked</strong>
+            <p>A bypass route or unsafe decision was refused by the proof path.</p>
+          </div>
+          <div class="small-node status-disclosed">
+            <strong>Disclosed</strong>
+            <p>The limitation is named so it cannot masquerade as coverage.</p>
+          </div>
+          <div class="small-node status-out">
+            <strong>Out of scope</strong>
+            <p>The surface needs another interception or deployment control.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="wrap two-col">
+        <div>
+          <span class="eyebrow">Sealed Mode</span>
+          <h2>A stronger deployment posture closes the paths around the gate.</h2>
+          <p>
+            ZLAR governs routed actions. A serious deployment also removes or blocks the paths that do not cross the boundary. That stronger posture is Sealed Mode.
+          </p>
+          <p>
+            Sealed Mode pairs the gate with sandbox profiles, network egress controls, filesystem allowlists, controlled shell access, proxied MCP access, read-only policy and gate files, external key custody, and receipt witnessing or external log anchoring.
+          </p>
+          <div class="button-row">
+            <a class="button secondary" href="sealed-mode.html">See the layers</a>
+          </div>
+        </div>
+        <div class="diagram">
+          <div class="label">Sealed Mode layers</div>
+          <div class="layer-stack">
+            <div class="layer"><strong>Gate</strong><span>Signed policy, deterministic allow/deny/ask.</span></div>
+            <div class="layer"><strong>Route</strong><span>Hooks and proxied MCP paths for action surfaces.</span></div>
+            <div class="layer"><strong>Contain</strong><span>Sandbox, filesystem, and network controls around the agent.</span></div>
+            <div class="layer"><strong>Prove</strong><span>Receipts, audit chains, coverage reports, verifier kits.</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="wrap two-col">
+        <div class="quote-panel">
+          <span class="eyebrow">Open Memo &middot; edited web version</span>
+          <p>
+            High-impact agentic AI systems should produce verifiable action-level evidence.
+          </p>
+          <p>
+            The architectural fit is the test: execution boundary, off-device authority, signed evidence.
+          </p>
+          <div class="button-row">
+            <a class="button secondary" href="open-memo.html">Read the memo</a>
+          </div>
+        </div>
+        <div class="quote-panel">
+          <span class="eyebrow">Founder essay &middot; edited web version</span>
+          <p>
+            ZLAR is a consent boundary for artificial agency.
+          </p>
+          <p>
+            The object is clear: a governed path from AI intention to world action.
+          </p>
+          <div class="button-row">
+            <a class="button secondary" href="execution-boundary.html">Read the essay</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="wrap">
+        <div class="section-intro">
+          <span class="eyebrow">Boundaries</span>
+          <h2>The claim is powerful because it is bounded.</h2>
+          <p>
+            The website can speak plainly in founder voice. The disclosure still has to be exact.
+          </p>
+        </div>
+        <div class="disclosure">
+          <h3>v3.3.15 claim boundary</h3>
+          <ul>
+            <li>ZLAR governs routed/intercepted action surfaces only.</li>
+            <li>Safe Codex wording: "ZLAR can govern Codex CLI-invoked MCP tool calls when those MCP servers are routed through ZLAR."</li>
+            <li>Unrouted shell/filesystem/browser/app/network/model-reasoning/final-text surfaces are not claimed as governed by this proof path.</li>
+            <li>/contest is not implemented.</li>
+            <li>External non-Vincent verifier attestation remains prepared/pending unless state changes.</li>
+          </ul>
+        </div>
+        <div class="button-row">
+          <a class="button secondary" href="boundaries.html">Read the boundary page</a>
+          <a class="button secondary" href="archive.html">Archive</a>
+          <a class="button secondary" href="https://github.com/ZLAR-AI/ZLAR">GitHub</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
       <p>
-        Fail closed: gate down = routed actions denied.<br>
-        No AI in the enforcement path. The gate classifies and enforces. It does not reason.<br>
-        Policy is a human artifact. Agents cannot modify the rules that govern them.<br>
-        Human invariants protect the decision-maker: daily caps, deliberation floors, authenticity checks. Rubber-stamping trips a canary; Tier 2 blocks the question until the human re-engages.
+        ZLAR Inc. &middot; <a href="proof-pack.html">Proof Pack</a> &middot; <a href="specs/">Specifications</a> &middot; <a href="legal.html">Legal</a> &middot; <a href="mailto:hello@zlar.ai">hello@zlar.ai</a>
       </p>
     </div>
-  </section>
-
-  <hr class="divider">
-
-  <!-- Scope -->
-  <section id="scope">
-    <span class="section-label">Scope</span>
-    <h2>What ZLAR governs &mdash; and what it doesn't.</h2>
-    <p>
-      ZLAR governs actions that flow through it. Actions that do not flow through it are not governed. This is not a hidden limitation. It is the scope boundary, stated in doctrine.
-    </p>
-    <p>
-      Within the governed path: cryptographically verifiable evidence for every intercepted action, signed policy, human authority routed when policy calls for it, fail-closed on every error path. The claim is structural and holds when the agent is adversarial, misaligned, or buggy.
-    </p>
-
-    <div class="flow">
-      <div class="flow-step">
-        <span class="flow-action">outside</span>
-        <div>
-          <div class="flow-name">Upstream of the contact boundary</div>
-          <p class="flow-desc">ZLAR does not govern the model, the prompt, or the reasoning trace. Governing upstream is governance theater. Governance happens at the contact.</p>
-        </div>
-      </div>
-      <div class="flow-step">
-        <span class="flow-action">outside</span>
-        <div>
-          <div class="flow-name">Un-routed paths</div>
-          <p class="flow-desc">Capabilities the deployment has not routed through a ZLAR interception surface reach effect without crossing the gate. Those belong to sandboxes, network controls, and OS permissions.</p>
-        </div>
-      </div>
-      <div class="flow-step">
-        <span class="flow-action">outside</span>
-        <div>
-          <div class="flow-name">Out-of-SDK sub-runtimes</div>
-          <p class="flow-desc">When the local process delegates to a sub-runtime that is not a ZLAR-mediated worker, ZLAR sees neither the handoff nor the sub-runtime's actions. A delegation-envelope gate is the named plan; not yet shipped.</p>
-        </div>
-      </div>
-    </div>
-
-    <p style="margin-top: 2rem;">
-      Closing these gaps is the deployment owner's job. A deployment that leaves un-routed capabilities has ZLAR running, not ZLAR governing.
-    </p>
-    <p style="font-size: 0.9rem; margin-top: 1rem;">
-      <a href="https://github.com/ZLAR-AI/ZLAR/blob/main/doctrine/SCOPE.md" style="color: var(--teal);">doctrine/SCOPE.md</a> &nbsp;&middot;&nbsp;
-      <a href="https://github.com/ZLAR-AI/ZLAR/blob/main/docs/adr/ADR-010-interception-coverage.md" style="color: var(--teal);">ADR-010 Interception Coverage</a>
-    </p>
-  </section>
-
-  <hr class="divider">
-
-  <!-- What ZLAR Is Not -->
-  <section id="distinctions">
-    <span class="section-label">Distinctions</span>
-    <h2>Adjacent things that are not this.</h2>
-    <p>
-      The category is crowded with adjacent things that look like governance and aren't. ZLAR is not those things.
-    </p>
-
-    <div class="flow">
-      <div class="flow-step">
-        <span class="flow-action">not this</span>
-        <div>
-          <div class="flow-name">A trust score is not authority</div>
-          <p class="flow-desc">A model judging another model is an attack surface disguised as a feature. Both can be talked into the same answer in the same language. The judge must not be smart in the way the agent is smart.</p>
-        </div>
-      </div>
-      <div class="flow-step">
-        <span class="flow-action">not this</span>
-        <div>
-          <div class="flow-name">A dashboard is not governance</div>
-          <p class="flow-desc">Watching after the fact is monitoring. Governance stops the action before it becomes real. Receipts come from a gate that already happened &mdash; not the other way around.</p>
-        </div>
-      </div>
-      <div class="flow-step">
-        <span class="flow-action">not this</span>
-        <div>
-          <div class="flow-name">A vendor governing its own agents is not oversight</div>
-          <p class="flow-desc">The party with revenue at stake cannot be the party that says no. Independent audit is structural, not optional &mdash; that is why finance has it, and that is why autonomous agents need it.</p>
-        </div>
-      </div>
-      <div class="flow-step">
-        <span class="flow-action">not this</span>
-        <div>
-          <div class="flow-name">A wrapper around an SDK is not authority placement</div>
-          <p class="flow-desc">If the agent can rewrite or bypass the wrapper, the first yes still lives inside the agent's reach. First-allow authority must live outside the governed agent's writable space.</p>
-        </div>
-      </div>
-    </div>
-
-    <p style="margin-top: 2rem;">
-      ZLAR is the structural alternative: deterministic gate, signed policy, separately-signed meta-policy, named human authority at the points consequence demands it, receipts an auditor can verify without the vendor in the room.
-    </p>
-  </section>
-
-  <hr class="divider">
-
-  <!-- Receipt is portable -->
-  <section id="portable-receipt">
-    <span class="section-label">Receipt portability</span>
-    <h2>Verifiable outside the vendor's interface.</h2>
-    <p>
-      A Governed Action Receipt is a signed artifact &mdash; not a screenshot, not a log entry, not a dashboard view. The decision, the rule it cited, the human who authorized it, the timestamp, the delegation chain are all bytes that anyone with the public key can verify.
-    </p>
-    <p>
-      That is the structural answer to vendor capture. The affected party &mdash; citizen, regulator, auditor, opposing counsel &mdash; does not depend on the vendor's interface for ground truth. After the session ends. After the vendor pivots. After the deployment is gone.
-    </p>
-    <p style="font-size: 0.9rem; margin-top: 1rem;">
-      <a href="receipt-verify.html" style="color: var(--teal);">Verify a real receipt &rarr;</a> &nbsp;&middot;&nbsp;
-      <a href="specs/receipt-v1.html" style="color: var(--teal);">Receipt v1 specification &rarr;</a>
-    </p>
-  </section>
-
-  <hr class="divider">
-
-  <!-- Capabilities -->
-  <section id="capabilities">
-    <span class="section-label">Shipped</span>
-    <h2>Governance infrastructure, not a dashboard.</h2>
-
-    <div class="components">
-      <div class="component">
-        <div class="component-name">Governed Action Receipt</div>
-        <p class="component-desc">Portable cryptographic proof. v1 envelope format (frozen). Ed25519 signature over canonical payload. Verifiable by anyone with the public key.</p>
-      </div>
-      <div class="component">
-        <div class="component-name">Deterministic Gate</div>
-        <p class="component-desc">Bash gate (Claude Code, Cursor, Windsurf) and MCP gate (any MCP client). Per-entry Ed25519 audit signing. Fail-closed on every error path.</p>
-      </div>
-      <div class="component">
-        <div class="component-name">Cedar Policy Engine</div>
-        <p class="component-desc">28+ formal policy rules in Amazon's Cedar language. Dual-engine evaluation (JSON regex + Cedar). Policy portability across governance layers.</p>
-      </div>
-      <div class="component">
-        <div class="component-name">Human Invariants</div>
-        <p class="component-desc">Five enforced constraints protecting the human decision-maker: H6 (daily cap), H13 (capacity), H14 (response-time variance), H15 (deliberation floor), H17 (authenticity).</p>
-      </div>
-      <div class="component">
-        <div class="component-name">Human-Attention Canary</div>
-        <p class="component-desc">Monitors the human decision-maker for response-time variance. Tier 1 advisory banner warns of rubber-stamping patterns. Tier 2 triggers a blocking preconfirm interrupt before the main ask. Resets on recovery.</p>
-      </div>
-      <div class="component">
-        <div class="component-name">Trust Lane</div>
-        <p class="component-desc">Three lanes &mdash; Fast, Guarded, Slow &mdash; track current evidence of operator attention. Five healthy canaries auto-promote one lane; a failed or missed canary resets the count and demotes one lane. Fast while evidence is fresh. Slow when it degrades.</p>
-      </div>
-      <div class="component">
-        <div class="component-name">Canonicalization Spec</div>
-        <p class="component-desc">Published specification (RFC 8785 subset). 28 test vectors verified across Node.js, Python, and bash. Cross-language receipt verification.</p>
-      </div>
-      <div class="component">
-        <div class="component-name">Semantic Validation</div>
-        <p class="component-desc">Five-layer verification pipeline. Rule-outcome consistency, authorizer coherence, temporal checks, delegation chain integrity. Signature is necessary but not sufficient.</p>
-      </div>
-    </div>
-  </section>
-
-  <hr class="divider">
-
-  <!-- Install -->
-  <section id="install">
-    <span class="section-label">Get started</span>
-    <h2>See governance work in under 60 seconds.</h2>
-    <p>
-      The quickstart runs the real gate against real tool calls. Two are allowed. Two are denied. A v1 receipt is generated and cryptographically verified. Nothing is simulated.
-    </p>
-    <div style="background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--card-radius); padding: 1.5rem 2rem; margin-top: 2rem;">
-      <code style="font-family: var(--mono); font-size: 1rem; color: var(--green);">git clone https://github.com/ZLAR-AI/ZLAR.git && cd ZLAR && bash scripts/quickstart.sh</code>
-    </div>
-    <p style="font-size: 0.85rem; color: var(--muted); margin-top: 0.75rem;">
-      Requirements: bash 4+, jq, openssl 3.x. Optional: Node.js 18+ (MCP gate, receipt verification).
-      <a href="https://github.com/ZLAR-AI/ZLAR/blob/main/docs/troubleshooting.md" style="color: var(--teal);">Troubleshooting &rarr;</a>
-    </p>
-  </section>
-
-  <hr class="divider">
-
-  <!-- Standards -->
-  <section id="standards">
-    <span class="section-label">Standards engagement</span>
-    <h2>Regulatory and standards participation.</h2>
-
-    <div class="links-grid">
-      <a href="nist-comment.html" class="link-card">
-        <span class="link-card-label">NIST Public Comment</span>
-        <div class="link-card-title">NCCoE: Execution-Boundary Governance</div>
-        <p class="link-card-desc">Formal comment on the NIST concept paper on AI agent identity and authorization.</p>
-      </a>
-      <a href="caisi-submission.html" class="link-card">
-        <span class="link-card-label">NIST CAISI Submission</span>
-        <div class="link-card-title">The Identity-to-Execution Gap</div>
-        <p class="link-card-desc">Submitted to NIST CAISI Listening Sessions. Primary barrier to AI agent adoption in financial services.</p>
-      </a>
-      <a href="specs/" class="link-card">
-        <span class="link-card-label">Published Specifications</span>
-        <div class="link-card-title">Canonicalization v1.0 &amp; Receipt v1</div>
-        <p class="link-card-desc">Formal specifications with permanent URLs. Cross-language verified. Receipt format frozen.</p>
-      </a>
-      <a href="legal.html" class="link-card">
-        <span class="link-card-label">Legal &amp; Regulatory</span>
-        <div class="link-card-title">Terms, Classification, License</div>
-        <p class="link-card-desc">Apache 2.0. Regulatory classification under EU AI Act. Known limitations disclosed.</p>
-      </a>
-    </div>
-  </section>
-
-  <hr class="divider">
-
-  <!-- Technical depth -->
-  <section id="depth">
-    <span class="section-label">Technical depth</span>
-    <h2>Inspect everything.</h2>
-
-    <div class="links-grid">
-      <a href="architecture.html" class="link-card">
-        <span class="link-card-label">Architecture Briefing</span>
-        <div class="link-card-title">Technical Overview</div>
-        <p class="link-card-desc">Problem, architecture, evidence, regulatory mapping. The complete technical briefing.</p>
-      </a>
-      <a href="proof-interactive.html" class="link-card">
-        <span class="link-card-label">Interactive</span>
-        <div class="link-card-title">Walk Through the Gate</div>
-        <p class="link-card-desc">Step through four scenarios. See the input, policy evaluation, and response at each stage.</p>
-      </a>
-      <a href="proof.html" class="link-card">
-        <span class="link-card-label">Formal Proof</span>
-        <div class="link-card-title">Enforcement Proof by Exhaustive Case Analysis</div>
-        <p class="link-card-desc">All 9 terminal states verified against source code. Every claim verifiable. Every boundary stated.</p>
-      </a>
-      <a href="receipt-verify.html" class="link-card">
-        <span class="link-card-label">Verify a Receipt</span>
-        <div class="link-card-title">Real v1 Receipt, One Command</div>
-        <p class="link-card-desc">A real Governed Action Receipt. Clone, verify with only the public key, no platform access. The proof a reader can touch.</p>
-      </a>
-      <a href="https://github.com/ZLAR-AI/ZLAR/tree/main/doctrine" class="link-card">
-        <span class="link-card-label">Doctrine Suite</span>
-        <div class="link-card-title">DNA, SCOPE, FRAMINGS, IMPLEMENTATION</div>
-        <p class="link-card-desc">The architectural canon. What ZLAR is, what it governs, how public claims are framed, how doctrine becomes code.</p>
-      </a>
-      <a href="https://github.com/ZLAR-AI/ZLAR" class="link-card">
-        <span class="link-card-label">Repository</span>
-        <div class="link-card-title">ZLAR on GitHub</div>
-        <p class="link-card-desc">Full source. 1,710 test assertions. 12 ADRs. Apache 2.0. Clone, install, read.</p>
-      </a>
-    </div>
-  </section>
-
-  <hr class="divider">
-
-  <!-- About -->
-  <section id="about">
-    <span class="section-label">About</span>
-    <h2>ZLAR Inc.</h2>
-    <p>
-      ZLAR is built from 25 years of financial services experience,
-      where independent audit is structural, not optional. The same principle applies to autonomous agents:
-      the entity performing the work cannot credibly audit itself.
-    </p>
-    <p>
-      Canadian corporation. Apache 2.0 licensed. Open source.
-    </p>
-    <p>
-      <a href="mailto:hello@zlar.ai" style="color: var(--teal);">hello@zlar.ai</a> &nbsp;&middot;&nbsp;
-      <a href="writing.html" style="color: var(--muted); font-size: 0.9rem;">Founder's writing &rarr;</a>
-    </p>
-  </section>
-
-  <footer>
-    <p>
-      &copy; 2026 ZLAR Inc. &nbsp;&middot;&nbsp;
-      <a href="https://github.com/ZLAR-AI/ZLAR">GitHub</a> &nbsp;&middot;&nbsp;
-      <a href="specs/">Specifications</a> &nbsp;&middot;&nbsp;
-      <a href="legal.html">Legal</a> &nbsp;&middot;&nbsp;
-      <a href="mailto:hello@zlar.ai">hello@zlar.ai</a>
-    </p>
   </footer>
-
 </body>
 </html>

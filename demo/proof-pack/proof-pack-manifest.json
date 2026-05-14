@@ -1,0 +1,135 @@
+{
+  "generated_at": "2026-05-14T00:00:00.000Z",
+  "pack_type": "zlar-proof-pack-v0",
+  "pack_version": 0,
+  "claim_ceiling": "ZLAR can govern Codex CLI-invoked MCP tool calls when those MCP servers are routed through ZLAR.",
+  "included_files": {
+    "manifest": "proof-pack-manifest.json",
+    "readme": "README.md",
+    "governed_profile_coverage_json": "evidence/governed-profile-coverage-report.json",
+    "governed_profile_coverage_text": "evidence/governed-profile-coverage-report.txt",
+    "scratch_verifier": "verify-proof-pack.mjs"
+  },
+  "evidence": {
+    "governed_profile_coverage_report": {
+      "included": true,
+      "report_type": "governed-profile-coverage-v0",
+      "profile": {
+        "id": "scratch:codex:routed-mcp",
+        "name": "scratch Codex routed-MCP proof profile",
+        "client": "Codex CLI",
+        "isolated_config": true
+      },
+      "json_file": "evidence/governed-profile-coverage-report.json",
+      "text_file": "evidence/governed-profile-coverage-report.txt",
+      "json_sha256": "91ec1c5a8457add21036bb1368eb56b3c39502cc24050d012888f44d9f3622f9",
+      "text_sha256": "89802f6827a0fa7c7db9c530b3d9c9bf3348552078fa72f6332d5c377b007ccf",
+      "surface_counts": {
+        "routed": 2,
+        "blocked": 2,
+        "disclosed": 2,
+        "out_of_scope": 2
+      },
+      "decision_surfaces": [
+        {
+          "id": "codex.mcp.decision.allow",
+          "status": "routed",
+          "audit_event_ids": [
+            "scratch-allow-001"
+          ],
+          "worker_receipt_count": 1,
+          "why_status": "available"
+        },
+        {
+          "id": "codex.mcp.decision.deny",
+          "status": "blocked",
+          "audit_event_ids": [
+            "scratch-deny-001"
+          ],
+          "worker_receipt_count": 1,
+          "why_status": "available"
+        }
+      ]
+    },
+    "routed_mcp_proof_report": {
+      "available": true,
+      "included": false,
+      "reason": "referenced by hash and sanitized call summary only",
+      "report_type": "scratch-routed-mcp-client-proof",
+      "report_sha256": "0e0b4da8e188c0fb0cd0fb36779942e171e6a0e401bd72d1dc17c90ad4b210f0",
+      "call_count": 2
+    },
+    "worker_receipts": {
+      "included_raw_store": false,
+      "coverage_report_receipt_count": 2,
+      "store_receipt_count": 0,
+      "receipt_summaries": [
+        {
+          "event_id": "scratch-allow-001",
+          "receipt_sha256": "4c1d5f4b54f57f5a7a18a6b0a25e9a2df3f3c0a961e2d9cb8fd468f24e6a8f11",
+          "audit_hash": "b8b6a142b7e8cdb5ee7d362b8a3e12866ab2e31a3c4f08e6957c1846acff4d31",
+          "detail_hash": "f2adbbd1130196ec8b1ef3d6710df2d7787e82de2a88f5f1a6d863e7a7d23a4a",
+          "decision": "allow"
+        },
+        {
+          "event_id": "scratch-deny-001",
+          "receipt_sha256": "4f00e0a78f10fa356773b47dd24cd57eb3f4f67b5952f4f51d01084f856a8e6d",
+          "audit_hash": "bdf8fd7f9e7b9e5e0d30fd065a0bd62388a3e7d830572b1fd00c7c61a56f41c0",
+          "detail_hash": "61d4047b075f6a63c5b6c4e8993bff69d8b678c5f41167a1e0a42b6f5fb4d638",
+          "decision": "deny"
+        }
+      ]
+    },
+    "why_lookup": {
+      "status_by_event_id": {
+        "scratch-allow-001": "available",
+        "scratch-deny-001": "available"
+      }
+    },
+    "verifier_kit": {
+      "packet": {
+        "status": "prepared_pending",
+        "kit_version": "v0.1.0",
+        "packet_status": "prepared_pending",
+        "external_attestation": "not_attested",
+        "worker_receipt_verification": "not_supported_by_verifier_kit_v0_1"
+      },
+      "runner": {
+        "status": "not_checked",
+        "external_attestation": "not_attested"
+      }
+    }
+  },
+  "non_claims": [
+    "This report covers routed or intercepted action surfaces only.",
+    "This report does not assert coverage for Codex shell, filesystem, browser, app-control, direct network, model reasoning, or final text surfaces.",
+    "MCP servers registered directly with a client instead of through the ZLAR MCP gate are outside this report.",
+    "/contest is not implemented.",
+    "External non-operator verifier attestation is not present in v0."
+  ],
+  "residual_ungoverned_surfaces": [
+    "Codex shell commands outside routed MCP tools/call decisions",
+    "Codex filesystem changes outside routed MCP tools/call decisions",
+    "Codex browser actions outside routed MCP tools/call decisions",
+    "Codex desktop app-control actions outside routed MCP tools/call decisions",
+    "Codex direct network calls outside routed MCP tools/call decisions",
+    "Codex model reasoning and final text",
+    "MCP protocol messages other than tools/call decisions",
+    "MCP servers registered directly with the client instead of through the ZLAR MCP gate"
+  ],
+  "privacy_validation": {
+    "passed": true,
+    "checks": {
+      "raw_args_absent": true,
+      "env_values_absent": true,
+      "prompt_text_absent": true,
+      "final_text_absent": true,
+      "private_paths_absent": true,
+      "numeric_human_ids_absent": true,
+      "approval_channel_ids_absent": true,
+      "live_approval_channel_details_absent": true,
+      "credentials_absent": true,
+      "operator_config_values_absent": true
+    }
+  }
+}

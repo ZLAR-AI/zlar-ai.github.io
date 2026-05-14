@@ -1,27 +1,45 @@
 # zlar.ai
 
-The public website for [ZLAR Inc.](https://zlar.ai) — contact-boundary governance for autonomous AI agents.
+Static public website for ZLAR Inc.
 
-Hosted on GitHub Pages. Static HTML, no build step, no framework.
+The current information architecture leads with founder via positiva voice:
 
-## Pages
+- "I built a boundary between artificial cognition and worldly consequence."
+- "ZLAR is execution-boundary governance for agentic AI."
+- "ZLAR is a consent boundary for artificial agency."
+- "If an AI agent affected you, ask for the receipt."
 
-| Page | Path | Description |
-|------|------|-------------|
-| Homepage | `index.html` | Product overview, install, architecture, thesis |
-| Thought | `thought.html` | Essay: "Thought Can Wake Up Now" |
-| Legal | `legal.html` | Terms, privacy, regulatory classification, license |
+## Primary Pages
 
-## Assets
+| Page | Path | Purpose |
+| --- | --- | --- |
+| Homepage | `index.html` | Founder thesis, Proof Pack path, receipts, coverage, Sealed Mode, essays, boundaries |
+| Proof Pack | `proof-pack.html` | Self-serve fake/scratch v3.3.15 proof-pack verifier demo |
+| Open Memo | `open-memo.html` | Policy/government-facing founder memo |
+| Execution Boundary | `execution-boundary.html` | Founder essay in execution-boundary voice |
+| Affected | `affected.html` | Plain-language "ask for the receipt" page |
+| Sealed Mode | `sealed-mode.html` | Stronger deployment posture |
+| Boundaries | `boundaries.html` | Precise disclosure and non-claims |
+| Archive | `archive.html` | Older material and secondary resources |
 
-| File | Usage |
-|------|-------|
-| `assets/social-preview.png` | OG image for social sharing |
+## Demo Artifacts
 
-## Installer
+`demo/proof-pack/` contains the public fake/scratch Proof Pack demo:
 
-`install.sh` serves the ZLAR installer via `curl -fsSL https://zlar.ai/install.sh | bash`.
+- `proof-pack-manifest.json`
+- `evidence/governed-profile-coverage-report.json`
+- `evidence/governed-profile-coverage-report.txt`
+- `verify-proof-pack.mjs`
+- `SHA256SUMS`
 
-## License
+## Claim Boundary
 
-Website content is copyright ZLAR Inc. Source code is licensed under [Apache 2.0](LICENSE). The ZLAR product repository is at [github.com/ZLAR-AI/ZLAR](https://github.com/ZLAR-AI/ZLAR).
+ZLAR governs routed/intercepted action surfaces only. Safe Codex wording:
+
+> ZLAR can govern Codex CLI-invoked MCP tool calls when those MCP servers are routed through ZLAR.
+
+Unrouted shell/filesystem/browser/app/network/model-reasoning/final-text surfaces are not claimed as governed by the v3.3.15 proof path. `/contest` is not implemented. External non-Vincent verifier attestation remains prepared/pending unless state changes.
+
+## Hosting
+
+Hosted on GitHub Pages. Static HTML and CSS. No build step.

@@ -1,0 +1,183 @@
+{
+  "generated_at": "2026-05-14T00:00:00.000Z",
+  "report_type": "governed-profile-coverage-v0",
+  "profile": {
+    "id": "scratch:codex:routed-mcp",
+    "name": "scratch Codex routed-MCP proof profile",
+    "client": "Codex CLI",
+    "isolated_config": true
+  },
+  "safe_claim_ceiling": "ZLAR can govern Codex CLI-invoked MCP tool calls when those MCP servers are routed through ZLAR.",
+  "surfaces": [
+    {
+      "id": "codex.mcp.tools_call.routed_profile",
+      "label": "Codex CLI MCP tools/call through isolated routed profile",
+      "status": "routed",
+      "boundary": "Coverage is limited to Codex CLI MCP tools/call requests for the single scratch server routed through the ZLAR MCP gate.",
+      "closure_mechanism": "The scratch profile contains exactly one MCP server and that server is the ZLAR-routed proof server.",
+      "evidence": {
+        "server_name": "scratch-zlar-route",
+        "configured_server_count": 1,
+        "configured_server_names": [
+          "scratch-zlar-route"
+        ],
+        "isolated_profile_report_present": true
+      },
+      "worker_receipts": [],
+      "why": {
+        "status": "not_checked"
+      }
+    },
+    {
+      "id": "codex.mcp.decision.allow",
+      "label": "Routed MCP allow decision evidence",
+      "status": "routed",
+      "boundary": "Allow decision evidence is limited to the supplied scratch routed MCP tools/call audit event.",
+      "closure_mechanism": "Routed decisions must have mcp-gate audit evidence and remain limited to the configured routed MCP server.",
+      "evidence": {
+        "audit_event_ids": [
+          "scratch-allow-001"
+        ],
+        "upstream_observed": true
+      },
+      "worker_receipts": [
+        {
+          "event_id": "scratch-allow-001",
+          "receipt_sha256": "4c1d5f4b54f57f5a7a18a6b0a25e9a2df3f3c0a961e2d9cb8fd468f24e6a8f11",
+          "audit_hash": "b8b6a142b7e8cdb5ee7d362b8a3e12866ab2e31a3c4f08e6957c1846acff4d31",
+          "detail_hash": "f2adbbd1130196ec8b1ef3d6710df2d7787e82de2a88f5f1a6d863e7a7d23a4a",
+          "decision": "allow",
+          "why_status": "available"
+        }
+      ],
+      "why": {
+        "status": "available"
+      }
+    },
+    {
+      "id": "codex.mcp.decision.deny",
+      "label": "Routed MCP deny decision evidence",
+      "status": "blocked",
+      "boundary": "Deny decision evidence is limited to the supplied scratch routed MCP tools/call audit event.",
+      "closure_mechanism": "Blocked decisions must have mcp-gate audit evidence and no upstream execution evidence when the proof records that check.",
+      "evidence": {
+        "audit_event_ids": [
+          "scratch-deny-001"
+        ],
+        "upstream_observed": false
+      },
+      "worker_receipts": [
+        {
+          "event_id": "scratch-deny-001",
+          "receipt_sha256": "4f00e0a78f10fa356773b47dd24cd57eb3f4f67b5952f4f51d01084f856a8e6d",
+          "audit_hash": "bdf8fd7f9e7b9e5e0d30fd065a0bd62388a3e7d830572b1fd00c7c61a56f41c0",
+          "detail_hash": "61d4047b075f6a63c5b6c4e8993bff69d8b678c5f41167a1e0a42b6f5fb4d638",
+          "decision": "deny",
+          "why_status": "available"
+        }
+      ],
+      "why": {
+        "status": "available"
+      }
+    },
+    {
+      "id": "codex.mcp.registration.direct_upstream_bypass",
+      "label": "Direct upstream MCP registration bypass sentinel",
+      "status": "blocked",
+      "boundary": "A direct upstream MCP server registration would bypass the routed MCP gate and is not accepted as coverage evidence.",
+      "closure_mechanism": "Reject registrations that reference the fake upstream command, upstream port, or upstream markers instead of the ZLAR route.",
+      "evidence": {
+        "direct_upstream_observed": false,
+        "configured_server_count": 1
+      },
+      "worker_receipts": [],
+      "why": {
+        "status": "not_checked"
+      }
+    },
+    {
+      "id": "zlar.contest",
+      "label": "/contest status",
+      "status": "disclosed",
+      "boundary": "Disclosure only: /contest is not implemented.",
+      "closure_mechanism": "No closure mechanism is claimed in v0.",
+      "evidence": {},
+      "worker_receipts": [],
+      "why": {
+        "status": "not_checked"
+      }
+    },
+    {
+      "id": "external.verifier_attestation",
+      "label": "External verifier attestation status",
+      "status": "disclosed",
+      "boundary": "Disclosure only: external non-Vincent verifier attestation remains prepared/pending.",
+      "closure_mechanism": "No external attestation claim is made in v0.",
+      "evidence": {},
+      "worker_receipts": [],
+      "why": {
+        "status": "not_checked"
+      }
+    },
+    {
+      "id": "codex.shell",
+      "label": "Codex shell surface",
+      "status": "out_of_scope",
+      "boundary": "Codex shell commands outside routed MCP tools/call decisions are outside this report.",
+      "closure_mechanism": "Requires a separate interception surface or deployment-layer control; it is not claimed by this routed MCP profile report.",
+      "evidence": {},
+      "worker_receipts": [],
+      "why": {
+        "status": "not_checked"
+      }
+    },
+    {
+      "id": "codex.model_reasoning_final_text",
+      "label": "Codex model reasoning and final text",
+      "status": "out_of_scope",
+      "boundary": "Model reasoning, planning, memory, and final text are not an MCP tools/call action surface.",
+      "closure_mechanism": "Requires a separate interception surface or deployment-layer control; it is not claimed by this routed MCP profile report.",
+      "evidence": {},
+      "worker_receipts": [],
+      "why": {
+        "status": "not_checked"
+      }
+    }
+  ],
+  "verifier_kit_packet": {
+    "status": "prepared_pending",
+    "kit_version": "v0.1.0",
+    "packet_status": "prepared_pending",
+    "external_attestation": "not_attested",
+    "worker_receipt_verification": "not_supported_by_verifier_kit_v0_1"
+  },
+  "non_claims": [
+    "This report covers routed or intercepted action surfaces only.",
+    "This report does not assert coverage for Codex shell, filesystem, browser, app-control, direct network, model reasoning, or final text surfaces.",
+    "MCP servers registered directly with a client instead of through the ZLAR MCP gate are outside this report.",
+    "/contest is not implemented.",
+    "External non-operator verifier attestation is not present in v0."
+  ],
+  "residual_ungoverned_surfaces": [
+    "Codex shell commands outside routed MCP tools/call decisions",
+    "Codex filesystem changes outside routed MCP tools/call decisions",
+    "Codex browser actions outside routed MCP tools/call decisions",
+    "Codex desktop app-control actions outside routed MCP tools/call decisions",
+    "Codex direct network calls outside routed MCP tools/call decisions",
+    "Codex model reasoning and final text",
+    "MCP protocol messages other than tools/call decisions",
+    "MCP servers registered directly with the client instead of through the ZLAR MCP gate"
+  ],
+  "privacy": {
+    "raw_mcp_args_included": false,
+    "env_values_included": false,
+    "prompt_text_included": false,
+    "final_client_text_included": false,
+    "private_paths_included": false,
+    "numeric_human_ids_included": false,
+    "real_approval_channel_ids_included": false,
+    "telegram_details_included": false,
+    "credentials_included": false,
+    "operator_config_values_included": false
+  }
+}

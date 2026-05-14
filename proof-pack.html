@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Try the Proof Pack - ZLAR</title>
+  <meta name="description" content="Download and verify a fake/scratch ZLAR Proof Pack v0 bundle for the v3.3.15 routed-MCP proof path.">
+  <meta property="og:title" content="Try the ZLAR Proof Pack">
+  <meta property="og:description" content="A self-serve scratch proof pack: manifest, coverage report, verifier, hashes, PASS output, and explicit non-claims.">
+  <meta property="og:url" content="https://zlar.ai/proof-pack.html">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;650;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="zlar.css">
+</head>
+<body>
+  <nav class="site-nav">
+    <a class="brand" href="/">ZL<span>A</span>R</a>
+    <div class="nav-links">
+      <a class="primary-link" href="proof-pack.html">Try Proof Pack</a>
+      <a href="execution-boundary.html">Boundary</a>
+      <a href="open-memo.html">Open Memo</a>
+      <a href="affected.html">Affected?</a>
+      <a href="boundaries.html">Boundaries</a>
+      <a href="archive.html">Archive</a>
+      <a href="https://github.com/ZLAR-AI/ZLAR">GitHub</a>
+    </div>
+  </nav>
+
+  <main>
+    <header class="hero">
+      <div class="wrap hero-grid">
+        <div>
+          <span class="eyebrow">Proof Pack v0</span>
+          <h1>Try the proof before you trust the claim.</h1>
+          <p class="lede">
+            This is the self-serve v3.3.15 demo path: a fake/scratch proof pack with sanitized artifacts, a coverage report, hashes, and a dependency-free verifier. It is designed to make the boundary visible.
+          </p>
+          <div class="button-row">
+            <a class="button primary" href="#download">Download and verify</a>
+            <a class="button secondary" href="boundaries.html">Read the boundary</a>
+          </div>
+        </div>
+        <div class="diagram">
+          <div class="label">Proof Pack anatomy</div>
+          <div class="proof-anatomy">
+            <div class="small-node status-routed"><strong>Manifest</strong><p>What is in the bundle.</p></div>
+            <div class="small-node status-routed"><strong>Coverage</strong><p>Where the boundary held.</p></div>
+            <div class="small-node status-blocked"><strong>Hashes</strong><p>Whether files still match.</p></div>
+            <div class="small-node status-disclosed"><strong>Verifier</strong><p>What can be checked.</p></div>
+            <div class="small-node status-out"><strong>Non-claims</strong><p>What is outside.</p></div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <section class="section" id="download">
+      <div class="wrap">
+        <div class="section-intro">
+          <span class="eyebrow">Run it</span>
+          <h2>Download the scratch pack and run the verifier.</h2>
+          <p>
+            The commands below fetch only public fake/scratch artifacts from this website. They do not need ZLAR credentials, private keys, live Telegram, real chat IDs, raw MCP args, prompt text, final client text, or operator paths.
+          </p>
+        </div>
+        <pre class="terminal"><code>mkdir zlar-proof-pack-v0-scratch
+cd zlar-proof-pack-v0-scratch
+mkdir -p evidence
+
+curl -fsSLO https://zlar.ai/demo/proof-pack/README.md
+curl -fsSLO https://zlar.ai/demo/proof-pack/proof-pack-manifest.json
+curl -fsSLO https://zlar.ai/demo/proof-pack/SHA256SUMS
+curl -fsSLO https://zlar.ai/demo/proof-pack/verify-proof-pack.mjs
+curl -fsSLo evidence/governed-profile-coverage-report.json \
+  https://zlar.ai/demo/proof-pack/evidence/governed-profile-coverage-report.json
+curl -fsSLo evidence/governed-profile-coverage-report.txt \
+  https://zlar.ai/demo/proof-pack/evidence/governed-profile-coverage-report.txt
+
+shasum -a 256 -c SHA256SUMS
+node verify-proof-pack.mjs</code></pre>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="wrap two-col">
+        <div>
+          <span class="eyebrow">Expected result</span>
+          <h2>A clean run ends in PASS.</h2>
+          <p>
+            The verifier checks file integrity, claim ceiling, report type, disclosure text, privacy flags, and unsafe text patterns. It does not pretend to be a production attestation.
+          </p>
+        </div>
+        <pre class="terminal"><code>README.md: OK
+proof-pack-manifest.json: OK
+evidence/governed-profile-coverage-report.json: OK
+evidence/governed-profile-coverage-report.txt: OK
+verify-proof-pack.mjs: OK
+<span class="pass">PASS</span> proof-pack manifest type
+<span class="pass">PASS</span> manifest claim ceiling
+<span class="pass">PASS</span> coverage report type
+<span class="pass">PASS</span> coverage claim ceiling
+<span class="pass">PASS</span> privacy and claim text scan
+<span class="pass">PASS</span> scratch proof pack verified</code></pre>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="wrap">
+        <div class="section-intro">
+          <span class="eyebrow">What was verified</span>
+          <h2>Plain English, no ceremony.</h2>
+        </div>
+        <div class="three-col">
+          <div class="card">
+            <div class="label">Integrity</div>
+            <h3>The files still match.</h3>
+            <p>The SHA-256 sidecar checks the downloaded README, manifest, coverage JSON, coverage text, and verifier script.</p>
+          </div>
+          <div class="card">
+            <div class="label">Claim ceiling</div>
+            <h3>The Codex claim stays bounded.</h3>
+            <p>The manifest and report must use the exact safe wording for routed MCP tool calls.</p>
+          </div>
+          <div class="card">
+            <div class="label">Privacy</div>
+            <h3>No private run details are included.</h3>
+            <p>The scratch pack declares false for raw args, environment values, prompt text, final text, private paths, identifiers, credentials, and operator config values.</p>
+          </div>
+        </div>
+        <div class="disclosure">
+          <h3>Disclosure</h3>
+          <ul>
+            <li>This public pack uses fake/scratch artifacts only.</li>
+            <li>It verifies the shape of the proof path, not a production deployment.</li>
+            <li>It does not provide external non-Vincent verifier attestation.</li>
+            <li>It does not implement /contest.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="wrap two-col">
+        <div>
+          <span class="eyebrow">Coverage map</span>
+          <h2>The report names the edge.</h2>
+          <p>
+            A coverage report matters because it refuses to let "we governed something" become "we governed everything." It makes the proof path honest enough to inspect.
+          </p>
+        </div>
+        <div class="coverage-map">
+          <div class="small-node status-routed"><strong>Routed</strong><p>Scratch MCP tools/call evidence crossed the gate.</p></div>
+          <div class="small-node status-blocked"><strong>Blocked</strong><p>Direct upstream registration was not accepted.</p></div>
+          <div class="small-node status-disclosed"><strong>Disclosed</strong><p>/contest and external attestation are named.</p></div>
+          <div class="small-node status-out"><strong>Out of scope</strong><p>Unrouted surfaces are not claimed.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section compact">
+      <div class="wrap">
+        <div class="disclosure">
+          <h3>v3.3.15 claim boundary</h3>
+          <p>
+            Release state: <a href="https://github.com/ZLAR-AI/ZLAR/releases/tag/v3.3.15">ZLAR v3.3.15 on GitHub</a>.
+          </p>
+          <ul>
+            <li>ZLAR governs routed/intercepted action surfaces only.</li>
+            <li>Safe Codex wording: "ZLAR can govern Codex CLI-invoked MCP tool calls when those MCP servers are routed through ZLAR."</li>
+            <li>Unrouted shell/filesystem/browser/app/network/model-reasoning/final-text surfaces are not claimed as governed by this proof path.</li>
+            <li>/contest is not implemented.</li>
+            <li>External non-Vincent verifier attestation remains prepared/pending unless state changes.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <p>
+        ZLAR Inc. &middot; <a href="/">Home</a> &middot; <a href="boundaries.html">Boundaries</a> &middot; <a href="archive.html">Archive</a> &middot; <a href="mailto:hello@zlar.ai">hello@zlar.ai</a>
+      </p>
+    </div>
+  </footer>
+</body>
+</html>

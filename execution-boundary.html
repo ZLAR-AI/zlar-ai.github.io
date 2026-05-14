@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>I Built an Execution-Boundary Governance Layer - ZLAR</title>
+  <meta name="description" content="Founder essay by Vincent Nijjar: ZLAR is execution-boundary governance for autonomous AI, a consent boundary for artificial agency.">
+  <meta property="og:title" content="I Built an Execution-Boundary Governance Layer for Agentic AI">
+  <meta property="og:description" content="ZLAR is a deterministic external gate between an agent's cognition and consequential action.">
+  <meta property="og:url" content="https://zlar.ai/execution-boundary.html">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;650;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="zlar.css">
+</head>
+<body>
+  <nav class="site-nav">
+    <a class="brand" href="/">ZL<span>A</span>R</a>
+    <div class="nav-links">
+      <a class="primary-link" href="proof-pack.html">Try Proof Pack</a>
+      <a href="execution-boundary.html">Boundary</a>
+      <a href="open-memo.html">Open Memo</a>
+      <a href="affected.html">Affected?</a>
+      <a href="boundaries.html">Boundaries</a>
+      <a href="archive.html">Archive</a>
+      <a href="https://github.com/ZLAR-AI/ZLAR">GitHub</a>
+    </div>
+  </nav>
+
+  <main>
+    <header class="hero">
+      <div class="wrap hero-grid">
+        <div>
+          <span class="eyebrow">Founder essay &middot; edited web version</span>
+          <h1>I built an execution-boundary governance layer for agentic AI.</h1>
+          <p class="lede">
+            ZLAR is a deterministic external gate between an agent's cognition and consequential action. It is a consent boundary for artificial agency.
+          </p>
+          <div class="button-row">
+            <a class="button primary" href="proof-pack.html">Try the Proof Pack</a>
+            <a class="button secondary" href="open-memo.html">Read the Open Memo</a>
+          </div>
+        </div>
+        <div class="diagram">
+          <div class="label">Boundary diagram</div>
+          <div class="boundary-diagram">
+            <div class="node"><strong>Agent cognition</strong><p>Plans, code, requests, tool calls.</p></div>
+            <div class="arrow">-&gt;</div>
+            <div class="gate-node">signed deterministic authority</div>
+            <div class="arrow">-&gt;</div>
+            <div class="node"><strong>Consequence</strong><p>Action in the world.</p></div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <article class="section">
+      <div class="wrap essay">
+        <p>
+          I built ZLAR as execution-boundary governance for autonomous AI: a deterministic external gate between an agent's cognition and consequential action.
+        </p>
+        <p>
+          The core idea is simple:
+        </p>
+        <blockquote>
+          An agent may generate plans, code, messages, edits, requests, and tool calls. Consequence crosses into the world through a separate, signed, deterministic authority.
+        </blockquote>
+        <p>
+          ZLAR is a consent boundary for artificial agency.
+        </p>
+
+        <h2>What ZLAR Is</h2>
+        <p>
+          ZLAR intercepts AI-agent tool calls before they reach operational systems: shell commands, file writes, API calls, MCP tool calls, deployment steps, and other consequential actions.
+        </p>
+        <p>
+          It evaluates each routed action against signed policy, allows routine actions, routes consequential actions to a human when required, and produces cryptographic receipts showing that governance occurred.
+        </p>
+        <p>
+          The gate is deny-first, fail-closed, and deterministic. Its authority comes from signed human policy, independent key custody, and records that can be verified outside the agent's runtime.
+        </p>
+        <p>
+          As AI becomes persistent, embodied, and operational, the governing question is: where is the lawful boundary between cognition and consequence?
+        </p>
+        <p>
+          ZLAR's answer is: at the execution boundary.
+        </p>
+
+        <h2>The Category</h2>
+        <p>
+          Security teams will recognize parts of ZLAR: policy enforcement, auditability, human approval, sandboxing, key custody, and tamper-evident logs.
+        </p>
+        <p>
+          The category is larger than any one security control. ZLAR is execution-boundary governance for autonomous AI. It can be described as proof-carrying governance for agentic systems, external authorization infrastructure for AI agents, a deterministic control plane for autonomous AI action, or governed agency.
+        </p>
+        <p>
+          The name can evolve. The object is clear: a governed path from AI intention to world action.
+        </p>
+
+        <h2>The Proof Artifact</h2>
+        <p>
+          The flagship artifact is the Governed Action Receipt.
+        </p>
+        <p>
+          A receipt shows that a specific action was attempted, which policy evaluated it, which decision authority applied, whether a human approved or denied it, whether the record remains intact, and how the receipt connects to the audit chain.
+        </p>
+        <p>
+          Every consequential AI action should produce a verifiable governance receipt.
+        </p>
+        <p>
+          The receipt turns AI governance into something inspectable. It gives operators, auditors, affected people, and outside verifiers a record they can test.
+        </p>
+
+        <h2>The Demo</h2>
+        <p>
+          The first priority is one unforgettable demo.
+        </p>
+        <p>
+          The demo should show an AI agent attempting consequential work in a real developer environment. ZLAR applies policy at the action boundary. Routine actions pass. High-risk actions are denied or escalated. A human approves or denies on a separate channel. A verifiable receipt is produced. A third party verifies the receipt.
+        </p>
+        <p>
+          The five-minute experience should be simple: a user starts an agent, the agent attempts a governed action, ZLAR blocks or escalates the action, the human approval flow appears, and a receipt is generated and verified.
+        </p>
+        <p>
+          That first success should feel immediate: the user sees governed execution, human authority, and verifiable evidence in one run.
+        </p>
+
+        <h2>Honest Scope</h2>
+        <p>
+          ZLAR governs actions routed through it.
+        </p>
+        <p>
+          A strong deployment pairs the ZLAR gate with surrounding controls: sandbox profiles, OS permissions, filesystem allowlists, network egress controls, sealed policy files, external key custody, and controlled access paths around shell and MCP surfaces.
+        </p>
+        <p>
+          That combination is ZLAR Sealed Mode.
+        </p>
+
+        <h2>ZLAR Sealed Mode</h2>
+        <p>
+          Sealed Mode combines the ZLAR gate, sandbox profile, network egress controls, filesystem allowlist, controlled shell access, proxied MCP access, read-only policy and gate files, external key custody, and receipt witnessing or external log anchoring.
+        </p>
+        <p>
+          Sealed Mode makes the execution boundary visible, enforceable, and reviewable in deployment.
+        </p>
+
+        <h2>Affected-Person Pathway</h2>
+        <p>
+          The receipt is designed to be legible to advocates acting for affected people: patients, claimants, tenants, borrowers, workers, developers, and customers. The person affected by an AI action deserves a record even when they were outside the approval loop.
+        </p>
+        <blockquote>
+          If an AI agent affected you, ask for the receipt.
+        </blockquote>
+        <p>
+          The affected person should be able to ask: who authorized this action, under what policy, at what time, and can the record be verified?
+        </p>
+        <p>
+          ZLAR gives that question an artifact.
+        </p>
+
+        <h2>Why This Matters</h2>
+        <p>
+          Autonomous agents need external authorization, durable policy, and records people can contest.
+        </p>
+        <p>
+          Accountable agency has four minimum conditions: the action boundary is defined, the policy authority is external to the agent, consequential actions produce receipts, and affected people have a path to understand and challenge the action.
+        </p>
+        <p>
+          ZLAR governs the boundary where AI intention becomes world action.
+        </p>
+
+        <h2>First Markets</h2>
+        <p>
+          Developer agents already edit files, change configuration, run commands, touch secrets, and push code. The pain is concrete and visible. The demo is obvious. The adoption path is fast.
+        </p>
+        <p>
+          Enterprises need auditability, approvals, policy enforcement, and contestability as agentic workflows enter real business processes. The sales path is slower, but the value is high.
+        </p>
+
+        <h2>Final Claim</h2>
+        <p>
+          I built a boundary between artificial cognition and worldly consequence.
+        </p>
+        <p>
+          As AI becomes persistent, embodied, agentic, and socially integrated, the live governance question is: who or what is allowed to turn cognition into action?
+        </p>
+        <p>
+          ZLAR gives the answer a working form.
+        </p>
+        <p>
+          As AI agents enter the world, ZLAR governs the moment thought becomes action.
+        </p>
+
+        <div class="disclosure">
+          <h3>Disclosure</h3>
+          <p>
+            This essay uses founder voice. The claim boundary remains precise: ZLAR governs routed/intercepted action surfaces only.
+          </p>
+        </div>
+      </div>
+    </article>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <p>
+        ZLAR Inc. &middot; <a href="/">Home</a> &middot; <a href="proof-pack.html">Proof Pack</a> &middot; <a href="open-memo.html">Open Memo</a> &middot; <a href="mailto:hello@zlar.ai">hello@zlar.ai</a>
+      </p>
+    </div>
+  </footer>
+</body>
+</html>
