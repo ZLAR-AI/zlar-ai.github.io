@@ -105,6 +105,13 @@ code {
   font-weight: 650;
 }
 
+.nav-links a.nav-secondary {
+  color: var(--muted);
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  font-weight: 800;
+}
+
 .nav-links a.primary-link {
   background: var(--teal);
   border: 1px solid var(--teal);
@@ -173,6 +180,20 @@ code {
   flex-wrap: wrap;
   gap: 0.85rem;
   margin-top: 2rem;
+}
+
+.quiet-links {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 1.2rem;
+}
+
+.quiet-links,
+.quiet-links a {
+  color: var(--muted);
+  font-size: 0.9rem;
 }
 
 .button {
@@ -382,7 +403,7 @@ code {
 .boundary-diagram {
   display: grid;
   gap: 0.75rem;
-  grid-template-columns: 1fr auto 1fr;
+  grid-template-columns: 1fr auto minmax(118px, 0.74fr) auto 1fr;
   margin-top: 1rem;
 }
 
@@ -431,6 +452,11 @@ code {
   grid-template-columns: repeat(4, minmax(0, 1fr));
 }
 
+.compact-map,
+.compact-anatomy {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
 .small-node {
   background: rgba(13, 21, 32, 0.94);
   min-height: 104px;
@@ -472,6 +498,10 @@ code {
   box-shadow: var(--shadow);
   margin-top: 1.25rem;
   overflow: hidden;
+}
+
+.hero-receipt {
+  margin-top: 0;
 }
 
 .receipt-card header {

@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ZLAR - Execution-Boundary Governance for Agentic AI</title>
-  <meta name="description" content="ZLAR is execution-boundary governance for agentic AI: a consent boundary between artificial cognition and worldly consequence, with receipts and coverage reports for routed actions.">
-  <meta property="og:title" content="ZLAR - Execution-Boundary Governance for Agentic AI">
-  <meta property="og:description" content="ZLAR is a boundary between artificial cognition and worldly consequence. Try the proof pack and ask for the receipt.">
+  <title>ZLAR - Boundary for Agentic AI</title>
+  <meta name="description" content="ZLAR is a boundary between artificial cognition and worldly consequence. Routed agent actions cross separate human-controlled authority before they become consequence.">
+  <meta property="og:title" content="ZLAR - Boundary for Agentic AI">
+  <meta property="og:description" content="AI agents can act before authorization is visible. ZLAR makes routed actions cross a human-controlled boundary first.">
   <meta property="og:url" content="https://zlar.ai">
   <meta name="twitter:card" content="summary_large_image">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -18,13 +18,10 @@
   <nav class="site-nav">
     <a class="brand" href="/">ZL<span>A</span>R</a>
     <div class="nav-links">
-      <a class="primary-link" href="proof-pack.html">Try Proof Pack</a>
-      <a href="execution-boundary.html">Founder Note</a>
+      <a class="primary-link" href="proof-pack.html">Sample receipt</a>
       <a href="open-memo.html">Open Memo</a>
-      <a href="affected.html">Affected?</a>
-      <a href="boundaries.html">Boundaries</a>
-      <a href="archive.html">Archive</a>
-      <a href="https://github.com/ZLAR-AI/ZLAR">GitHub</a>
+      <a href="mailto:vincent@zlar.ai">Talk to Vincent</a>
+      <a class="nav-secondary" href="https://github.com/ZLAR-AI/ZLAR">GitHub</a>
     </div>
   </nav>
 
@@ -32,30 +29,33 @@
     <header class="hero">
       <div class="wrap hero-grid">
         <div>
-          <span class="eyebrow">Execution-boundary governance</span>
           <h1>ZLAR is a boundary between artificial cognition and worldly consequence.</h1>
           <p class="lede">
-            ZLAR is execution-boundary governance for agentic AI. It is a consent boundary for artificial agency: the place where an agent's plans, tool calls, edits, and requests must cross a separate authority before they become action.
+            An AI agent can write, call tools, move data, and trigger workflows before anyone can see who authorized it. ZLAR makes routed actions cross a separate authority — one humans control — before they become consequence.
           </p>
           <div class="button-row">
-            <a class="button primary" href="proof-pack.html">Try the Proof Pack</a>
-            <a class="button secondary" href="execution-boundary.html">Read the Founder Note</a>
+            <a class="button primary" href="proof-pack.html">See a sample receipt</a>
+            <a class="button secondary" href="mailto:vincent@zlar.ai">Talk to Vincent</a>
           </div>
+          <p class="quiet-links">
+            <a href="open-memo.html">Read the Open Memo</a>
+            <span>&middot;</span>
+            <a href="https://github.com/ZLAR-AI/ZLAR">GitHub</a>
+          </p>
         </div>
         <div class="diagram" aria-label="Cognition to ZLAR boundary to consequence diagram">
-          <div class="label">The governing question</div>
-          <p><strong>Who or what is allowed to turn cognition into action?</strong></p>
+          <div class="label">Boundary</div>
           <div class="boundary-diagram">
             <div class="node">
               <strong>Artificial cognition</strong>
-              <p>Plans, code, tool calls, requests, messages, proposed changes.</p>
+              <p>Plans, edits, tool calls, requests.</p>
             </div>
             <div class="arrow">-&gt;</div>
             <div class="gate-node">ZLAR<br>boundary</div>
             <div class="arrow">-&gt;</div>
             <div class="node">
               <strong>Worldly consequence</strong>
-              <p>Files changed, systems called, records moved, approvals made.</p>
+              <p>Files changed, systems called, records moved.</p>
             </div>
           </div>
         </div>
@@ -64,65 +64,16 @@
 
     <section class="section">
       <div class="wrap two-col">
-        <div class="section-intro">
-          <span class="eyebrow">What ZLAR is</span>
-          <h2>A deterministic boundary where intention becomes action.</h2>
+        <div>
+          <span class="eyebrow">Human problem</span>
+          <h2>Action is arriving faster than accountability.</h2>
           <p>
-            An agent may generate plans, code, messages, edits, requests, and tool calls. Consequence crosses into the world through a separate, signed, deterministic authority.
-          </p>
-          <p>
-            ZLAR evaluates routed actions against human-signed policy, allows routine actions, denies forbidden actions, routes consequential actions to a human when required, and produces evidence that the governance event happened.
+            A model can recommend. An agent can do. The hard moment is not the sentence it writes, but the action it causes: a file changed, a workflow triggered, a record moved, a system called.
           </p>
         </div>
         <div class="quote-panel">
           <p>
-            ZLAR is not a smarter judge inside the model. It is the boundary outside the model.
-          </p>
-          <p>
-            The absence of AI in the enforcement path is the point.
-          </p>
-        </div>
-      </div>
-    </section>
-
-    <section class="section">
-      <div class="wrap">
-        <div class="section-intro">
-          <span class="eyebrow">Try the Proof Pack</span>
-          <h2>Run the verifier against a fake/scratch evidence bundle.</h2>
-          <p>
-            The first self-serve path is not a sales page. It is a small proof pack with scratch artifacts: a manifest, coverage report, receipt summary, hashes, and a verifier script. Download it, run the checks, and see exactly what the proof path claims.
-          </p>
-        </div>
-        <div class="proof-anatomy" aria-label="Proof Pack anatomy diagram">
-          <div class="small-node status-routed">
-            <strong>Manifest</strong>
-            <p>Names the pack type, claim ceiling, included files, and hashes.</p>
-          </div>
-          <div class="small-node status-routed">
-            <strong>Coverage</strong>
-            <p>Shows routed, blocked, disclosed, and out-of-scope surfaces.</p>
-          </div>
-          <div class="small-node status-blocked">
-            <strong>Receipt</strong>
-            <p>Shows the governed decision evidence without raw private detail.</p>
-          </div>
-          <div class="small-node status-disclosed">
-            <strong>Verifier</strong>
-            <p>Checks hash integrity, safe claim ceiling, and disclosure flags.</p>
-          </div>
-          <div class="small-node status-out">
-            <strong>Non-claims</strong>
-            <p>Names what this proof path does not govern.</p>
-          </div>
-        </div>
-        <div class="button-row">
-          <a class="button primary" href="proof-pack.html">Open the demo</a>
-        </div>
-        <div class="disclosure">
-          <h3>Disclosure</h3>
-          <p>
-            The public proof pack is fake/scratch evidence for a bounded v3.3.15 path. It demonstrates the shape of verification; it is not a production deployment record and not external attestation. Release state: <a href="https://github.com/ZLAR-AI/ZLAR/releases/tag/v3.3.15">ZLAR v3.3.15</a>.
+            Governance becomes visible when a proposed action is allowed, denied, or sent to a human before it takes effect.
           </p>
         </div>
       </div>
@@ -131,113 +82,24 @@
     <section class="section">
       <div class="wrap two-col">
         <div>
-          <span class="eyebrow">Governed Action Receipt</span>
+          <span class="eyebrow">Receipt</span>
           <h2>If an AI agent affected you, ask for the receipt.</h2>
           <p>
-            A receipt is the portable record of a governed action: what was attempted, what policy applied, who or what authorized it, when the decision happened, and whether the record still verifies.
-          </p>
-          <p>
-            The affected person may never have been in the approval loop. The receipt is how they can ask what happened anyway.
+            A receipt is the record of one governed action: what was attempted, which policy applied, what decision was made, who or what authorized it, and whether the evidence still verifies.
           </p>
           <div class="button-row">
-            <a class="button secondary" href="affected.html">How to ask</a>
+            <a class="button primary" href="proof-pack.html">See a sample receipt</a>
           </div>
         </div>
-        <div class="receipt-card" aria-label="Receipt card">
+        <div class="receipt-card" aria-label="Sample receipt card">
           <header>
             <span>governed-action receipt</span>
-            <span>v1</span>
+            <span>sample</span>
           </header>
-          <div class="receipt-row"><span>outcome</span><span>authorized | denied | allow | deny</span></div>
-          <div class="receipt-row"><span>authorizer</span><span>policy | human | gate | timeout</span></div>
-          <div class="receipt-row"><span>policy</span><span>signed human-authored rule set</span></div>
-          <div class="receipt-row"><span>evidence</span><span>signature, hash chain, timestamp</span></div>
-        </div>
-      </div>
-    </section>
-
-    <section class="section">
-      <div class="wrap">
-        <div class="section-intro">
-          <span class="eyebrow">Coverage Report</span>
-          <h2>Show where the boundary held and where it ended.</h2>
-          <p>
-            A receipt proves one governed decision. A coverage report explains the perimeter of the run. It names the surfaces that were routed, the bypass sentinels that were blocked, the limitations that were disclosed, and the surfaces outside this proof path.
-          </p>
-        </div>
-        <div class="coverage-map" aria-label="Coverage map diagram">
-          <div class="small-node status-routed">
-            <strong>Routed</strong>
-            <p>Evidence exists that this action surface crossed the ZLAR gate.</p>
-          </div>
-          <div class="small-node status-blocked">
-            <strong>Blocked</strong>
-            <p>A bypass route or unsafe decision was refused by the proof path.</p>
-          </div>
-          <div class="small-node status-disclosed">
-            <strong>Disclosed</strong>
-            <p>The limitation is named so it cannot masquerade as coverage.</p>
-          </div>
-          <div class="small-node status-out">
-            <strong>Out of scope</strong>
-            <p>The surface needs another interception or deployment control.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="section">
-      <div class="wrap two-col">
-        <div>
-          <span class="eyebrow">Sealed Mode</span>
-          <h2>A stronger deployment posture closes the paths around the gate.</h2>
-          <p>
-            ZLAR governs routed actions. A serious deployment also removes or blocks the paths that do not cross the boundary. That stronger posture is Sealed Mode.
-          </p>
-          <p>
-            Sealed Mode pairs the gate with sandbox profiles, network egress controls, filesystem allowlists, controlled shell access, proxied MCP access, read-only policy and gate files, external key custody, and receipt witnessing or external log anchoring.
-          </p>
-          <div class="button-row">
-            <a class="button secondary" href="sealed-mode.html">See the layers</a>
-          </div>
-        </div>
-        <div class="diagram">
-          <div class="label">Sealed Mode layers</div>
-          <div class="layer-stack">
-            <div class="layer"><strong>Gate</strong><span>Signed policy, deterministic allow/deny/ask.</span></div>
-            <div class="layer"><strong>Route</strong><span>Hooks and proxied MCP paths for action surfaces.</span></div>
-            <div class="layer"><strong>Contain</strong><span>Sandbox, filesystem, and network controls around the agent.</span></div>
-            <div class="layer"><strong>Prove</strong><span>Receipts, audit chains, coverage reports, verifier kits.</span></div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="section">
-      <div class="wrap two-col">
-        <div class="quote-panel">
-          <span class="eyebrow">Open Memo &middot; edited web version</span>
-          <p>
-            High-impact agentic AI systems should produce verifiable action-level evidence.
-          </p>
-          <p>
-            The architectural fit is the test: execution boundary, off-device authority, signed evidence.
-          </p>
-          <div class="button-row">
-            <a class="button secondary" href="open-memo.html">Read the memo</a>
-          </div>
-        </div>
-        <div class="quote-panel">
-          <span class="eyebrow">Founder Note &middot; edited web version</span>
-          <p>
-            ZLAR is a consent boundary for artificial agency.
-          </p>
-          <p>
-            The object is clear: a governed path from AI intention to world action.
-          </p>
-          <div class="button-row">
-            <a class="button secondary" href="execution-boundary.html">Read the Founder Note</a>
-          </div>
+          <div class="receipt-row"><span>attempted</span><span>routed agent action</span></div>
+          <div class="receipt-row"><span>policy</span><span>signed human-authored rule</span></div>
+          <div class="receipt-row"><span>decision</span><span>allow | deny | ask</span></div>
+          <div class="receipt-row"><span>verify</span><span>hashes, signature, coverage</span></div>
         </div>
       </div>
     </section>
@@ -245,14 +107,14 @@
     <section class="section" id="scope">
       <div class="wrap">
         <div class="section-intro">
-          <span class="eyebrow">Boundaries</span>
-          <h2>The claim is powerful because it is bounded.</h2>
+          <span class="eyebrow">Disclosure</span>
+          <h2>The claim is deliberately bounded.</h2>
           <p>
-            The website can speak plainly in founder voice. The disclosure still has to be exact.
+            ZLAR governs routed/intercepted action surfaces only. The public sample shows one bounded v3.3.15 proof path and names what it does not cover.
           </p>
         </div>
         <div class="disclosure">
-          <h3>v3.3.15 claim boundary</h3>
+          <h3>Short boundary</h3>
           <ul>
             <li>ZLAR governs routed/intercepted action surfaces only.</li>
             <li>Safe Codex wording: "ZLAR can govern Codex CLI-invoked MCP tool calls when those MCP servers are routed through ZLAR."</li>
@@ -262,9 +124,24 @@
           </ul>
         </div>
         <div class="button-row">
-          <a class="button secondary" href="boundaries.html">Read the boundary page</a>
+          <a class="button secondary" href="boundaries.html">Read the boundaries</a>
           <a class="button secondary" href="archive.html">Archive</a>
-          <a class="button secondary" href="https://github.com/ZLAR-AI/ZLAR">GitHub</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section compact" id="contact">
+      <div class="wrap two-col">
+        <div>
+          <span class="eyebrow">Conversation</span>
+          <h2>Bring the action you need governed.</h2>
+          <p>
+            Start with the sample receipt, then ask the practical question: which agent actions should cross a boundary before they affect people or systems?
+          </p>
+        </div>
+        <div class="button-row">
+          <a class="button primary" href="mailto:vincent@zlar.ai">Talk to Vincent</a>
+          <a class="button secondary" href="open-memo.html">Open Memo</a>
         </div>
       </div>
     </section>
@@ -273,7 +150,7 @@
   <footer class="site-footer">
     <div class="wrap">
       <p>
-        ZLAR Inc. &middot; <a href="proof-pack.html">Proof Pack</a> &middot; <a href="specs/">Specifications</a> &middot; <a href="legal.html">Legal</a> &middot; <a href="mailto:hello@zlar.ai">hello@zlar.ai</a>
+        ZLAR Inc. &middot; <a href="proof-pack.html">Sample receipt</a> &middot; <a href="open-memo.html">Open Memo</a> &middot; <a href="boundaries.html">Boundaries</a> &middot; <a href="archive.html">Archive</a> &middot; <a href="mailto:vincent@zlar.ai">Talk to Vincent</a> &middot; <a href="https://github.com/ZLAR-AI/ZLAR">GitHub</a>
       </p>
     </div>
   </footer>

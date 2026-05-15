@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Try the Proof Pack - ZLAR</title>
-  <meta name="description" content="Fetch and verify a fake/scratch ZLAR Proof Pack v0 bundle for the v3.3.15 routed-MCP proof path.">
-  <meta property="og:title" content="Try the ZLAR Proof Pack">
-  <meta property="og:description" content="A self-serve scratch proof pack: manifest, coverage report, verifier, hashes, PASS output, and explicit non-claims.">
+  <title>See a Sample Receipt - ZLAR</title>
+  <meta name="description" content="Inspect a sample ZLAR receipt, then verify the sample run with hashes, manifest, coverage boundaries, and privacy/claim checks for the v3.3.15 routed-MCP proof path.">
+  <meta property="og:title" content="See a Sample Receipt - ZLAR">
+  <meta property="og:description" content="Start with the receipt, then run the local verifier for the bounded sample path.">
   <meta property="og:url" content="https://zlar.ai/proof-pack.html">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -17,13 +17,10 @@
   <nav class="site-nav">
     <a class="brand" href="/">ZL<span>A</span>R</a>
     <div class="nav-links">
-      <a class="primary-link" href="proof-pack.html">Try Proof Pack</a>
-      <a href="execution-boundary.html">Founder Note</a>
+      <a class="primary-link" href="proof-pack.html">Sample receipt</a>
       <a href="open-memo.html">Open Memo</a>
-      <a href="affected.html">Affected?</a>
-      <a href="boundaries.html">Boundaries</a>
-      <a href="archive.html">Archive</a>
-      <a href="https://github.com/ZLAR-AI/ZLAR">GitHub</a>
+      <a href="mailto:vincent@zlar.ai">Talk to Vincent</a>
+      <a class="nav-secondary" href="https://github.com/ZLAR-AI/ZLAR">GitHub</a>
     </div>
   </nav>
 
@@ -31,36 +28,60 @@
     <header class="hero">
       <div class="wrap hero-grid">
         <div>
-          <span class="eyebrow">Proof Pack v0</span>
-          <h1>Try the proof before you trust the claim.</h1>
+          <span class="eyebrow">Sample receipt</span>
+          <h1>See what a governed agent action leaves behind.</h1>
           <p class="lede">
-            This is the self-serve v3.3.15 demo path: a fake/scratch proof pack with sanitized artifacts, a coverage report, hashes, and a dependency-free verifier. It is designed to make the boundary visible.
+            A ZLAR receipt gives a governed action a record: what was attempted, what policy applied, what decision was made, and where the boundary stopped.
           </p>
           <div class="button-row">
-            <a class="button primary" href="#download">See verification steps</a>
-            <a class="button secondary" href="boundaries.html">Read the boundary</a>
+            <a class="button primary" href="#receipt">Inspect the receipt</a>
+            <a class="button secondary" href="#verify">Verify in Terminal</a>
           </div>
         </div>
-        <div class="diagram">
-          <div class="label">Proof Pack anatomy</div>
-          <div class="proof-anatomy">
-            <div class="small-node status-routed"><strong>Manifest</strong><p>Bundle list and claim ceiling.</p></div>
-            <div class="small-node status-routed"><strong>Coverage</strong><p>Where the boundary held.</p></div>
-            <div class="small-node status-blocked"><strong>Hashes</strong><p>File integrity checks.</p></div>
-            <div class="small-node status-disclosed"><strong>Verifier</strong><p>Local PASS checks.</p></div>
-            <div class="small-node status-out"><strong>Limits</strong><p>What is not claimed.</p></div>
-          </div>
+        <div class="receipt-card hero-receipt" aria-label="Visible sample receipt card">
+          <header>
+            <span>governed-action receipt</span>
+            <span>sample</span>
+          </header>
+          <div class="receipt-row"><span>attempted</span><span>routed MCP tool call</span></div>
+          <div class="receipt-row"><span>decision</span><span>allow | deny | ask</span></div>
+          <div class="receipt-row"><span>authority</span><span>signed human policy</span></div>
+          <div class="receipt-row"><span>coverage</span><span>routed/intercepted surfaces only</span></div>
         </div>
       </div>
     </header>
 
-    <section class="section" id="download">
+    <section class="section" id="receipt">
+      <div class="wrap two-col">
+        <div>
+          <span class="eyebrow">What the receipt says</span>
+          <h2>A receipt makes the governance event inspectable.</h2>
+          <p>
+            The sample receipt points to a bounded evidence bundle. It shows the decision surface, the policy authority, the verification path, and the coverage report that says where ZLAR held and where it ended.
+          </p>
+          <p>
+            For developers and auditors, the technical artifact name is Proof Pack v0. For a first visitor, the important thing is simpler: there is a record you can inspect.
+          </p>
+        </div>
+        <div class="diagram">
+          <div class="label">Sample anatomy</div>
+          <div class="proof-anatomy compact-anatomy" aria-label="Proof Pack v0 anatomy diagram">
+            <div class="small-node status-routed"><strong>Receipt</strong><p>One governed decision.</p></div>
+            <div class="small-node status-routed"><strong>Hashes</strong><p>Downloaded files match.</p></div>
+            <div class="small-node status-disclosed"><strong>Coverage</strong><p>Scope and limits are named.</p></div>
+            <div class="small-node status-out"><strong>Checks</strong><p>Privacy and claim scans pass.</p></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="verify">
       <div class="wrap">
         <div class="section-intro">
-          <span class="eyebrow">Run it</span>
-          <h2>Fetch the scratch pack and run the verifier.</h2>
+          <span class="eyebrow">Developer verification</span>
+          <h2>Verify the sample run in Terminal.</h2>
           <p>
-            The commands below fetch only public fake/scratch artifacts from this website. They do not need ZLAR credentials, private keys, live Telegram, real chat IDs, raw MCP args, prompt text, final client text, or operator paths.
+            These commands download the public sample artifacts, check the SHA-256 sidecar, and run the local verifier.
           </p>
         </div>
         <pre class="terminal"><code>mkdir zlar-proof-pack-v0-scratch
@@ -78,7 +99,28 @@ curl -fsSLo evidence/governed-profile-coverage-report.txt \
 
 shasum -a 256 -c SHA256SUMS
 node verify-proof-pack.mjs</code></pre>
-        <div class="download-list" aria-label="Proof Pack file downloads">
+        <div class="disclosure">
+          <h3>Sample disclosure</h3>
+          <ul>
+            <li>This sample uses fake/scratch artifacts only.</li>
+            <li>It verifies hashes, manifest, coverage boundaries, and privacy/claim checks for a sample path.</li>
+            <li>It is not production deployment evidence.</li>
+            <li>It is not external non-Vincent verifier attestation.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="section compact" id="files">
+      <div class="wrap">
+        <div class="section-intro">
+          <span class="eyebrow">Files</span>
+          <h2>Download the sample artifacts directly.</h2>
+          <p>
+            These links download the same public sample files used by the terminal commands.
+          </p>
+        </div>
+        <div class="download-list" aria-label="Sample receipt file downloads">
           <a href="demo/proof-pack/README.md" download>README</a>
           <a href="demo/proof-pack/proof-pack-manifest.json" download>Manifest</a>
           <a href="demo/proof-pack/SHA256SUMS" download>SHA256SUMS</a>
@@ -93,9 +135,9 @@ node verify-proof-pack.mjs</code></pre>
       <div class="wrap two-col">
         <div>
           <span class="eyebrow">Expected result</span>
-          <h2>A clean run ends in PASS.</h2>
+          <h2>A clean verification ends in PASS.</h2>
           <p>
-            The verifier checks file integrity, claim ceiling, report type, disclosure text, privacy flags, and unsafe text patterns. It does not pretend to be a production attestation.
+            The output should show every downloaded file as OK, followed by verifier PASS lines for the manifest, claim ceiling, coverage type, hashes, non-claims, privacy flags, and text scans.
           </p>
         </div>
         <pre class="terminal"><code>README.md: OK
@@ -107,61 +149,11 @@ verify-proof-pack.mjs: OK
 <span class="pass">PASS</span> manifest claim ceiling
 <span class="pass">PASS</span> coverage report type
 <span class="pass">PASS</span> coverage claim ceiling
+<span class="pass">PASS</span> hashes match manifest entries
+<span class="pass">PASS</span> non-claims present
+<span class="pass">PASS</span> privacy flags are false
 <span class="pass">PASS</span> privacy and claim text scan
 <span class="pass">PASS</span> scratch proof pack verified</code></pre>
-      </div>
-    </section>
-
-    <section class="section">
-      <div class="wrap">
-        <div class="section-intro">
-          <span class="eyebrow">What was verified</span>
-          <h2>What the verifier checks.</h2>
-        </div>
-        <div class="three-col">
-          <div class="card">
-            <div class="label">Integrity</div>
-            <h3>The files still match.</h3>
-            <p>The SHA-256 sidecar checks the downloaded README, manifest, coverage JSON, coverage text, and verifier script.</p>
-          </div>
-          <div class="card">
-            <div class="label">Claim ceiling</div>
-            <h3>The Codex claim stays bounded.</h3>
-            <p>The manifest and report must use the exact safe wording for routed MCP tool calls.</p>
-          </div>
-          <div class="card">
-            <div class="label">Privacy</div>
-            <h3>No private run details are included.</h3>
-            <p>The scratch pack declares false for raw args, environment values, prompt text, final text, private paths, identifiers, credentials, and operator config values.</p>
-          </div>
-        </div>
-        <div class="disclosure">
-          <h3>Disclosure</h3>
-          <ul>
-            <li>This public pack uses fake/scratch artifacts only.</li>
-            <li>It verifies the shape of the proof path, not a production deployment.</li>
-            <li>It does not provide external non-Vincent verifier attestation.</li>
-            <li>It does not implement /contest.</li>
-          </ul>
-        </div>
-      </div>
-    </section>
-
-    <section class="section">
-      <div class="wrap two-col">
-        <div>
-          <span class="eyebrow">Coverage map</span>
-          <h2>The report names the edge.</h2>
-          <p>
-            A coverage report matters because it refuses to let "we governed something" become "we governed everything." It makes the proof path honest enough to inspect.
-          </p>
-        </div>
-        <div class="coverage-map">
-          <div class="small-node status-routed"><strong>Routed</strong><p>Scratch MCP tools/call evidence crossed the gate.</p></div>
-          <div class="small-node status-blocked"><strong>Blocked</strong><p>Direct upstream registration was not accepted.</p></div>
-          <div class="small-node status-disclosed"><strong>Disclosed</strong><p>/contest and external attestation are named.</p></div>
-          <div class="small-node status-out"><strong>Out of scope</strong><p>Unrouted surfaces are not claimed.</p></div>
-        </div>
       </div>
     </section>
 
@@ -187,7 +179,7 @@ verify-proof-pack.mjs: OK
   <footer class="site-footer">
     <div class="wrap">
       <p>
-        ZLAR Inc. &middot; <a href="/">Home</a> &middot; <a href="boundaries.html">Boundaries</a> &middot; <a href="archive.html">Archive</a> &middot; <a href="mailto:hello@zlar.ai">hello@zlar.ai</a>
+        ZLAR Inc. &middot; <a href="/">Home</a> &middot; <a href="open-memo.html">Open Memo</a> &middot; <a href="boundaries.html">Boundaries</a> &middot; <a href="archive.html">Archive</a> &middot; <a href="mailto:vincent@zlar.ai">Talk to Vincent</a>
       </p>
     </div>
   </footer>

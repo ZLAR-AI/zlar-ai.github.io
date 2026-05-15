@@ -6,13 +6,10 @@ ZLAR is execution-boundary governance for agentic AI. It is a consent boundary f
 
 Primary pages:
 
-- [Try the Proof Pack](https://zlar.ai/proof-pack.html): self-serve fake/scratch v3.3.15 proof-pack demo with manifest, coverage report, hashes, verifier, PASS output, and explicit non-claims.
-- [Founder Note](https://zlar.ai/execution-boundary.html): execution-boundary governance in via positiva voice.
+- [Sample receipt](https://zlar.ai/proof-pack.html): human-first sample receipt with optional v3.3.15 terminal verification, manifest, coverage report, hashes, verifier, PASS output, and explicit non-claims.
 - [Open Memo on Action-Level Assurance](https://zlar.ai/open-memo.html): policy and government-facing founder memo.
-- [If an AI Agent Affected You](https://zlar.ai/affected.html): ask for the receipt.
-- [Sealed Mode](https://zlar.ai/sealed-mode.html): stronger deployment posture around the gate.
 - [Boundaries and Non-Claims](https://zlar.ai/boundaries.html): exact claim boundary.
-- [Archive](https://zlar.ai/archive.html): older essays, proof pages, standards submissions, specs, and legal.
+- [Archive](https://zlar.ai/archive.html): Founder Note, affected-person pathway, Sealed Mode, older proof pages, standards submissions, specs, and legal.
 
 Claim boundary:
 
