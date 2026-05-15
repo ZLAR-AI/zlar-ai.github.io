@@ -4,7 +4,7 @@ Static public website for ZLAR Inc.
 
 The current information architecture leads with founder via positiva voice:
 
-- "I built a boundary between artificial cognition and worldly consequence."
+- "ZLAR is a boundary between artificial cognition and worldly consequence."
 - "ZLAR is execution-boundary governance for agentic AI."
 - "ZLAR is a consent boundary for artificial agency."
 - "If an AI agent affected you, ask for the receipt."
@@ -13,10 +13,10 @@ The current information architecture leads with founder via positiva voice:
 
 | Page | Path | Purpose |
 | --- | --- | --- |
-| Homepage | `index.html` | Founder thesis, Proof Pack path, receipts, coverage, Sealed Mode, essays, boundaries |
+| Homepage | `index.html` | Founder thesis, Proof Pack path, receipts, coverage, Sealed Mode, founder writing, boundaries |
 | Proof Pack | `proof-pack.html` | Self-serve fake/scratch v3.3.15 proof-pack verifier demo |
 | Open Memo | `open-memo.html` | Policy/government-facing founder memo |
-| Execution Boundary | `execution-boundary.html` | Founder essay in execution-boundary voice |
+| Founder Note | `execution-boundary.html` | Founder Note in execution-boundary voice |
 | Affected | `affected.html` | Plain-language "ask for the receipt" page |
 | Sealed Mode | `sealed-mode.html` | Stronger deployment posture |
 | Boundaries | `boundaries.html` | Precise disclosure and non-claims |

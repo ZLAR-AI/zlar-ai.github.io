@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Try the Proof Pack - ZLAR</title>
-  <meta name="description" content="Download and verify a fake/scratch ZLAR Proof Pack v0 bundle for the v3.3.15 routed-MCP proof path.">
+  <meta name="description" content="Fetch and verify a fake/scratch ZLAR Proof Pack v0 bundle for the v3.3.15 routed-MCP proof path.">
   <meta property="og:title" content="Try the ZLAR Proof Pack">
   <meta property="og:description" content="A self-serve scratch proof pack: manifest, coverage report, verifier, hashes, PASS output, and explicit non-claims.">
   <meta property="og:url" content="https://zlar.ai/proof-pack.html">
@@ -18,7 +18,7 @@
     <a class="brand" href="/">ZL<span>A</span>R</a>
     <div class="nav-links">
       <a class="primary-link" href="proof-pack.html">Try Proof Pack</a>
-      <a href="execution-boundary.html">Boundary</a>
+      <a href="execution-boundary.html">Founder Note</a>
       <a href="open-memo.html">Open Memo</a>
       <a href="affected.html">Affected?</a>
       <a href="boundaries.html">Boundaries</a>
@@ -37,18 +37,18 @@
             This is the self-serve v3.3.15 demo path: a fake/scratch proof pack with sanitized artifacts, a coverage report, hashes, and a dependency-free verifier. It is designed to make the boundary visible.
           </p>
           <div class="button-row">
-            <a class="button primary" href="#download">Download and verify</a>
+            <a class="button primary" href="#download">See verification steps</a>
             <a class="button secondary" href="boundaries.html">Read the boundary</a>
           </div>
         </div>
         <div class="diagram">
           <div class="label">Proof Pack anatomy</div>
           <div class="proof-anatomy">
-            <div class="small-node status-routed"><strong>Manifest</strong><p>What is in the bundle.</p></div>
+            <div class="small-node status-routed"><strong>Manifest</strong><p>Bundle list and claim ceiling.</p></div>
             <div class="small-node status-routed"><strong>Coverage</strong><p>Where the boundary held.</p></div>
-            <div class="small-node status-blocked"><strong>Hashes</strong><p>Whether files still match.</p></div>
-            <div class="small-node status-disclosed"><strong>Verifier</strong><p>What can be checked.</p></div>
-            <div class="small-node status-out"><strong>Non-claims</strong><p>What is outside.</p></div>
+            <div class="small-node status-blocked"><strong>Hashes</strong><p>File integrity checks.</p></div>
+            <div class="small-node status-disclosed"><strong>Verifier</strong><p>Local PASS checks.</p></div>
+            <div class="small-node status-out"><strong>Limits</strong><p>What is not claimed.</p></div>
           </div>
         </div>
       </div>
@@ -58,7 +58,7 @@
       <div class="wrap">
         <div class="section-intro">
           <span class="eyebrow">Run it</span>
-          <h2>Download the scratch pack and run the verifier.</h2>
+          <h2>Fetch the scratch pack and run the verifier.</h2>
           <p>
             The commands below fetch only public fake/scratch artifacts from this website. They do not need ZLAR credentials, private keys, live Telegram, real chat IDs, raw MCP args, prompt text, final client text, or operator paths.
           </p>
@@ -78,6 +78,14 @@ curl -fsSLo evidence/governed-profile-coverage-report.txt \
 
 shasum -a 256 -c SHA256SUMS
 node verify-proof-pack.mjs</code></pre>
+        <div class="download-list" aria-label="Proof Pack file downloads">
+          <a href="demo/proof-pack/README.md" download>README</a>
+          <a href="demo/proof-pack/proof-pack-manifest.json" download>Manifest</a>
+          <a href="demo/proof-pack/SHA256SUMS" download>SHA256SUMS</a>
+          <a href="demo/proof-pack/verify-proof-pack.mjs" download>Verifier</a>
+          <a href="demo/proof-pack/evidence/governed-profile-coverage-report.json" download>Coverage JSON</a>
+          <a href="demo/proof-pack/evidence/governed-profile-coverage-report.txt" download>Coverage TXT</a>
+        </div>
       </div>
     </section>
 
@@ -108,7 +116,7 @@ verify-proof-pack.mjs: OK
       <div class="wrap">
         <div class="section-intro">
           <span class="eyebrow">What was verified</span>
-          <h2>Plain English, no ceremony.</h2>
+          <h2>What the verifier checks.</h2>
         </div>
         <div class="three-col">
           <div class="card">
