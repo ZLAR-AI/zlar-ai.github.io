@@ -6,7 +6,7 @@ ZLAR is execution-boundary governance for agentic AI. It is a consent boundary f
 
 Primary pages:
 
-- [Sample receipt](https://zlar.ai/proof-pack.html): human-first sample receipt with optional v3.3.15 terminal verification, manifest, coverage report, hashes, verifier, PASS output, and explicit non-claims.
+- [Sample receipt](https://zlar.ai/proof-pack.html): human-first sample receipt with optional bounded terminal verification, manifest, coverage report, hashes, verifier, PASS output, and explicit non-claims.
 - [Open Memo on Action-Level Assurance](https://zlar.ai/open-memo.html): policy and government-facing founder memo.
 - [Boundaries and Non-Claims](https://zlar.ai/boundaries.html): exact claim boundary.
 - [Archive](https://zlar.ai/archive.html): Founder Note, affected-person pathway, Sealed Mode, older proof pages, standards submissions, specs, and legal.
@@ -15,7 +15,7 @@ Claim boundary:
 
 - ZLAR governs routed/intercepted action surfaces only.
 - Safe Codex wording: "ZLAR can govern Codex CLI-invoked MCP tool calls when those MCP servers are routed through ZLAR."
-- Unrouted shell/filesystem/browser/app/network/model-reasoning/final-text surfaces are not claimed as governed by the v3.3.15 proof path.
+- Unrouted shell/filesystem/browser/app/network/model-reasoning/final-text surfaces are not claimed as governed by the current proof path.
 - /contest is not implemented.
 - External non-Vincent verifier attestation remains prepared/pending unless state changes.
 

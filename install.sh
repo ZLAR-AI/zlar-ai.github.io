@@ -15,10 +15,9 @@
 set -eu
 
 # Read version from the VERSION file if running from a repo clone.
-# When run via `curl | bash`, the script has no neighboring VERSION file —
+# When run via `curl | bash`, the script has no neighboring VERSION file;
 # leave ZLAR_VERSION empty here and resolve it from SCRIPT_SOURCE_DIR/VERSION
-# after Phase 4 (i.e., after the source is downloaded or cloned). The tarball
-# URL needs the version up front, so curl|bash flows go straight to git clone.
+# after Phase 4, once the source is downloaded or cloned.
 _INSTALL_SELF="${BASH_SOURCE:-$0}"
 _INSTALL_SELF_DIR=""
 if [ -n "${_INSTALL_SELF}" ] && [ -f "${_INSTALL_SELF}" ]; then
@@ -228,14 +227,10 @@ fi
 
 if [ -z "${SCRIPT_SOURCE_DIR}" ]; then
     GITHUB_REPO="ZLAR-AI/ZLAR"
+
     TMPDIR_DL=$(mktemp -d)
     trap "rm -rf '${TMPDIR_DL}'" EXIT
 
-    # If we know the version up front (local repo clone with neighboring
-    # VERSION file), try the release tarball first — fast, no git dependency.
-    # Otherwise (curl|bash flow) we don't have the version yet, so skip the
-    # tarball attempt entirely and clone the repo. The clone gets the latest
-    # main; we re-read VERSION from the cloned source below.
     DOWNLOAD_OK=0
     if [ -n "${ZLAR_VERSION}" ]; then
         TARBALL_URL="https://github.com/${GITHUB_REPO}/releases/latest/download/zlar-${ZLAR_VERSION}.tar.gz"
@@ -272,13 +267,14 @@ if [ -z "${SCRIPT_SOURCE_DIR}" ]; then
     fi
 fi
 
-# Authoritative version: read from the source we'll install from.
-# For local clones this matches the early read; for curl|bash this is the
-# first time ZLAR_VERSION gets set. If the source has no VERSION file
-# something is structurally wrong — abort rather than stamp a wrong value.
+# Authoritative version: read from the source selected above. For local clones
+# this matches the early read; for curl|bash this is the first time
+# ZLAR_VERSION gets set. Missing VERSION means the source is structurally
+# wrong, so abort rather than stamp a wrong version.
 if [ -f "${SCRIPT_SOURCE_DIR}/VERSION" ]; then
     ZLAR_VERSION=$(cat "${SCRIPT_SOURCE_DIR}/VERSION" | tr -d '[:space:]')
 fi
+
 if [ -z "${ZLAR_VERSION}" ]; then
     fail "Source at ${SCRIPT_SOURCE_DIR} has no VERSION file — installation aborted"
     exit 1
@@ -286,6 +282,8 @@ fi
 
 # Create install directory structure
 mkdir -p "${INSTALL_DIR}/bin"
+mkdir -p "${INSTALL_DIR}/lib"
+mkdir -p "${INSTALL_DIR}/scripts"
 mkdir -p "${INSTALL_DIR}/adapters/claude-code"
 mkdir -p "${INSTALL_DIR}/adapters/cursor"
 mkdir -p "${INSTALL_DIR}/adapters/windsurf"
@@ -297,6 +295,13 @@ mkdir -p "${INSTALL_DIR}/var/log/sessions"
 cp "${SCRIPT_SOURCE_DIR}/bin/zlar-gate"   "${INSTALL_DIR}/bin/zlar-gate"
 cp "${SCRIPT_SOURCE_DIR}/bin/zlar-policy" "${INSTALL_DIR}/bin/zlar-policy"
 cp "${SCRIPT_SOURCE_DIR}/bin/zlar"     "${INSTALL_DIR}/bin/zlar"
+
+# Copy shared libraries used by the gate, CLI, and Telegram dispatcher.
+cp "${SCRIPT_SOURCE_DIR}/lib/"* "${INSTALL_DIR}/lib/"
+
+# Copy Telegram dispatcher bootstrap sources
+cp "${SCRIPT_SOURCE_DIR}/scripts/zlar-tg-boot.sh" "${INSTALL_DIR}/scripts/zlar-tg-boot.sh"
+cp "${SCRIPT_SOURCE_DIR}/scripts/zlar-tg-poll"    "${INSTALL_DIR}/scripts/zlar-tg-poll"
 
 # Copy uninstall script
 cp "${SCRIPT_SOURCE_DIR}/uninstall.sh"    "${INSTALL_DIR}/uninstall.sh"
@@ -324,12 +329,39 @@ printf "%s\n" "${ZLAR_VERSION}" > "${INSTALL_DIR}/VERSION"
 chmod +x "${INSTALL_DIR}/bin/zlar-gate"
 chmod +x "${INSTALL_DIR}/bin/zlar-policy"
 chmod +x "${INSTALL_DIR}/bin/zlar"
+chmod +x "${INSTALL_DIR}/scripts/zlar-tg-boot.sh"
+chmod +x "${INSTALL_DIR}/scripts/zlar-tg-poll"
 chmod +x "${INSTALL_DIR}/adapters/claude-code/hook.sh"
 chmod +x "${INSTALL_DIR}/adapters/cursor/hook.sh"
 chmod +x "${INSTALL_DIR}/adapters/windsurf/hook.sh"
 chmod +x "${INSTALL_DIR}/uninstall.sh"
 
 ok "Core files installed to ${INSTALL_DIR}"
+
+# Deploy the shared Telegram dispatcher entrypoints used by the LaunchDaemon.
+# These are optional until Telegram is configured, so lack of sudo is a warning,
+# not an install failure.
+install_system_script() {
+    local src="$1"
+    local dst="$2"
+    local label="$3"
+
+    if [ "$(id -u)" -eq 0 ]; then
+        cp "${src}" "${dst}"
+        chmod 755 "${dst}"
+        ok "${label}: installed to ${dst}"
+    elif command -v sudo >/dev/null 2>&1 && sudo -n true 2>/dev/null; then
+        sudo cp "${src}" "${dst}"
+        sudo chmod 755 "${dst}"
+        ok "${label}: installed to ${dst}"
+    else
+        warn "${label}: not installed to ${dst} (sudo required)"
+        printf "       Run: ${BOLD}sudo cp ${src} ${dst} && sudo chmod 755 ${dst}${NC}\n"
+    fi
+}
+
+install_system_script "${INSTALL_DIR}/scripts/zlar-tg-boot.sh" "/usr/local/bin/zlar-tg-boot.sh" "Telegram boot script"
+install_system_script "${INSTALL_DIR}/scripts/zlar-tg-poll" "/usr/local/bin/zlar-tg-poll" "Telegram dispatcher"
 
 # ═══════════════════════════════════════════════════════════════════════════════
 # PHASE 5: Generate keys and sign policy

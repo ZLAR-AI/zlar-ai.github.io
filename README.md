@@ -14,7 +14,7 @@ The current information architecture is a small first-use marketing path:
 | Page | Path | Purpose |
 | --- | --- | --- |
 | Homepage | `index.html` | Category, human problem, boundary, receipt, sample verification, contact |
-| Sample receipt | `proof-pack.html` | Human-first sample receipt with optional v3.3.15 terminal verification |
+| Sample receipt | `proof-pack.html` | Human-first sample receipt with optional bounded terminal verification |
 | Open Memo | `open-memo.html` | Policy/government-facing founder memo |
 | Boundaries | `boundaries.html` | Precise disclosure and non-claims |
 | Archive | `archive.html` | Founder Note, affected-person pathway, Sealed Mode, older material, and secondary resources |
@@ -35,7 +35,7 @@ ZLAR governs routed/intercepted action surfaces only. Safe Codex wording:
 
 > ZLAR can govern Codex CLI-invoked MCP tool calls when those MCP servers are routed through ZLAR.
 
-Unrouted shell/filesystem/browser/app/network/model-reasoning/final-text surfaces are not claimed as governed by the v3.3.15 proof path. `/contest` is not implemented. External non-Vincent verifier attestation remains prepared/pending unless state changes.
+Unrouted shell/filesystem/browser/app/network/model-reasoning/final-text surfaces are not claimed as governed by the current proof path. `/contest` is not implemented. External non-Vincent verifier attestation remains prepared/pending unless state changes.
 
 ## Hosting
 
