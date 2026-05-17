@@ -4,9 +4,9 @@ Static public website for ZLAR Inc.
 
 The current information architecture is a plain public path:
 
-- "ZLAR is the doorway AI must pass through before it does something real."
-- "ZLAR lets AI act, but makes it pass through rules, real people, and proof."
-- "AI can move. People stay present. Actions leave proof."
+- "ZLAR is where AI action becomes answerable."
+- "ZLAR keeps humans in the loop when AI starts doing real things."
+- "AI can move. Humans remain present. Actions become answerable."
 - "If AI affected you, ask for the receipt."
 
 ## Primary Pages
@@ -19,7 +19,7 @@ The current information architecture is a plain public path:
 | Financial Services | `financial-services.html` | The gap between login and what AI is allowed to do |
 | Healthcare | `healthcare.html` | Bounded healthcare workflow framing without clinical claims |
 | Defense / Military | `defense.html` | Command visibility, rules, people, and proof for routed actions |
-| Founder Note | `founder-note.html` | First-person statement of the doorway thesis |
+| Founder Note | `founder-note.html` | First-person statement of the threshold thesis |
 | Sample receipt | `proof-pack.html` | Human-first sample receipt with optional bounded terminal verification |
 | Open Memo | `open-memo.html` | Policy memo for rules before action and receipts afterward |
 | Boundaries | `boundaries.html` | What passes through ZLAR, what does not, and what the sample does not prove |

@@ -1,8 +1,8 @@
 # ZLAR
 
-> ZLAR is the doorway AI must pass through before it does something real.
+> ZLAR is where AI action becomes answerable.
 
-ZLAR lets AI act, but makes it pass through rules, real people, and proof. Before AI does something real, ZLAR checks the rule. The rule can allow it, block it, or ask a person to say yes. Afterward, ZLAR leaves a receipt.
+ZLAR keeps humans in the loop when AI starts doing real things. Before AI acts, ZLAR checks the rule. The rule can allow it, block it, or ask a person. Afterward, ZLAR leaves a receipt.
 
 Primary pages:
 
@@ -12,7 +12,7 @@ Primary pages:
 - [Financial Services](https://zlar.ai/financial-services.html): the gap between login and what AI is allowed to do.
 - [Healthcare](https://zlar.ai/healthcare.html): bounded healthcare workflow framing without clinical claims.
 - [Defense / Military](https://zlar.ai/defense.html): command visibility, rules, people, and proof for routed actions.
-- [Founder Note](https://zlar.ai/founder-note.html): first-person statement of the doorway thesis.
+- [Founder Note](https://zlar.ai/founder-note.html): first-person statement of the threshold thesis.
 - [Sample receipt](https://zlar.ai/proof-pack.html): human-first sample receipt with optional bounded terminal verification, manifest, coverage report, hashes, verifier, PASS output, and explicit non-claims.
 - [Open Memo on Action-Level Assurance](https://zlar.ai/open-memo.html): policy memo for rules before action and receipts afterward.
 - [Boundaries and Non-Claims](https://zlar.ai/boundaries.html): what passes through ZLAR, what does not, and what the sample does not prove.
