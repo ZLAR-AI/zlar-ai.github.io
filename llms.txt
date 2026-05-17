@@ -1,15 +1,22 @@
 # ZLAR
 
-> ZLAR is a boundary between artificial cognition and worldly consequence.
+> ZLAR gives humans standing at the moment machine intelligence tries to affect the world.
 
-ZLAR is execution-boundary governance for agentic AI. It is a consent boundary for artificial agency: routed actions cross a deterministic, signed, human-authored authority before they become consequence.
+ZLAR is a witnessed execution boundary between intelligence and consequence. Routed actions cross deterministic, signed, human-authored authority before they become consequence.
 
 Primary pages:
 
+- [Home](https://zlar.ai/): founder-led category surface for operational AI with human standing.
+- [Enterprise](https://zlar.ai/enterprise.html): conversation page for enterprise AI operators choosing one action surface to govern.
+- [Government](https://zlar.ai/government.html): action-level assurance, receipts, coverage, and public-sector accountability framing.
+- [Financial Services](https://zlar.ai/financial-services.html): identity-to-execution gap and receipt-shaped controls for routed financial-services AI actions.
+- [Healthcare](https://zlar.ai/healthcare.html): bounded action-surface framing for healthcare records, workflows, and affected-person evidence.
+- [Defense / Military](https://zlar.ai/defense.html): delegation, command authority, and evidence for controlled routed action surfaces.
+- [Founder Note](https://zlar.ai/founder-note.html): voice surface on human standing, relaxed acceleration, and why the boundary matters.
 - [Sample receipt](https://zlar.ai/proof-pack.html): human-first sample receipt with optional bounded terminal verification, manifest, coverage report, hashes, verifier, PASS output, and explicit non-claims.
 - [Open Memo on Action-Level Assurance](https://zlar.ai/open-memo.html): policy and government-facing founder memo.
 - [Boundaries and Non-Claims](https://zlar.ai/boundaries.html): exact claim boundary.
-- [Archive](https://zlar.ai/archive.html): Founder Note, affected-person pathway, Sealed Mode, older proof pages, standards submissions, specs, and legal.
+- [Archive](https://zlar.ai/archive.html): affected-person pathway, Sealed Mode, older proof pages, standards submissions, specs, legal, and earlier founder writing.
 
 Claim boundary:
 
@@ -21,4 +28,4 @@ Claim boundary:
 
 Interpretation rule:
 
-Founder narrative pages explain the thesis. Disclosure boxes and boundary pages carry the precise public claim. If a page appears to imply broader coverage than the boundary page, read the boundary page as controlling.
+Founder and audience pages explain the thesis. Disclosure boxes and boundary pages carry the precise public claim. If a page appears to imply broader coverage than the boundary page, read the boundary page as controlling.

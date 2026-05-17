@@ -136,6 +136,10 @@ code {
   padding: 6.5rem 0 5rem;
 }
 
+.home-hero {
+  padding: 4.5rem 0 3rem;
+}
+
 .hero-grid {
   align-items: center;
   display: grid;
@@ -150,6 +154,16 @@ code {
   letter-spacing: 0;
   line-height: 0.98;
   margin: 0 0 1.5rem;
+}
+
+.home-hero h1 {
+  font-size: clamp(2.35rem, 5vw, 4rem);
+  line-height: 1.02;
+  max-width: 780px;
+}
+
+.home-hero .button-row {
+  margin-top: 1.5rem;
 }
 
 .page-hero h1 {
@@ -279,6 +293,15 @@ code {
 
 .card {
   padding: 1.25rem;
+}
+
+.card:hover {
+  border-color: var(--line-strong);
+  text-decoration: none;
+}
+
+.card p:last-child {
+  margin-bottom: 0;
 }
 
 .panel {
@@ -581,6 +604,54 @@ code {
   grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
+.operator-grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+}
+
+.operator-card {
+  display: block;
+  min-height: 100%;
+}
+
+.operator-card h3 {
+  font-size: 1.08rem;
+}
+
+.operator-card p {
+  font-size: 0.92rem;
+  line-height: 1.5;
+}
+
+.audience-list {
+  display: grid;
+  gap: 0.85rem;
+  margin-top: 1.2rem;
+}
+
+.audience-list .panel {
+  box-shadow: none;
+  padding: 1.15rem;
+}
+
+.audience-list h3 {
+  font-size: 1rem;
+}
+
+.cta-panel {
+  background: rgba(56, 189, 248, 0.08);
+  border: 1px solid var(--line-strong);
+  border-left: 4px solid var(--teal);
+  border-radius: var(--radius);
+  margin-top: 1.5rem;
+  padding: 1.25rem;
+}
+
+.cta-panel h3 {
+  color: var(--ink);
+}
+
 .site-footer {
   border-top: 1px solid var(--line);
   padding: 2.2rem 0;
@@ -595,6 +666,7 @@ code {
   .hero-grid,
   .two-col,
   .three-col,
+  .operator-grid,
   .archive-grid {
     grid-template-columns: 1fr;
   }
@@ -610,6 +682,12 @@ code {
 
   .arrow {
     text-align: center;
+  }
+}
+
+@media (max-width: 1100px) and (min-width: 901px) {
+  .operator-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 }
 

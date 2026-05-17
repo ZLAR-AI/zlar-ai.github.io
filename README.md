@@ -2,22 +2,28 @@
 
 Static public website for ZLAR Inc.
 
-The current information architecture is a small first-use marketing path:
+The current information architecture is a v2 conversation-ready public path:
 
-- "ZLAR is a boundary between artificial cognition and worldly consequence."
-- "ZLAR is execution-boundary governance for agentic AI."
-- "ZLAR is a consent boundary for artificial agency."
+- "ZLAR gives humans standing at the moment machine intelligence tries to affect the world."
+- "ZLAR creates a witnessed execution boundary between intelligence and consequence."
+- "Operational AI, with human standing."
 - "If an AI agent affected you, ask for the receipt."
 
 ## Primary Pages
 
 | Page | Path | Purpose |
 | --- | --- | --- |
-| Homepage | `index.html` | Category, human problem, boundary, receipt, sample verification, contact |
+| Homepage | `index.html` | Founder-led category surface, operator routing, proof gateway, boundary disclosure, contact |
+| Enterprise | `enterprise.html` | Enterprise conversation page for choosing one governed action surface |
+| Government | `government.html` | Action-level assurance and public-sector accountability framing |
+| Financial Services | `financial-services.html` | Identity-to-execution gap and receipt-shaped governance primitive |
+| Healthcare | `healthcare.html` | Bounded healthcare action-surface framing without clinical claims |
+| Defense / Military | `defense.html` | Delegation, command authority, and evidence for controlled routed action surfaces |
+| Founder Note | `founder-note.html` | Voice surface for human standing, relaxed acceleration, and the boundary thesis |
 | Sample receipt | `proof-pack.html` | Human-first sample receipt with optional bounded terminal verification |
 | Open Memo | `open-memo.html` | Policy/government-facing founder memo |
 | Boundaries | `boundaries.html` | Precise disclosure and non-claims |
-| Archive | `archive.html` | Founder Note, affected-person pathway, Sealed Mode, older material, and secondary resources |
+| Archive | `archive.html` | Affected-person pathway, Sealed Mode, older material, standards submissions, and secondary resources |
 
 ## Demo Artifacts
 
@@ -28,6 +34,8 @@ The current information architecture is a small first-use marketing path:
 - `evidence/governed-profile-coverage-report.txt`
 - `verify-proof-pack.mjs`
 - `SHA256SUMS`
+
+Do not edit these files unless the sample bundle is intentionally regenerated and all checksums/manifests are updated together.
 
 ## Claim Boundary
 
