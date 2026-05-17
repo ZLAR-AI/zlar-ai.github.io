@@ -4,9 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>See a Sample Receipt - ZLAR</title>
-  <meta name="description" content="Inspect a sample ZLAR receipt, then verify the sample run with hashes, manifest, coverage boundaries, and privacy/claim checks for the bounded routed-MCP proof path.">
+  <meta name="description" content="Inspect a sample ZLAR receipt. See what the AI tried to do, what rule was used, what happened, and what the sample does not prove.">
   <meta property="og:title" content="See a Sample Receipt - ZLAR">
-  <meta property="og:description" content="Start with the receipt, then run the local verifier for the bounded sample path.">
+  <meta property="og:description" content="A ZLAR receipt shows what happened when AI tried to do something real.">
   <meta property="og:url" content="https://zlar.ai/proof-pack.html">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -32,9 +32,9 @@
       <div class="wrap hero-grid">
         <div>
           <span class="eyebrow">Sample receipt</span>
-          <h1>See what a governed agent action leaves behind.</h1>
+          <h1>See what ZLAR leaves behind after AI tries to act.</h1>
           <p class="lede">
-            A ZLAR receipt gives a governed action a record: what was attempted, what policy applied, what decision was made, and where the boundary stopped.
+            A receipt answers plain questions: what did the AI try to do, what rule was used, was it allowed or blocked, did a person say yes, and can we still prove what happened?
           </p>
           <div class="button-row">
             <a class="button primary" href="#receipt">Inspect the receipt</a>
@@ -47,9 +47,9 @@
             <span>sample</span>
           </header>
           <div class="receipt-row"><span>attempted</span><span>routed MCP tool call</span></div>
-          <div class="receipt-row"><span>decision</span><span>allow | deny | ask</span></div>
-          <div class="receipt-row"><span>authority</span><span>signed human policy</span></div>
-          <div class="receipt-row"><span>coverage</span><span>routed/intercepted surfaces only</span></div>
+          <div class="receipt-row"><span>decision</span><span>allowed | blocked | ask a person</span></div>
+          <div class="receipt-row"><span>rule</span><span>signed human-authored rule</span></div>
+          <div class="receipt-row"><span>scope</span><span>routed/intercepted surfaces only</span></div>
         </div>
       </div>
     </header>
@@ -58,12 +58,12 @@
       <div class="wrap two-col">
         <div>
           <span class="eyebrow">What the receipt says</span>
-          <h2>A receipt makes the governance event inspectable.</h2>
+          <h2>A receipt makes the action inspectable.</h2>
           <p>
-            The sample receipt points to a bounded evidence bundle. It shows the decision surface, the policy authority, the verification path, and the coverage report that says where ZLAR held and where it ended.
+            The sample receipt points to a bounded evidence bundle. It shows the action, the rule, the decision, the verification path, and the coverage report that says what ZLAR saw and what it did not see.
           </p>
           <p>
-            For developers and auditors, the technical artifact name is Proof Pack v0. For a first visitor, the important thing is simpler: there is a record you can inspect.
+            For developers and auditors, the technical artifact name is Proof Pack v0. For a first visitor, the important thing is simpler: there is a record you can check.
           </p>
         </div>
         <div class="diagram">
@@ -82,7 +82,7 @@
       <div class="wrap">
         <div class="section-intro">
           <span class="eyebrow">Developer verification</span>
-          <h2>Verify the sample run in Terminal.</h2>
+          <h2>Verify the sample in Terminal.</h2>
           <p>
             These commands download the public sample artifacts, check the SHA-256 sidecar, and run the local verifier.
           </p>
@@ -138,9 +138,9 @@ node verify-proof-pack.mjs</code></pre>
       <div class="wrap two-col">
         <div>
           <span class="eyebrow">Expected result</span>
-          <h2>A clean verification ends in PASS.</h2>
+          <h2>A clean check ends in PASS.</h2>
           <p>
-            The output should show every downloaded file as OK, followed by verifier PASS lines for the manifest, claim ceiling, coverage type, hashes, non-claims, privacy flags, and text scans.
+            The output should show every downloaded file as OK, followed by PASS lines for the manifest, claim ceiling, coverage type, hashes, non-claims, privacy flags, and text scans.
           </p>
         </div>
         <pre class="terminal"><code>README.md: OK
@@ -163,10 +163,10 @@ verify-proof-pack.mjs: OK
     <section class="section compact">
       <div class="wrap">
         <div class="disclosure">
-          <h3>Current claim boundary</h3>
+          <h3>Current scope</h3>
           <p>
             Release state: <a href="https://github.com/ZLAR-AI/ZLAR/releases/tag/v3.3.16">ZLAR v3.3.16 on GitHub</a>.
-            The downloadable sample bundle is bounded fake/scratch evidence for the safe routed-MCP proof path; it is not production deployment evidence and not external verifier attestation.
+            The downloadable sample bundle is bounded fake/scratch evidence for the safe routed-MCP proof path. It is not production deployment evidence and not external verifier attestation.
           </p>
           <ul>
             <li>ZLAR governs routed/intercepted action surfaces only.</li>

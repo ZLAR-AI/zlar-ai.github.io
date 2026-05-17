@@ -4,9 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>An Open Memo on Action-Level Assurance - ZLAR</title>
-  <meta name="description" content="Founder memo by Vincent Nijjar: high-impact agentic AI systems should produce verifiable action-level evidence.">
+  <meta name="description" content="Founder memo by Vincent Nijjar: high-impact AI should leave proof when it does something real.">
   <meta property="og:title" content="An Open Memo on Action-Level Assurance">
-  <meta property="og:description" content="The policy voice for ZLAR: execution boundary, off-device authority, signed evidence, receipts, and coverage reports.">
+  <meta property="og:description" content="Before high-impact AI acts, there should be a rule, a real person when needed, and a receipt afterward.">
   <meta property="og:url" content="https://zlar.ai/open-memo.html">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -33,7 +33,7 @@
         <span class="eyebrow">Founder memo &middot; May 2026 &middot; edited web version</span>
         <h1>An Open Memo on Action-Level Assurance</h1>
         <p class="lede">
-          Addressed to Canada's AI policy community. The architectural argument applies wherever AI governance frames meet runtime.
+          Addressed first to Canada's AI policy community. The point is broader: when AI does something real, people should be able to see the rule, the yes, and the receipt.
         </p>
         <div class="button-row">
           <a class="button primary" href="proof-pack.html">See a sample receipt</a>
@@ -47,89 +47,82 @@
         <p><strong>By Vincent Nijjar</strong></p>
 
         <blockquote>
-          High-impact agentic AI systems should produce verifiable action-level evidence.
+          High-impact AI systems should leave proof when they do something real.
         </blockquote>
 
         <p>
-          ZLAR is an action-level assurance layer for agentic AI.
+          AI is starting to do real things. It can change files, call tools, move data, run commands, start workflows, and affect people.
         </p>
         <p>
-          ZLAR places a deterministic governance boundary around AI-agent actions. Routine actions pass through. Actions of consequence route to a human on a separate device, on infrastructure held by the human and outside the agent's runtime.
+          That means governance cannot stop at asking whether an AI system should exist. It also has to ask what happens when that system tries to act.
         </p>
         <p>
-          For actions routed through ZLAR, the system produces signed, tamper-evident evidence built for independent verification.
+          ZLAR is the doorway AI must pass through before it does something real. The doorway checks a signed rule. The rule can allow, block, or ask a person to say yes. Afterward, ZLAR leaves a receipt.
         </p>
         <p>
-          ZLAR is Canadian-built and operator-held: policy, decisions, and records belong to the deploying institution.
-        </p>
-
-        <h2>Three Lenses For AI Governance</h2>
-        <p>
-          Present AI governance frameworks answer one question: should this AI system be deployed, and was it deployed responsibly? Call this the system lens. Its instruments ask about the AI system as the object of governance.
-        </p>
-        <p>
-          A second question is downstream of the first. Once an AI system is deployed, it takes actions. Should this action happen, and is there a human accountable for it at the moment it does? Call this the action lens. Its instruments are different: deterministic policy at the action boundary, off-device human authorization, tamper-evident audit, decision receipts.
-        </p>
-        <p>
-          A third question sits beneath both. The action lens depends on a real boundary. The boundary sits between the agent's cognition and the agent's act. The agent may think, process, and deliberate freely. The question for governance is whether a specific consequence is permitted to cross from thought into the world.
-        </p>
-        <p>
-          Where does the boundary sit? Does it hold against the agent that the action belongs to? Where does the enforcement layer sit, relative to the agent's compromise surface? Call this the boundary lens.
-        </p>
-        <p>
-          When the boundary is real, the action lens has something verifiable to point at. ZLAR is built to be a real boundary.
+          ZLAR is Canadian-built and operator-held. The deploying institution holds the rules, decisions, and records.
         </p>
 
-        <h2>Protecting And Empowering People</h2>
+        <h2>The Policy Gap</h2>
         <p>
-          Protecting people from agentic AI requires a runtime control that intercepts the action before it becomes real, evaluates it against signed human-authored policy, and either allows it, denies it, or routes it to a human on a separate device held outside the agent's runtime.
+          Most AI governance asks system questions: should this system be deployed, was it tested, and who is responsible for it?
         </p>
         <p>
-          Empowering people in an agentic AI world means giving the affected human a record they can read, understand, and challenge.
+          Those questions matter. They do not answer the runtime question: should this action happen now?
         </p>
         <p>
-          When an AI agent changes a record, blocks a workflow, accesses a file, triggers a decision, or causes operational harm, the affected person deserves a transparent record. They should be able to ask: what happened, which system acted, was a human involved, who approved it, what policy allowed it, and how to challenge it.
-        </p>
-        <p>
-          A coverage report names where the governance boundary held and where it ended. The report is honest about scope and shows what the architecture covers.
+          When AI updates a record, sends a notice, moves data, or calls a tool, people need a record of that action. They need to know what rule was used, whether it was allowed or blocked, whether a person said yes, and whether the proof still verifies.
         </p>
 
-        <h2>Where The Boundary Sits</h2>
+        <h2>What ZLAR Asks For</h2>
         <p>
-          ZLAR places signed, deterministic, human-authored policy at the action boundary. The policy evaluates each consequential action against rules written by humans and signed by a human authority. High-risk actions route to a human on a separate device, over a separate channel held outside the agent's runtime.
+          ZLAR asks for a simple shape around high-impact AI action:
+        </p>
+        <ul class="plain-list">
+          <li>A defined doorway before the action happens.</li>
+          <li>Signed rules that the AI cannot rewrite while it is trying to act.</li>
+          <li>A real person when the rule says a person must decide.</li>
+          <li>Enough time and room for that person to say no.</li>
+          <li>A receipt after the decision.</li>
+          <li>A coverage report that says what passed through ZLAR and what did not.</li>
+        </ul>
+        <p>
+          A fast no can be real. A fast yes can be dangerous. The policy question is not just whether a human was technically in the loop. It is whether the yes was meaningful.
+        </p>
+
+        <h2>Where The Doorway Sits</h2>
+        <p>
+          ZLAR sits before action, not inside the AI's explanation of itself. The AI may plan, write, reason, and request. Before a routed action takes effect, ZLAR checks the rule.
         </p>
         <p>
-          This places human authority structurally outside the agent's reach.
+          This matters because another AI judging the action is still AI in the enforcement path. A classifier, trust score, model-grounded check, or content scanner may be useful, but it is not the same as a signed rule outside the AI's reach.
         </p>
         <p>
-          Many governance approaches take a different route: they put AI in the enforcement path, such as a trust score, a behavioural classifier, a model-grounded check, or a content scanner. The agent's actions are evaluated by another AI system, often inside the same runtime, on the same network, under the same compromise surface.
-        </p>
-        <p>
-          The boundary lens distinguishes the two. ZLAR sits on the side where the boundary is real.
+          ZLAR's bet is plain: the rule should not be made up by the same system trying to act.
         </p>
 
         <h2>Where ZLAR Is Today</h2>
         <p>Working today:</p>
         <ul class="plain-list">
-          <li>Deterministic policy enforcement for governed actions.</li>
-          <li>Signed policy evaluation.</li>
-          <li>Allow, deny, or human-approval decisions at the action boundary.</li>
-          <li>Off-device human approval over a channel held outside the agent's runtime.</li>
+          <li>Deterministic rule checks for governed actions.</li>
+          <li>Signed rule evaluation.</li>
+          <li>Allow, block, or human-approval decisions for routed actions.</li>
+          <li>Human approval over a channel outside the AI's runtime.</li>
           <li>Tamper-evident audit chain.</li>
-          <li>Decision receipts, signed and locally verifiable, operator and auditor-facing.</li>
-          <li>Trust Lane attention-check mechanism in the current Claude Code deployment.</li>
-          <li>Software-rooted signing authority for policy and constitution.</li>
+          <li>Signed receipts that can be verified locally.</li>
+          <li>Trust Lane attention checks in a supported local deployment path.</li>
+          <li>Software-rooted signing authority for rules and constitution.</li>
         </ul>
         <p>Designed and on the near-term roadmap:</p>
         <ul class="plain-list">
           <li>Packaged verifier kit for outside-party validation.</li>
           <li>External witnessing and attestation.</li>
-          <li>Worker-facing decision receipt and explicit contestability surface for affected humans.</li>
+          <li>Worker-facing receipts and a clear contestability path for affected people.</li>
         </ul>
 
         <h2>The Evidence Bundle</h2>
         <p>
-          The evidence bundle is the record produced by a governed AI-agent run. It answers, for one run: what ZLAR governed, where the governance boundary held, what the agent attempted, what policy applied, what was allowed, denied, or escalated to a human, who authorized high-risk actions, whether the audit record still matches what was recorded, and whether signatures still verify.
+          The evidence bundle is the record produced by a governed AI run. It answers plain questions: what did ZLAR govern, what did the AI try to do, what rule applied, was the action allowed or blocked, did a person say yes, and can the record still be verified?
         </p>
         <p>
           AI governance is also concrete evidence. Ask for the record.
@@ -137,33 +130,30 @@
 
         <h2>The Bounded Claim</h2>
         <p>
-          ZLAR's claim is precise. For actions routed through ZLAR, the system applies deterministic policy and produces evidence of the governance decision.
+          ZLAR's claim is precise. For actions routed through ZLAR, the system applies deterministic rules and produces evidence of the decision.
         </p>
         <p>
-          ZLAR addresses the action layer. Model intent, bias evaluation, privacy law, and broader AI safety belong to their own frameworks and instruments. Action-level assurance complements them; the layers compose.
+          ZLAR does not claim to govern every AI action everywhere. It governs routed or intercepted action surfaces. Model intent, bias evaluation, privacy law, safety analysis, and legal authority still need their own work.
         </p>
         <p>
-          ZLAR's strength depends on deployment quality: the agent is routed through ZLAR, bypass paths are closed, the policy is signed and appropriate, approval flows are configured correctly, the audit chain is preserved, and external witnesses and verifiers are used.
-        </p>
-        <p>
-          The evidence bundle exists to make these conditions verifiable.
+          ZLAR's strength depends on deployment quality: the action is routed through ZLAR, bypass paths are closed, the rule is signed and appropriate, approval flows are configured correctly, the audit chain is preserved, and external witnesses or verifiers are used when needed.
         </p>
 
         <h2>A Policy Proposal</h2>
         <p>
-          Minimum action-level assurance for high-impact agentic deployments should include:
+          Minimum action-level assurance for high-impact AI deployments should include:
         </p>
         <ul class="plain-list">
-          <li>A defined execution boundary.</li>
-          <li>Deny-first policy for high-risk actions.</li>
-          <li>Human authorization for consequential actions, on infrastructure held outside the agent's runtime.</li>
+          <li>A defined doorway before action.</li>
+          <li>Deny-first rules for high-risk actions.</li>
+          <li>Human authorization for important actions, outside the AI's runtime.</li>
           <li>Tamper-evident audit records.</li>
           <li>Decision receipts.</li>
-          <li>Coverage reports showing where governance held and where it ended.</li>
-          <li>A contestability path for affected humans.</li>
+          <li>Coverage reports showing what passed through the doorway and what did not.</li>
+          <li>A contestability path for affected people.</li>
         </ul>
         <p>
-          The proposal complements model evaluation and system-level AI governance. Those frameworks set direction at the system level. Action-level assurance carries that direction into runtime.
+          This does not replace model evaluation or system-level AI governance. It carries those commitments into the moment when AI tries to act.
         </p>
 
         <h2>To Canada's AI Policy Community</h2>
@@ -171,19 +161,19 @@
           This memo is a request for engagement.
         </p>
         <p>
-          The question for federal policy is whether high-impact agentic systems should be expected to produce verifiable action-level evidence: a defined execution boundary, decision receipts, human authorization records, audit-chain verification, coverage reporting, and a contestability path.
+          The question for policy is simple: when high-impact AI does something real, should the organization be expected to show the rule, the decision, the person if there was one, the receipt, and the coverage boundary?
         </p>
         <p>
-          Test the proposal against Canada's emerging responsible-AI strategy. Test it against ZLAR. Test it against any vendor or framework. The architectural fit is the test: execution boundary, off-device authority, signed evidence.
+          Test that question against ZLAR. Test it against any vendor or framework. Ask where the doorway sits. Ask whether the AI can route around it. Ask whether the record can still be verified after the run.
         </p>
         <p>
-          Run the agent. Export the proof. Show what was governed, what happened, who authorized it, and whether the evidence still verifies.
+          Run the AI. Export the proof. Show what happened.
         </p>
 
         <div class="disclosure">
           <h3>Disclosure</h3>
           <p>
-            This memo is policy argument and founder voice. ZLAR's public claim remains bounded to actions that pass through routed/intercepted ZLAR gate surfaces.
+            This memo is policy argument and founder voice. ZLAR's public claim remains bounded to actions that pass through routed or intercepted ZLAR gate surfaces.
           </p>
         </div>
       </div>

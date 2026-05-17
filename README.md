@@ -2,27 +2,27 @@
 
 Static public website for ZLAR Inc.
 
-The current information architecture is a v2 conversation-ready public path:
+The current information architecture is a plain public path:
 
-- "ZLAR gives humans standing at the moment machine intelligence tries to affect the world."
-- "ZLAR creates a witnessed execution boundary between intelligence and consequence."
-- "Operational AI, with human standing."
-- "If an AI agent affected you, ask for the receipt."
+- "ZLAR is the doorway AI must pass through before it does something real."
+- "ZLAR lets AI act, but makes it pass through rules, real people, and proof."
+- "AI can move. People stay present. Actions leave proof."
+- "If AI affected you, ask for the receipt."
 
 ## Primary Pages
 
 | Page | Path | Purpose |
 | --- | --- | --- |
-| Homepage | `index.html` | Founder-led category surface, operator routing, proof gateway, boundary disclosure, contact |
-| Enterprise | `enterprise.html` | Enterprise conversation page for choosing one governed action surface |
-| Government | `government.html` | Action-level assurance and public-sector accountability framing |
-| Financial Services | `financial-services.html` | Identity-to-execution gap and receipt-shaped governance primitive |
-| Healthcare | `healthcare.html` | Bounded healthcare action-surface framing without clinical claims |
-| Defense / Military | `defense.html` | Delegation, command authority, and evidence for controlled routed action surfaces |
-| Founder Note | `founder-note.html` | Voice surface for human standing, relaxed acceleration, and the boundary thesis |
+| Homepage | `index.html` | Plain voice spine, operator routing, sample receipt, scope disclosure, contact |
+| Enterprise | `enterprise.html` | Rules before enterprise AI changes files, calls tools, or starts workflows |
+| Government | `government.html` | Public records for AI actions: what happened, what rule applied, and what proof remains |
+| Financial Services | `financial-services.html` | The gap between login and what AI is allowed to do |
+| Healthcare | `healthcare.html` | Bounded healthcare workflow framing without clinical claims |
+| Defense / Military | `defense.html` | Command visibility, rules, people, and proof for routed actions |
+| Founder Note | `founder-note.html` | First-person statement of the doorway thesis |
 | Sample receipt | `proof-pack.html` | Human-first sample receipt with optional bounded terminal verification |
-| Open Memo | `open-memo.html` | Policy/government-facing founder memo |
-| Boundaries | `boundaries.html` | Precise disclosure and non-claims |
+| Open Memo | `open-memo.html` | Policy memo for rules before action and receipts afterward |
+| Boundaries | `boundaries.html` | What passes through ZLAR, what does not, and what the sample does not prove |
 | Archive | `archive.html` | Affected-person pathway, Sealed Mode, older material, standards submissions, and secondary resources |
 
 ## Demo Artifacts
