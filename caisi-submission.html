@@ -119,6 +119,32 @@
       font-style: italic;
     }
 
+    .archive-note {
+      background: rgba(56, 189, 248, 0.08);
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--teal);
+      border-radius: 0.5rem;
+      margin: 0 0 2.5rem;
+      padding: 1.1rem 1.25rem;
+    }
+
+    .archive-note h2 {
+      color: var(--teal);
+      font-family: var(--font);
+      font-size: 0.95rem;
+      letter-spacing: 0.08em;
+      margin: 0 0 0.65rem;
+      text-transform: uppercase;
+    }
+
+    .archive-note p {
+      color: #cbd5e1;
+      font-size: 0.95rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .archive-note p:last-child { margin-bottom: 0; }
+
     .essay-divider {
       border: none;
       border-top: 1px solid var(--border);
@@ -235,6 +261,23 @@
 
     <hr class="essay-divider">
 
+    <div class="archive-note">
+      <h2>Archived context</h2>
+      <p>
+        This page preserves a March 2026 standards submission. It is historical
+        context, not a current production-authority claim.
+      </p>
+      <p>
+        The current public claim boundary is governed by <a href="boundaries.html">Boundaries and Non-Claims</a>,
+        the <a href="proof-pack.html">sample receipt</a>, and the
+        <a href="https://github.com/ZLAR-AI/ZLAR/releases/tag/v3.3.17">v3.3.17 release</a>:
+        fixture/report-input <code>zlar coverage</code> for supplied evidence
+        about defined routed action-surface lanes. It does not prove live
+        machine coverage, production authority, enterprise readiness, external
+        attestation, sovereign recognition, or coverage of unrouted surfaces.
+      </p>
+    </div>
+
     <p>
       On March 29, 2026, ZLAR founder Vincent Nijjar submitted this paper to the
       <strong>NIST Center for AI Standards and Innovation (CAISI)</strong> as part of their
@@ -251,8 +294,9 @@
       The paper presents evidence from the Cloud Security Alliance, the FIFAI II Report,
       Gartner, and Rubrik Zero Labs quantifying the gap, maps the compounding regulatory
       friction across SOX, SR 11-7, OCC 2023-17, and BCBS 239, and presents ZLAR as a
-      working solution &mdash; an open-source execution-boundary governance system already
-      operating in production.
+      working open-source execution-boundary governance system. Current public claims
+      remain bounded by the v3.3.17 release and do not assert production authority or
+      live machine coverage.
     </p>
 
     <h2>Document</h2>

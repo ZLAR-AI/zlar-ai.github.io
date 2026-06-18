@@ -96,6 +96,34 @@
       padding: 3rem 2rem 6rem;
     }
 
+    .archive-note {
+      background: rgba(56, 189, 248, 0.08);
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--teal);
+      border-radius: 0.5rem;
+      margin-bottom: 2.25rem;
+      padding: 1.1rem 1.25rem;
+    }
+
+    .archive-note h2 {
+      color: var(--teal);
+      font-family: var(--font);
+      font-size: 0.85rem;
+      letter-spacing: 0.08em;
+      margin: 0 0 0.65rem;
+      text-transform: uppercase;
+    }
+
+    .archive-note p {
+      color: #cbd5e1;
+      font-family: var(--font);
+      font-size: 0.95rem;
+      line-height: 1.65;
+      margin-bottom: 0.75rem;
+    }
+
+    .archive-note p:last-child { margin-bottom: 0; }
+
     .essay p {
       font-family: var(--serif);
       font-size: 1.0625rem;
@@ -236,6 +264,24 @@
 
   <article class="essay">
 
+    <div class="archive-note">
+      <h2>Archived founder writing</h2>
+      <p>
+        This essay is preserved as April 2026 founder writing. It explains why
+        fail-open hooks matter, but it is not the current public claim boundary.
+      </p>
+      <p>
+        The current boundary is governed by <a href="boundaries.html">Boundaries and Non-Claims</a>,
+        the <a href="proof-pack.html">sample receipt</a>, and the
+        <a href="https://github.com/ZLAR-AI/ZLAR/releases/tag/v3.3.17">v3.3.17 release</a>:
+        fixture/report-input <code>zlar coverage</code> for supplied evidence
+        about defined routed action-surface lanes. It does not prove live
+        machine coverage, production deployment, production authority,
+        enterprise readiness, external attestation, sovereign recognition, or
+        coverage of unrouted surfaces.
+      </p>
+    </div>
+
     <p>I'm a human being watching this moment in AI in real time, trying to describe what I see as clearly as I can.</p>
 
     <p>I keep thinking about an office.</p>
@@ -312,7 +358,7 @@
 
     <p>I need one thing from you: a fail-closed option for PreToolUse hooks. One configuration flag. If the hook fails to respond within N milliseconds, deny the tool call. That single change closes the last gap between the gate working and the gate being deterministic on covered paths.</p>
 
-    <p>Everything else already exists. The deterministic policy engine. The signed rules the agent cannot modify. The hash-chained evidence trail. The human-in-the-loop approval via Telegram. The MCP proxy gate that is structurally fail-closed because no proxy means no connection. The test suites. It is live, it is open source, and it is Apache 2.0.</p>
+    <p>Everything else already exists in the historical open-source and routed-path context this essay described. The deterministic policy engine. The signed rules the agent cannot modify. The hash-chained evidence trail. The human-in-the-loop approval via Telegram. The MCP proxy gate that is structurally fail-closed because no proxy means no connection. The test suites. The code was live as an open-source project; that was not a claim of live machine coverage, production deployment, or broad readiness.</p>
 
     <p><a href="https://github.com/ZLAR-AI/ZLAR">github.com/ZLAR-AI/ZLAR</a></p>
 
