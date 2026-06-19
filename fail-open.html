@@ -273,7 +273,7 @@
       <p>
         The current boundary is governed by <a href="boundaries.html">Boundaries and Non-Claims</a>,
         the <a href="proof-pack.html">sample receipt</a>, and the
-        <a href="https://github.com/ZLAR-AI/ZLAR/releases/tag/v3.3.28">v3.3.28 release</a>:
+        <a href="https://github.com/ZLAR-AI/ZLAR/releases/tag/v3.3.29">v3.3.29 release</a>:
         bounded local fixture protected-records terminal profile and
         profile-contract evidence, receipt-replay refusal evidence, and
         adapter-profile harness evidence plus a callable local protected-records
@@ -281,12 +281,15 @@
         CLI-process conformance evidence plus protected-records downstream
         service proof, sample service-profile preflight evidence, proof-pack
         service-profile identity metadata, and local disposable runtime-profile
-        proof with launcher-owned persistent consumed-receipt storage and
-        replay refusal after service restart. It does not prove live
+        proof with launcher-owned lockfile-guarded persistent consumed-receipt
+        storage, replay refusal after service restart, invalid/duplicate/locked
+        consumed-store refusal, and boundary observations for burned receipts
+        plus valid-store rollback reopening replay. It does not prove live
         approval-channel delivery or health, a live records system, a
         production records adapter or service, persistent runtime profile
-        activation, production-grade durable storage, concurrency hardening, or
-        tamper resistance for the consumed-receipt store, direct filesystem side-door closure, host
+        activation, exactly-once effect semantics, anti-rollback protection,
+        stale-lock recovery, multi-host coordination, production-grade durable
+        storage, or tamper resistance for the consumed-receipt store, direct filesystem side-door closure, host
         process side-door closure, live machine coverage, production
         deployment, production authority, enterprise readiness, external
         attestation, sovereign recognition, or coverage of unrouted surfaces.
