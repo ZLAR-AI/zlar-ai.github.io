@@ -273,22 +273,25 @@
       <p>
         The current boundary is governed by <a href="boundaries.html">Boundaries and Non-Claims</a>,
         the <a href="proof-pack.html">sample receipt</a>, and the
-        <a href="https://github.com/ZLAR-AI/ZLAR/releases/tag/v3.3.30">v3.3.30 release</a>:
+        <a href="https://github.com/ZLAR-AI/ZLAR/releases/tag/v3.3.31">v3.3.31 release</a>:
         bounded local fixture protected-records terminal profile and
         profile-contract evidence, receipt-replay refusal evidence, and
         adapter-profile harness evidence plus a callable local protected-records
         write adapter command for supplied inputs and protected-records adapter
         CLI-process conformance evidence plus protected-records downstream
-        service proof, sample service-profile preflight evidence, proof-pack
-        service-profile identity metadata, and local disposable runtime-profile
-        proof with launcher-owned lockfile-guarded persistent consumed-receipt
+        service proof, sample service-profile preflight evidence, sample
+        runtime-profile preflight evidence, proof-pack service-profile and
+        runtime-profile preflight identity metadata, and local disposable
+        runtime-profile proof with launcher-owned lockfile-guarded persistent consumed-receipt
         storage, a launcher-owned local consumed-store anti-rollback anchor,
         replay refusal after service restart, invalid/duplicate/locked
         consumed-store refusal, invalid local anchor refusal, consumed-store
         rollback/deletion/replacement refusal when the local anchor remains
         current, and boundary observations for burned receipts plus
         store-and-anchor rollback reopening replay without stronger custody or
-        external witness. It does not prove live
+        external witness. The proof pack carries runtime-profile preflight
+        identity as metadata only; it does not run the runtime-profile preflight
+        or disposable runtime-profile proof inside the proof pack. It does not prove live
         approval-channel delivery or health, a live records system, a
         production records adapter or service, persistent runtime profile
         activation, exactly-once effect semantics, production-grade anti-rollback protection,
