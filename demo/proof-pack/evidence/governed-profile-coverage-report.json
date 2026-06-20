@@ -111,7 +111,7 @@
       "id": "external.verifier_attestation",
       "label": "External verifier attestation status",
       "status": "disclosed",
-      "boundary": "Disclosure only: external non-Vincent verifier attestation remains prepared/pending.",
+      "boundary": "Disclosure only: a private-by-default non-Vincent verifier request has been sent; no completed attestation has been received.",
       "closure_mechanism": "No external attestation claim is made in v0.",
       "evidence": {},
       "worker_receipts": [],
@@ -145,9 +145,9 @@
     }
   ],
   "verifier_kit_packet": {
-    "status": "prepared_pending",
+    "status": "private_request_sent_attestation_pending",
     "kit_version": "v0.1.0",
-    "packet_status": "prepared_pending",
+    "packet_status": "private_request_sent_attestation_pending",
     "external_attestation": "not_attested",
     "worker_receipt_verification": "not_supported_by_verifier_kit_v0_1"
   },

@@ -17,7 +17,7 @@ Included evidence:
 What the scratch verifier checks:
 
 - The bundle is a `zlar-proof-pack-v0` manifest.
-- The claim ceiling matches the v3.3.15 safe Codex wording.
+- The claim ceiling matches the current safe Codex wording.
 - Coverage report type is `governed-profile-coverage-v0`.
 - Required non-claims are present.
 - Privacy flags remain false.
@@ -29,5 +29,7 @@ What this does not prove:
 - It does not prove production deployment coverage.
 - It does not verify a live private receipt.
 - It does not prove external attestation.
+- It records that a private-by-default non-Vincent verifier request has been
+  sent, but no completed attestation has been received.
 - It does not implement `/contest`.
 - It does not claim governance for unrouted shell/filesystem/browser/app/network/model-reasoning/final-text surfaces.

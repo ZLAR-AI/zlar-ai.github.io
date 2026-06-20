@@ -22,8 +22,8 @@
       },
       "json_file": "evidence/governed-profile-coverage-report.json",
       "text_file": "evidence/governed-profile-coverage-report.txt",
-      "json_sha256": "91ec1c5a8457add21036bb1368eb56b3c39502cc24050d012888f44d9f3622f9",
-      "text_sha256": "89802f6827a0fa7c7db9c530b3d9c9bf3348552078fa72f6332d5c377b007ccf",
+      "json_sha256": "0ac5048e40d25571cf4362baad7b0adcc1e0b4a35ef6ab69f18c1096f695a7ed",
+      "text_sha256": "f6a8415eb94f957664acd473ac0a289b2626a6bbeee4eae430dd23cb1f953f04",
       "surface_counts": {
         "routed": 2,
         "blocked": 2,
@@ -88,9 +88,9 @@
     },
     "verifier_kit": {
       "packet": {
-        "status": "prepared_pending",
+        "status": "private_request_sent_attestation_pending",
         "kit_version": "v0.1.0",
-        "packet_status": "prepared_pending",
+        "packet_status": "private_request_sent_attestation_pending",
         "external_attestation": "not_attested",
         "worker_receipt_verification": "not_supported_by_verifier_kit_v0_1"
       },

@@ -22,7 +22,14 @@ const UNSAFE_PATTERNS = [
   [/\b(?:raw_args|tool_args|mcp_args|args_preview)\b/i, 'raw argument key'],
   [/\b(?:token|secret|password|api[_-]?key)\s*[:=]\s*[^&\s"'`,;})\]]+/i, 'credential-shaped value'],
   [/\b(?:govern|governs|governed)\s+Codex\b/, 'broad Codex governance claim'],
-  [/\bexternally attested\b/i, 'external attestation completion claim'],
+  [new RegExp(`\\b${['externally', 'attested'].join('\\s+')}\\b`, 'i'), 'external attestation completion claim'],
+  [new RegExp(`\\b${['prepared', 'pending'].join('_')}\\b|\\bprepared\\/pending\\b`, 'i'), 'stale verifier request status'],
+  [new RegExp(`\\b${['no-contact', 'external', 'verifier', 'packet'].join('\\s+')}\\b`, 'i'), 'stale no-contact verifier packet status'],
+  [
+    new RegExp(`\\b${['no', 'verifier', 'has', 'been', 'contacted'].join('\\s+')}\\b|\\b${['contacted', 'or', 'appointed'].join('\\s+')}\\b`, 'i'),
+    'stale verifier contact status',
+  ],
+  [/\bv3\.3\.15 safe Codex wording\b/i, 'stale proof-pack release anchor'],
 ];
 
 function readText(path) {

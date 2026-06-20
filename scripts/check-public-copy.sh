@@ -17,6 +17,7 @@ PUBLIC_PATHS=(
     '*.md'
     'docs'
     'specs'
+    'demo'
 )
 
 pass() {
@@ -118,6 +119,14 @@ assert_no_public_regex \
 assert_no_public_regex \
     "public copy must not claim completed external attestation" \
     'externally[-[:space:]]+attested|external[-[:space:]]+attestation[-[:space:]]+(complete|completed|done)|independently[-[:space:]]+attested|non[-[:space:]]+Vincent[-[:space:]]+verifier[-[:space:]]+has[-[:space:]]+verified'
+
+assert_no_public_regex \
+    "public downloadable assets must not preserve stale verifier status" \
+    'prepared_pending|prepared/pending|no-contact external verifier packet|no verifier has been contacted|contacted or appointed'
+
+assert_no_public_regex \
+    "public downloadable assets must not anchor current safe wording to stale release" \
+    'v3\.3\.15 safe Codex wording'
 
 echo
 printf "Results: %d/%d passed" "${PASS}" "${TOTAL}"

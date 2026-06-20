@@ -1,7 +1,7 @@
 Governed Profile Coverage Report v0
 Profile: scratch Codex routed-MCP proof profile (Codex CLI; isolated=true)
 Claim ceiling: ZLAR can govern Codex CLI-invoked MCP tool calls when those MCP servers are routed through ZLAR.
-Verifier kit packet: prepared_pending; external attestation=not_attested
+Verifier kit packet: private_request_sent_attestation_pending; external attestation=not_attested
 
 Surfaces:
 - codex.mcp.tools_call.routed_profile: routed; servers=1; Coverage is limited to Codex CLI MCP tools/call requests for the single scratch server routed through the ZLAR MCP gate.
@@ -9,7 +9,7 @@ Surfaces:
 - codex.mcp.decision.deny: blocked; audit=scratch-deny-001; Deny decision evidence is limited to the supplied scratch routed MCP tools/call audit event.
 - codex.mcp.registration.direct_upstream_bypass: blocked; servers=1; A direct upstream MCP server registration would bypass the routed MCP gate and is not accepted as coverage evidence.
 - zlar.contest: disclosed; evidence=none; Disclosure only: /contest is not implemented.
-- external.verifier_attestation: disclosed; evidence=none; Disclosure only: external non-Vincent verifier attestation remains prepared/pending.
+- external.verifier_attestation: disclosed; evidence=none; Disclosure only: a private-by-default non-Vincent verifier request has been sent; no completed attestation has been received.
 - codex.shell: out_of_scope; evidence=none; Codex shell commands outside routed MCP tools/call decisions are outside this report.
 - codex.model_reasoning_final_text: out_of_scope; evidence=none; Model reasoning, planning, memory, and final text are not an MCP tools/call action surface.
 
