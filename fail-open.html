@@ -273,7 +273,7 @@
       <p>
         The current boundary is governed by <a href="boundaries.html">Boundaries and Non-Claims</a>,
         the <a href="proof-pack.html">sample receipt</a>, and the
-        <a href="https://github.com/ZLAR-AI/ZLAR/releases/tag/v3.3.37">v3.3.37 release</a>:
+        <a href="https://github.com/ZLAR-AI/ZLAR/releases/tag/v3.3.38">v3.3.38 release</a>:
         bounded local fixture protected-records terminal profile and
         profile-contract evidence, receipt-replay refusal evidence, and
         adapter-profile harness evidence plus a callable local protected-records
@@ -302,7 +302,9 @@
         integrity and embedded preflight boundaries without rerunning the
         preflight or selecting a live/current-machine runtime profile; `verify
         --sample` checks the committed sample artifact without generating fresh
-        evidence. It does not run
+        evidence. `zlar proof-smoke` now checks the local proof-pack sample
+        artifact, the committed activation-preflight sample artifact, and the
+        fixture-input coverage map as fixture smoke evidence. It does not run
         the service-profile preflight as a deployment preflight, install or activate
         a runtime profile, write runtime or hook configuration, start a service, or
         select a latest/current-machine profile. It does not prove live
