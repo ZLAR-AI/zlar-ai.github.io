@@ -67,6 +67,48 @@ assert_no_public_regex() {
     fi
 }
 
+assert_no_public_regex_collapsed() {
+    local label="$1"
+    local pattern="$2"
+    TOTAL=$((TOTAL + 1))
+
+    local matches rc
+    set +e
+    matches=$(PUBLIC_COPY_PATTERN="${pattern}" node <<'NODE'
+const { execFileSync } = require('node:child_process');
+const fs = require('node:fs');
+
+const publicPaths = ['*.html', '*.txt', '*.md', 'docs', 'specs', 'demo'];
+const pattern = new RegExp(process.env.PUBLIC_COPY_PATTERN, 'i');
+const files = execFileSync('git', ['ls-files', '-z', '--', ...publicPaths])
+  .toString('utf8')
+  .split('\0')
+  .filter(Boolean);
+
+const hits = [];
+for (const file of files) {
+  const body = fs.readFileSync(file, 'utf8').replace(/\s+/g, ' ');
+  if (pattern.test(body)) {
+    hits.push(file);
+  }
+}
+
+if (hits.length > 0) {
+  console.log(hits.join('\n'));
+  process.exit(1);
+}
+NODE
+)
+    rc=$?
+    set -e
+
+    if [ "${rc}" -eq 0 ]; then
+        pass
+    else
+        fail "${label}" "${matches}"
+    fi
+}
+
 echo "=== Website Public-Copy Guard ==="
 
 assert_contains_fixed \
@@ -131,6 +173,10 @@ assert_no_public_regex \
 
 assert_no_public_regex \
     "public downloadable assets must not preserve stale attestation-pending verifier status" \
+    'private_request_sent_attestation_pending|attestation pending|no completed attestation has been received'
+
+assert_no_public_regex_collapsed \
+    "public copy must not hide stale attestation-pending wording across line breaks" \
     'private_request_sent_attestation_pending|attestation pending|no completed attestation has been received'
 
 assert_no_public_regex \
