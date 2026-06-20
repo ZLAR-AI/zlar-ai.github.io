@@ -11,7 +11,7 @@ const REQUIRED_NON_CLAIMS = [
   'This report does not assert coverage for Codex shell, filesystem, browser, app-control, direct network, model reasoning, or final text surfaces.',
   'MCP servers registered directly with a client instead of through the ZLAR MCP gate are outside this report.',
   '/contest is not implemented.',
-  'External non-operator verifier attestation is not present in v0.',
+  'Public external verifier attestation is not claimed in v0.',
 ];
 
 const UNSAFE_PATTERNS = [
@@ -24,6 +24,15 @@ const UNSAFE_PATTERNS = [
   [/\b(?:govern|governs|governed)\s+Codex\b/, 'broad Codex governance claim'],
   [new RegExp(`\\b${['externally', 'attested'].join('\\s+')}\\b`, 'i'), 'external attestation completion claim'],
   [new RegExp(`\\b${['prepared', 'pending'].join('_')}\\b|\\bprepared\\/pending\\b`, 'i'), 'stale verifier request status'],
+  [
+    new RegExp(
+      `${['private', 'request', 'sent', 'attestation', 'pending'].join('_')}|` +
+        `\\b${['attestation', 'pending'].join('\\s+')}\\b|` +
+        `\\b${['no', 'completed', 'attestation', 'has', 'been', 'received'].join('\\s+')}\\b`,
+      'i'
+    ),
+    'stale attestation-pending verifier status',
+  ],
   [new RegExp(`\\b${['no-contact', 'external', 'verifier', 'packet'].join('\\s+')}\\b`, 'i'), 'stale no-contact verifier packet status'],
   [
     new RegExp(`\\b${['no', 'verifier', 'has', 'been', 'contacted'].join('\\s+')}\\b|\\b${['contacted', 'or', 'appointed'].join('\\s+')}\\b`, 'i'),

@@ -24,7 +24,7 @@ Claim boundary:
 - Safe Codex wording: "ZLAR can govern Codex CLI-invoked MCP tool calls when those MCP servers are routed through ZLAR."
 - Unrouted shell/filesystem/browser/app/network/model-reasoning/final-text surfaces are not claimed as governed by the current proof path.
 - /contest is not implemented.
-- A private-by-default non-Vincent verifier request has been sent; no completed attestation has been received, and any result must be bounded by verifier relationship, disclosure permission, and exact evidence returned.
+- A private-by-default non-Vincent verifier request has been sent; no public external attestation is claimed in this repo, and any private reply or later result remains bounded by verifier relationship, disclosure permission, and exact evidence returned.
 
 Interpretation rule:
 

@@ -111,7 +111,7 @@
       "id": "external.verifier_attestation",
       "label": "External verifier attestation status",
       "status": "disclosed",
-      "boundary": "Disclosure only: a private-by-default non-Vincent verifier request has been sent; no completed attestation has been received.",
+      "boundary": "Disclosure only: a private-by-default non-Vincent verifier request has been sent; no public external attestation is claimed in this repo.",
       "closure_mechanism": "No external attestation claim is made in v0.",
       "evidence": {},
       "worker_receipts": [],
@@ -145,9 +145,9 @@
     }
   ],
   "verifier_kit_packet": {
-    "status": "private_request_sent_attestation_pending",
+    "status": "private_request_sent_public_attestation_not_claimed",
     "kit_version": "v0.1.0",
-    "packet_status": "private_request_sent_attestation_pending",
+    "packet_status": "private_request_sent_public_attestation_not_claimed",
     "external_attestation": "not_attested",
     "worker_receipt_verification": "not_supported_by_verifier_kit_v0_1"
   },
@@ -156,7 +156,7 @@
     "This report does not assert coverage for Codex shell, filesystem, browser, app-control, direct network, model reasoning, or final text surfaces.",
     "MCP servers registered directly with a client instead of through the ZLAR MCP gate are outside this report.",
     "/contest is not implemented.",
-    "External non-operator verifier attestation is not present in v0."
+    "Public external verifier attestation is not claimed in v0."
   ],
   "residual_ungoverned_surfaces": [
     "Codex shell commands outside routed MCP tools/call decisions",

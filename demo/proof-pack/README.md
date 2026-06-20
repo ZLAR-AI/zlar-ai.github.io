@@ -30,6 +30,6 @@ What this does not prove:
 - It does not verify a live private receipt.
 - It does not prove external attestation.
 - It records that a private-by-default non-Vincent verifier request has been
-  sent, but no completed attestation has been received.
+  sent and that no public external attestation is claimed in this repo.
 - It does not implement `/contest`.
 - It does not claim governance for unrouted shell/filesystem/browser/app/network/model-reasoning/final-text surfaces.

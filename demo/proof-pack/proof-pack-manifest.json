@@ -22,8 +22,8 @@
       },
       "json_file": "evidence/governed-profile-coverage-report.json",
       "text_file": "evidence/governed-profile-coverage-report.txt",
-      "json_sha256": "0ac5048e40d25571cf4362baad7b0adcc1e0b4a35ef6ab69f18c1096f695a7ed",
-      "text_sha256": "f6a8415eb94f957664acd473ac0a289b2626a6bbeee4eae430dd23cb1f953f04",
+      "json_sha256": "0f4735ff54df8a808bad0bd0976819553faa5f90e5dddee48a5a5e6bd074c896",
+      "text_sha256": "25d45e4a105bc3a586d97bfe446eb35c4daf8ad58cafc0c8557c3843911f3927",
       "surface_counts": {
         "routed": 2,
         "blocked": 2,
@@ -88,9 +88,9 @@
     },
     "verifier_kit": {
       "packet": {
-        "status": "private_request_sent_attestation_pending",
+        "status": "private_request_sent_public_attestation_not_claimed",
         "kit_version": "v0.1.0",
-        "packet_status": "private_request_sent_attestation_pending",
+        "packet_status": "private_request_sent_public_attestation_not_claimed",
         "external_attestation": "not_attested",
         "worker_receipt_verification": "not_supported_by_verifier_kit_v0_1"
       },
@@ -105,7 +105,7 @@
     "This report does not assert coverage for Codex shell, filesystem, browser, app-control, direct network, model reasoning, or final text surfaces.",
     "MCP servers registered directly with a client instead of through the ZLAR MCP gate are outside this report.",
     "/contest is not implemented.",
-    "External non-operator verifier attestation is not present in v0."
+    "Public external verifier attestation is not claimed in v0."
   ],
   "residual_ungoverned_surfaces": [
     "Codex shell commands outside routed MCP tools/call decisions",

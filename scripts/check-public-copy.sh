@@ -84,6 +84,11 @@ assert_contains_fixed \
     "boundaries.html" \
     "private-by-default non-Vincent verifier request"
 
+assert_contains_fixed \
+    "boundaries page keeps public attestation non-claim" \
+    "boundaries.html" \
+    "no public external attestation is claimed in this repo"
+
 assert_no_public_regex \
     "public copy must not say receipts prove/record what happened" \
     '(^|[^[:alnum:]_])receipts?[^.?!]{0,80}(records?|shows?|captures?|explains?|proves?)[^.?!]{0,80}what happened'
@@ -123,6 +128,10 @@ assert_no_public_regex \
 assert_no_public_regex \
     "public downloadable assets must not preserve stale verifier status" \
     'prepared_pending|prepared/pending|no-contact external verifier packet|no verifier has been contacted|contacted or appointed'
+
+assert_no_public_regex \
+    "public downloadable assets must not preserve stale attestation-pending verifier status" \
+    'private_request_sent_attestation_pending|attestation pending|no completed attestation has been received'
 
 assert_no_public_regex \
     "public downloadable assets must not anchor current safe wording to stale release" \
