@@ -273,7 +273,7 @@
       <p>
         The current boundary is governed by <a href="boundaries.html">Boundaries and Non-Claims</a>,
         the <a href="proof-pack.html">sample receipt</a>, and the
-        <a href="https://github.com/ZLAR-AI/ZLAR/releases/tag/v3.3.40">v3.3.40 release</a>:
+        <a href="https://github.com/ZLAR-AI/ZLAR/releases/tag/v3.3.41">v3.3.41 release</a>:
         bounded local fixture protected-records terminal profile and
         profile-contract evidence, receipt-replay refusal evidence, and
         adapter-profile harness evidence plus a callable local protected-records
@@ -281,7 +281,9 @@
         CLI-process conformance evidence plus protected-records downstream
         service proof with invalid, unknown-issuer, and stale receipt refusal
         before service-state mutation, sample service-profile preflight evidence
-        with the same expanded refusal matrix, sample
+        with the same expanded refusal matrix, portable
+        service-profile preflight artifact generation/verification with a committed sample artifact for explicit
+        fixture profile/report payloads, sample
         runtime-profile preflight evidence, sample runtime activation-plan
         preflight evidence, proof-pack service-profile preflight execution evidence, separate runtime-profile
         preflight identity metadata, proof-pack runtime activation-plan preflight execution evidence, portable
@@ -296,7 +298,7 @@
         store-and-anchor rollback reopening replay without stronger custody or
         external witness. The proof pack executes the service-profile preflight
         as bounded local disposable fixture evidence with the nine-case contract/refusal matrix
-        and explicit non-claims. It carries
+        and explicit non-claims. The standalone service-profile preflight artifact verifier checks canonical artifact integrity and embedded service-profile preflight boundaries without rerunning the preflight or selecting a live/latest profile; verify --sample checks the committed service-profile preflight sample artifact without generating fresh evidence. It carries
         runtime-profile preflight identity metadata and executes the runtime
         activation-plan preflight under explicit fixture plan/profile files, including the bounded runtime-profile
         preflight/proof nested inside that activation preflight. The
