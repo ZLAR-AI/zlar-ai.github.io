@@ -79,9 +79,9 @@ assert_contains_fixed \
     "that guard is CI evidence only and adds no runtime authority"
 
 assert_contains_fixed \
-    "boundaries page keeps external verifier packet boundary" \
+    "boundaries page keeps private verifier request boundary" \
     "boundaries.html" \
-    "no-contact external verifier packet"
+    "private-by-default non-Vincent verifier request"
 
 assert_no_public_regex \
     "public copy must not say receipts prove/record what happened" \
