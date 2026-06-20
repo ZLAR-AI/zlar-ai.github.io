@@ -45,6 +45,17 @@ ZLAR governs routed/intercepted action surfaces only. Safe Codex wording:
 
 Unrouted shell/filesystem/browser/app/network/model-reasoning/final-text surfaces are not claimed as governed by the current proof path. `/contest` is not implemented. External non-Vincent verifier attestation remains prepared/pending unless state changes.
 
+## Public Copy Guard
+
+Run the website claim-boundary guard before changing public copy:
+
+```bash
+bash scripts/check-public-copy.sh
+```
+
+The guard fails language that treats receipts as logs, after-the-fact event
+history, agent intent, decision correctness, or global authorization.
+
 ## Hosting
 
 Hosted on GitHub Pages. Static HTML and CSS. No build step.
