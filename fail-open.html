@@ -273,7 +273,7 @@
       <p>
         The current boundary is governed by <a href="boundaries.html">Boundaries and Non-Claims</a>,
         the <a href="proof-pack.html">sample receipt</a>, and the
-        <a href="https://github.com/ZLAR-AI/ZLAR/releases/tag/v3.3.35">v3.3.35 release</a>:
+        <a href="https://github.com/ZLAR-AI/ZLAR/releases/tag/v3.3.36">v3.3.36 release</a>:
         bounded local fixture protected-records terminal profile and
         profile-contract evidence, receipt-replay refusal evidence, and
         adapter-profile harness evidence plus a callable local protected-records
@@ -284,7 +284,8 @@
         with the same expanded refusal matrix, sample
         runtime-profile preflight evidence, sample runtime activation-plan
         preflight evidence, proof-pack service-profile identity metadata, separate runtime-profile
-        preflight identity metadata, proof-pack runtime activation-plan preflight execution evidence, and local disposable
+        preflight identity metadata, proof-pack runtime activation-plan preflight execution evidence, portable
+        activation-preflight artifact generation/verification for explicit fixture plan/profile/report payloads, and local disposable
         runtime-profile proof with launcher-owned lockfile-guarded persistent consumed-receipt
         storage, a launcher-owned local consumed-store anti-rollback anchor,
         replay refusal after service restart, invalid/duplicate/locked
@@ -295,7 +296,10 @@
         external witness. The proof pack carries runtime-profile preflight identity
         metadata and executes the runtime activation-plan preflight under explicit
         fixture plan/profile files, including the bounded runtime-profile
-        preflight/proof nested inside that activation preflight. It does not run
+        preflight/proof nested inside that activation preflight. The
+        activation-preflight artifact verifier checks canonical artifact
+        integrity and embedded preflight boundaries without rerunning the
+        preflight or selecting a live/current-machine runtime profile. It does not run
         the service-profile preflight as a deployment preflight, install or activate
         a runtime profile, write runtime or hook configuration, start a service, or
         select a latest/current-machine profile. It does not prove live
