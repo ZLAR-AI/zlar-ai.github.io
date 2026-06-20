@@ -273,7 +273,7 @@
       <p>
         The current boundary is governed by <a href="boundaries.html">Boundaries and Non-Claims</a>,
         the <a href="proof-pack.html">sample receipt</a>, and the
-        <a href="https://github.com/ZLAR-AI/ZLAR/releases/tag/v3.3.38">v3.3.38 release</a>:
+        <a href="https://github.com/ZLAR-AI/ZLAR/releases/tag/v3.3.39">v3.3.39 release</a>:
         bounded local fixture protected-records terminal profile and
         profile-contract evidence, receipt-replay refusal evidence, and
         adapter-profile harness evidence plus a callable local protected-records
@@ -283,7 +283,7 @@
         before service-state mutation, sample service-profile preflight evidence
         with the same expanded refusal matrix, sample
         runtime-profile preflight evidence, sample runtime activation-plan
-        preflight evidence, proof-pack service-profile identity metadata, separate runtime-profile
+        preflight evidence, proof-pack service-profile preflight execution evidence, separate runtime-profile
         preflight identity metadata, proof-pack runtime activation-plan preflight execution evidence, portable
         activation-preflight artifact generation/verification with a committed sample artifact for explicit
         fixture plan/profile/report payloads, and local disposable
@@ -294,9 +294,11 @@
         rollback/deletion/replacement refusal when the local anchor remains
         current, and boundary observations for burned receipts plus
         store-and-anchor rollback reopening replay without stronger custody or
-        external witness. The proof pack carries runtime-profile preflight identity
-        metadata and executes the runtime activation-plan preflight under explicit
-        fixture plan/profile files, including the bounded runtime-profile
+        external witness. The proof pack executes the service-profile preflight
+        as bounded local disposable fixture evidence with the nine-case contract/refusal matrix
+        and explicit non-claims. It carries
+        runtime-profile preflight identity metadata and executes the runtime
+        activation-plan preflight under explicit fixture plan/profile files, including the bounded runtime-profile
         preflight/proof nested inside that activation preflight. The
         activation-preflight artifact verifier checks canonical artifact
         integrity and embedded preflight boundaries without rerunning the
@@ -305,7 +307,7 @@
         evidence. `zlar proof-smoke` now checks the local proof-pack sample
         artifact, the committed activation-preflight sample artifact, and the
         fixture-input coverage map as fixture smoke evidence. It does not run
-        the service-profile preflight as a deployment preflight, install or activate
+        the service-profile preflight against a live/current-machine deployment, install or activate
         a runtime profile, write runtime or hook configuration, start a service, or
         select a latest/current-machine profile. It does not prove live
         approval-channel delivery or health, a live records system, a
