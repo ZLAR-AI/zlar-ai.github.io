@@ -78,6 +78,11 @@ assert_contains_fixed \
     "boundaries.html" \
     "that guard is CI evidence only and adds no runtime authority"
 
+assert_contains_fixed \
+    "boundaries page keeps external verifier packet boundary" \
+    "boundaries.html" \
+    "no-contact external verifier packet"
+
 assert_no_public_regex \
     "public copy must not say receipts prove/record what happened" \
     '(^|[^[:alnum:]_])receipts?[^.?!]{0,80}(records?|shows?|captures?|explains?|proves?)[^.?!]{0,80}what happened'
@@ -109,6 +114,10 @@ assert_no_public_regex \
 assert_no_public_regex \
     "public copy must not equate logs and receipts" \
     '(^|[^[:alnum:]_])a[[:space:]]+log[[:space:]]+is[[:space:]]+the[[:space:]]+same[[:space:]]+as[[:space:]]+a[[:space:]]+receipt'
+
+assert_no_public_regex \
+    "public copy must not claim completed external attestation" \
+    'externally[-[:space:]]+attested|external[-[:space:]]+attestation[-[:space:]]+(complete|completed|done)|independently[-[:space:]]+attested|non[-[:space:]]+Vincent[-[:space:]]+verifier[-[:space:]]+has[-[:space:]]+verified'
 
 echo
 printf "Results: %d/%d passed" "${PASS}" "${TOTAL}"
