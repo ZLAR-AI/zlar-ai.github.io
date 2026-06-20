@@ -2,7 +2,7 @@
 
 > ZLAR is where AI action becomes answerable.
 
-ZLAR keeps humans in the loop when AI starts doing real things. Before AI acts, ZLAR checks the rule. The rule can allow it, block it, or ask a person. Afterward, ZLAR leaves a receipt.
+ZLAR keeps humans in the loop when AI starts doing real things. Before AI acts, ZLAR checks the rule. The rule can allow it, block it, or ask a person. A log records what happened. A ZLAR receipt records what counted as authorized effect when action tried to become consequence.
 
 Primary pages:
 

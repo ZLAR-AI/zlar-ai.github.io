@@ -6,7 +6,7 @@
   <title>Verify a ZLAR Receipt &mdash; ZLAR</title>
   <meta name="description" content="Verify a demo ZLAR receipt with only the public key. No platform access required.">
   <meta property="og:title" content="Verify a ZLAR Receipt &mdash; ZLAR">
-  <meta property="og:description" content="A signed demo receipt shows what the AI tried to do, what rule was used, and whether the record still verifies.">
+  <meta property="og:description" content="A signed demo receipt records what counted as authorized effect and whether the record still verifies.">
   <meta property="og:image" content="https://zlar.ai/assets/social-preview.png">
   <meta property="og:url" content="https://zlar.ai/receipt-verify.html">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>&#x1F6A6;</text></svg>">
@@ -167,7 +167,7 @@ Verified. Action "Write" in domain "write" was deny by policy at 2026-04-24T12:5
       <li>The receipt is anchored to the audit chain via <code style="font-family: var(--mono); color: var(--teal);">audit_prev_hash</code> (here "genesis" &mdash; the first entry). A production chain links each receipt to the previous receipt's hash; reordering or dropping a receipt breaks the chain and is detectable.</li>
     </ul>
     <p>
-      The receipt does <strong>not</strong> prove the rule was correct, or that the AI had good intentions. It proves the decision was recorded: a decision was made by the stated authorizer, against signed rules, at the stated time, and the record has not been tampered with since.
+      The receipt does <strong>not</strong> prove the rule was correct, or that the AI had good intentions. It proves what counted as authorized effect: a decision was made by the stated authorizer, against signed rules, at the stated time, and the record has not been tampered with since.
     </p>
 
     <span class="section-label">About these keys</span>
