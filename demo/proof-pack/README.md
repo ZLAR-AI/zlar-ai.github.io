@@ -4,7 +4,7 @@ This public bundle is a fake/scratch proof-pack example for zlar.ai. It is desig
 
 Current public release:
 
-ZLAR v3.3.85 — Config-backed service preflight.
+ZLAR v3.3.86 — Release-forward service-preflight quick-check.
 
 Claim ceiling:
 

@@ -124,47 +124,47 @@ assert_contains_fixed \
 assert_contains_fixed \
     "boundaries page keeps current release pointer" \
     "boundaries.html" \
-    "ZLAR v3.3.85 on GitHub"
+    "ZLAR v3.3.86 on GitHub"
 
 assert_contains_fixed \
     "website README keeps current release pointer" \
     "README.md" \
-    "ZLAR v3.3.85 — Config-backed service preflight"
+    "ZLAR v3.3.86 — Release-forward service-preflight quick-check"
 
 assert_contains_fixed \
     "LLM index keeps current release pointer" \
     "llms.txt" \
-    "Current public release: ZLAR v3.3.85 — Config-backed service preflight."
+    "Current public release: ZLAR v3.3.86 — Release-forward service-preflight quick-check."
 
 assert_contains_fixed \
     "proof-pack README keeps current release pointer" \
     "demo/proof-pack/README.md" \
-    "ZLAR v3.3.85 — Config-backed service preflight."
+    "ZLAR v3.3.86 — Release-forward service-preflight quick-check."
 
 assert_contains_fixed \
     "proof-pack manifest keeps current release pointer" \
     "demo/proof-pack/proof-pack-manifest.json" \
-    "\"current_public_release\": \"v3.3.85\""
+    "\"current_public_release\": \"v3.3.86\""
 
 assert_contains_fixed \
-    "proof-pack manifest keeps config-backed service boundary" \
+    "proof-pack manifest keeps service-preflight quick-check boundary" \
     "demo/proof-pack/proof-pack-manifest.json" \
-    "Config-backed service preflight; local disposable fixture/preflight evidence only"
+    "Release-forward service-preflight quick-check; standalone config-backed service-preflight sample verification only"
 
 assert_contains_fixed \
     "architecture archive keeps current release pointer" \
     "architecture.html" \
-    "Current public release: ZLAR v3.3.85 — Config-backed service preflight."
+    "Current public release: ZLAR v3.3.86 — Release-forward service-preflight quick-check."
 
 assert_contains_fixed \
-    "CAISI archive keeps current service-preflight boundary" \
+    "CAISI archive keeps current quick-check boundary" \
     "caisi-submission.html" \
-    "The current release adds config-backed protected-records service preflight evidence"
+    "The current release surfaces the config-backed service-preflight sample as a standalone release-forward evaluator quick-check"
 
 assert_contains_fixed \
-    "fail-open archive keeps current service-preflight boundary" \
+    "fail-open archive keeps current quick-check boundary" \
     "fail-open.html" \
-    "The current release adds config-backed protected-records service preflight evidence"
+    "The current release surfaces the config-backed service-preflight sample as a standalone release-forward evaluator quick-check"
 
 assert_contains_fixed \
     "boundaries page keeps records.write terminal proof boundary" \
@@ -177,9 +177,9 @@ assert_contains_fixed \
     "The historical private verifier request remains sent and private-by-default"
 
 assert_contains_fixed \
-    "boundaries page keeps service-preflight boundary" \
+    "boundaries page keeps service-preflight quick-check boundary" \
     "boundaries.html" \
-    "The current release adds config-backed protected-records service preflight evidence"
+    "The current release surfaces the config-backed service-preflight sample as a standalone release-forward evaluator quick-check"
 
 assert_contains_fixed \
     "boundaries page keeps dry-run manifest file" \
