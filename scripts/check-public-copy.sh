@@ -122,6 +122,16 @@ assert_contains_fixed \
     "that guard is CI evidence only and adds no runtime authority"
 
 assert_contains_fixed \
+    "boundaries page keeps current release pointer" \
+    "boundaries.html" \
+    "ZLAR v3.3.73 on GitHub"
+
+assert_contains_fixed \
+    "boundaries page keeps records.write terminal proof boundary" \
+    "boundaries.html" \
+    "records-write-terminal-proof"
+
+assert_contains_fixed \
     "boundaries page keeps private verifier request boundary" \
     "boundaries.html" \
     "private-by-default non-Vincent verifier request"
@@ -180,12 +190,32 @@ assert_no_public_regex \
     '(^|[^[:alnum:]_])the[[:space:]]+receipt[[:space:]]+proves?[[:space:]]+the[[:space:]]+decision[[:space:]]+was[[:space:]]+correct'
 
 assert_no_public_regex \
+    "public copy must not claim all actions cross the gate" \
+    '(^|>)[[:space:]]*(it|the[[:space:]]+agent|an[[:space:]]+agent)[[:space:]]+cannot[[:space:]]+act[[:space:]]+without[[:space:]]+crossing[[:space:]]+the[[:space:]]+gate'
+
+assert_no_public_regex \
+    "public copy must not claim every important attempt is recorded" \
+    'every[[:space:]]+important[[:space:]]+attempt'
+
+assert_no_public_regex \
+    "public copy must not claim current independent/external key custody" \
+    '(authority[[:space:]]+comes[[:space:]]+from[^.?!]{0,120}(independent|external)[[:space:]]+key[[:space:]]+custody|sealed[[:space:]]+mode[^.?!]{0,160}(independent|external)[[:space:]]+key[[:space:]]+custody)'
+
+assert_no_public_regex \
+    "public copy must not claim unconditional working-today approval channel" \
+    'human[[:space:]]+approval[[:space:]]+over[[:space:]]+a[[:space:]]+channel[[:space:]]+outside[[:space:]]+the[[:space:]]+AI.?s[[:space:]]+runtime\.'
+
+assert_no_public_regex \
     "public copy must not equate logs and receipts" \
     '(^|[^[:alnum:]_])a[[:space:]]+log[[:space:]]+is[[:space:]]+the[[:space:]]+same[[:space:]]+as[[:space:]]+a[[:space:]]+receipt'
 
 assert_no_public_regex \
     "public copy must not claim completed external attestation" \
     'externally[-[:space:]]+attested|external[-[:space:]]+attestation[-[:space:]]+(complete|completed|done)|independently[-[:space:]]+attested|non[-[:space:]]+Vincent[-[:space:]]+verifier[-[:space:]]+has[-[:space:]]+verified'
+
+assert_no_public_regex \
+    "public copy must not preserve stale previous-release pointer" \
+    'v3[.]3[.]72'
 
 assert_no_public_regex \
     "public downloadable assets must not preserve stale verifier status" \

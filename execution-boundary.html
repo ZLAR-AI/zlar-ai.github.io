@@ -59,7 +59,7 @@
             This founder note is an earlier thesis page. Current public claim
             boundaries are governed by <a href="boundaries.html">Boundaries and
             Non-Claims</a>, the <a href="proof-pack.html">sample receipt</a>,
-            and the <a href="https://github.com/ZLAR-AI/ZLAR/releases/tag/v3.3.72">v3.3.72 release</a>.
+            and the <a href="https://github.com/ZLAR-AI/ZLAR/releases/tag/v3.3.73">v3.3.73 release</a>.
             References below to third-party verification, key custody,
             witnessing, or external anchoring describe the intended evidence
             path, not completed independent public attestation. A
@@ -84,13 +84,13 @@
 
         <h2>What ZLAR Is</h2>
         <p>
-          ZLAR intercepts AI-agent tool calls before they reach operational systems: shell commands, file writes, API calls, MCP tool calls, deployment steps, and other consequential actions.
+          ZLAR intercepts routed or configured AI-agent tool calls before they reach operational systems: shell commands, file writes, API calls, MCP tool calls, deployment steps, and other consequential actions when those paths are routed through the checkpoint.
         </p>
         <p>
           It evaluates each routed action against signed policy, allows routine actions, routes consequential actions to a human when required, and produces cryptographic receipts showing that governance occurred.
         </p>
         <p>
-          The gate is deny-first, fail-closed, and deterministic. Its authority comes from signed human policy, independent key custody, and records that can be verified outside the agent's runtime.
+          The gate is deny-first, fail-closed, and deterministic. Its authority comes from signed human policy and records that can be verified outside the agent's runtime. Independent custody and external witnessing are deployment patterns, not current public evidence.
         </p>
         <p>
           As AI becomes persistent, embodied, and operational, the governing question is: where is the lawful boundary between cognition and consequence?
@@ -101,7 +101,7 @@
 
         <h2>The Category</h2>
         <p>
-          Security teams will recognize parts of ZLAR: policy enforcement, auditability, human approval, sandboxing, key custody, and tamper-evident logs.
+          Security teams will recognize parts of ZLAR: policy enforcement, auditability, human approval, sandboxing, key posture, and tamper-evident logs.
         </p>
         <p>
           The category is larger than any one security control. ZLAR is execution-boundary governance for autonomous AI. It can be described as proof-carrying governance for agentic systems, external authorization infrastructure for AI agents, a deterministic control plane for autonomous AI action, or governed agency.
@@ -143,7 +143,7 @@
           ZLAR governs actions routed through it.
         </p>
         <p>
-          A strong deployment pairs the ZLAR gate with surrounding controls: sandbox profiles, OS permissions, filesystem allowlists, network egress controls, sealed policy files, external key custody, and controlled access paths around shell and MCP surfaces.
+          A strong deployment pairs the ZLAR gate with surrounding controls: sandbox profiles, OS permissions, filesystem allowlists, network egress controls, sealed policy files, defined key custody, and controlled access paths around shell and MCP surfaces.
         </p>
         <p>
           That combination is ZLAR Sealed Mode.
@@ -151,7 +151,7 @@
 
         <h2>ZLAR Sealed Mode</h2>
         <p>
-          Sealed Mode combines the ZLAR gate, sandbox profile, network egress controls, filesystem allowlist, controlled shell access, proxied MCP access, read-only policy and gate files, external key custody, and receipt witnessing or external log anchoring.
+          Sealed Mode is a deployment pattern that can combine the ZLAR gate, sandbox profile, network egress controls, filesystem allowlist, controlled shell access, proxied MCP access, read-only policy and gate files, defined key custody, and receipt witnessing or external log anchoring.
         </p>
         <p>
           Sealed Mode makes the execution boundary visible, enforceable, and reviewable in deployment.
