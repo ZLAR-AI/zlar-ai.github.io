@@ -2,9 +2,9 @@
   "generated_at": "2026-05-14T00:00:00.000Z",
   "pack_type": "zlar-proof-pack-v0",
   "pack_version": 0,
-  "current_public_release": "v3.3.99",
-  "current_public_release_url": "https://github.com/ZLAR-AI/ZLAR/releases/tag/v3.3.99",
-  "current_public_release_boundary": "Release-forward result Markdown polish; release-forward packet readability hardening only, no machine-readable manifest change, public external attestation, non-operator review, production authority, enterprise readiness, current-machine governance, live MCP coverage, or unrouted-surface coverage claim.",
+  "current_public_release": "v3.3.100",
+  "current_public_release_url": "https://github.com/ZLAR-AI/ZLAR/releases/tag/v3.3.100",
+  "current_public_release_boundary": "Verifier kit reproducibility evidence; source-build archive determinism for identical inputs and the same publisher key only, no production publisher key custody, production signing identity, public release publication, public external attestation, live trust-registry state, revocation truth, enterprise readiness, current-machine governance, live MCP coverage, coverage of unrouted surfaces, or v3.4.0 readiness claim.",
   "claim_ceiling": "ZLAR can govern Codex CLI-invoked MCP tool calls when those MCP servers are routed through ZLAR.",
   "included_files": {
     "manifest": "proof-pack-manifest.json",

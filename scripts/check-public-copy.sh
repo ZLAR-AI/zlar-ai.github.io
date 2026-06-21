@@ -124,47 +124,52 @@ assert_contains_fixed \
 assert_contains_fixed \
     "boundaries page keeps current release pointer" \
     "boundaries.html" \
-    "ZLAR v3.3.99 on GitHub"
+    "ZLAR v3.3.100 on GitHub"
 
 assert_contains_fixed \
     "website README keeps current release pointer" \
     "README.md" \
-    "ZLAR v3.3.99 — Release-forward result Markdown polish"
+    "ZLAR v3.3.100 — Verifier kit reproducibility evidence"
 
 assert_contains_fixed \
     "LLM index keeps current release pointer" \
     "llms.txt" \
-    "Current public release: ZLAR v3.3.99 — Release-forward result Markdown polish."
+    "Current public release: ZLAR v3.3.100 — Verifier kit reproducibility evidence."
 
 assert_contains_fixed \
     "proof-pack README keeps current release pointer" \
     "demo/proof-pack/README.md" \
-    "ZLAR v3.3.99 — Release-forward result Markdown polish."
+    "ZLAR v3.3.100 — Verifier kit reproducibility evidence."
 
 assert_contains_fixed \
     "proof-pack manifest keeps current release pointer" \
     "demo/proof-pack/proof-pack-manifest.json" \
-    "\"current_public_release\": \"v3.3.99\""
+    "\"current_public_release\": \"v3.3.100\""
 
 assert_contains_fixed \
     "proof-pack manifest keeps verifier target boundary" \
     "demo/proof-pack/proof-pack-manifest.json" \
-    "Release-forward result Markdown polish"
+    "Verifier kit reproducibility evidence"
+
+assert_contains_fixed \
+    "proof-pack manifest keeps reproducibility boundary" \
+    "demo/proof-pack/proof-pack-manifest.json" \
+    "source-build archive determinism for identical inputs and the same publisher key only"
 
 assert_contains_fixed \
     "architecture archive keeps current release pointer" \
     "architecture.html" \
-    "Current public release: ZLAR v3.3.99 — Release-forward result Markdown polish."
+    "Current public release: ZLAR v3.3.100 — Verifier kit reproducibility evidence."
 
 assert_contains_fixed \
     "CAISI archive keeps current release boundary" \
     "caisi-submission.html" \
-    "The current release adds release-forward result Markdown polish"
+    "The current release adds verifier-kit reproducibility evidence"
 
 assert_contains_fixed \
     "fail-open archive keeps current release boundary" \
     "fail-open.html" \
-    "The current release adds release-forward result Markdown polish"
+    "The current release adds verifier-kit reproducibility evidence"
 
 assert_contains_fixed \
     "boundaries page keeps records.write terminal proof boundary" \
@@ -179,7 +184,22 @@ assert_contains_fixed \
 assert_contains_fixed \
     "boundaries page keeps current release boundary" \
     "boundaries.html" \
-    "The current release adds release-forward result Markdown polish"
+    "The current release adds verifier-kit reproducibility evidence"
+
+assert_contains_fixed \
+    "boundaries page keeps verifier kit reproducibility artifact" \
+    "boundaries.html" \
+    "zlar-verifier-kit-reproducibility-v1.json"
+
+assert_contains_fixed \
+    "boundaries page keeps source-build determinism boundary" \
+    "boundaries.html" \
+    "source-build archive determinism for identical inputs and the same publisher key only"
+
+assert_contains_fixed \
+    "boundaries page keeps v3.3.99 markdown polish as historical" \
+    "boundaries.html" \
+    "The v3.3.99 release added release-forward result Markdown polish"
 
 assert_contains_fixed \
     "boundaries page keeps dry-run result markdown artifact" \
@@ -330,6 +350,14 @@ assert_contains_fixed \
     "boundaries page keeps Telegram health non-claim" \
     "boundaries.html" \
     "does not prove Telegram health"
+
+assert_no_public_regex \
+    "public copy must not mark v3.3.99 Markdown polish as current" \
+    'The[[:space:]]+current[[:space:]]+release[[:space:]]+adds[[:space:]]+release-forward[[:space:]]+result[[:space:]]+Markdown[[:space:]]+polish'
+
+assert_no_public_regex \
+    "public proof-pack manifest must not keep stale v3.3.99 boundary" \
+    'Verifier[[:space:]]+kit[[:space:]]+reproducibility[[:space:]]+evidence;[[:space:]]+release-forward[[:space:]]+packet[[:space:]]+readability'
 
 assert_no_public_regex \
     "public copy must not say receipts prove/record what happened" \
