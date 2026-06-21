@@ -182,6 +182,11 @@ assert_contains_fixed \
     "The current release prepares a pinned v3.4.0 external-verifier target and public-distribution check path"
 
 assert_contains_fixed \
+    "CAISI metadata keeps current claim boundary" \
+    "caisi-submission.html" \
+    "Current ZLAR public claims are bounded by v3.4.1"
+
+assert_contains_fixed \
     "fail-open archive keeps current release boundary" \
     "fail-open.html" \
     "The current release prepares a pinned v3.4.0 external-verifier target and public-distribution check path"
@@ -594,7 +599,7 @@ assert_no_public_regex \
 
 assert_no_public_regex \
     "public copy must not preserve stale v3.3.107 current-release boundary" \
-    'ZLAR v3[.]3[.]107 on GitHub|Current public release:[[:space:]]*ZLAR v3[.]3[.]107|releases/tag/v3[.]3[.]107|ZLAR v3[.]3[.]107</h3>|The current release adds North Star private intake pointer reporting'
+    'ZLAR v3[.]3[.]107 on GitHub|Current public release:[[:space:]]*ZLAR v3[.]3[.]107|Current ZLAR public claims are bounded by v3[.]3[.]107|releases/tag/v3[.]3[.]107|ZLAR v3[.]3[.]107</h3>|The current release adds North Star private intake pointer reporting'
 
 assert_no_public_regex \
     "public copy must not preserve stale v3.3.109 current-release boundary" \
