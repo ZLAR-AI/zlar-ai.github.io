@@ -129,52 +129,52 @@ assert_contains_fixed \
 assert_contains_fixed \
     "boundaries page keeps current release pointer" \
     "boundaries.html" \
-    "ZLAR v3.3.106 on GitHub"
+    "ZLAR v3.3.107 on GitHub"
 
 assert_contains_fixed \
     "website README keeps current release pointer" \
     "README.md" \
-    "ZLAR v3.3.106 — Private intake manifest pointer"
+    "ZLAR v3.3.107 — North Star private intake pointer reporting"
 
 assert_contains_fixed \
     "LLM index keeps current release pointer" \
     "llms.txt" \
-    "Current public release: ZLAR v3.3.106 — Private intake manifest pointer."
+    "Current public release: ZLAR v3.3.107 — North Star private intake pointer reporting."
 
 assert_contains_fixed \
     "proof-pack README keeps current release pointer" \
     "demo/proof-pack/README.md" \
-    "ZLAR v3.3.106 — Private intake manifest pointer."
+    "ZLAR v3.3.107 — North Star private intake pointer reporting."
 
 assert_contains_fixed \
     "proof-pack manifest keeps current release pointer" \
     "demo/proof-pack/proof-pack-manifest.json" \
-    "\"current_public_release\": \"v3.3.106\""
+    "\"current_public_release\": \"v3.3.107\""
 
 assert_contains_fixed \
     "proof-pack manifest keeps verifier target boundary" \
     "demo/proof-pack/proof-pack-manifest.json" \
-    "Private intake manifest pointer"
+    "North Star private intake pointer reporting"
 
 assert_contains_fixed \
     "proof-pack manifest keeps private evidence hash boundary" \
     "demo/proof-pack/proof-pack-manifest.json" \
-    "manifest discoverability for a generated sample fixture only"
+    "private-intake sample discoverability only"
 
 assert_contains_fixed \
     "architecture archive keeps current release pointer" \
     "architecture.html" \
-    "Current public release: ZLAR v3.3.106 — Private intake manifest pointer."
+    "Current public release: ZLAR v3.3.107 — North Star private intake pointer reporting."
 
 assert_contains_fixed \
     "CAISI archive keeps current release boundary" \
     "caisi-submission.html" \
-    "The current release adds private intake manifest pointer evidence"
+    "The current release adds North Star private intake pointer reporting"
 
 assert_contains_fixed \
     "fail-open archive keeps current release boundary" \
     "fail-open.html" \
-    "The current release adds private intake manifest pointer evidence"
+    "The current release adds North Star private intake pointer reporting"
 
 assert_contains_fixed \
     "boundaries page keeps records.write terminal proof boundary" \
@@ -189,7 +189,7 @@ assert_contains_fixed \
 assert_contains_fixed \
     "boundaries page keeps current release boundary" \
     "boundaries.html" \
-    "The current release adds private intake manifest pointer evidence"
+    "The current release adds North Star private intake pointer reporting"
 
 assert_contains_fixed \
     "boundaries page keeps current manifest pointer field" \
@@ -199,7 +199,7 @@ assert_contains_fixed \
 assert_contains_fixed \
     "boundaries page keeps current non-circular hash boundary" \
     "boundaries.html" \
-    'keeps generated private-intake sample files out of the core `artifact_hashes` list'
+    'records the bounded `private_verifier_result_sample` manifest pointer contract'
 
 assert_contains_fixed \
     "boundaries page keeps v3.3.105 private sample as historical" \
