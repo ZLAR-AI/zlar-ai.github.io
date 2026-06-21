@@ -39,7 +39,7 @@ Do not edit these files unless the sample bundle is intentionally regenerated an
 
 ## Claim Boundary
 
-Current public release: [ZLAR v3.3.101 — Readiness report reproducibility bridge](https://github.com/ZLAR-AI/ZLAR/releases/tag/v3.3.101).
+Current public release: [ZLAR v3.3.102 — Receipt emission boundary clarity](https://github.com/ZLAR-AI/ZLAR/releases/tag/v3.3.102).
 
 ZLAR governs routed/intercepted action surfaces only. Safe Codex wording:
 

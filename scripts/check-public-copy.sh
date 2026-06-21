@@ -117,6 +117,11 @@ assert_contains_fixed \
     "A log records what happened. A ZLAR receipt records what counted as authorized effect"
 
 assert_contains_fixed \
+    "receipt verify page keeps quickstart demo boundary" \
+    "receipt-verify.html" \
+    "The gate decisions are real; the receipt is bounded demo evidence, not live production governance."
+
+assert_contains_fixed \
     "boundaries page keeps release boundary" \
     "boundaries.html" \
     "that guard is CI evidence only and adds no runtime authority"
@@ -124,52 +129,52 @@ assert_contains_fixed \
 assert_contains_fixed \
     "boundaries page keeps current release pointer" \
     "boundaries.html" \
-    "ZLAR v3.3.101 on GitHub"
+    "ZLAR v3.3.102 on GitHub"
 
 assert_contains_fixed \
     "website README keeps current release pointer" \
     "README.md" \
-    "ZLAR v3.3.101 — Readiness report reproducibility bridge"
+    "ZLAR v3.3.102 — Receipt emission boundary clarity"
 
 assert_contains_fixed \
     "LLM index keeps current release pointer" \
     "llms.txt" \
-    "Current public release: ZLAR v3.3.101 — Readiness report reproducibility bridge."
+    "Current public release: ZLAR v3.3.102 — Receipt emission boundary clarity."
 
 assert_contains_fixed \
     "proof-pack README keeps current release pointer" \
     "demo/proof-pack/README.md" \
-    "ZLAR v3.3.101 — Readiness report reproducibility bridge."
+    "ZLAR v3.3.102 — Receipt emission boundary clarity."
 
 assert_contains_fixed \
     "proof-pack manifest keeps current release pointer" \
     "demo/proof-pack/proof-pack-manifest.json" \
-    "\"current_public_release\": \"v3.3.101\""
+    "\"current_public_release\": \"v3.3.102\""
 
 assert_contains_fixed \
     "proof-pack manifest keeps verifier target boundary" \
     "demo/proof-pack/proof-pack-manifest.json" \
-    "Readiness report reproducibility bridge"
+    "Receipt emission boundary clarity"
 
 assert_contains_fixed \
-    "proof-pack manifest keeps reproducibility bridge boundary" \
+    "proof-pack manifest keeps receipt-emission boundary" \
     "demo/proof-pack/proof-pack-manifest.json" \
-    "readiness-report accuracy over preserved release-forward evidence only"
+    "claim-boundary and copy-guard hardening only"
 
 assert_contains_fixed \
     "architecture archive keeps current release pointer" \
     "architecture.html" \
-    "Current public release: ZLAR v3.3.101 — Readiness report reproducibility bridge."
+    "Current public release: ZLAR v3.3.102 — Receipt emission boundary clarity."
 
 assert_contains_fixed \
     "CAISI archive keeps current release boundary" \
     "caisi-submission.html" \
-    "The current release adds the readiness report reproducibility bridge"
+    "The current release clarifies receipt-emission boundaries"
 
 assert_contains_fixed \
     "fail-open archive keeps current release boundary" \
     "fail-open.html" \
-    "The current release adds the readiness report reproducibility bridge"
+    "The current release clarifies receipt-emission boundaries"
 
 assert_contains_fixed \
     "boundaries page keeps records.write terminal proof boundary" \
@@ -184,12 +189,27 @@ assert_contains_fixed \
 assert_contains_fixed \
     "boundaries page keeps current release boundary" \
     "boundaries.html" \
-    "The current release adds the readiness report reproducibility bridge"
+    "The current release clarifies receipt-emission boundaries"
+
+assert_contains_fixed \
+    "boundaries page keeps configured action receipt boundary" \
+    "boundaries.html" \
+    "ZLAR_EMIT_RECEIPTS=true"
+
+assert_contains_fixed \
+    "boundaries page keeps constructed quickstart event boundary" \
+    "boundaries.html" \
+    "constructed quickstart audit event"
 
 assert_contains_fixed \
     "boundaries page keeps reproducibility claim-boundary flags" \
     "boundaries.html" \
     "false reproducibility claim-boundary flags"
+
+assert_contains_fixed \
+    "boundaries page keeps v3.3.101 readiness bridge as historical" \
+    "boundaries.html" \
+    "The v3.3.101 release added the readiness report reproducibility bridge"
 
 assert_contains_fixed \
     "boundaries page keeps verifier kit reproducibility artifact" \
@@ -398,6 +418,14 @@ assert_no_public_regex \
     '(^|[^[:alnum:]_])the[[:space:]]+receipt[[:space:]]+proves?[[:space:]]+the[[:space:]]+decision[[:space:]]+was[[:space:]]+correct'
 
 assert_no_public_regex \
+    "public copy must not claim quickstart has no simulation boundary" \
+    'Nothing[[:space:]]+is[[:space:]]+simulated'
+
+assert_no_public_regex \
+    "public copy must not claim gate unconditionally writes action receipts" \
+    'audit[[:space:]]+entry[[:space:]]+[+][[:space:]]+receipt[[:space:]]+written|writes[[:space:]]+audit[[:space:]]+trail[[:space:]]+and[[:space:]]+receipts'
+
+assert_no_public_regex \
     "public copy must not claim all actions cross the gate" \
     '(^|>)[[:space:]]*(it|the[[:space:]]+agent|an[[:space:]]+agent)[[:space:]]+cannot[[:space:]]+act[[:space:]]+without[[:space:]]+crossing[[:space:]]+the[[:space:]]+gate'
 
@@ -479,7 +507,11 @@ assert_no_public_regex \
 
 assert_no_public_regex \
     "public copy must not preserve stale v3.3.100 current-release boundary" \
-    'ZLAR v3[.]3[.]100 on GitHub|Current public release:[[:space:]]*ZLAR v3[.]3[.]100|releases/tag/v3[.]3[.]100|The current release adds verifier-kit reproducibility evidence|Readiness report reproducibility bridge; source-build archive determinism'
+    'ZLAR v3[.]3[.]100 on GitHub|Current public release:[[:space:]]*ZLAR v3[.]3[.]100|releases/tag/v3[.]3[.]100|The current release adds verifier-kit reproducibility evidence|Receipt emission boundary clarity; source-build archive determinism'
+
+assert_no_public_regex \
+    "public copy must not preserve stale v3.3.101 current-release boundary" \
+    'ZLAR v3[.]3[.]101 on GitHub|Current public release:[[:space:]]*ZLAR v3[.]3[.]101|releases/tag/v3[.]3[.]101|The current release adds the readiness report reproducibility bridge|Receipt emission boundary clarity; readiness-report accuracy'
 
 assert_no_public_regex \
     "public copy must not claim unconditional Telegram or phone approval routing" \

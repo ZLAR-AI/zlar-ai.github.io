@@ -180,7 +180,7 @@ Verified. Action "Write" in domain "write" was deny by policy at 2026-04-24T12:5
       This page uses demo keys, not operational keys. Operational deployments choose their own keys and publish the public keys they want third parties to use.
     </p>
     <p style="font-size: 0.9rem;">
-      Reproduce this receipt yourself: <code style="font-family: var(--mono); color: var(--teal);">bash scripts/quickstart.sh</code> generates fresh keys, runs the real gate against four tool calls, and verifies a v1 receipt. Nothing is simulated.
+      Reproduce the quickstart path yourself: <code style="font-family: var(--mono); color: var(--teal);">bash scripts/quickstart.sh</code> generates fresh keys, runs the real gate against four tool-call-shaped inputs, then signs and verifies a v1 receipt over a constructed quickstart audit event. The gate decisions are real; the receipt is bounded demo evidence, not live production governance.
     </p>
 
     <div class="links-row">

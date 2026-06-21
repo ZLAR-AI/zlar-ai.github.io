@@ -4,7 +4,7 @@ This public bundle is a fake/scratch proof-pack example for zlar.ai. It is desig
 
 Current public release:
 
-ZLAR v3.3.101 — Readiness report reproducibility bridge.
+ZLAR v3.3.102 — Receipt emission boundary clarity.
 
 Claim ceiling:
 
