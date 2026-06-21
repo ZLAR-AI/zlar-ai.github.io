@@ -124,37 +124,47 @@ assert_contains_fixed \
 assert_contains_fixed \
     "boundaries page keeps current release pointer" \
     "boundaries.html" \
-    "ZLAR v3.3.82 on GitHub"
+    "ZLAR v3.3.83 on GitHub"
 
 assert_contains_fixed \
     "website README keeps current release pointer" \
     "README.md" \
-    "ZLAR v3.3.82 — Pinned v3.3.81 verifier target"
+    "ZLAR v3.3.83 — Release-forward verifier dry-run helper"
 
 assert_contains_fixed \
     "LLM index keeps current release pointer" \
     "llms.txt" \
-    "Current public release: ZLAR v3.3.82 — Pinned v3.3.81 verifier target."
+    "Current public release: ZLAR v3.3.83 — Release-forward verifier dry-run helper."
 
 assert_contains_fixed \
     "proof-pack README keeps current release pointer" \
     "demo/proof-pack/README.md" \
-    "ZLAR v3.3.82 — Pinned v3.3.81 verifier target."
+    "ZLAR v3.3.83 — Release-forward verifier dry-run helper."
 
 assert_contains_fixed \
     "proof-pack manifest keeps current release pointer" \
     "demo/proof-pack/proof-pack-manifest.json" \
-    "\"current_public_release\": \"v3.3.82\""
+    "\"current_public_release\": \"v3.3.83\""
 
 assert_contains_fixed \
-    "proof-pack manifest keeps pinned verifier target boundary" \
+    "proof-pack manifest keeps dry-run helper boundary" \
     "demo/proof-pack/proof-pack-manifest.json" \
-    "Pinned v3.3.81 verifier target; no verifier request sent"
+    "Release-forward verifier dry-run helper; no verifier request sent"
 
 assert_contains_fixed \
     "architecture archive keeps current release pointer" \
     "architecture.html" \
-    "Current public release: ZLAR v3.3.82 — Pinned v3.3.81 verifier target."
+    "Current public release: ZLAR v3.3.83 — Release-forward verifier dry-run helper."
+
+assert_contains_fixed \
+    "CAISI archive keeps current helper boundary" \
+    "caisi-submission.html" \
+    "The current release adds a non-sending release-forward verifier dry-run"
+
+assert_contains_fixed \
+    "fail-open archive keeps current helper boundary" \
+    "fail-open.html" \
+    "The current release adds a non-sending release-forward verifier dry-run"
 
 assert_contains_fixed \
     "boundaries page keeps records.write terminal proof boundary" \
@@ -167,9 +177,19 @@ assert_contains_fixed \
     "The historical private verifier request remains sent and private-by-default"
 
 assert_contains_fixed \
+    "boundaries page keeps dry-run helper boundary" \
+    "boundaries.html" \
+    "The current release publishes a non-sending release-forward verifier dry-run helper"
+
+assert_contains_fixed \
+    "boundaries page keeps helper moving-target refusal" \
+    "boundaries.html" \
+    "refuses moving targets such as \`main\`, \`HEAD\`, \`latest\`, and \`--latest\`"
+
+assert_contains_fixed \
     "boundaries page keeps pinned v3.3.81 verifier target" \
     "boundaries.html" \
-    "pinned \`v3.3.81\` release-forward verifier target"
+    "The prepared pinned \`v3.3.81\` release-forward verifier target"
 
 assert_contains_fixed \
     "boundaries page keeps pinned verifier target sha" \
@@ -179,7 +199,7 @@ assert_contains_fixed \
 assert_contains_fixed \
     "boundaries page keeps verifier preservation boundary" \
     "boundaries.html" \
-    "The verifier/evaluator boundary now preserves the \`v3.3.81+\` runtime-profile installation counts"
+    "The verifier/evaluator boundary still preserves the \`v3.3.81+\` runtime-profile installation counts"
 
 assert_contains_fixed \
     "boundaries page keeps 4/4 coverage boundary" \
@@ -194,7 +214,7 @@ assert_contains_fixed \
 assert_contains_fixed \
     "boundaries page keeps earlier v3.3.76 target boundary" \
     "boundaries.html" \
-    "while keeping the earlier prepared \`v3.3.76\` active-profile target intact"
+    "the earlier prepared \`v3.3.76\` active-profile target remains intact"
 
 assert_contains_fixed \
     "boundaries page keeps no non-operator review claim" \
@@ -323,8 +343,8 @@ assert_no_public_regex \
     'v3[.]3[.]80'
 
 assert_no_public_regex \
-    "public copy must not preserve stale v3.3.81 current-release pointer" \
-    'ZLAR v3[.]3[.]81 on GitHub|Current public release:[[:space:]]*ZLAR v3[.]3[.]81|releases/tag/v3[.]3[.]81|ZLAR v3[.]3[.]81[[:space:]]+—[[:space:]]+Disposable runtime profile installation proof'
+    "public copy must not preserve stale v3.3.82 current-release pointer" \
+    'ZLAR v3[.]3[.]82 on GitHub|Current public release:[[:space:]]*ZLAR v3[.]3[.]82|releases/tag/v3[.]3[.]82|ZLAR v3[.]3[.]82[[:space:]]+—[[:space:]]+Release-forward verifier dry-run helper'
 
 assert_no_public_regex \
     "public copy must not claim unconditional Telegram or phone approval routing" \
