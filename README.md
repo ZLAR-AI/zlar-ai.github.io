@@ -39,7 +39,7 @@ Do not edit these files unless the sample bundle is intentionally regenerated an
 
 ## Claim Boundary
 
-Current public release: [ZLAR v3.3.81 — Disposable runtime profile installation proof](https://github.com/ZLAR-AI/ZLAR/releases/tag/v3.3.81).
+Current public release: [ZLAR v3.3.82 — Pinned v3.3.81 verifier target](https://github.com/ZLAR-AI/ZLAR/releases/tag/v3.3.82).
 
 ZLAR governs routed/intercepted action surfaces only. Safe Codex wording:
 

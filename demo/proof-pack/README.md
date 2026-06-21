@@ -4,7 +4,7 @@ This public bundle is a fake/scratch proof-pack example for zlar.ai. It is desig
 
 Current public release:
 
-ZLAR v3.3.81 — Disposable runtime profile installation proof.
+ZLAR v3.3.82 — Pinned v3.3.81 verifier target.
 
 Claim ceiling:
 

@@ -124,37 +124,37 @@ assert_contains_fixed \
 assert_contains_fixed \
     "boundaries page keeps current release pointer" \
     "boundaries.html" \
-    "ZLAR v3.3.81 on GitHub"
+    "ZLAR v3.3.82 on GitHub"
 
 assert_contains_fixed \
     "website README keeps current release pointer" \
     "README.md" \
-    "ZLAR v3.3.81 — Disposable runtime profile installation proof"
+    "ZLAR v3.3.82 — Pinned v3.3.81 verifier target"
 
 assert_contains_fixed \
     "LLM index keeps current release pointer" \
     "llms.txt" \
-    "Current public release: ZLAR v3.3.81 — Disposable runtime profile installation proof."
+    "Current public release: ZLAR v3.3.82 — Pinned v3.3.81 verifier target."
 
 assert_contains_fixed \
     "proof-pack README keeps current release pointer" \
     "demo/proof-pack/README.md" \
-    "ZLAR v3.3.81 — Disposable runtime profile installation proof."
+    "ZLAR v3.3.82 — Pinned v3.3.81 verifier target."
 
 assert_contains_fixed \
     "proof-pack manifest keeps current release pointer" \
     "demo/proof-pack/proof-pack-manifest.json" \
-    "\"current_public_release\": \"v3.3.81\""
+    "\"current_public_release\": \"v3.3.82\""
 
 assert_contains_fixed \
-    "proof-pack manifest keeps runtime-profile installation boundary" \
+    "proof-pack manifest keeps pinned verifier target boundary" \
     "demo/proof-pack/proof-pack-manifest.json" \
-    "local disposable fixture evidence only; no persistent runtime profile installation or activation"
+    "Pinned v3.3.81 verifier target; no verifier request sent"
 
 assert_contains_fixed \
     "architecture archive keeps current release pointer" \
     "architecture.html" \
-    "Current public release: ZLAR v3.3.81 — Disposable runtime profile installation proof."
+    "Current public release: ZLAR v3.3.82 — Pinned v3.3.81 verifier target."
 
 assert_contains_fixed \
     "boundaries page keeps records.write terminal proof boundary" \
@@ -164,22 +164,22 @@ assert_contains_fixed \
 assert_contains_fixed \
     "boundaries page keeps verifier packet split status" \
     "boundaries.html" \
-    "The historical private verifier request remains sent and private-by-default. Separately, the prepared pinned release-forward verifier target remains"
+    "The historical private verifier request remains sent and private-by-default"
 
 assert_contains_fixed \
-    "boundaries page keeps verifier packet target" \
+    "boundaries page keeps pinned v3.3.81 verifier target" \
     "boundaries.html" \
-    "the \`v3.3.76\` proof-pack/proof-smoke release"
+    "pinned \`v3.3.81\` release-forward verifier target"
 
 assert_contains_fixed \
-    "boundaries page keeps active profile selection preservation" \
+    "boundaries page keeps pinned verifier target sha" \
     "boundaries.html" \
-    "\`active_profile_selection\` summary"
+    "ebcfa57caf80624036f884d7133fbe92127d0180"
 
 assert_contains_fixed \
-    "boundaries page keeps current runtime-profile installation proof boundary" \
+    "boundaries page keeps verifier preservation boundary" \
     "boundaries.html" \
-    "The current release adds local disposable runtime-profile installation proof"
+    "The verifier/evaluator boundary now preserves the \`v3.3.81+\` runtime-profile installation counts"
 
 assert_contains_fixed \
     "boundaries page keeps 4/4 coverage boundary" \
@@ -192,24 +192,24 @@ assert_contains_fixed \
     "configured approval channel when enabled and fail closed when absent"
 
 assert_contains_fixed \
-    "boundaries page keeps prior verifier handoff boundary" \
+    "boundaries page keeps earlier v3.3.76 target boundary" \
     "boundaries.html" \
-    "The prior verifier handoff boundary still holds"
+    "while keeping the earlier prepared \`v3.3.76\` active-profile target intact"
 
 assert_contains_fixed \
-    "boundaries page keeps verifier-kit runner non-claim" \
+    "boundaries page keeps no non-operator review claim" \
     "boundaries.html" \
-    "no external attestation is claimed unless a real non-operator runner fills, signs, or publishes the result"
+    "does not prove non-operator review"
 
 assert_contains_fixed \
     "boundaries page keeps no new verifier contact" \
     "boundaries.html" \
-    "The verifier handoff status sends no new verifier request, contacts no verifier, creates no public external attestation"
+    "It sends no verifier request, contacts no verifier, creates no public external attestation"
 
 assert_contains_fixed \
-    "boundaries page keeps active profile selection non-claims" \
+    "boundaries page keeps previous runtime-profile installation proof boundary" \
     "boundaries.html" \
-    "no persistent runtime-profile install, no hook activation, no live profile check, and no \`--latest\` selection"
+    "The previous \`v3.3.81\` release added local disposable runtime-profile installation proof"
 
 assert_contains_fixed \
     "boundaries page keeps public claim guard hardening boundary" \
@@ -321,6 +321,10 @@ assert_no_public_regex \
 assert_no_public_regex \
     "public copy must not preserve stale previous-release pointer" \
     'v3[.]3[.]80'
+
+assert_no_public_regex \
+    "public copy must not preserve stale v3.3.81 current-release pointer" \
+    'ZLAR v3[.]3[.]81 on GitHub|Current public release:[[:space:]]*ZLAR v3[.]3[.]81|releases/tag/v3[.]3[.]81|ZLAR v3[.]3[.]81[[:space:]]+—[[:space:]]+Disposable runtime profile installation proof'
 
 assert_no_public_regex \
     "public copy must not claim unconditional Telegram or phone approval routing" \
