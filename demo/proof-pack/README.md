@@ -4,7 +4,7 @@ This public bundle is a fake/scratch proof-pack example for zlar.ai. It is desig
 
 Current public release:
 
-ZLAR v3.3.100 — Verifier kit reproducibility evidence.
+ZLAR v3.3.101 — Readiness report reproducibility bridge.
 
 Claim ceiling:
 

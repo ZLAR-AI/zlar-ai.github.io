@@ -124,52 +124,52 @@ assert_contains_fixed \
 assert_contains_fixed \
     "boundaries page keeps current release pointer" \
     "boundaries.html" \
-    "ZLAR v3.3.100 on GitHub"
+    "ZLAR v3.3.101 on GitHub"
 
 assert_contains_fixed \
     "website README keeps current release pointer" \
     "README.md" \
-    "ZLAR v3.3.100 — Verifier kit reproducibility evidence"
+    "ZLAR v3.3.101 — Readiness report reproducibility bridge"
 
 assert_contains_fixed \
     "LLM index keeps current release pointer" \
     "llms.txt" \
-    "Current public release: ZLAR v3.3.100 — Verifier kit reproducibility evidence."
+    "Current public release: ZLAR v3.3.101 — Readiness report reproducibility bridge."
 
 assert_contains_fixed \
     "proof-pack README keeps current release pointer" \
     "demo/proof-pack/README.md" \
-    "ZLAR v3.3.100 — Verifier kit reproducibility evidence."
+    "ZLAR v3.3.101 — Readiness report reproducibility bridge."
 
 assert_contains_fixed \
     "proof-pack manifest keeps current release pointer" \
     "demo/proof-pack/proof-pack-manifest.json" \
-    "\"current_public_release\": \"v3.3.100\""
+    "\"current_public_release\": \"v3.3.101\""
 
 assert_contains_fixed \
     "proof-pack manifest keeps verifier target boundary" \
     "demo/proof-pack/proof-pack-manifest.json" \
-    "Verifier kit reproducibility evidence"
+    "Readiness report reproducibility bridge"
 
 assert_contains_fixed \
-    "proof-pack manifest keeps reproducibility boundary" \
+    "proof-pack manifest keeps reproducibility bridge boundary" \
     "demo/proof-pack/proof-pack-manifest.json" \
-    "source-build archive determinism for identical inputs and the same publisher key only"
+    "readiness-report accuracy over preserved release-forward evidence only"
 
 assert_contains_fixed \
     "architecture archive keeps current release pointer" \
     "architecture.html" \
-    "Current public release: ZLAR v3.3.100 — Verifier kit reproducibility evidence."
+    "Current public release: ZLAR v3.3.101 — Readiness report reproducibility bridge."
 
 assert_contains_fixed \
     "CAISI archive keeps current release boundary" \
     "caisi-submission.html" \
-    "The current release adds verifier-kit reproducibility evidence"
+    "The current release adds the readiness report reproducibility bridge"
 
 assert_contains_fixed \
     "fail-open archive keeps current release boundary" \
     "fail-open.html" \
-    "The current release adds verifier-kit reproducibility evidence"
+    "The current release adds the readiness report reproducibility bridge"
 
 assert_contains_fixed \
     "boundaries page keeps records.write terminal proof boundary" \
@@ -184,7 +184,12 @@ assert_contains_fixed \
 assert_contains_fixed \
     "boundaries page keeps current release boundary" \
     "boundaries.html" \
-    "The current release adds verifier-kit reproducibility evidence"
+    "The current release adds the readiness report reproducibility bridge"
+
+assert_contains_fixed \
+    "boundaries page keeps reproducibility claim-boundary flags" \
+    "boundaries.html" \
+    "false reproducibility claim-boundary flags"
 
 assert_contains_fixed \
     "boundaries page keeps verifier kit reproducibility artifact" \
@@ -195,6 +200,11 @@ assert_contains_fixed \
     "boundaries page keeps source-build determinism boundary" \
     "boundaries.html" \
     "source-build archive determinism for identical inputs and the same publisher key only"
+
+assert_contains_fixed \
+    "boundaries page keeps v3.3.100 reproducibility as historical" \
+    "boundaries.html" \
+    "The v3.3.100 release added verifier-kit reproducibility evidence"
 
 assert_contains_fixed \
     "boundaries page keeps v3.3.99 markdown polish as historical" \
@@ -466,6 +476,10 @@ assert_no_public_regex \
 assert_no_public_regex \
     "public copy must not preserve stale v3.3.98 current-release pointer" \
     'ZLAR v3[.]3[.]98 on GitHub|Current public release:[[:space:]]*ZLAR v3[.]3[.]98|releases/tag/v3[.]3[.]98|The current release adds North Star readiness report evidence'
+
+assert_no_public_regex \
+    "public copy must not preserve stale v3.3.100 current-release boundary" \
+    'ZLAR v3[.]3[.]100 on GitHub|Current public release:[[:space:]]*ZLAR v3[.]3[.]100|releases/tag/v3[.]3[.]100|The current release adds verifier-kit reproducibility evidence|Readiness report reproducibility bridge; source-build archive determinism'
 
 assert_no_public_regex \
     "public copy must not claim unconditional Telegram or phone approval routing" \
