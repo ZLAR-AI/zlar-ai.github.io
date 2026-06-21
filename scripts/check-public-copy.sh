@@ -129,42 +129,42 @@ assert_contains_fixed \
 assert_contains_fixed \
     "boundaries page keeps current release pointer" \
     "boundaries.html" \
-    "ZLAR v3.4.1 on GitHub"
+    "ZLAR v3.4.2 on GitHub"
 
 assert_contains_fixed \
     "proof-pack page keeps current release pointer" \
     "proof-pack.html" \
-    "ZLAR v3.4.1 on GitHub"
+    "ZLAR v3.4.2 on GitHub"
 
 assert_contains_fixed \
     "proof-pack page keeps current release boundary" \
     "proof-pack.html" \
-    "The current release prepares a pinned v3.4.0 external-verifier target and public-distribution check path"
+    "The current release hardens public verifier-kit distribution evidence"
 
 assert_contains_fixed \
     "website README keeps current release pointer" \
     "README.md" \
-    "ZLAR v3.4.1 - Prepared v3.4 verifier target"
+    "ZLAR v3.4.2 - Verifier-kit public asset byte binding"
 
 assert_contains_fixed \
     "LLM index keeps current release pointer" \
     "llms.txt" \
-    "Current public release: ZLAR v3.4.1 - Prepared v3.4 verifier target."
+    "Current public release: ZLAR v3.4.2 - Verifier-kit public asset byte binding."
 
 assert_contains_fixed \
     "proof-pack README keeps current release pointer" \
     "demo/proof-pack/README.md" \
-    "ZLAR v3.4.1 - Prepared v3.4 verifier target."
+    "ZLAR v3.4.2 - Verifier-kit public asset byte binding."
 
 assert_contains_fixed \
     "proof-pack manifest keeps current release pointer" \
     "demo/proof-pack/proof-pack-manifest.json" \
-    "\"current_public_release\": \"v3.4.1\""
+    "\"current_public_release\": \"v3.4.2\""
 
 assert_contains_fixed \
     "proof-pack manifest keeps verifier target boundary" \
     "demo/proof-pack/proof-pack-manifest.json" \
-    "Prepared v3.4 verifier target"
+    "Verifier-kit public asset byte binding"
 
 assert_contains_fixed \
     "proof-pack manifest keeps external-attestation non-claim" \
@@ -174,22 +174,22 @@ assert_contains_fixed \
 assert_contains_fixed \
     "architecture archive keeps current release pointer" \
     "architecture.html" \
-    "Current public release: ZLAR v3.4.1 - Prepared v3.4 verifier target."
+    "Current public release: ZLAR v3.4.2 - Verifier-kit public asset byte binding."
 
 assert_contains_fixed \
     "CAISI archive keeps current release boundary" \
     "caisi-submission.html" \
-    "The current release prepares a pinned v3.4.0 external-verifier target and public-distribution check path"
+    "The current release hardens public verifier-kit distribution evidence"
 
 assert_contains_fixed \
     "CAISI metadata keeps current claim boundary" \
     "caisi-submission.html" \
-    "Current ZLAR public claims are bounded by v3.4.1"
+    "Current ZLAR public claims are bounded by v3.4.2"
 
 assert_contains_fixed \
     "fail-open archive keeps current release boundary" \
     "fail-open.html" \
-    "The current release prepares a pinned v3.4.0 external-verifier target and public-distribution check path"
+    "The current release hardens public verifier-kit distribution evidence"
 
 assert_contains_fixed \
     "boundaries page keeps records.write terminal proof boundary" \
@@ -204,7 +204,12 @@ assert_contains_fixed \
 assert_contains_fixed \
     "boundaries page keeps current release boundary" \
     "boundaries.html" \
-    "The current release prepares a pinned v3.4.0 external-verifier target and public-distribution check path"
+    "The current release hardens public verifier-kit distribution evidence"
+
+assert_contains_fixed \
+    "boundaries page keeps byte-binding audit result" \
+    "boundaries.html" \
+    "ready_for_public_distribution_claim=true"
 
 assert_contains_fixed \
     "boundaries page keeps public-distribution audit command" \
@@ -608,6 +613,10 @@ assert_no_public_regex \
 assert_no_public_regex \
     "public copy must not preserve stale v3.4.0 current-release pointer" \
     'ZLAR v3[.]4[.]0 on GitHub|Current public release:[[:space:]]*ZLAR v3[.]4[.]0|releases/tag/v3[.]4[.]0|"current_public_release": "v3[.]4[.]0"'
+
+assert_no_public_regex \
+    "public copy must not preserve stale v3.4.1 current-release pointer" \
+    'ZLAR v3[.]4[.]1 on GitHub|Current public release:[[:space:]]*ZLAR v3[.]4[.]1|Current ZLAR public claims are bounded by v3[.]4[.]1|releases/tag/v3[.]4[.]1|"current_public_release": "v3[.]4[.]1"|The current release prepares a pinned v3[.]4[.]0 external-verifier target'
 
 assert_no_public_regex \
     "public copy must not claim unconditional Telegram or phone approval routing" \
