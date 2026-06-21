@@ -124,7 +124,7 @@ assert_contains_fixed \
 assert_contains_fixed \
     "boundaries page keeps current release pointer" \
     "boundaries.html" \
-    "ZLAR v3.3.77 on GitHub"
+    "ZLAR v3.3.78 on GitHub"
 
 assert_contains_fixed \
     "boundaries page keeps records.write terminal proof boundary" \
@@ -134,7 +134,7 @@ assert_contains_fixed \
 assert_contains_fixed \
     "boundaries page keeps verifier packet retarget boundary" \
     "boundaries.html" \
-    "prepared, not-sent release-forward external verifier packet"
+    "prepared, not-sent release-forward external verifier packet remains pinned"
 
 assert_contains_fixed \
     "boundaries page keeps verifier packet target" \
@@ -145,6 +145,16 @@ assert_contains_fixed \
     "boundaries page keeps active profile selection preservation" \
     "boundaries.html" \
     "\`active_profile_selection\` summary"
+
+assert_contains_fixed \
+    "boundaries page keeps verifier active-profile hardening" \
+    "boundaries.html" \
+    "current release hardens verifier active-profile boundaries"
+
+assert_contains_fixed \
+    "boundaries page keeps verifier-kit runner non-claim" \
+    "boundaries.html" \
+    "no external attestation is claimed unless a real non-operator runner fills, signs, or publishes the result"
 
 assert_contains_fixed \
     "boundaries page keeps no new verifier contact" \
@@ -265,7 +275,7 @@ assert_no_public_regex \
 
 assert_no_public_regex \
     "public copy must not preserve stale previous-release pointer" \
-    'v3[.]3[.]72'
+    'v3[.]3[.]77'
 
 assert_no_public_regex \
     "public downloadable assets must not preserve stale verifier status" \
