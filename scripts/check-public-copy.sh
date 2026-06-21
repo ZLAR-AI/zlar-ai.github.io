@@ -124,7 +124,7 @@ assert_contains_fixed \
 assert_contains_fixed \
     "boundaries page keeps current release pointer" \
     "boundaries.html" \
-    "ZLAR v3.3.76 on GitHub"
+    "ZLAR v3.3.77 on GitHub"
 
 assert_contains_fixed \
     "boundaries page keeps records.write terminal proof boundary" \
@@ -132,9 +132,24 @@ assert_contains_fixed \
     "records-write-terminal-proof"
 
 assert_contains_fixed \
-    "boundaries page keeps active profile selection boundary" \
+    "boundaries page keeps verifier packet retarget boundary" \
     "boundaries.html" \
-    "fixture-contained active-profile selection evidence in the proof pack and proof-smoke report for the first \`records.write\` terminal"
+    "prepared, not-sent release-forward external verifier packet"
+
+assert_contains_fixed \
+    "boundaries page keeps verifier packet target" \
+    "boundaries.html" \
+    "the \`v3.3.76\` proof-pack/proof-smoke release"
+
+assert_contains_fixed \
+    "boundaries page keeps active profile selection preservation" \
+    "boundaries.html" \
+    "\`active_profile_selection\` summary"
+
+assert_contains_fixed \
+    "boundaries page keeps no new verifier contact" \
+    "boundaries.html" \
+    "It sends no new verifier request, contacts no verifier, creates no public external attestation"
 
 assert_contains_fixed \
     "boundaries page keeps active profile selection non-claims" \
