@@ -124,7 +124,7 @@ assert_contains_fixed \
 assert_contains_fixed \
     "boundaries page keeps current release pointer" \
     "boundaries.html" \
-    "ZLAR v3.3.75 on GitHub"
+    "ZLAR v3.3.76 on GitHub"
 
 assert_contains_fixed \
     "boundaries page keeps records.write terminal proof boundary" \
@@ -134,12 +134,12 @@ assert_contains_fixed \
 assert_contains_fixed \
     "boundaries page keeps active profile selection boundary" \
     "boundaries.html" \
-    'fixture-contained active-profile selection evidence for the first `records.write` terminal'
+    "fixture-contained active-profile selection evidence in the proof pack and proof-smoke report for the first \`records.write\` terminal"
 
 assert_contains_fixed \
     "boundaries page keeps active profile selection non-claims" \
     "boundaries.html" \
-    'no persistent runtime-profile install, no hook activation, no live profile check, and no `--latest` selection'
+    "no persistent runtime-profile install, no hook activation, no live profile check, and no \`--latest\` selection"
 
 assert_contains_fixed \
     "boundaries page keeps public claim guard hardening boundary" \
