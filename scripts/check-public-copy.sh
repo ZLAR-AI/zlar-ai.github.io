@@ -124,47 +124,47 @@ assert_contains_fixed \
 assert_contains_fixed \
     "boundaries page keeps current release pointer" \
     "boundaries.html" \
-    "ZLAR v3.3.94 on GitHub"
+    "ZLAR v3.3.95 on GitHub"
 
 assert_contains_fixed \
     "website README keeps current release pointer" \
     "README.md" \
-    "ZLAR v3.3.94 — Verifier-kit issuer registry recognition"
+    "ZLAR v3.3.95 — Verifier recognition refusal matrix"
 
 assert_contains_fixed \
     "LLM index keeps current release pointer" \
     "llms.txt" \
-    "Current public release: ZLAR v3.3.94 — Verifier-kit issuer registry recognition."
+    "Current public release: ZLAR v3.3.95 — Verifier recognition refusal matrix."
 
 assert_contains_fixed \
     "proof-pack README keeps current release pointer" \
     "demo/proof-pack/README.md" \
-    "ZLAR v3.3.94 — Verifier-kit issuer registry recognition."
+    "ZLAR v3.3.95 — Verifier recognition refusal matrix."
 
 assert_contains_fixed \
     "proof-pack manifest keeps current release pointer" \
     "demo/proof-pack/proof-pack-manifest.json" \
-    "\"current_public_release\": \"v3.3.94\""
+    "\"current_public_release\": \"v3.3.95\""
 
 assert_contains_fixed \
     "proof-pack manifest keeps verifier target boundary" \
     "demo/proof-pack/proof-pack-manifest.json" \
-    "Verifier-kit issuer registry recognition and release-forward recognition JSON preservation"
+    "Verifier recognition refusal matrix"
 
 assert_contains_fixed \
     "architecture archive keeps current release pointer" \
     "architecture.html" \
-    "Current public release: ZLAR v3.3.94 — Verifier-kit issuer registry recognition."
+    "Current public release: ZLAR v3.3.95 — Verifier recognition refusal matrix."
 
 assert_contains_fixed \
     "CAISI archive keeps current release boundary" \
     "caisi-submission.html" \
-    "The current release adds verifier-kit trusted issuer registry recognition"
+    "The current release adds the verifier recognition refusal matrix"
 
 assert_contains_fixed \
     "fail-open archive keeps current release boundary" \
     "fail-open.html" \
-    "The current release adds verifier-kit trusted issuer registry recognition"
+    "The current release adds the verifier recognition refusal matrix"
 
 assert_contains_fixed \
     "boundaries page keeps records.write terminal proof boundary" \
@@ -179,7 +179,12 @@ assert_contains_fixed \
 assert_contains_fixed \
     "boundaries page keeps current release boundary" \
     "boundaries.html" \
-    "The current release adds verifier-kit trusted issuer registry recognition"
+    "The current release adds the verifier recognition refusal matrix"
+
+assert_contains_fixed \
+    "boundaries page keeps refusal matrix boundary" \
+    "boundaries.html" \
+    "unknown issuer, retired issuer, compromised issuer, wrong policy, wrong scope, and malformed registry input are refused"
 
 assert_contains_fixed \
     "boundaries page keeps service-profile coverage lane" \

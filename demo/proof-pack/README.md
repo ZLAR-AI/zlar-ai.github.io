@@ -4,7 +4,7 @@ This public bundle is a fake/scratch proof-pack example for zlar.ai. It is desig
 
 Current public release:
 
-ZLAR v3.3.94 — Verifier-kit issuer registry recognition.
+ZLAR v3.3.95 — Verifier recognition refusal matrix.
 
 Claim ceiling:
 
