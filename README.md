@@ -39,7 +39,7 @@ Do not edit these files unless the sample bundle is intentionally regenerated an
 
 ## Claim Boundary
 
-Current public release: [ZLAR v3.3.97 — Release-forward malformed-registry evidence](https://github.com/ZLAR-AI/ZLAR/releases/tag/v3.3.97).
+Current public release: [ZLAR v3.3.98 — North Star readiness report](https://github.com/ZLAR-AI/ZLAR/releases/tag/v3.3.98).
 
 ZLAR governs routed/intercepted action surfaces only. Safe Codex wording:
 

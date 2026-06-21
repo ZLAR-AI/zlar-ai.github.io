@@ -124,47 +124,47 @@ assert_contains_fixed \
 assert_contains_fixed \
     "boundaries page keeps current release pointer" \
     "boundaries.html" \
-    "ZLAR v3.3.97 on GitHub"
+    "ZLAR v3.3.98 on GitHub"
 
 assert_contains_fixed \
     "website README keeps current release pointer" \
     "README.md" \
-    "ZLAR v3.3.97 — Release-forward malformed-registry evidence"
+    "ZLAR v3.3.98 — North Star readiness report"
 
 assert_contains_fixed \
     "LLM index keeps current release pointer" \
     "llms.txt" \
-    "Current public release: ZLAR v3.3.97 — Release-forward malformed-registry evidence."
+    "Current public release: ZLAR v3.3.98 — North Star readiness report."
 
 assert_contains_fixed \
     "proof-pack README keeps current release pointer" \
     "demo/proof-pack/README.md" \
-    "ZLAR v3.3.97 — Release-forward malformed-registry evidence."
+    "ZLAR v3.3.98 — North Star readiness report."
 
 assert_contains_fixed \
     "proof-pack manifest keeps current release pointer" \
     "demo/proof-pack/proof-pack-manifest.json" \
-    "\"current_public_release\": \"v3.3.97\""
+    "\"current_public_release\": \"v3.3.98\""
 
 assert_contains_fixed \
     "proof-pack manifest keeps verifier target boundary" \
     "demo/proof-pack/proof-pack-manifest.json" \
-    "Release-forward malformed-registry evidence"
+    "North Star readiness report"
 
 assert_contains_fixed \
     "architecture archive keeps current release pointer" \
     "architecture.html" \
-    "Current public release: ZLAR v3.3.97 — Release-forward malformed-registry evidence."
+    "Current public release: ZLAR v3.3.98 — North Star readiness report."
 
 assert_contains_fixed \
     "CAISI archive keeps current release boundary" \
     "caisi-submission.html" \
-    "The current release adds release-forward malformed-registry evidence"
+    "The current release adds North Star readiness report evidence"
 
 assert_contains_fixed \
     "fail-open archive keeps current release boundary" \
     "fail-open.html" \
-    "The current release adds release-forward malformed-registry evidence"
+    "The current release adds North Star readiness report evidence"
 
 assert_contains_fixed \
     "boundaries page keeps records.write terminal proof boundary" \
@@ -179,7 +179,22 @@ assert_contains_fixed \
 assert_contains_fixed \
     "boundaries page keeps current release boundary" \
     "boundaries.html" \
-    "The current release adds release-forward malformed-registry evidence"
+    "The current release adds North Star readiness report evidence"
+
+assert_contains_fixed \
+    "boundaries page keeps North Star readiness artifact" \
+    "boundaries.html" \
+    "zlar-north-star-readiness-v1.json"
+
+assert_contains_fixed \
+    "boundaries page keeps not-ready-for-v3.4 result" \
+    "boundaries.html" \
+    "NOT_READY_FOR_V3_4_0"
+
+assert_contains_fixed \
+    "boundaries page keeps no v3.4 readiness claim" \
+    "boundaries.html" \
+    "not v3.4.0 readiness"
 
 assert_contains_fixed \
     "boundaries page keeps malformed-registry no-verdict boundary" \
@@ -405,6 +420,10 @@ assert_no_public_regex \
 assert_no_public_regex \
     "public copy must not preserve stale v3.3.83 current-release pointer" \
     'ZLAR v3[.]3[.]83 on GitHub|Current public release:[[:space:]]*ZLAR v3[.]3[.]83|releases/tag/v3[.]3[.]83|ZLAR v3[.]3[.]83[[:space:]]+—[[:space:]]+Release-forward verifier dry-run helper|ZLAR v3[.]3[.]83[[:space:]]+—[[:space:]]+Release-forward dry-run manifest'
+
+assert_no_public_regex \
+    "public copy must not preserve stale v3.3.97 current-release pointer" \
+    'ZLAR v3[.]3[.]97 on GitHub|Current public release:[[:space:]]*ZLAR v3[.]3[.]97|releases/tag/v3[.]3[.]97|The current release adds release-forward malformed-registry evidence'
 
 assert_no_public_regex \
     "public copy must not claim unconditional Telegram or phone approval routing" \

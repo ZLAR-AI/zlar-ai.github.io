@@ -4,7 +4,7 @@ This public bundle is a fake/scratch proof-pack example for zlar.ai. It is desig
 
 Current public release:
 
-ZLAR v3.3.97 — Release-forward malformed-registry evidence.
+ZLAR v3.3.98 — North Star readiness report.
 
 Claim ceiling:
 
