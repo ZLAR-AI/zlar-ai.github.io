@@ -129,52 +129,52 @@ assert_contains_fixed \
 assert_contains_fixed \
     "boundaries page keeps current release pointer" \
     "boundaries.html" \
-    "ZLAR v3.3.105 on GitHub"
+    "ZLAR v3.3.106 on GitHub"
 
 assert_contains_fixed \
     "website README keeps current release pointer" \
     "README.md" \
-    "ZLAR v3.3.105 — Release-forward private intake sample"
+    "ZLAR v3.3.106 — Private intake manifest pointer"
 
 assert_contains_fixed \
     "LLM index keeps current release pointer" \
     "llms.txt" \
-    "Current public release: ZLAR v3.3.105 — Release-forward private intake sample."
+    "Current public release: ZLAR v3.3.106 — Private intake manifest pointer."
 
 assert_contains_fixed \
     "proof-pack README keeps current release pointer" \
     "demo/proof-pack/README.md" \
-    "ZLAR v3.3.105 — Release-forward private intake sample."
+    "ZLAR v3.3.106 — Private intake manifest pointer."
 
 assert_contains_fixed \
     "proof-pack manifest keeps current release pointer" \
     "demo/proof-pack/proof-pack-manifest.json" \
-    "\"current_public_release\": \"v3.3.105\""
+    "\"current_public_release\": \"v3.3.106\""
 
 assert_contains_fixed \
     "proof-pack manifest keeps verifier target boundary" \
     "demo/proof-pack/proof-pack-manifest.json" \
-    "Release-forward private intake sample"
+    "Private intake manifest pointer"
 
 assert_contains_fixed \
     "proof-pack manifest keeps private evidence hash boundary" \
     "demo/proof-pack/proof-pack-manifest.json" \
-    "sample private-intake reproducibility over a local non-sending dry-run packet only"
+    "manifest discoverability for a generated sample fixture only"
 
 assert_contains_fixed \
     "architecture archive keeps current release pointer" \
     "architecture.html" \
-    "Current public release: ZLAR v3.3.105 — Release-forward private intake sample."
+    "Current public release: ZLAR v3.3.106 — Private intake manifest pointer."
 
 assert_contains_fixed \
     "CAISI archive keeps current release boundary" \
     "caisi-submission.html" \
-    "The current release adds release-forward private intake sample evidence"
+    "The current release adds private intake manifest pointer evidence"
 
 assert_contains_fixed \
     "fail-open archive keeps current release boundary" \
     "fail-open.html" \
-    "The current release adds release-forward private intake sample evidence"
+    "The current release adds private intake manifest pointer evidence"
 
 assert_contains_fixed \
     "boundaries page keeps records.write terminal proof boundary" \
@@ -189,17 +189,22 @@ assert_contains_fixed \
 assert_contains_fixed \
     "boundaries page keeps current release boundary" \
     "boundaries.html" \
-    "The current release adds release-forward private intake sample evidence"
+    "The current release adds private intake manifest pointer evidence"
 
 assert_contains_fixed \
-    "boundaries page keeps current sample verification command boundary" \
+    "boundaries page keeps current manifest pointer field" \
     "boundaries.html" \
-    "bin/zlar private-verifier-result verify --evidence-dir .. --json"
+    "private_verifier_result_sample"
 
 assert_contains_fixed \
-    "boundaries page keeps current private result artifact boundary" \
+    "boundaries page keeps current non-circular hash boundary" \
     "boundaries.html" \
-    "zlar-private-verifier-result-verification-v1.json"
+    'keeps generated private-intake sample files out of the core `artifact_hashes` list'
+
+assert_contains_fixed \
+    "boundaries page keeps v3.3.105 private sample as historical" \
+    "boundaries.html" \
+    "The v3.3.105 release added release-forward private intake sample evidence"
 
 assert_contains_fixed \
     "boundaries page keeps v3.3.104 hash verification as historical" \

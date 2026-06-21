@@ -4,7 +4,7 @@ This public bundle is a fake/scratch proof-pack example for zlar.ai. It is desig
 
 Current public release:
 
-ZLAR v3.3.105 — Release-forward private intake sample.
+ZLAR v3.3.106 — Private intake manifest pointer.
 
 Claim ceiling:
 
