@@ -39,7 +39,7 @@ Do not edit these files unless the sample bundle is intentionally regenerated an
 
 ## Claim Boundary
 
-Current public release: [ZLAR v3.3.80 — Approval-channel boundary normalization](https://github.com/ZLAR-AI/ZLAR/releases/tag/v3.3.80).
+Current public release: [ZLAR v3.3.81 — Disposable runtime profile installation proof](https://github.com/ZLAR-AI/ZLAR/releases/tag/v3.3.81).
 
 ZLAR governs routed/intercepted action surfaces only. Safe Codex wording:
 

@@ -124,37 +124,37 @@ assert_contains_fixed \
 assert_contains_fixed \
     "boundaries page keeps current release pointer" \
     "boundaries.html" \
-    "ZLAR v3.3.80 on GitHub"
+    "ZLAR v3.3.81 on GitHub"
 
 assert_contains_fixed \
     "website README keeps current release pointer" \
     "README.md" \
-    "ZLAR v3.3.80 — Approval-channel boundary normalization"
+    "ZLAR v3.3.81 — Disposable runtime profile installation proof"
 
 assert_contains_fixed \
     "LLM index keeps current release pointer" \
     "llms.txt" \
-    "Current public release: ZLAR v3.3.80 — Approval-channel boundary normalization."
+    "Current public release: ZLAR v3.3.81 — Disposable runtime profile installation proof."
 
 assert_contains_fixed \
     "proof-pack README keeps current release pointer" \
     "demo/proof-pack/README.md" \
-    "ZLAR v3.3.80 — Approval-channel boundary normalization."
+    "ZLAR v3.3.81 — Disposable runtime profile installation proof."
 
 assert_contains_fixed \
     "proof-pack manifest keeps current release pointer" \
     "demo/proof-pack/proof-pack-manifest.json" \
-    "\"current_public_release\": \"v3.3.80\""
+    "\"current_public_release\": \"v3.3.81\""
 
 assert_contains_fixed \
-    "proof-pack manifest keeps approval-channel boundary" \
+    "proof-pack manifest keeps runtime-profile installation boundary" \
     "demo/proof-pack/proof-pack-manifest.json" \
-    "no live approval-channel delivery or health"
+    "local disposable fixture evidence only; no persistent runtime profile installation or activation"
 
 assert_contains_fixed \
     "architecture archive keeps current release pointer" \
     "architecture.html" \
-    "Current public release: ZLAR v3.3.80 — Approval-channel boundary normalization."
+    "Current public release: ZLAR v3.3.81 — Disposable runtime profile installation proof."
 
 assert_contains_fixed \
     "boundaries page keeps records.write terminal proof boundary" \
@@ -177,9 +177,14 @@ assert_contains_fixed \
     "\`active_profile_selection\` summary"
 
 assert_contains_fixed \
-    "boundaries page keeps approval-channel normalization" \
+    "boundaries page keeps current runtime-profile installation proof boundary" \
     "boundaries.html" \
-    "current release normalizes approval-channel boundary copy"
+    "The current release adds local disposable runtime-profile installation proof"
+
+assert_contains_fixed \
+    "boundaries page keeps 4/4 coverage boundary" \
+    "boundaries.html" \
+    "coverage sample at \`4/4\` governed counted lanes"
 
 assert_contains_fixed \
     "boundaries page keeps configured-channel fail-closed boundary" \
@@ -209,7 +214,7 @@ assert_contains_fixed \
 assert_contains_fixed \
     "boundaries page keeps public claim guard hardening boundary" \
     "boundaries.html" \
-    "approval routing is described as configured-channel behavior, not unconditional phone or Telegram availability"
+    "Approval-channel boundary copy remains configured-channel behavior"
 
 assert_contains_fixed \
     "boundaries page keeps private verifier request boundary" \
@@ -315,7 +320,7 @@ assert_no_public_regex \
 
 assert_no_public_regex \
     "public copy must not preserve stale previous-release pointer" \
-    'v3[.]3[.]79'
+    'v3[.]3[.]80'
 
 assert_no_public_regex \
     "public copy must not claim unconditional Telegram or phone approval routing" \

@@ -4,7 +4,7 @@ This public bundle is a fake/scratch proof-pack example for zlar.ai. It is desig
 
 Current public release:
 
-ZLAR v3.3.80 — Approval-channel boundary normalization.
+ZLAR v3.3.81 — Disposable runtime profile installation proof.
 
 Claim ceiling:
 
