@@ -124,47 +124,47 @@ assert_contains_fixed \
 assert_contains_fixed \
     "boundaries page keeps current release pointer" \
     "boundaries.html" \
-    "ZLAR v3.3.88 on GitHub"
+    "ZLAR v3.3.89 on GitHub"
 
 assert_contains_fixed \
     "website README keeps current release pointer" \
     "README.md" \
-    "ZLAR v3.3.88 — Runtime refusal taxonomy"
+    "ZLAR v3.3.89 — Verifier target and boundary guards"
 
 assert_contains_fixed \
     "LLM index keeps current release pointer" \
     "llms.txt" \
-    "Current public release: ZLAR v3.3.88 — Runtime refusal taxonomy."
+    "Current public release: ZLAR v3.3.89 — Verifier target and boundary guards."
 
 assert_contains_fixed \
     "proof-pack README keeps current release pointer" \
     "demo/proof-pack/README.md" \
-    "ZLAR v3.3.88 — Runtime refusal taxonomy."
+    "ZLAR v3.3.89 — Verifier target and boundary guards."
 
 assert_contains_fixed \
     "proof-pack manifest keeps current release pointer" \
     "demo/proof-pack/proof-pack-manifest.json" \
-    "\"current_public_release\": \"v3.3.88\""
+    "\"current_public_release\": \"v3.3.89\""
 
 assert_contains_fixed \
-    "proof-pack manifest keeps runtime refusal taxonomy boundary" \
+    "proof-pack manifest keeps verifier target boundary" \
     "demo/proof-pack/proof-pack-manifest.json" \
-    "Runtime refusal taxonomy; local disposable runtime/profile-installation proof"
+    "Verifier target and boundary guards; verifier-packet, CLI-status, documentation, and guard hardening only"
 
 assert_contains_fixed \
     "architecture archive keeps current release pointer" \
     "architecture.html" \
-    "Current public release: ZLAR v3.3.88 — Runtime refusal taxonomy."
+    "Current public release: ZLAR v3.3.89 — Verifier target and boundary guards."
 
 assert_contains_fixed \
-    "CAISI archive keeps current runtime-refusal boundary" \
+    "CAISI archive keeps current release boundary" \
     "caisi-submission.html" \
-    "The current release expands the local disposable runtime-profile refusal taxonomy"
+    "The current release hardens verifier-target and claim-boundary language"
 
 assert_contains_fixed \
-    "fail-open archive keeps current runtime-refusal boundary" \
+    "fail-open archive keeps current release boundary" \
     "fail-open.html" \
-    "The current release expands the local disposable runtime-profile refusal taxonomy"
+    "The current release hardens verifier-target and claim-boundary language"
 
 assert_contains_fixed \
     "boundaries page keeps records.write terminal proof boundary" \
@@ -177,9 +177,9 @@ assert_contains_fixed \
     "The historical private verifier request remains sent and private-by-default"
 
 assert_contains_fixed \
-    "boundaries page keeps runtime refusal taxonomy boundary" \
+    "boundaries page keeps current release boundary" \
     "boundaries.html" \
-    "The current release expands the local disposable runtime-profile refusal taxonomy"
+    "The current release hardens verifier-target and claim-boundary language"
 
 assert_contains_fixed \
     "boundaries page keeps dry-run manifest file" \
@@ -197,14 +197,14 @@ assert_contains_fixed \
     "refuses moving targets such as \`main\`, \`HEAD\`, \`latest\`, and \`--latest\`"
 
 assert_contains_fixed \
-    "boundaries page keeps pinned v3.3.86 verifier target" \
+    "boundaries page keeps pinned v3.3.88 verifier target" \
     "boundaries.html" \
-    "The prepared pinned \`v3.3.86\` release-forward verifier target"
+    "The prepared pinned \`v3.3.88\` release-forward verifier target"
 
 assert_contains_fixed \
     "boundaries page keeps pinned verifier target sha" \
     "boundaries.html" \
-    "19344fbfb24405a7028fa99682f2a3d759b7c90a"
+    "f698b085ae68a0a77f5bbff87e4824ca4482751d"
 
 assert_contains_fixed \
     "boundaries page keeps verifier preservation boundary" \
@@ -307,6 +307,26 @@ assert_no_public_regex \
 assert_no_public_regex \
     "public copy must not claim all actions cross the gate" \
     '(^|>)[[:space:]]*(it|the[[:space:]]+agent|an[[:space:]]+agent)[[:space:]]+cannot[[:space:]]+act[[:space:]]+without[[:space:]]+crossing[[:space:]]+the[[:space:]]+gate'
+
+assert_no_public_regex \
+    "public copy must not say before AI acts without a routed qualifier" \
+    'Before[[:space:]]+AI[[:space:]]+acts'
+
+assert_no_public_regex \
+    "public copy must not say ZLAR is the doorway all AI must pass through" \
+    'ZLAR[[:space:]]+is[[:space:]]+the[[:space:]]+doorway[[:space:]]+AI[[:space:]]+must[[:space:]]+pass[[:space:]]+through'
+
+assert_no_public_regex \
+    "public copy must not claim every outcome traces to a human decision" \
+    'Every[[:space:]]+outcome[[:space:]]+traces[[:space:]]+back[[:space:]]+to[[:space:]]+a[[:space:]]+human[[:space:]]+decision'
+
+assert_no_public_regex \
+    "public copy must not claim the agent has no choice but to meet the gate" \
+    'agent[[:space:]]+has[[:space:]]+no[[:space:]]+choice[[:space:]]+but[[:space:]]+to[[:space:]]+meet[[:space:]]+the[[:space:]]+gate'
+
+assert_no_public_regex \
+    "public copy must not claim categorical touch prevention outside a governed path" \
+    'AI[[:space:]]+cannot[[:space:]]+touch[[:space:]]+the[[:space:]]+rules|can.?t[[:space:]]+touch[[:space:]]+what.?s[[:space:]]+on[[:space:]]+the[[:space:]]+other[[:space:]]+side'
 
 assert_no_public_regex \
     "public copy must not claim every important attempt is recorded" \

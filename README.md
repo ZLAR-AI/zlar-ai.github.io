@@ -39,7 +39,7 @@ Do not edit these files unless the sample bundle is intentionally regenerated an
 
 ## Claim Boundary
 
-Current public release: [ZLAR v3.3.88 — Runtime refusal taxonomy](https://github.com/ZLAR-AI/ZLAR/releases/tag/v3.3.88).
+Current public release: [ZLAR v3.3.89 — Verifier target and boundary guards](https://github.com/ZLAR-AI/ZLAR/releases/tag/v3.3.89).
 
 ZLAR governs routed/intercepted action surfaces only. Safe Codex wording:
 

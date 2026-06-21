@@ -2,7 +2,7 @@
 
 > ZLAR is where AI action becomes answerable.
 
-ZLAR keeps humans in the loop when AI starts doing real things. Before AI acts, ZLAR checks the rule. The rule can allow it, block it, or ask a person. A log records what happened. A ZLAR receipt records what counted as authorized effect when action tried to become consequence.
+ZLAR keeps humans in the loop when routed AI actions start doing real things. Before a governed action acts, ZLAR checks the rule. The rule can allow it, block it, or ask a person. A log records what happened. A ZLAR receipt records what counted as authorized effect when action tried to become consequence.
 
 Primary pages:
 
@@ -20,7 +20,7 @@ Primary pages:
 
 Claim boundary:
 
-- Current public release: ZLAR v3.3.88 — Runtime refusal taxonomy.
+- Current public release: ZLAR v3.3.89 — Verifier target and boundary guards.
 - ZLAR governs routed/intercepted action surfaces only.
 - Safe Codex wording: "ZLAR can govern Codex CLI-invoked MCP tool calls when those MCP servers are routed through ZLAR."
 - Unrouted shell/filesystem/browser/app/network/model-reasoning/final-text surfaces are not claimed as governed by the current proof path.

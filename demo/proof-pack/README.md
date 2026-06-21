@@ -4,7 +4,7 @@ This public bundle is a fake/scratch proof-pack example for zlar.ai. It is desig
 
 Current public release:
 
-ZLAR v3.3.88 — Runtime refusal taxonomy.
+ZLAR v3.3.89 — Verifier target and boundary guards.
 
 Claim ceiling:
 
