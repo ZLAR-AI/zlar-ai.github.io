@@ -129,52 +129,52 @@ assert_contains_fixed \
 assert_contains_fixed \
     "boundaries page keeps current release pointer" \
     "boundaries.html" \
-    "ZLAR v3.3.109 on GitHub"
+    "ZLAR v3.4.0 on GitHub"
 
 assert_contains_fixed \
     "website README keeps current release pointer" \
     "README.md" \
-    "ZLAR v3.3.109 - Verifier-kit public distribution posture audit"
+    "ZLAR v3.4.0 - Public verifier-kit distribution boundary release"
 
 assert_contains_fixed \
     "LLM index keeps current release pointer" \
     "llms.txt" \
-    "Current public release: ZLAR v3.3.109 - Verifier-kit public distribution posture audit."
+    "Current public release: ZLAR v3.4.0 - Public verifier-kit distribution boundary release."
 
 assert_contains_fixed \
     "proof-pack README keeps current release pointer" \
     "demo/proof-pack/README.md" \
-    "ZLAR v3.3.109 - Verifier-kit public distribution posture audit."
+    "ZLAR v3.4.0 - Public verifier-kit distribution boundary release."
 
 assert_contains_fixed \
     "proof-pack manifest keeps current release pointer" \
     "demo/proof-pack/proof-pack-manifest.json" \
-    "\"current_public_release\": \"v3.3.109\""
+    "\"current_public_release\": \"v3.4.0\""
 
 assert_contains_fixed \
     "proof-pack manifest keeps verifier target boundary" \
     "demo/proof-pack/proof-pack-manifest.json" \
-    "Verifier-kit public distribution posture audit"
+    "Public verifier-kit distribution boundary release"
 
 assert_contains_fixed \
-    "proof-pack manifest keeps public-distribution non-claim" \
+    "proof-pack manifest keeps external-attestation non-claim" \
     "demo/proof-pack/proof-pack-manifest.json" \
-    "no verifier-kit asset publication"
+    "no public external attestation"
 
 assert_contains_fixed \
     "architecture archive keeps current release pointer" \
     "architecture.html" \
-    "Current public release: ZLAR v3.3.109 - Verifier-kit public distribution posture audit."
+    "Current public release: ZLAR v3.4.0 - Public verifier-kit distribution boundary release."
 
 assert_contains_fixed \
     "CAISI archive keeps current release boundary" \
     "caisi-submission.html" \
-    "The current release adds verifier-kit public distribution posture audit"
+    "The current release is the public verifier-kit distribution boundary release"
 
 assert_contains_fixed \
     "fail-open archive keeps current release boundary" \
     "fail-open.html" \
-    "The current release adds verifier-kit public distribution posture audit"
+    "The current release is the public verifier-kit distribution boundary release"
 
 assert_contains_fixed \
     "boundaries page keeps records.write terminal proof boundary" \
@@ -189,7 +189,7 @@ assert_contains_fixed \
 assert_contains_fixed \
     "boundaries page keeps current release boundary" \
     "boundaries.html" \
-    "The current release adds verifier-kit public distribution posture audit"
+    "The current release is the public verifier-kit distribution boundary release"
 
 assert_contains_fixed \
     "boundaries page keeps public-distribution audit command" \
@@ -202,9 +202,9 @@ assert_contains_fixed \
     "zlar-verifier-kit-public-distribution-v1.json"
 
 assert_contains_fixed \
-    "boundaries page keeps public-distribution non-claim" \
+    "boundaries page keeps production-authority non-claim" \
     "boundaries.html" \
-    "not verifier-kit asset publication"
+    "not public external attestation"
 
 assert_contains_fixed \
     "boundaries page keeps v3.3.108 pointer summary as historical" \
