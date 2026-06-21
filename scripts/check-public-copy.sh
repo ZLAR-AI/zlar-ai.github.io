@@ -124,47 +124,47 @@ assert_contains_fixed \
 assert_contains_fixed \
     "boundaries page keeps current release pointer" \
     "boundaries.html" \
-    "ZLAR v3.3.83 on GitHub"
+    "ZLAR v3.3.84 on GitHub"
 
 assert_contains_fixed \
     "website README keeps current release pointer" \
     "README.md" \
-    "ZLAR v3.3.83 — Release-forward verifier dry-run helper"
+    "ZLAR v3.3.84 — Release-forward dry-run manifest"
 
 assert_contains_fixed \
     "LLM index keeps current release pointer" \
     "llms.txt" \
-    "Current public release: ZLAR v3.3.83 — Release-forward verifier dry-run helper."
+    "Current public release: ZLAR v3.3.84 — Release-forward dry-run manifest."
 
 assert_contains_fixed \
     "proof-pack README keeps current release pointer" \
     "demo/proof-pack/README.md" \
-    "ZLAR v3.3.83 — Release-forward verifier dry-run helper."
+    "ZLAR v3.3.84 — Release-forward dry-run manifest."
 
 assert_contains_fixed \
     "proof-pack manifest keeps current release pointer" \
     "demo/proof-pack/proof-pack-manifest.json" \
-    "\"current_public_release\": \"v3.3.83\""
+    "\"current_public_release\": \"v3.3.84\""
 
 assert_contains_fixed \
-    "proof-pack manifest keeps dry-run helper boundary" \
+    "proof-pack manifest keeps dry-run manifest boundary" \
     "demo/proof-pack/proof-pack-manifest.json" \
-    "Release-forward verifier dry-run helper; no verifier request sent"
+    "Release-forward dry-run manifest; no verifier request sent"
 
 assert_contains_fixed \
     "architecture archive keeps current release pointer" \
     "architecture.html" \
-    "Current public release: ZLAR v3.3.83 — Release-forward verifier dry-run helper."
+    "Current public release: ZLAR v3.3.84 — Release-forward dry-run manifest."
 
 assert_contains_fixed \
     "CAISI archive keeps current helper boundary" \
     "caisi-submission.html" \
-    "The current release adds a non-sending release-forward verifier dry-run"
+    "The current release adds a machine-readable release-forward dry-run"
 
 assert_contains_fixed \
     "fail-open archive keeps current helper boundary" \
     "fail-open.html" \
-    "The current release adds a non-sending release-forward verifier dry-run"
+    "The current release adds a machine-readable release-forward dry-run"
 
 assert_contains_fixed \
     "boundaries page keeps records.write terminal proof boundary" \
@@ -177,9 +177,19 @@ assert_contains_fixed \
     "The historical private verifier request remains sent and private-by-default"
 
 assert_contains_fixed \
-    "boundaries page keeps dry-run helper boundary" \
+    "boundaries page keeps dry-run manifest boundary" \
     "boundaries.html" \
-    "The current release publishes a non-sending release-forward verifier dry-run helper"
+    "The current release publishes a machine-readable release-forward dry-run manifest contract"
+
+assert_contains_fixed \
+    "boundaries page keeps dry-run manifest file" \
+    "boundaries.html" \
+    "DRY-RUN-MANIFEST.json"
+
+assert_contains_fixed \
+    "boundaries page keeps dry-run manifest fields" \
+    "boundaries.html" \
+    "explicit target, observed commit, assertion counts, artifact hashes, run-file hashes, privacy flags, and non-claim flags"
 
 assert_contains_fixed \
     "boundaries page keeps helper moving-target refusal" \
@@ -343,8 +353,8 @@ assert_no_public_regex \
     'v3[.]3[.]80'
 
 assert_no_public_regex \
-    "public copy must not preserve stale v3.3.82 current-release pointer" \
-    'ZLAR v3[.]3[.]82 on GitHub|Current public release:[[:space:]]*ZLAR v3[.]3[.]82|releases/tag/v3[.]3[.]82|ZLAR v3[.]3[.]82[[:space:]]+—[[:space:]]+Release-forward verifier dry-run helper'
+    "public copy must not preserve stale v3.3.83 current-release pointer" \
+    'ZLAR v3[.]3[.]83 on GitHub|Current public release:[[:space:]]*ZLAR v3[.]3[.]83|releases/tag/v3[.]3[.]83|ZLAR v3[.]3[.]83[[:space:]]+—[[:space:]]+Release-forward verifier dry-run helper|ZLAR v3[.]3[.]83[[:space:]]+—[[:space:]]+Release-forward dry-run manifest'
 
 assert_no_public_regex \
     "public copy must not claim unconditional Telegram or phone approval routing" \
