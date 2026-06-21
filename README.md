@@ -39,7 +39,7 @@ Do not edit these files unless the sample bundle is intentionally regenerated an
 
 ## Claim Boundary
 
-Current public release: [ZLAR v3.3.84 — Release-forward dry-run manifest](https://github.com/ZLAR-AI/ZLAR/releases/tag/v3.3.84).
+Current public release: [ZLAR v3.3.85 — Config-backed service preflight](https://github.com/ZLAR-AI/ZLAR/releases/tag/v3.3.85).
 
 ZLAR governs routed/intercepted action surfaces only. Safe Codex wording:
 

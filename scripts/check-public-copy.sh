@@ -124,47 +124,47 @@ assert_contains_fixed \
 assert_contains_fixed \
     "boundaries page keeps current release pointer" \
     "boundaries.html" \
-    "ZLAR v3.3.84 on GitHub"
+    "ZLAR v3.3.85 on GitHub"
 
 assert_contains_fixed \
     "website README keeps current release pointer" \
     "README.md" \
-    "ZLAR v3.3.84 — Release-forward dry-run manifest"
+    "ZLAR v3.3.85 — Config-backed service preflight"
 
 assert_contains_fixed \
     "LLM index keeps current release pointer" \
     "llms.txt" \
-    "Current public release: ZLAR v3.3.84 — Release-forward dry-run manifest."
+    "Current public release: ZLAR v3.3.85 — Config-backed service preflight."
 
 assert_contains_fixed \
     "proof-pack README keeps current release pointer" \
     "demo/proof-pack/README.md" \
-    "ZLAR v3.3.84 — Release-forward dry-run manifest."
+    "ZLAR v3.3.85 — Config-backed service preflight."
 
 assert_contains_fixed \
     "proof-pack manifest keeps current release pointer" \
     "demo/proof-pack/proof-pack-manifest.json" \
-    "\"current_public_release\": \"v3.3.84\""
+    "\"current_public_release\": \"v3.3.85\""
 
 assert_contains_fixed \
-    "proof-pack manifest keeps dry-run manifest boundary" \
+    "proof-pack manifest keeps config-backed service boundary" \
     "demo/proof-pack/proof-pack-manifest.json" \
-    "Release-forward dry-run manifest; no verifier request sent"
+    "Config-backed service preflight; local disposable fixture/preflight evidence only"
 
 assert_contains_fixed \
     "architecture archive keeps current release pointer" \
     "architecture.html" \
-    "Current public release: ZLAR v3.3.84 — Release-forward dry-run manifest."
+    "Current public release: ZLAR v3.3.85 — Config-backed service preflight."
 
 assert_contains_fixed \
-    "CAISI archive keeps current helper boundary" \
+    "CAISI archive keeps current service-preflight boundary" \
     "caisi-submission.html" \
-    "The current release adds a machine-readable release-forward dry-run"
+    "The current release adds config-backed protected-records service preflight evidence"
 
 assert_contains_fixed \
-    "fail-open archive keeps current helper boundary" \
+    "fail-open archive keeps current service-preflight boundary" \
     "fail-open.html" \
-    "The current release adds a machine-readable release-forward dry-run"
+    "The current release adds config-backed protected-records service preflight evidence"
 
 assert_contains_fixed \
     "boundaries page keeps records.write terminal proof boundary" \
@@ -177,9 +177,9 @@ assert_contains_fixed \
     "The historical private verifier request remains sent and private-by-default"
 
 assert_contains_fixed \
-    "boundaries page keeps dry-run manifest boundary" \
+    "boundaries page keeps service-preflight boundary" \
     "boundaries.html" \
-    "The current release publishes a machine-readable release-forward dry-run manifest contract"
+    "The current release adds config-backed protected-records service preflight evidence"
 
 assert_contains_fixed \
     "boundaries page keeps dry-run manifest file" \
