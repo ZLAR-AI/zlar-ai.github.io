@@ -124,7 +124,32 @@ assert_contains_fixed \
 assert_contains_fixed \
     "boundaries page keeps current release pointer" \
     "boundaries.html" \
-    "ZLAR v3.3.78 on GitHub"
+    "ZLAR v3.3.79 on GitHub"
+
+assert_contains_fixed \
+    "website README keeps current release pointer" \
+    "README.md" \
+    "ZLAR v3.3.79 — Verifier handoff wording normalization"
+
+assert_contains_fixed \
+    "LLM index keeps current release pointer" \
+    "llms.txt" \
+    "Current public release: ZLAR v3.3.79 — Verifier handoff wording normalization."
+
+assert_contains_fixed \
+    "proof-pack README keeps current release pointer" \
+    "demo/proof-pack/README.md" \
+    "ZLAR v3.3.79 — Verifier handoff wording normalization."
+
+assert_contains_fixed \
+    "proof-pack manifest keeps current release pointer" \
+    "demo/proof-pack/proof-pack-manifest.json" \
+    "\"current_public_release\": \"v3.3.79\""
+
+assert_contains_fixed \
+    "architecture archive keeps current release pointer" \
+    "architecture.html" \
+    "Current public release: ZLAR v3.3.79 — Verifier handoff wording normalization."
 
 assert_contains_fixed \
     "boundaries page keeps records.write terminal proof boundary" \
@@ -132,9 +157,9 @@ assert_contains_fixed \
     "records-write-terminal-proof"
 
 assert_contains_fixed \
-    "boundaries page keeps verifier packet retarget boundary" \
+    "boundaries page keeps verifier packet split status" \
     "boundaries.html" \
-    "prepared, not-sent release-forward external verifier packet remains pinned"
+    "The historical private verifier request remains sent and private-by-default. Separately, the prepared pinned release-forward verifier target remains"
 
 assert_contains_fixed \
     "boundaries page keeps verifier packet target" \
@@ -147,9 +172,9 @@ assert_contains_fixed \
     "\`active_profile_selection\` summary"
 
 assert_contains_fixed \
-    "boundaries page keeps verifier active-profile hardening" \
+    "boundaries page keeps verifier handoff normalization" \
     "boundaries.html" \
-    "current release hardens verifier active-profile boundaries"
+    "current release normalizes verifier handoff wording"
 
 assert_contains_fixed \
     "boundaries page keeps verifier-kit runner non-claim" \
@@ -159,7 +184,7 @@ assert_contains_fixed \
 assert_contains_fixed \
     "boundaries page keeps no new verifier contact" \
     "boundaries.html" \
-    "It sends no new verifier request, contacts no verifier, creates no public external attestation"
+    "The verifier handoff status sends no new verifier request, contacts no verifier, creates no public external attestation"
 
 assert_contains_fixed \
     "boundaries page keeps active profile selection non-claims" \
@@ -275,7 +300,15 @@ assert_no_public_regex \
 
 assert_no_public_regex \
     "public copy must not preserve stale previous-release pointer" \
-    'v3[.]3[.]77'
+    'v3[.]3[.]78'
+
+assert_no_public_regex \
+    "public copy must not use current-release retarget wording" \
+    'current[[:space:]]+release[[:space:]]+line[[:space:]]+also[[:space:]]+(adds[[:space:]]+release-forward[[:space:]]+verifier[[:space:]]+packet[[:space:]]+alignment|retargets|hardens[[:space:]]+verifier[[:space:]]+active-profile)'
+
+assert_no_public_regex \
+    "public copy must not use muddy prepared-not-sent verifier phrasing" \
+    'prepared,[[:space:]]+not-sent[[:space:]]+release-forward[[:space:]]+external[[:space:]]+verifier[[:space:]]+packet|not-yet-sent[[:space:]]+pinned[[:space:]]+target'
 
 assert_no_public_regex \
     "public downloadable assets must not preserve stale verifier status" \

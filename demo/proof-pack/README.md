@@ -2,6 +2,10 @@
 
 This public bundle is a fake/scratch proof-pack example for zlar.ai. It is designed to show the shape of verification without exposing operator data, raw MCP arguments, private paths, approval-channel identifiers, credentials, prompt text, or final client text.
 
+Current public release:
+
+ZLAR v3.3.79 — Verifier handoff wording normalization.
+
 Claim ceiling:
 
 ZLAR can govern Codex CLI-invoked MCP tool calls when those MCP servers are routed through ZLAR.

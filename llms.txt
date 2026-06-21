@@ -20,6 +20,7 @@ Primary pages:
 
 Claim boundary:
 
+- Current public release: ZLAR v3.3.79 — Verifier handoff wording normalization.
 - ZLAR governs routed/intercepted action surfaces only.
 - Safe Codex wording: "ZLAR can govern Codex CLI-invoked MCP tool calls when those MCP servers are routed through ZLAR."
 - Unrouted shell/filesystem/browser/app/network/model-reasoning/final-text surfaces are not claimed as governed by the current proof path.
