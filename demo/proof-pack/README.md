@@ -4,7 +4,7 @@ This public bundle is a fake/scratch proof-pack example for zlar.ai. It is desig
 
 Current public release:
 
-ZLAR v3.3.107 — North Star private intake pointer reporting.
+ZLAR v3.3.108 — Release-forward result pointer summary.
 
 Claim ceiling:
 

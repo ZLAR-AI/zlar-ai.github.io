@@ -129,52 +129,52 @@ assert_contains_fixed \
 assert_contains_fixed \
     "boundaries page keeps current release pointer" \
     "boundaries.html" \
-    "ZLAR v3.3.107 on GitHub"
+    "ZLAR v3.3.108 on GitHub"
 
 assert_contains_fixed \
     "website README keeps current release pointer" \
     "README.md" \
-    "ZLAR v3.3.107 — North Star private intake pointer reporting"
+    "ZLAR v3.3.108 — Release-forward result pointer summary"
 
 assert_contains_fixed \
     "LLM index keeps current release pointer" \
     "llms.txt" \
-    "Current public release: ZLAR v3.3.107 — North Star private intake pointer reporting."
+    "Current public release: ZLAR v3.3.108 — Release-forward result pointer summary."
 
 assert_contains_fixed \
     "proof-pack README keeps current release pointer" \
     "demo/proof-pack/README.md" \
-    "ZLAR v3.3.107 — North Star private intake pointer reporting."
+    "ZLAR v3.3.108 — Release-forward result pointer summary."
 
 assert_contains_fixed \
     "proof-pack manifest keeps current release pointer" \
     "demo/proof-pack/proof-pack-manifest.json" \
-    "\"current_public_release\": \"v3.3.107\""
+    "\"current_public_release\": \"v3.3.108\""
 
 assert_contains_fixed \
     "proof-pack manifest keeps verifier target boundary" \
     "demo/proof-pack/proof-pack-manifest.json" \
-    "North Star private intake pointer reporting"
+    "Release-forward result pointer summary"
 
 assert_contains_fixed \
-    "proof-pack manifest keeps private evidence hash boundary" \
+    "proof-pack manifest keeps dry-run readability boundary" \
     "demo/proof-pack/proof-pack-manifest.json" \
-    "private-intake sample discoverability only"
+    "dry-run result readability only"
 
 assert_contains_fixed \
     "architecture archive keeps current release pointer" \
     "architecture.html" \
-    "Current public release: ZLAR v3.3.107 — North Star private intake pointer reporting."
+    "Current public release: ZLAR v3.3.108 — Release-forward result pointer summary."
 
 assert_contains_fixed \
     "CAISI archive keeps current release boundary" \
     "caisi-submission.html" \
-    "The current release adds North Star private intake pointer reporting"
+    "The current release adds release-forward result pointer summary"
 
 assert_contains_fixed \
     "fail-open archive keeps current release boundary" \
     "fail-open.html" \
-    "The current release adds North Star private intake pointer reporting"
+    "The current release adds release-forward result pointer summary"
 
 assert_contains_fixed \
     "boundaries page keeps records.write terminal proof boundary" \
@@ -189,17 +189,22 @@ assert_contains_fixed \
 assert_contains_fixed \
     "boundaries page keeps current release boundary" \
     "boundaries.html" \
-    "The current release adds North Star private intake pointer reporting"
+    "The current release adds release-forward result pointer summary"
 
 assert_contains_fixed \
-    "boundaries page keeps current manifest pointer field" \
+    "boundaries page keeps current readiness pointer field" \
     "boundaries.html" \
-    "private_verifier_result_sample"
+    "private_intake_sample_manifest_pointer"
 
 assert_contains_fixed \
-    "boundaries page keeps current non-circular hash boundary" \
+    "boundaries page keeps current pointer contract section" \
     "boundaries.html" \
-    'records the bounded `private_verifier_result_sample` manifest pointer contract'
+    "Private Intake Pointer Contract"
+
+assert_contains_fixed \
+    "boundaries page keeps v3.3.107 pointer reporting as historical" \
+    "boundaries.html" \
+    "The v3.3.107 release added North Star private intake pointer reporting"
 
 assert_contains_fixed \
     "boundaries page keeps v3.3.105 private sample as historical" \
@@ -556,6 +561,10 @@ assert_no_public_regex \
 assert_no_public_regex \
     "public copy must not preserve stale v3.3.102 current-release boundary" \
     'ZLAR v3[.]3[.]102 on GitHub|Current public release:[[:space:]]*ZLAR v3[.]3[.]102|releases/tag/v3[.]3[.]102|ZLAR v3[.]3[.]102</h3>|The current release clarifies receipt-emission boundaries|Receipt emission boundary clarity; claim-boundary and copy-guard hardening only'
+
+assert_no_public_regex \
+    "public copy must not preserve stale v3.3.107 current-release boundary" \
+    'ZLAR v3[.]3[.]107 on GitHub|Current public release:[[:space:]]*ZLAR v3[.]3[.]107|releases/tag/v3[.]3[.]107|ZLAR v3[.]3[.]107</h3>|The current release adds North Star private intake pointer reporting'
 
 assert_no_public_regex \
     "public copy must not claim unconditional Telegram or phone approval routing" \
