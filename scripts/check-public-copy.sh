@@ -124,47 +124,47 @@ assert_contains_fixed \
 assert_contains_fixed \
     "boundaries page keeps current release pointer" \
     "boundaries.html" \
-    "ZLAR v3.3.90 on GitHub"
+    "ZLAR v3.3.92 on GitHub"
 
 assert_contains_fixed \
     "website README keeps current release pointer" \
     "README.md" \
-    "ZLAR v3.3.90 — Runtime profile-id refusal"
+    "ZLAR v3.3.92 — Release-forward shallow-checkout guard"
 
 assert_contains_fixed \
     "LLM index keeps current release pointer" \
     "llms.txt" \
-    "Current public release: ZLAR v3.3.90 — Runtime profile-id refusal."
+    "Current public release: ZLAR v3.3.92 — Release-forward shallow-checkout guard."
 
 assert_contains_fixed \
     "proof-pack README keeps current release pointer" \
     "demo/proof-pack/README.md" \
-    "ZLAR v3.3.90 — Runtime profile-id refusal."
+    "ZLAR v3.3.92 — Release-forward shallow-checkout guard."
 
 assert_contains_fixed \
     "proof-pack manifest keeps current release pointer" \
     "demo/proof-pack/proof-pack-manifest.json" \
-    "\"current_public_release\": \"v3.3.90\""
+    "\"current_public_release\": \"v3.3.92\""
 
 assert_contains_fixed \
     "proof-pack manifest keeps verifier target boundary" \
     "demo/proof-pack/proof-pack-manifest.json" \
-    "Runtime profile-id refusal; local disposable runtime/profile-installation proof hardening only"
+    "Release-forward shallow-checkout guard and service-profile coverage-lane preservation"
 
 assert_contains_fixed \
     "architecture archive keeps current release pointer" \
     "architecture.html" \
-    "Current public release: ZLAR v3.3.90 — Runtime profile-id refusal."
+    "Current public release: ZLAR v3.3.92 — Release-forward shallow-checkout guard."
 
 assert_contains_fixed \
     "CAISI archive keeps current release boundary" \
     "caisi-submission.html" \
-    "The current release adds wrong-runtime-profile-id refusal to the local disposable runtime-profile taxonomy"
+    "The current release preserves the v3.3.91 service-profile coverage lane"
 
 assert_contains_fixed \
     "fail-open archive keeps current release boundary" \
     "fail-open.html" \
-    "The current release adds wrong-runtime-profile-id refusal to the local disposable runtime-profile taxonomy"
+    "The current release preserves the v3.3.91 service-profile coverage lane"
 
 assert_contains_fixed \
     "boundaries page keeps records.write terminal proof boundary" \
@@ -179,7 +179,17 @@ assert_contains_fixed \
 assert_contains_fixed \
     "boundaries page keeps current release boundary" \
     "boundaries.html" \
-    "The current release adds wrong-runtime-profile-id refusal to the local disposable runtime-profile taxonomy"
+    "The current release preserves the v3.3.91 service-profile coverage lane"
+
+assert_contains_fixed \
+    "boundaries page keeps service-profile coverage lane" \
+    "boundaries.html" \
+    "protected-records.service-profile.records.write"
+
+assert_contains_fixed \
+    "boundaries page keeps current 5/5 coverage boundary" \
+    "boundaries.html" \
+    "current \`v3.3.91+\` service-profile coverage lane at \`5/5\`"
 
 assert_contains_fixed \
     "boundaries page keeps dry-run manifest file" \
@@ -197,14 +207,14 @@ assert_contains_fixed \
     "refuses moving targets such as \`main\`, \`HEAD\`, \`latest\`, and \`--latest\`"
 
 assert_contains_fixed \
-    "boundaries page keeps pinned v3.3.88 verifier target" \
+    "boundaries page keeps pinned v3.3.90 verifier target" \
     "boundaries.html" \
-    "The prepared pinned \`v3.3.88\` release-forward verifier target"
+    "The prepared pinned \`v3.3.90\` release-forward verifier target"
 
 assert_contains_fixed \
     "boundaries page keeps pinned verifier target sha" \
     "boundaries.html" \
-    "f698b085ae68a0a77f5bbff87e4824ca4482751d"
+    "9a8147163384f776777bf283217a5cd55cbbdfe7"
 
 assert_contains_fixed \
     "boundaries page keeps verifier preservation boundary" \
@@ -214,7 +224,7 @@ assert_contains_fixed \
 assert_contains_fixed \
     "boundaries page keeps 4/4 coverage boundary" \
     "boundaries.html" \
-    "coverage sample at \`4/4\` governed counted lanes"
+    "older pinned \`v3.3.90\` coverage sample at \`4/4\`"
 
 assert_contains_fixed \
     "boundaries page keeps configured-channel fail-closed boundary" \
