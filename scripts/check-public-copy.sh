@@ -124,32 +124,37 @@ assert_contains_fixed \
 assert_contains_fixed \
     "boundaries page keeps current release pointer" \
     "boundaries.html" \
-    "ZLAR v3.3.79 on GitHub"
+    "ZLAR v3.3.80 on GitHub"
 
 assert_contains_fixed \
     "website README keeps current release pointer" \
     "README.md" \
-    "ZLAR v3.3.79 — Verifier handoff wording normalization"
+    "ZLAR v3.3.80 — Approval-channel boundary normalization"
 
 assert_contains_fixed \
     "LLM index keeps current release pointer" \
     "llms.txt" \
-    "Current public release: ZLAR v3.3.79 — Verifier handoff wording normalization."
+    "Current public release: ZLAR v3.3.80 — Approval-channel boundary normalization."
 
 assert_contains_fixed \
     "proof-pack README keeps current release pointer" \
     "demo/proof-pack/README.md" \
-    "ZLAR v3.3.79 — Verifier handoff wording normalization."
+    "ZLAR v3.3.80 — Approval-channel boundary normalization."
 
 assert_contains_fixed \
     "proof-pack manifest keeps current release pointer" \
     "demo/proof-pack/proof-pack-manifest.json" \
-    "\"current_public_release\": \"v3.3.79\""
+    "\"current_public_release\": \"v3.3.80\""
+
+assert_contains_fixed \
+    "proof-pack manifest keeps approval-channel boundary" \
+    "demo/proof-pack/proof-pack-manifest.json" \
+    "no live approval-channel delivery or health"
 
 assert_contains_fixed \
     "architecture archive keeps current release pointer" \
     "architecture.html" \
-    "Current public release: ZLAR v3.3.79 — Verifier handoff wording normalization."
+    "Current public release: ZLAR v3.3.80 — Approval-channel boundary normalization."
 
 assert_contains_fixed \
     "boundaries page keeps records.write terminal proof boundary" \
@@ -172,9 +177,19 @@ assert_contains_fixed \
     "\`active_profile_selection\` summary"
 
 assert_contains_fixed \
-    "boundaries page keeps verifier handoff normalization" \
+    "boundaries page keeps approval-channel normalization" \
     "boundaries.html" \
-    "current release normalizes verifier handoff wording"
+    "current release normalizes approval-channel boundary copy"
+
+assert_contains_fixed \
+    "boundaries page keeps configured-channel fail-closed boundary" \
+    "boundaries.html" \
+    "configured approval channel when enabled and fail closed when absent"
+
+assert_contains_fixed \
+    "boundaries page keeps prior verifier handoff boundary" \
+    "boundaries.html" \
+    "The prior verifier handoff boundary still holds"
 
 assert_contains_fixed \
     "boundaries page keeps verifier-kit runner non-claim" \
@@ -300,7 +315,15 @@ assert_no_public_regex \
 
 assert_no_public_regex \
     "public copy must not preserve stale previous-release pointer" \
-    'v3[.]3[.]78'
+    'v3[.]3[.]79'
+
+assert_no_public_regex \
+    "public copy must not claim unconditional Telegram or phone approval routing" \
+    'human[[:space:]]+notified[[:space:]]+via[[:space:]]+Telegram|routes?[[:space:]]+to[[:space:]]+a[[:space:]]+human[[:space:]]+via[[:space:]]+Telegram|single[[:space:]]+bot[[:space:]]+that[[:space:]]+routes[[:space:]]+all[[:space:]]+governed[[:space:]]+asks|Telegram[[:space:]]+unreachable:[[:space:]]+deny|human.?s[[:space:]]+only[[:space:]]+interface[[:space:]]+is[^.?!]{0,80}phone|person[[:space:]]+behind[[:space:]]+the[[:space:]]+phone'
+
+assert_no_public_regex \
+    "public copy must not claim categorical agent self-modification prevention" \
+    'agents[[:space:]]+cannot[[:space:]]+modify[[:space:]]+their[[:space:]]+own[[:space:]]+rules'
 
 assert_no_public_regex \
     "public copy must not use current-release retarget wording" \

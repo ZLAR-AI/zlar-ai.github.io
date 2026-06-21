@@ -4,7 +4,7 @@ This public bundle is a fake/scratch proof-pack example for zlar.ai. It is desig
 
 Current public release:
 
-ZLAR v3.3.79 — Verifier handoff wording normalization.
+ZLAR v3.3.80 — Approval-channel boundary normalization.
 
 Claim ceiling:
 
