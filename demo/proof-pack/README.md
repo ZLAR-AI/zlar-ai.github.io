@@ -4,7 +4,7 @@ This public bundle is a fake/scratch proof-pack example for zlar.ai. It is desig
 
 Current public release:
 
-ZLAR v3.3.102 — Receipt emission boundary clarity.
+ZLAR v3.3.103 — Private verifier result intake.
 
 Claim ceiling:
 

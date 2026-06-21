@@ -129,52 +129,52 @@ assert_contains_fixed \
 assert_contains_fixed \
     "boundaries page keeps current release pointer" \
     "boundaries.html" \
-    "ZLAR v3.3.102 on GitHub"
+    "ZLAR v3.3.103 on GitHub"
 
 assert_contains_fixed \
     "website README keeps current release pointer" \
     "README.md" \
-    "ZLAR v3.3.102 — Receipt emission boundary clarity"
+    "ZLAR v3.3.103 — Private verifier result intake"
 
 assert_contains_fixed \
     "LLM index keeps current release pointer" \
     "llms.txt" \
-    "Current public release: ZLAR v3.3.102 — Receipt emission boundary clarity."
+    "Current public release: ZLAR v3.3.103 — Private verifier result intake."
 
 assert_contains_fixed \
     "proof-pack README keeps current release pointer" \
     "demo/proof-pack/README.md" \
-    "ZLAR v3.3.102 — Receipt emission boundary clarity."
+    "ZLAR v3.3.103 — Private verifier result intake."
 
 assert_contains_fixed \
     "proof-pack manifest keeps current release pointer" \
     "demo/proof-pack/proof-pack-manifest.json" \
-    "\"current_public_release\": \"v3.3.102\""
+    "\"current_public_release\": \"v3.3.103\""
 
 assert_contains_fixed \
     "proof-pack manifest keeps verifier target boundary" \
     "demo/proof-pack/proof-pack-manifest.json" \
-    "Receipt emission boundary clarity"
+    "Private verifier result intake"
 
 assert_contains_fixed \
-    "proof-pack manifest keeps receipt-emission boundary" \
+    "proof-pack manifest keeps private verifier intake boundary" \
     "demo/proof-pack/proof-pack-manifest.json" \
-    "claim-boundary and copy-guard hardening only"
+    "private result intake and claim-boundary hardening only"
 
 assert_contains_fixed \
     "architecture archive keeps current release pointer" \
     "architecture.html" \
-    "Current public release: ZLAR v3.3.102 — Receipt emission boundary clarity."
+    "Current public release: ZLAR v3.3.103 — Private verifier result intake."
 
 assert_contains_fixed \
     "CAISI archive keeps current release boundary" \
     "caisi-submission.html" \
-    "The current release clarifies receipt-emission boundaries"
+    "The current release adds private verifier result intake"
 
 assert_contains_fixed \
     "fail-open archive keeps current release boundary" \
     "fail-open.html" \
-    "The current release clarifies receipt-emission boundaries"
+    "The current release adds private verifier result intake"
 
 assert_contains_fixed \
     "boundaries page keeps records.write terminal proof boundary" \
@@ -189,7 +189,22 @@ assert_contains_fixed \
 assert_contains_fixed \
     "boundaries page keeps current release boundary" \
     "boundaries.html" \
-    "The current release clarifies receipt-emission boundaries"
+    "The current release adds private verifier result intake"
+
+assert_contains_fixed \
+    "boundaries page keeps private verifier result command" \
+    "boundaries.html" \
+    "bin/zlar private-verifier-result verify"
+
+assert_contains_fixed \
+    "boundaries page keeps private verifier result schema" \
+    "boundaries.html" \
+    "zlar-private-verifier-result-v1"
+
+assert_contains_fixed \
+    "boundaries page keeps v3.3.102 receipt boundary as historical" \
+    "boundaries.html" \
+    "The v3.3.102 release clarified receipt-emission boundaries"
 
 assert_contains_fixed \
     "boundaries page keeps configured action receipt boundary" \
@@ -512,6 +527,10 @@ assert_no_public_regex \
 assert_no_public_regex \
     "public copy must not preserve stale v3.3.101 current-release boundary" \
     'ZLAR v3[.]3[.]101 on GitHub|Current public release:[[:space:]]*ZLAR v3[.]3[.]101|releases/tag/v3[.]3[.]101|The current release adds the readiness report reproducibility bridge|Receipt emission boundary clarity; readiness-report accuracy'
+
+assert_no_public_regex \
+    "public copy must not preserve stale v3.3.102 current-release boundary" \
+    'ZLAR v3[.]3[.]102 on GitHub|Current public release:[[:space:]]*ZLAR v3[.]3[.]102|releases/tag/v3[.]3[.]102|ZLAR v3[.]3[.]102</h3>|The current release clarifies receipt-emission boundaries|Receipt emission boundary clarity; claim-boundary and copy-guard hardening only'
 
 assert_no_public_regex \
     "public copy must not claim unconditional Telegram or phone approval routing" \
