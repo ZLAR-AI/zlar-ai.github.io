@@ -124,47 +124,47 @@ assert_contains_fixed \
 assert_contains_fixed \
     "boundaries page keeps current release pointer" \
     "boundaries.html" \
-    "ZLAR v3.3.86 on GitHub"
+    "ZLAR v3.3.87 on GitHub"
 
 assert_contains_fixed \
     "website README keeps current release pointer" \
     "README.md" \
-    "ZLAR v3.3.86 — Release-forward service-preflight quick-check"
+    "ZLAR v3.3.87 — Downstream refusal explicit reasons"
 
 assert_contains_fixed \
     "LLM index keeps current release pointer" \
     "llms.txt" \
-    "Current public release: ZLAR v3.3.86 — Release-forward service-preflight quick-check."
+    "Current public release: ZLAR v3.3.87 — Downstream refusal explicit reasons."
 
 assert_contains_fixed \
     "proof-pack README keeps current release pointer" \
     "demo/proof-pack/README.md" \
-    "ZLAR v3.3.86 — Release-forward service-preflight quick-check."
+    "ZLAR v3.3.87 — Downstream refusal explicit reasons."
 
 assert_contains_fixed \
     "proof-pack manifest keeps current release pointer" \
     "demo/proof-pack/proof-pack-manifest.json" \
-    "\"current_public_release\": \"v3.3.86\""
+    "\"current_public_release\": \"v3.3.87\""
 
 assert_contains_fixed \
-    "proof-pack manifest keeps service-preflight quick-check boundary" \
+    "proof-pack manifest keeps downstream refusal boundary" \
     "demo/proof-pack/proof-pack-manifest.json" \
-    "Release-forward service-preflight quick-check; standalone config-backed service-preflight sample verification only"
+    "Downstream refusal explicit reasons; local hermetic refusal proof and regenerated proof-pack/proof-smoke samples only"
 
 assert_contains_fixed \
     "architecture archive keeps current release pointer" \
     "architecture.html" \
-    "Current public release: ZLAR v3.3.86 — Release-forward service-preflight quick-check."
+    "Current public release: ZLAR v3.3.87 — Downstream refusal explicit reasons."
 
 assert_contains_fixed \
-    "CAISI archive keeps current quick-check boundary" \
+    "CAISI archive keeps current downstream-refusal boundary" \
     "caisi-submission.html" \
-    "The current release surfaces the config-backed service-preflight sample as a standalone release-forward evaluator quick-check"
+    "The current release expands the local hermetic downstream-refusal proof"
 
 assert_contains_fixed \
-    "fail-open archive keeps current quick-check boundary" \
+    "fail-open archive keeps current downstream-refusal boundary" \
     "fail-open.html" \
-    "The current release surfaces the config-backed service-preflight sample as a standalone release-forward evaluator quick-check"
+    "The current release expands the local hermetic downstream-refusal proof"
 
 assert_contains_fixed \
     "boundaries page keeps records.write terminal proof boundary" \
@@ -177,9 +177,9 @@ assert_contains_fixed \
     "The historical private verifier request remains sent and private-by-default"
 
 assert_contains_fixed \
-    "boundaries page keeps service-preflight quick-check boundary" \
+    "boundaries page keeps downstream refusal boundary" \
     "boundaries.html" \
-    "The current release surfaces the config-backed service-preflight sample as a standalone release-forward evaluator quick-check"
+    "The current release expands the local hermetic downstream-refusal proof"
 
 assert_contains_fixed \
     "boundaries page keeps dry-run manifest file" \
@@ -197,14 +197,14 @@ assert_contains_fixed \
     "refuses moving targets such as \`main\`, \`HEAD\`, \`latest\`, and \`--latest\`"
 
 assert_contains_fixed \
-    "boundaries page keeps pinned v3.3.81 verifier target" \
+    "boundaries page keeps pinned v3.3.86 verifier target" \
     "boundaries.html" \
-    "The prepared pinned \`v3.3.81\` release-forward verifier target"
+    "The prepared pinned \`v3.3.86\` release-forward verifier target"
 
 assert_contains_fixed \
     "boundaries page keeps pinned verifier target sha" \
     "boundaries.html" \
-    "ebcfa57caf80624036f884d7133fbe92127d0180"
+    "19344fbfb24405a7028fa99682f2a3d759b7c90a"
 
 assert_contains_fixed \
     "boundaries page keeps verifier preservation boundary" \
@@ -224,7 +224,7 @@ assert_contains_fixed \
 assert_contains_fixed \
     "boundaries page keeps earlier v3.3.76 target boundary" \
     "boundaries.html" \
-    "the earlier prepared \`v3.3.76\` active-profile target remains intact"
+    "the earlier prepared \`v3.3.81\` runtime-profile-installation target and \`v3.3.76\` active-profile target remain intact"
 
 assert_contains_fixed \
     "boundaries page keeps no non-operator review claim" \
