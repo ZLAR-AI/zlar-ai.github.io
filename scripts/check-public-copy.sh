@@ -124,47 +124,47 @@ assert_contains_fixed \
 assert_contains_fixed \
     "boundaries page keeps current release pointer" \
     "boundaries.html" \
-    "ZLAR v3.3.93 on GitHub"
+    "ZLAR v3.3.94 on GitHub"
 
 assert_contains_fixed \
     "website README keeps current release pointer" \
     "README.md" \
-    "ZLAR v3.3.93 — Service-profile wrong-policy refusal"
+    "ZLAR v3.3.94 — Verifier-kit issuer registry recognition"
 
 assert_contains_fixed \
     "LLM index keeps current release pointer" \
     "llms.txt" \
-    "Current public release: ZLAR v3.3.93 — Service-profile wrong-policy refusal."
+    "Current public release: ZLAR v3.3.94 — Verifier-kit issuer registry recognition."
 
 assert_contains_fixed \
     "proof-pack README keeps current release pointer" \
     "demo/proof-pack/README.md" \
-    "ZLAR v3.3.93 — Service-profile wrong-policy refusal."
+    "ZLAR v3.3.94 — Verifier-kit issuer registry recognition."
 
 assert_contains_fixed \
     "proof-pack manifest keeps current release pointer" \
     "demo/proof-pack/proof-pack-manifest.json" \
-    "\"current_public_release\": \"v3.3.93\""
+    "\"current_public_release\": \"v3.3.94\""
 
 assert_contains_fixed \
     "proof-pack manifest keeps verifier target boundary" \
     "demo/proof-pack/proof-pack-manifest.json" \
-    "Service-profile wrong-policy refusal and service-profile coverage-lane preservation"
+    "Verifier-kit issuer registry recognition and release-forward recognition JSON preservation"
 
 assert_contains_fixed \
     "architecture archive keeps current release pointer" \
     "architecture.html" \
-    "Current public release: ZLAR v3.3.93 — Service-profile wrong-policy refusal."
+    "Current public release: ZLAR v3.3.94 — Verifier-kit issuer registry recognition."
 
 assert_contains_fixed \
     "CAISI archive keeps current release boundary" \
     "caisi-submission.html" \
-    "The current release adds the service-profile wrong-policy refusal"
+    "The current release adds verifier-kit trusted issuer registry recognition"
 
 assert_contains_fixed \
     "fail-open archive keeps current release boundary" \
     "fail-open.html" \
-    "The current release adds the service-profile wrong-policy refusal"
+    "The current release adds verifier-kit trusted issuer registry recognition"
 
 assert_contains_fixed \
     "boundaries page keeps records.write terminal proof boundary" \
@@ -179,7 +179,7 @@ assert_contains_fixed \
 assert_contains_fixed \
     "boundaries page keeps current release boundary" \
     "boundaries.html" \
-    "The current release adds the service-profile wrong-policy refusal"
+    "The current release adds verifier-kit trusted issuer registry recognition"
 
 assert_contains_fixed \
     "boundaries page keeps service-profile coverage lane" \
@@ -190,6 +190,11 @@ assert_contains_fixed \
     "boundaries page keeps current 5/5 coverage boundary" \
     "boundaries.html" \
     "current \`v3.3.91+\` service-profile coverage lane at \`5/5\` and the \`v3.3.93+\` service-profile wrong-policy preflight at \`11/11\`"
+
+assert_contains_fixed \
+    "boundaries page keeps verifier recognition boundary" \
+    "boundaries.html" \
+    "the release-forward verifier packet can preserve \`zlar-trusted-receipt-issuer-recognition.json\` for \`v3.3.94+\` targets"
 
 assert_contains_fixed \
     "boundaries page keeps dry-run manifest file" \
