@@ -124,47 +124,47 @@ assert_contains_fixed \
 assert_contains_fixed \
     "boundaries page keeps current release pointer" \
     "boundaries.html" \
-    "ZLAR v3.3.96 on GitHub"
+    "ZLAR v3.3.97 on GitHub"
 
 assert_contains_fixed \
     "website README keeps current release pointer" \
     "README.md" \
-    "ZLAR v3.3.96 — Trusted issuer registry schema contract"
+    "ZLAR v3.3.97 — Release-forward malformed-registry evidence"
 
 assert_contains_fixed \
     "LLM index keeps current release pointer" \
     "llms.txt" \
-    "Current public release: ZLAR v3.3.96 — Trusted issuer registry schema contract."
+    "Current public release: ZLAR v3.3.97 — Release-forward malformed-registry evidence."
 
 assert_contains_fixed \
     "proof-pack README keeps current release pointer" \
     "demo/proof-pack/README.md" \
-    "ZLAR v3.3.96 — Trusted issuer registry schema contract."
+    "ZLAR v3.3.97 — Release-forward malformed-registry evidence."
 
 assert_contains_fixed \
     "proof-pack manifest keeps current release pointer" \
     "demo/proof-pack/proof-pack-manifest.json" \
-    "\"current_public_release\": \"v3.3.96\""
+    "\"current_public_release\": \"v3.3.97\""
 
 assert_contains_fixed \
     "proof-pack manifest keeps verifier target boundary" \
     "demo/proof-pack/proof-pack-manifest.json" \
-    "Trusted issuer registry schema contract"
+    "Release-forward malformed-registry evidence"
 
 assert_contains_fixed \
     "architecture archive keeps current release pointer" \
     "architecture.html" \
-    "Current public release: ZLAR v3.3.96 — Trusted issuer registry schema contract."
+    "Current public release: ZLAR v3.3.97 — Release-forward malformed-registry evidence."
 
 assert_contains_fixed \
     "CAISI archive keeps current release boundary" \
     "caisi-submission.html" \
-    "The current release tightens the trusted issuer registry schema contract"
+    "The current release adds release-forward malformed-registry evidence"
 
 assert_contains_fixed \
     "fail-open archive keeps current release boundary" \
     "fail-open.html" \
-    "The current release tightens the trusted issuer registry schema contract"
+    "The current release adds release-forward malformed-registry evidence"
 
 assert_contains_fixed \
     "boundaries page keeps records.write terminal proof boundary" \
@@ -179,7 +179,12 @@ assert_contains_fixed \
 assert_contains_fixed \
     "boundaries page keeps current release boundary" \
     "boundaries.html" \
-    "The current release tightens the trusted issuer registry schema contract"
+    "The current release adds release-forward malformed-registry evidence"
+
+assert_contains_fixed \
+    "boundaries page keeps malformed-registry no-verdict boundary" \
+    "boundaries.html" \
+    "no \`RECOGNIZED\` or \`RECOGNITION-REFUSED\` verdict is emitted before the schema-contract error"
 
 assert_contains_fixed \
     "boundaries page keeps schema-contract mismatch boundary" \

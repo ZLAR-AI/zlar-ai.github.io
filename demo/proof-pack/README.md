@@ -4,7 +4,7 @@ This public bundle is a fake/scratch proof-pack example for zlar.ai. It is desig
 
 Current public release:
 
-ZLAR v3.3.96 — Trusted issuer registry schema contract.
+ZLAR v3.3.97 — Release-forward malformed-registry evidence.
 
 Claim ceiling:
 
