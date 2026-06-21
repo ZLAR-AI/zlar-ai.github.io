@@ -124,12 +124,17 @@ assert_contains_fixed \
 assert_contains_fixed \
     "boundaries page keeps current release pointer" \
     "boundaries.html" \
-    "ZLAR v3.3.73 on GitHub"
+    "ZLAR v3.3.74 on GitHub"
 
 assert_contains_fixed \
     "boundaries page keeps records.write terminal proof boundary" \
     "boundaries.html" \
     "records-write-terminal-proof"
+
+assert_contains_fixed \
+    "boundaries page keeps public claim guard hardening boundary" \
+    "boundaries.html" \
+    "approval routing is described as configured-channel behavior, not unconditional phone or Telegram availability"
 
 assert_contains_fixed \
     "boundaries page keeps private verifier request boundary" \
@@ -208,6 +213,26 @@ assert_no_public_regex \
 assert_no_public_regex \
     "public copy must not equate logs and receipts" \
     '(^|[^[:alnum:]_])a[[:space:]]+log[[:space:]]+is[[:space:]]+the[[:space:]]+same[[:space:]]+as[[:space:]]+a[[:space:]]+receipt'
+
+assert_no_public_regex \
+    "public copy must not claim unconditional phone approval routing" \
+    'message[[:space:]]+appears[[:space:]]+on[[:space:]]+the[[:space:]]+operator.?s[[:space:]]+phone'
+
+assert_no_public_regex \
+    "public copy must not claim unconditional Telegram approval routing" \
+    'human[-[:space:]]+in[-[:space:]]+the[-[:space:]]+loop[[:space:]]+approval[[:space:]]+via[[:space:]]+Telegram|approval[[:space:]]+via[[:space:]]+Telegram'
+
+assert_no_public_regex \
+    "public copy must not claim absolute agent inability to modify governance" \
+    'you[[:space:]]+cannot[[:space:]]+modify[[:space:]]+the[[:space:]]+gate,[[:space:]]+the[[:space:]]+policy,[[:space:]]+or[[:space:]]+the[[:space:]]+signing[[:space:]]+key'
+
+assert_no_public_regex \
+    "public copy must not claim the gate is unconditionally outside agent writable space" \
+    'the[[:space:]]+gate[[:space:]]+sits[[:space:]]+outside[[:space:]]+your[[:space:]]+writable[[:space:]]+space'
+
+assert_no_public_regex \
+    "public copy must not claim structurally impossible outcomes without a bounded deployment qualifier" \
+    'structurally[[:space:]]+impossible'
 
 assert_no_public_regex \
     "public copy must not claim completed external attestation" \

@@ -273,7 +273,7 @@
       <p>
         The current boundary is governed by <a href="boundaries.html">Boundaries and Non-Claims</a>,
         the <a href="proof-pack.html">sample receipt</a>, and the
-        <a href="https://github.com/ZLAR-AI/ZLAR/releases/tag/v3.3.73">v3.3.73 release</a>:
+        <a href="https://github.com/ZLAR-AI/ZLAR/releases/tag/v3.3.74">v3.3.74 release</a>:
         bounded local fixture protected-records terminal profile and
         profile-contract evidence, receipt-replay refusal evidence, and
         adapter-profile harness evidence plus a callable local protected-records
@@ -387,7 +387,7 @@
       In technical language: ZLAR is a deterministic policy-enforced execution boundary for AI agents. JSON policy rules with a Cedar proof-of-concept demonstrating a formal verification path. Ed25519-signed and hash-chained audit trails. Synchronous interception for tool calls on governed paths. No AI in the enforcement path.
     </div>
 
-    <p>If ZLAR had been deployed at that publish boundary with fail-closed enforcement on the hook path, the npm publish command would have been intercepted and held for human approval before release. A human would have seen what was in the package. With that context, the 512,000 lines would almost certainly never have reached the public registry. That is the kind of mistake a deterministic gate is designed to make structurally impossible &mdash; not by trusting the human to be perfect, but by ensuring the action cannot proceed without explicit human authorization.</p>
+    <p>If ZLAR had been deployed at that publish boundary with fail-closed enforcement on the hook path, the npm publish command would have been intercepted and held for human approval before release. A human would have seen what was in the package. With that context, the 512,000 lines would almost certainly never have reached the public registry. That is the kind of mistake a deterministic gate is designed to stop on the covered path &mdash; not by trusting the human to be perfect, but by ensuring the governed action cannot proceed through that route without explicit human authorization.</p>
 
     <hr>
 
@@ -401,7 +401,7 @@
 
     <p>I need one thing from you: a fail-closed option for PreToolUse hooks. One configuration flag. If the hook fails to respond within N milliseconds, deny the tool call. That single change closes the last gap between the gate working and the gate being deterministic on covered paths.</p>
 
-    <p>Everything else already exists in the historical open-source and routed-path context this essay described. The deterministic policy engine. The signed rules the agent cannot modify. The hash-chained evidence trail. The human-in-the-loop approval via Telegram. The MCP proxy gate that is structurally fail-closed because no proxy means no connection. The test suites. The code was live as an open-source project; that was not a claim of live machine coverage, production deployment, or broad readiness.</p>
+    <p>Everything else already exists in the historical open-source and routed-path context this essay described. The deterministic policy engine. Signed rules that hardened deployments place outside agent writable authority. The hash-chained evidence trail. Human approval routing when a deployment configures an approval channel; Telegram is historical context, not current Codex orchestration evidence. The MCP proxy gate that is structurally fail-closed because no proxy means no connection. The test suites. The code was live as an open-source project; that was not a claim of live machine coverage, production deployment, or broad readiness.</p>
 
     <p><a href="https://github.com/ZLAR-AI/ZLAR">github.com/ZLAR-AI/ZLAR</a></p>
 
