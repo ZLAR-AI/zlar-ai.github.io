@@ -132,6 +132,16 @@ assert_contains_fixed \
     "ZLAR v3.4.0 on GitHub"
 
 assert_contains_fixed \
+    "proof-pack page keeps current release pointer" \
+    "proof-pack.html" \
+    "ZLAR v3.4.0 on GitHub"
+
+assert_contains_fixed \
+    "proof-pack page keeps current release boundary" \
+    "proof-pack.html" \
+    "The current release is the public verifier-kit distribution boundary release"
+
+assert_contains_fixed \
     "website README keeps current release pointer" \
     "README.md" \
     "ZLAR v3.4.0 - Public verifier-kit distribution boundary release"
@@ -585,6 +595,10 @@ assert_no_public_regex \
 assert_no_public_regex \
     "public copy must not preserve stale v3.3.107 current-release boundary" \
     'ZLAR v3[.]3[.]107 on GitHub|Current public release:[[:space:]]*ZLAR v3[.]3[.]107|releases/tag/v3[.]3[.]107|ZLAR v3[.]3[.]107</h3>|The current release adds North Star private intake pointer reporting'
+
+assert_no_public_regex \
+    "public copy must not preserve stale v3.3.109 current-release boundary" \
+    'ZLAR v3[.]3[.]109 on GitHub|Current public release:[[:space:]]*ZLAR v3[.]3[.]109|releases/tag/v3[.]3[.]109|The current release adds verifier-kit public distribution posture audit|Verifier-kit public distribution posture audit'
 
 assert_no_public_regex \
     "public copy must not claim unconditional Telegram or phone approval routing" \
