@@ -131,6 +131,16 @@ assert_contains_fixed \
     "boundaries.html" \
     "no public external attestation is claimed in this repo"
 
+assert_contains_fixed \
+    "boundaries page keeps verifier-env JSON report boundary" \
+    "boundaries.html" \
+    "zlar-verifier-env-report-v0.json"
+
+assert_contains_fixed \
+    "boundaries page keeps verifier-env public attestation non-claim" \
+    "boundaries.html" \
+    "creates no public external attestation"
+
 assert_no_public_regex \
     "public copy must not say receipts prove/record what happened" \
     '(^|[^[:alnum:]_])receipts?[^.?!]{0,80}(records?|shows?|captures?|explains?|proves?)[^.?!]{0,80}what happened'
