@@ -141,6 +141,16 @@ assert_contains_fixed \
     "boundaries.html" \
     "creates no public external attestation"
 
+assert_contains_fixed \
+    "boundaries page keeps Codex adapter Telegram-silent boundary" \
+    "boundaries.html" \
+    "ZLAR_TELEGRAM_DISABLED=1"
+
+assert_contains_fixed \
+    "boundaries page keeps Telegram health non-claim" \
+    "boundaries.html" \
+    "does not prove Telegram health"
+
 assert_no_public_regex \
     "public copy must not say receipts prove/record what happened" \
     '(^|[^[:alnum:]_])receipts?[^.?!]{0,80}(records?|shows?|captures?|explains?|proves?)[^.?!]{0,80}what happened'
