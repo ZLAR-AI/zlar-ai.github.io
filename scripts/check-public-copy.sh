@@ -129,42 +129,42 @@ assert_contains_fixed \
 assert_contains_fixed \
     "boundaries page keeps current release pointer" \
     "boundaries.html" \
-    "ZLAR v3.4.0 on GitHub"
+    "ZLAR v3.4.1 on GitHub"
 
 assert_contains_fixed \
     "proof-pack page keeps current release pointer" \
     "proof-pack.html" \
-    "ZLAR v3.4.0 on GitHub"
+    "ZLAR v3.4.1 on GitHub"
 
 assert_contains_fixed \
     "proof-pack page keeps current release boundary" \
     "proof-pack.html" \
-    "The current release is the public verifier-kit distribution boundary release"
+    "The current release prepares a pinned v3.4.0 external-verifier target and public-distribution check path"
 
 assert_contains_fixed \
     "website README keeps current release pointer" \
     "README.md" \
-    "ZLAR v3.4.0 - Public verifier-kit distribution boundary release"
+    "ZLAR v3.4.1 - Prepared v3.4 verifier target"
 
 assert_contains_fixed \
     "LLM index keeps current release pointer" \
     "llms.txt" \
-    "Current public release: ZLAR v3.4.0 - Public verifier-kit distribution boundary release."
+    "Current public release: ZLAR v3.4.1 - Prepared v3.4 verifier target."
 
 assert_contains_fixed \
     "proof-pack README keeps current release pointer" \
     "demo/proof-pack/README.md" \
-    "ZLAR v3.4.0 - Public verifier-kit distribution boundary release."
+    "ZLAR v3.4.1 - Prepared v3.4 verifier target."
 
 assert_contains_fixed \
     "proof-pack manifest keeps current release pointer" \
     "demo/proof-pack/proof-pack-manifest.json" \
-    "\"current_public_release\": \"v3.4.0\""
+    "\"current_public_release\": \"v3.4.1\""
 
 assert_contains_fixed \
     "proof-pack manifest keeps verifier target boundary" \
     "demo/proof-pack/proof-pack-manifest.json" \
-    "Public verifier-kit distribution boundary release"
+    "Prepared v3.4 verifier target"
 
 assert_contains_fixed \
     "proof-pack manifest keeps external-attestation non-claim" \
@@ -174,17 +174,17 @@ assert_contains_fixed \
 assert_contains_fixed \
     "architecture archive keeps current release pointer" \
     "architecture.html" \
-    "Current public release: ZLAR v3.4.0 - Public verifier-kit distribution boundary release."
+    "Current public release: ZLAR v3.4.1 - Prepared v3.4 verifier target."
 
 assert_contains_fixed \
     "CAISI archive keeps current release boundary" \
     "caisi-submission.html" \
-    "The current release is the public verifier-kit distribution boundary release"
+    "The current release prepares a pinned v3.4.0 external-verifier target and public-distribution check path"
 
 assert_contains_fixed \
     "fail-open archive keeps current release boundary" \
     "fail-open.html" \
-    "The current release is the public verifier-kit distribution boundary release"
+    "The current release prepares a pinned v3.4.0 external-verifier target and public-distribution check path"
 
 assert_contains_fixed \
     "boundaries page keeps records.write terminal proof boundary" \
@@ -199,7 +199,7 @@ assert_contains_fixed \
 assert_contains_fixed \
     "boundaries page keeps current release boundary" \
     "boundaries.html" \
-    "The current release is the public verifier-kit distribution boundary release"
+    "The current release prepares a pinned v3.4.0 external-verifier target and public-distribution check path"
 
 assert_contains_fixed \
     "boundaries page keeps public-distribution audit command" \
@@ -599,6 +599,10 @@ assert_no_public_regex \
 assert_no_public_regex \
     "public copy must not preserve stale v3.3.109 current-release boundary" \
     'ZLAR v3[.]3[.]109 on GitHub|Current public release:[[:space:]]*ZLAR v3[.]3[.]109|releases/tag/v3[.]3[.]109|The current release adds verifier-kit public distribution posture audit|Verifier-kit public distribution posture audit'
+
+assert_no_public_regex \
+    "public copy must not preserve stale v3.4.0 current-release pointer" \
+    'ZLAR v3[.]4[.]0 on GitHub|Current public release:[[:space:]]*ZLAR v3[.]4[.]0|releases/tag/v3[.]4[.]0|"current_public_release": "v3[.]4[.]0"'
 
 assert_no_public_regex \
     "public copy must not claim unconditional Telegram or phone approval routing" \
