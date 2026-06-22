@@ -129,17 +129,27 @@ assert_contains_fixed \
 assert_contains_fixed \
     "boundaries page keeps current release pointer" \
     "boundaries.html" \
-    "ZLAR v3.4.10 on GitHub"
+    "ZLAR v3.4.11 on GitHub"
 
 assert_contains_fixed \
     "proof-pack page keeps current release pointer" \
     "proof-pack.html" \
-    "ZLAR v3.4.10 on GitHub"
+    "ZLAR v3.4.11 on GitHub"
 
 assert_contains_fixed \
     "proof-pack page keeps current release boundary" \
     "proof-pack.html" \
-    "The current release adds Product Proof Path readiness intake"
+    "The current release adds installed runtime-profile service proof"
+
+assert_contains_fixed \
+    "proof-pack page keeps installed service proof command" \
+    "proof-pack.html" \
+    "zlar protected-records-installed-runtime-profile-service-proof --sample"
+
+assert_contains_fixed \
+    "proof-pack page keeps installed service proof artifact" \
+    "proof-pack.html" \
+    "zlar-installed-runtime-profile-service-proof-v1.json"
 
 assert_contains_fixed \
     "proof-pack page keeps product proof path command" \
@@ -154,37 +164,37 @@ assert_contains_fixed \
 assert_contains_fixed \
     "website README keeps current release pointer" \
     "README.md" \
-    "ZLAR v3.4.10 - Product proof path readiness intake"
+    "ZLAR v3.4.11 - Installed runtime-profile service proof"
 
 assert_contains_fixed \
     "LLM index keeps current release pointer" \
     "llms.txt" \
-    "Current public release: ZLAR v3.4.10 - Product proof path readiness intake."
+    "Current public release: ZLAR v3.4.11 - Installed runtime-profile service proof."
 
 assert_contains_fixed \
     "proof-pack README keeps current release pointer" \
     "demo/proof-pack/README.md" \
-    "ZLAR v3.4.10 - Product proof path readiness intake."
+    "ZLAR v3.4.11 - Installed runtime-profile service proof."
 
 assert_contains_fixed \
     "proof-pack manifest keeps current release pointer" \
     "demo/proof-pack/proof-pack-manifest.json" \
-    "\"current_public_release\": \"v3.4.10\""
+    "\"current_public_release\": \"v3.4.11\""
 
 assert_contains_fixed \
     "proof-pack manifest keeps verifier target boundary" \
     "demo/proof-pack/proof-pack-manifest.json" \
-    "Product Proof Path readiness intake"
+    "Installed runtime-profile service proof"
 
 assert_contains_fixed \
-    "proof-pack manifest keeps readiness verified field" \
+    "proof-pack manifest keeps installed service proof command" \
     "demo/proof-pack/proof-pack-manifest.json" \
-    "product_proof_path_verified=true"
+    "zlar protected-records-installed-runtime-profile-service-proof --sample"
 
 assert_contains_fixed \
-    "proof-pack manifest keeps product proof path artifact" \
+    "proof-pack manifest keeps installed service proof artifact" \
     "demo/proof-pack/proof-pack-manifest.json" \
-    "zlar-product-proof-path-v1.json"
+    "zlar-installed-runtime-profile-service-proof-v1.json"
 
 assert_contains_fixed \
     "proof-pack manifest keeps external-attestation non-claim" \
@@ -194,22 +204,22 @@ assert_contains_fixed \
 assert_contains_fixed \
     "architecture archive keeps current release pointer" \
     "architecture.html" \
-    "Current public release: ZLAR v3.4.10 - Product proof path readiness intake."
+    "Current public release: ZLAR v3.4.11 - Installed runtime-profile service proof."
 
 assert_contains_fixed \
     "CAISI archive keeps current release boundary" \
     "caisi-submission.html" \
-    "The current release adds Product Proof Path readiness intake"
+    "The current release adds installed runtime-profile service proof"
 
 assert_contains_fixed \
     "CAISI metadata keeps current claim boundary" \
     "caisi-submission.html" \
-    "Current ZLAR public claims are bounded by v3.4.10"
+    "Current ZLAR public claims are bounded by v3.4.11"
 
 assert_contains_fixed \
     "fail-open archive keeps current release boundary" \
     "fail-open.html" \
-    "The current release adds Product Proof Path readiness intake"
+    "The current release adds installed runtime-profile service proof"
 
 assert_contains_fixed \
     "boundaries page keeps records.write terminal proof boundary" \
@@ -224,7 +234,17 @@ assert_contains_fixed \
 assert_contains_fixed \
     "boundaries page keeps current release boundary" \
     "boundaries.html" \
-    "The current release adds Product Proof Path readiness intake"
+    "The current release adds installed runtime-profile service proof"
+
+assert_contains_fixed \
+    "boundaries page keeps installed service proof command" \
+    "boundaries.html" \
+    "zlar protected-records-installed-runtime-profile-service-proof --sample"
+
+assert_contains_fixed \
+    "boundaries page keeps installed service proof artifact" \
+    "boundaries.html" \
+    "zlar-installed-runtime-profile-service-proof-v1.json"
 
 assert_contains_fixed \
     "boundaries page keeps readiness verified field" \
@@ -249,7 +269,7 @@ assert_contains_fixed \
 assert_contains_fixed \
     "boundaries page keeps current release asset-publication boundary" \
     "boundaries.html" \
-    "The current v3.4.10 release publishes all required verifier-kit assets"
+    "The v3.4.10 release also published all required verifier-kit assets"
 
 assert_contains_fixed \
     "boundaries page keeps public-distribution audit command" \
@@ -661,6 +681,10 @@ assert_no_public_regex \
 assert_no_public_regex \
     "public copy must not preserve stale v3.4.8 current-release boundary" \
     'ZLAR v3[.]4[.]8 on GitHub|Current public release:[[:space:]]*ZLAR v3[.]4[.]8|Current ZLAR public claims are bounded by v3[.]4[.]8|releases/tag/v3[.]4[.]8|"current_public_release": "v3[.]4[.]8"|The current release adds recognition-proof artifact verification|Recognition proof artifact verification'
+
+assert_no_public_regex \
+    "public copy must not preserve stale v3.4.10 current-release boundary" \
+    'ZLAR v3[.]4[.]10 on GitHub|Current public release:[[:space:]]*ZLAR v3[.]4[.]10|Current ZLAR public claims are bounded by v3[.]4[.]10|releases/tag/v3[.]4[.]10|"current_public_release": "v3[.]4[.]10"|The current release adds Product Proof Path readiness intake|The current v3[.]4[.]10 release publishes'
 
 assert_no_public_regex \
     "public copy must not claim unconditional Telegram or phone approval routing" \

@@ -2,9 +2,9 @@
   "generated_at": "2026-05-14T00:00:00.000Z",
   "pack_type": "zlar-proof-pack-v0",
   "pack_version": 0,
-  "current_public_release": "v3.4.10",
-  "current_public_release_url": "https://github.com/ZLAR-AI/ZLAR/releases/tag/v3.4.10",
-  "current_public_release_boundary": "Product Proof Path readiness intake; `zlar north-star-readiness --sample --json` runs `zlar product-proof-path --json`, evidence-dir readiness consumes `zlar-product-proof-path-v1.json` when present, and `product_proof_path_verified=true` is recorded only for a PASS report with true acceptance gates, false forbidden-claim flags, verified proof-pack artifact, no live probing, and no private operator state. This remains local fixture Product Proof Path evidence only: no live approval, no current-machine governance, no production downstream recognition, no production authority, no enterprise readiness, no public external attestation, no all-MCP governance, no sovereign recognition, and no coverage of unrouted surfaces claim.",
+  "current_public_release": "v3.4.11",
+  "current_public_release_url": "https://github.com/ZLAR-AI/ZLAR/releases/tag/v3.4.11",
+  "current_public_release_boundary": "Installed runtime-profile service proof; `zlar protected-records-installed-runtime-profile-service-proof --sample` consumes the verified read-only installed-runtime-profile preflight sample, starts a local disposable JSONL runtime-service child process from the selected-profile boundary, boards one matching `records.write`, proves all 18 selected-profile refusal cases refuse before service-state mutation, and is preserved by proof-smoke/north-star-readiness as `zlar-installed-runtime-profile-service-proof-v1.json` for `v3.4.11+` evidence. This remains local disposable installed-profile child-service evidence only: no persistent install, no activation, no live runtime service, no current-machine governance, no production downstream recognition, no production authority, no enterprise readiness, no public external attestation, no all-MCP governance, no sovereign recognition, and no coverage of unrouted surfaces claim.",
   "claim_ceiling": "ZLAR can govern Codex CLI-invoked MCP tool calls when those MCP servers are routed through ZLAR.",
   "included_files": {
     "manifest": "proof-pack-manifest.json",
