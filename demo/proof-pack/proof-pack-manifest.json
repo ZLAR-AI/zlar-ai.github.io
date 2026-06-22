@@ -2,9 +2,9 @@
   "generated_at": "2026-05-14T00:00:00.000Z",
   "pack_type": "zlar-proof-pack-v0",
   "pack_version": 0,
-  "current_public_release": "v3.4.6",
-  "current_public_release_url": "https://github.com/ZLAR-AI/ZLAR/releases/tag/v3.4.6",
-  "current_public_release_boundary": "Installed runtime-profile recognition contract; read-only installed-profile recognition-contract sample verification for an explicit installed runtime-profile root, preserving the selected profile recognition contract, launcher-owned recognition boundary, mutation-authoritative route, request-stream authority-material refusal, agent-supplied recognition-rule refusal, and required refusal-case count, with no latest selection, no persistent installation, no runtime activation, no service start, no hook/user/machine configuration, no downstream refusal proof, no current-machine governance, no production authority, no enterprise readiness, no public external attestation, no sovereign recognition, and no coverage of unrouted surfaces claim.",
+  "current_public_release": "v3.4.7",
+  "current_public_release_url": "https://github.com/ZLAR-AI/ZLAR/releases/tag/v3.4.7",
+  "current_public_release_boundary": "Installed runtime-profile recognition proof; local hermetic selected-profile recognition proof from a verified read-only installed-runtime-profile preflight sample, preserving the selected profile recognition contract and proving one matching records.write receipt boards while all 18 selected-profile refusal cases refuse before fake effect, with no latest selection, no persistent installation, no runtime activation, no live runtime service start, no live records-system inspection, no current-machine governance, no production downstream recognition, no production authority, no enterprise readiness, no public external attestation, no sovereign recognition, and no coverage of unrouted surfaces claim.",
   "claim_ceiling": "ZLAR can govern Codex CLI-invoked MCP tool calls when those MCP servers are routed through ZLAR.",
   "included_files": {
     "manifest": "proof-pack-manifest.json",
