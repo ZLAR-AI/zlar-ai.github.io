@@ -170,17 +170,22 @@ assert_contains_fixed \
 assert_contains_fixed \
     "boundaries page keeps current release pointer" \
     "boundaries.html" \
-    "ZLAR v3.4.20 on GitHub"
+    "ZLAR v3.4.21 on GitHub"
 
 assert_contains_fixed \
     "proof-pack page keeps current release pointer" \
     "proof-pack.html" \
-    "ZLAR v3.4.20 on GitHub"
+    "ZLAR v3.4.21 on GitHub"
 
 assert_contains_fixed \
     "proof-pack page keeps current release boundary" \
     "proof-pack.html" \
-    "The current release hardens verifier-kit dry-run diagnostics and preserves the v3.4.19 recognition-contract digest boundary"
+    "The current release preserves release-forward verifier diagnostics evidence"
+
+assert_contains_fixed \
+    "proof-pack page keeps external-runner diagnostics artifact" \
+    "proof-pack.html" \
+    "zlar-verifier-kit-external-runner-diagnostics-v1.json"
 
 assert_contains_fixed \
     "proof-pack page keeps recognition-contract digest field" \
@@ -210,12 +215,12 @@ assert_contains_fixed \
 assert_contains_fixed \
     "website README keeps current release pointer" \
     "README.md" \
-    "ZLAR v3.4.20 - Verifier-kit dry-run diagnostics hardening"
+    "ZLAR v3.4.21 - Release-forward verifier diagnostics preservation"
 
 assert_contains_fixed \
     "LLM index keeps current release pointer" \
     "llms.txt" \
-    "Current public release: ZLAR v3.4.20 - Verifier-kit dry-run diagnostics hardening."
+    "Current public release: ZLAR v3.4.21 - Release-forward verifier diagnostics preservation."
 
 assert_contains_fixed \
     "LLM index keeps release metadata pointer" \
@@ -237,25 +242,25 @@ assert_json_value \
     "release metadata keeps current release" \
     "release.json" \
     "current_public_release.version" \
-    "v3.4.20"
+    "v3.4.21"
 
 assert_json_value \
     "release metadata keeps release title" \
     "release.json" \
     "current_public_release.title" \
-    "Verifier-kit dry-run diagnostics hardening"
+    "Release-forward verifier diagnostics preservation"
 
 assert_json_value \
     "release metadata keeps release commit" \
     "release.json" \
     "current_public_release.commit" \
-    "9f025b5c013f75740b4d84681fdde7099e9037c6"
+    "24f50f8a470357a24c5b831e73534ce6f28f1bf7"
 
 assert_json_value \
     "release metadata keeps tag object" \
     "release.json" \
     "current_public_release.tag_object" \
-    "a6dacef18919c0d01181d93f1394fde180c2f2c1"
+    "615cd5cf1ead2d0effc473f68b5e8703499d5db7"
 
 assert_json_value \
     "release metadata keeps live URL" \
@@ -286,7 +291,12 @@ assert_contains_fixed \
 assert_contains_fixed \
     "release metadata keeps recognition-contract digest threshold" \
     "release.json" \
-    "v3.4.20 release checks pass with verifier-kit dry-run diagnostics hardening; v3.4.19+ readiness, proof-smoke, and release-forward dry-run checks preserve installed-runtime-profile recognition-contract SHA-256 binding"
+    "v3.4.21 release checks pass with release-forward verifier diagnostics preservation"
+
+assert_contains_fixed \
+    "release metadata keeps external-runner diagnostics threshold" \
+    "release.json" \
+    "zlar-verifier-kit-external-runner-diagnostics-v1.json"
 
 assert_contains_fixed \
     "release metadata keeps current-machine non-claim" \
@@ -296,17 +306,22 @@ assert_contains_fixed \
 assert_contains_fixed \
     "proof-pack README keeps current release pointer" \
     "demo/proof-pack/README.md" \
-    "ZLAR v3.4.20 - Verifier-kit dry-run diagnostics hardening."
+    "ZLAR v3.4.21 - Release-forward verifier diagnostics preservation."
 
 assert_contains_fixed \
     "proof-pack manifest keeps current release pointer" \
     "demo/proof-pack/proof-pack-manifest.json" \
-    "\"current_public_release\": \"v3.4.20\""
+    "\"current_public_release\": \"v3.4.21\""
 
 assert_contains_fixed \
     "proof-pack manifest keeps verifier target boundary" \
     "demo/proof-pack/proof-pack-manifest.json" \
-    "Verifier-kit dry-run diagnostics hardening"
+    "Release-forward verifier diagnostics preservation"
+
+assert_contains_fixed \
+    "proof-pack manifest keeps external-runner diagnostics artifact" \
+    "demo/proof-pack/proof-pack-manifest.json" \
+    "zlar-verifier-kit-external-runner-diagnostics-v1.json"
 
 assert_contains_fixed \
     "proof-pack manifest keeps recognition-contract digest field" \
@@ -331,22 +346,22 @@ assert_contains_fixed \
 assert_contains_fixed \
     "architecture archive keeps current release pointer" \
     "architecture.html" \
-    "Current public release: ZLAR v3.4.20 - Verifier-kit dry-run diagnostics hardening."
+    "Current public release: ZLAR v3.4.21 - Release-forward verifier diagnostics preservation."
 
 assert_contains_fixed \
     "CAISI archive keeps current release boundary" \
     "caisi-submission.html" \
-    "The current release hardens verifier-kit dry-run diagnostics and preserves the v3.4.19 recognition-contract digest boundary"
+    "The current release preserves release-forward verifier diagnostics evidence"
 
 assert_contains_fixed \
     "CAISI metadata keeps current claim boundary" \
     "caisi-submission.html" \
-    "Current ZLAR public claims are bounded by v3.4.20"
+    "Current ZLAR public claims are bounded by v3.4.21"
 
 assert_contains_fixed \
     "fail-open archive keeps current release boundary" \
     "fail-open.html" \
-    "The current release hardens verifier-kit dry-run diagnostics and preserves the v3.4.19 recognition-contract digest boundary"
+    "The current release preserves release-forward verifier diagnostics evidence"
 
 assert_contains_fixed \
     "boundaries page keeps records.write terminal proof boundary" \
@@ -361,7 +376,7 @@ assert_contains_fixed \
 assert_contains_fixed \
     "boundaries page keeps current release boundary" \
     "boundaries.html" \
-    "The current release hardens verifier-kit dry-run diagnostics and preserves the v3.4.19 recognition-contract digest boundary"
+    "The current release preserves release-forward verifier diagnostics evidence"
 
 assert_contains_fixed \
     "boundaries page keeps recognition-contract digest field" \
