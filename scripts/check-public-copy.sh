@@ -129,42 +129,42 @@ assert_contains_fixed \
 assert_contains_fixed \
     "boundaries page keeps current release pointer" \
     "boundaries.html" \
-    "ZLAR v3.4.7 on GitHub"
+    "ZLAR v3.4.8 on GitHub"
 
 assert_contains_fixed \
     "proof-pack page keeps current release pointer" \
     "proof-pack.html" \
-    "ZLAR v3.4.7 on GitHub"
+    "ZLAR v3.4.8 on GitHub"
 
 assert_contains_fixed \
     "proof-pack page keeps current release boundary" \
     "proof-pack.html" \
-    "The current release adds installed-runtime-profile recognition proof evidence"
+    "The current release adds recognition-proof artifact verification"
 
 assert_contains_fixed \
     "website README keeps current release pointer" \
     "README.md" \
-    "ZLAR v3.4.7 - Installed runtime-profile recognition proof"
+    "ZLAR v3.4.8 - Recognition proof artifact verification"
 
 assert_contains_fixed \
     "LLM index keeps current release pointer" \
     "llms.txt" \
-    "Current public release: ZLAR v3.4.7 - Installed runtime-profile recognition proof."
+    "Current public release: ZLAR v3.4.8 - Recognition proof artifact verification."
 
 assert_contains_fixed \
     "proof-pack README keeps current release pointer" \
     "demo/proof-pack/README.md" \
-    "ZLAR v3.4.7 - Installed runtime-profile recognition proof."
+    "ZLAR v3.4.8 - Recognition proof artifact verification."
 
 assert_contains_fixed \
     "proof-pack manifest keeps current release pointer" \
     "demo/proof-pack/proof-pack-manifest.json" \
-    "\"current_public_release\": \"v3.4.7\""
+    "\"current_public_release\": \"v3.4.8\""
 
 assert_contains_fixed \
     "proof-pack manifest keeps verifier target boundary" \
     "demo/proof-pack/proof-pack-manifest.json" \
-    "Installed runtime-profile recognition proof"
+    "Recognition proof artifact verification"
 
 assert_contains_fixed \
     "proof-pack manifest keeps external-attestation non-claim" \
@@ -174,22 +174,22 @@ assert_contains_fixed \
 assert_contains_fixed \
     "architecture archive keeps current release pointer" \
     "architecture.html" \
-    "Current public release: ZLAR v3.4.7 - Installed runtime-profile recognition proof."
+    "Current public release: ZLAR v3.4.8 - Recognition proof artifact verification."
 
 assert_contains_fixed \
     "CAISI archive keeps current release boundary" \
     "caisi-submission.html" \
-    "The current release adds installed-runtime-profile recognition proof evidence"
+    "The current release adds recognition-proof artifact verification"
 
 assert_contains_fixed \
     "CAISI metadata keeps current claim boundary" \
     "caisi-submission.html" \
-    "Current ZLAR public claims are bounded by v3.4.7"
+    "Current ZLAR public claims are bounded by v3.4.8"
 
 assert_contains_fixed \
     "fail-open archive keeps current release boundary" \
     "fail-open.html" \
-    "The current release adds installed-runtime-profile recognition proof evidence"
+    "The current release adds recognition-proof artifact verification"
 
 assert_contains_fixed \
     "boundaries page keeps records.write terminal proof boundary" \
@@ -204,7 +204,7 @@ assert_contains_fixed \
 assert_contains_fixed \
     "boundaries page keeps current release boundary" \
     "boundaries.html" \
-    "The current release adds installed-runtime-profile recognition proof evidence"
+    "The current release adds recognition-proof artifact verification"
 
 assert_contains_fixed \
     "boundaries page keeps byte-binding audit result" \
@@ -214,7 +214,7 @@ assert_contains_fixed \
 assert_contains_fixed \
     "boundaries page keeps current release asset-publication boundary" \
     "boundaries.html" \
-    "The current v3.4.7 release publishes all required verifier-kit assets"
+    "The current v3.4.8 release publishes all required verifier-kit assets"
 
 assert_contains_fixed \
     "boundaries page keeps public-distribution audit command" \

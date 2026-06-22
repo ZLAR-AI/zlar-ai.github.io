@@ -4,7 +4,7 @@ This public bundle is a fake/scratch proof-pack example for zlar.ai. It is desig
 
 Current public release:
 
-ZLAR v3.4.7 - Installed runtime-profile recognition proof.
+ZLAR v3.4.8 - Recognition proof artifact verification.
 
 Claim ceiling:
 
