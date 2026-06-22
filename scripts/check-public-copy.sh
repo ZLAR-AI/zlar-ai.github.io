@@ -129,37 +129,32 @@ assert_contains_fixed \
 assert_contains_fixed \
     "boundaries page keeps current release pointer" \
     "boundaries.html" \
-    "ZLAR v3.4.14 on GitHub"
+    "ZLAR v3.4.15 on GitHub"
 
 assert_contains_fixed \
     "proof-pack page keeps current release pointer" \
     "proof-pack.html" \
-    "ZLAR v3.4.14 on GitHub"
+    "ZLAR v3.4.15 on GitHub"
 
 assert_contains_fixed \
     "proof-pack page keeps current release boundary" \
     "proof-pack.html" \
-    "The current release hardens service-proof artifact verification readiness binding"
+    "The current release adds installed runtime-profile terminal-chain evidence"
 
 assert_contains_fixed \
-    "proof-pack page keeps service proof artifact verifier command" \
+    "proof-pack page keeps terminal-chain command" \
     "proof-pack.html" \
-    "zlar protected-records-installed-runtime-profile-service-proof verify --sample --json"
+    "zlar protected-records-installed-runtime-profile-terminal-chain --sample"
 
 assert_contains_fixed \
-    "proof-pack page keeps service proof artifact verification file" \
+    "proof-pack page keeps terminal-chain required count" \
     "proof-pack.html" \
-    "zlar-installed-runtime-profile-service-proof-artifact-verification-v1.json"
+    "installed_runtime_profile_terminal_chain_required=true"
 
 assert_contains_fixed \
-    "proof-pack page keeps service proof artifact verification required count" \
+    "proof-pack page keeps terminal-chain preserved count" \
     "proof-pack.html" \
-    "installed_runtime_profile_service_artifact_verification_required=true"
-
-assert_contains_fixed \
-    "proof-pack page keeps service proof artifact verification preserved count" \
-    "proof-pack.html" \
-    "installed_runtime_profile_service_artifact_verification_preserved=true"
+    "installed_runtime_profile_terminal_chain_preserved=true"
 
 assert_contains_fixed \
     "proof-pack page keeps product proof path command" \
@@ -174,47 +169,42 @@ assert_contains_fixed \
 assert_contains_fixed \
     "website README keeps current release pointer" \
     "README.md" \
-    "ZLAR v3.4.14 - Service-proof artifact verification readiness binding"
+    "ZLAR v3.4.15 - Installed runtime-profile terminal chain"
 
 assert_contains_fixed \
     "LLM index keeps current release pointer" \
     "llms.txt" \
-    "Current public release: ZLAR v3.4.14 - Service-proof artifact verification readiness binding."
+    "Current public release: ZLAR v3.4.15 - Installed runtime-profile terminal chain."
 
 assert_contains_fixed \
     "proof-pack README keeps current release pointer" \
     "demo/proof-pack/README.md" \
-    "ZLAR v3.4.14 - Service-proof artifact verification readiness binding."
+    "ZLAR v3.4.15 - Installed runtime-profile terminal chain."
 
 assert_contains_fixed \
     "proof-pack manifest keeps current release pointer" \
     "demo/proof-pack/proof-pack-manifest.json" \
-    "\"current_public_release\": \"v3.4.14\""
+    "\"current_public_release\": \"v3.4.15\""
 
 assert_contains_fixed \
     "proof-pack manifest keeps verifier target boundary" \
     "demo/proof-pack/proof-pack-manifest.json" \
-    "Service-proof artifact verification readiness binding"
+    "Installed runtime-profile terminal chain"
 
 assert_contains_fixed \
-    "proof-pack manifest keeps service proof artifact verifier command" \
+    "proof-pack manifest keeps terminal-chain command" \
     "demo/proof-pack/proof-pack-manifest.json" \
-    "zlar protected-records-installed-runtime-profile-service-proof verify --sample --json"
+    "zlar protected-records-installed-runtime-profile-terminal-chain --sample"
 
 assert_contains_fixed \
-    "proof-pack manifest keeps service proof artifact verification file" \
+    "proof-pack manifest keeps terminal-chain required count" \
     "demo/proof-pack/proof-pack-manifest.json" \
-    "zlar-installed-runtime-profile-service-proof-artifact-verification-v1.json"
+    "installed_runtime_profile_terminal_chain_required=true"
 
 assert_contains_fixed \
-    "proof-pack manifest keeps service proof artifact verification required count" \
+    "proof-pack manifest keeps terminal-chain preserved count" \
     "demo/proof-pack/proof-pack-manifest.json" \
-    "installed_runtime_profile_service_artifact_verification_required=true"
-
-assert_contains_fixed \
-    "proof-pack manifest keeps service proof artifact verification preserved count" \
-    "demo/proof-pack/proof-pack-manifest.json" \
-    "installed_runtime_profile_service_artifact_verification_preserved=true"
+    "installed_runtime_profile_terminal_chain_preserved=true"
 
 assert_contains_fixed \
     "proof-pack manifest keeps external-attestation non-claim" \
@@ -224,22 +214,22 @@ assert_contains_fixed \
 assert_contains_fixed \
     "architecture archive keeps current release pointer" \
     "architecture.html" \
-    "Current public release: ZLAR v3.4.14 - Service-proof artifact verification readiness binding."
+    "Current public release: ZLAR v3.4.15 - Installed runtime-profile terminal chain."
 
 assert_contains_fixed \
     "CAISI archive keeps current release boundary" \
     "caisi-submission.html" \
-    "The current release hardens service-proof artifact verification readiness binding"
+    "The current release adds installed runtime-profile terminal-chain evidence"
 
 assert_contains_fixed \
     "CAISI metadata keeps current claim boundary" \
     "caisi-submission.html" \
-    "Current ZLAR public claims are bounded by v3.4.14"
+    "Current ZLAR public claims are bounded by v3.4.15"
 
 assert_contains_fixed \
     "fail-open archive keeps current release boundary" \
     "fail-open.html" \
-    "The current release hardens service-proof artifact verification readiness binding"
+    "The current release adds installed runtime-profile terminal-chain evidence"
 
 assert_contains_fixed \
     "boundaries page keeps records.write terminal proof boundary" \
@@ -254,27 +244,22 @@ assert_contains_fixed \
 assert_contains_fixed \
     "boundaries page keeps current release boundary" \
     "boundaries.html" \
-    "The current release hardens service-proof artifact verification readiness binding"
+    "The current release adds installed runtime-profile terminal-chain evidence"
 
 assert_contains_fixed \
-    "boundaries page keeps service proof artifact verifier command" \
+    "boundaries page keeps terminal-chain command" \
     "boundaries.html" \
-    "zlar protected-records-installed-runtime-profile-service-proof verify --sample --json"
+    "zlar protected-records-installed-runtime-profile-terminal-chain --sample"
 
 assert_contains_fixed \
-    "boundaries page keeps service proof artifact verification file" \
+    "boundaries page keeps terminal-chain required count" \
     "boundaries.html" \
-    "zlar-installed-runtime-profile-service-proof-artifact-verification-v1.json"
+    "installed_runtime_profile_terminal_chain_required=true"
 
 assert_contains_fixed \
-    "boundaries page keeps service proof artifact verification required count" \
+    "boundaries page keeps terminal-chain preserved count" \
     "boundaries.html" \
-    "installed_runtime_profile_service_artifact_verification_required=true"
-
-assert_contains_fixed \
-    "boundaries page keeps service proof artifact verification preserved count" \
-    "boundaries.html" \
-    "installed_runtime_profile_service_artifact_verification_preserved=true"
+    "installed_runtime_profile_terminal_chain_preserved=true"
 
 assert_contains_fixed \
     "boundaries page keeps readiness verified field" \
