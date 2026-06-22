@@ -41,7 +41,7 @@ Do not edit these files unless the sample bundle is intentionally regenerated an
 
 ## Claim Boundary
 
-Current public release: [ZLAR v3.4.18 - Service-proof artifact refusal taxonomy binding](https://github.com/ZLAR-AI/ZLAR/releases/tag/v3.4.18).
+Current public release: [ZLAR v3.4.19 - Recognition-contract digest binding](https://github.com/ZLAR-AI/ZLAR/releases/tag/v3.4.19).
 
 ZLAR governs routed/intercepted action surfaces only. Safe Codex wording:
 

@@ -1,16 +1,16 @@
 {
   "schema": "zlar-public-release-metadata-v1",
-  "generated_at": "2026-06-22T19:32:48Z",
+  "generated_at": "2026-06-22T20:25:00Z",
   "site": "https://zlar.ai/",
   "current_public_release": {
-    "version": "v3.4.18",
-    "title": "Service-proof artifact refusal taxonomy binding",
-    "url": "https://github.com/ZLAR-AI/ZLAR/releases/tag/v3.4.18",
+    "version": "v3.4.19",
+    "title": "Recognition-contract digest binding",
+    "url": "https://github.com/ZLAR-AI/ZLAR/releases/tag/v3.4.19",
     "repository": "https://github.com/ZLAR-AI/ZLAR",
-    "commit": "8e320336004e40363137faaed4368bb698eda009",
-    "tag": "v3.4.18",
-    "tag_object": "49852ed174783a6a6c6e6b31287540a8bdfe978f",
-    "published_at": "2026-06-22T19:30:04Z"
+    "commit": "1ee5950b10086a0c11cb539b4b224fbe48be350a",
+    "tag": "v3.4.19",
+    "tag_object": "6fc2abfddbf3c5f51cd11309230843e75667fcb0",
+    "published_at": "2026-06-22T20:22:47Z"
   },
   "website": {
     "repository": "https://github.com/ZLAR-AI/zlar-ai.github.io",
@@ -25,11 +25,11 @@
   },
   "authority_boundary": "A log records what happened. A ZLAR receipt records what counted as authorized effect when action tried to become consequence.",
   "claim_boundary": {
-    "summary": "Service-proof artifact refusal taxonomy binding over the installed runtime-profile service-proof artifact verification path.",
+    "summary": "Recognition-contract digest binding over the installed runtime-profile proof chain.",
     "service_proof_command": "zlar protected-records-installed-runtime-profile-service-proof --sample",
     "service_proof_artifact_verification_command": "zlar protected-records-installed-runtime-profile-service-proof verify --sample --json",
     "terminal_chain_command": "zlar protected-records-installed-runtime-profile-terminal-chain --sample",
-    "evidence_threshold": "v3.4.18+ readiness, proof-smoke, private verifier intake, and release-forward dry-run checks preserve service-proof artifact-verification refusal taxonomy SHA-256 binding.",
+    "evidence_threshold": "v3.4.19+ readiness, proof-smoke, and release-forward dry-run checks preserve installed-runtime-profile recognition-contract SHA-256 binding.",
     "safe_codex_wording": "ZLAR can govern Codex CLI-invoked MCP tool calls when those MCP servers are routed through ZLAR.",
     "non_claims": [
       "No persistent install.",

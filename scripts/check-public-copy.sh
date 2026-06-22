@@ -170,32 +170,32 @@ assert_contains_fixed \
 assert_contains_fixed \
     "boundaries page keeps current release pointer" \
     "boundaries.html" \
-    "ZLAR v3.4.18 on GitHub"
+    "ZLAR v3.4.19 on GitHub"
 
 assert_contains_fixed \
     "proof-pack page keeps current release pointer" \
     "proof-pack.html" \
-    "ZLAR v3.4.18 on GitHub"
+    "ZLAR v3.4.19 on GitHub"
 
 assert_contains_fixed \
     "proof-pack page keeps current release boundary" \
     "proof-pack.html" \
-    "The current release binds service-proof artifact verification to the exact selected-profile refusal taxonomy"
+    "The current release binds the installed-runtime-profile recognition contract SHA-256"
 
 assert_contains_fixed \
-    "proof-pack page keeps service-proof taxonomy field" \
+    "proof-pack page keeps recognition-contract digest field" \
     "proof-pack.html" \
-    "installed_runtime_profile_service_artifact_verification_refusal_taxonomy_sha256"
+    "installed_runtime_profile_recognition_contract_sha256"
 
 assert_contains_fixed \
-    "proof-pack page keeps service-proof verifier binding" \
+    "proof-pack page keeps recognition-contract digest binding" \
     "proof-pack.html" \
-    "cannot be replaced by a matching refusal count"
+    "cannot be replaced behind matching profile and taxonomy counts"
 
 assert_contains_fixed \
-    "proof-pack page keeps service-proof evidence boundary" \
+    "proof-pack page keeps recognition-contract evidence boundary" \
     "proof-pack.html" \
-    "local disposable installed-runtime-profile service-proof artifact-verification evidence only"
+    "local disposable installed-runtime-profile recognition-contract digest evidence only"
 
 assert_contains_fixed \
     "proof-pack page keeps product proof path command" \
@@ -210,12 +210,12 @@ assert_contains_fixed \
 assert_contains_fixed \
     "website README keeps current release pointer" \
     "README.md" \
-    "ZLAR v3.4.18 - Service-proof artifact refusal taxonomy binding"
+    "ZLAR v3.4.19 - Recognition-contract digest binding"
 
 assert_contains_fixed \
     "LLM index keeps current release pointer" \
     "llms.txt" \
-    "Current public release: ZLAR v3.4.18 - Service-proof artifact refusal taxonomy binding."
+    "Current public release: ZLAR v3.4.19 - Recognition-contract digest binding."
 
 assert_contains_fixed \
     "LLM index keeps release metadata pointer" \
@@ -237,25 +237,25 @@ assert_json_value \
     "release metadata keeps current release" \
     "release.json" \
     "current_public_release.version" \
-    "v3.4.18"
+    "v3.4.19"
 
 assert_json_value \
     "release metadata keeps release title" \
     "release.json" \
     "current_public_release.title" \
-    "Service-proof artifact refusal taxonomy binding"
+    "Recognition-contract digest binding"
 
 assert_json_value \
     "release metadata keeps release commit" \
     "release.json" \
     "current_public_release.commit" \
-    "8e320336004e40363137faaed4368bb698eda009"
+    "1ee5950b10086a0c11cb539b4b224fbe48be350a"
 
 assert_json_value \
     "release metadata keeps tag object" \
     "release.json" \
     "current_public_release.tag_object" \
-    "49852ed174783a6a6c6e6b31287540a8bdfe978f"
+    "6fc2abfddbf3c5f51cd11309230843e75667fcb0"
 
 assert_json_value \
     "release metadata keeps live URL" \
@@ -284,9 +284,9 @@ assert_contains_fixed \
     "zlar protected-records-installed-runtime-profile-terminal-chain --sample"
 
 assert_contains_fixed \
-    "release metadata keeps service-proof artifact taxonomy threshold" \
+    "release metadata keeps recognition-contract digest threshold" \
     "release.json" \
-    "v3.4.18+ readiness, proof-smoke, private verifier intake, and release-forward dry-run checks preserve service-proof artifact-verification refusal taxonomy SHA-256 binding"
+    "v3.4.19+ readiness, proof-smoke, and release-forward dry-run checks preserve installed-runtime-profile recognition-contract SHA-256 binding"
 
 assert_contains_fixed \
     "release metadata keeps current-machine non-claim" \
@@ -296,27 +296,27 @@ assert_contains_fixed \
 assert_contains_fixed \
     "proof-pack README keeps current release pointer" \
     "demo/proof-pack/README.md" \
-    "ZLAR v3.4.18 - Service-proof artifact refusal taxonomy binding."
+    "ZLAR v3.4.19 - Recognition-contract digest binding."
 
 assert_contains_fixed \
     "proof-pack manifest keeps current release pointer" \
     "demo/proof-pack/proof-pack-manifest.json" \
-    "\"current_public_release\": \"v3.4.18\""
+    "\"current_public_release\": \"v3.4.19\""
 
 assert_contains_fixed \
     "proof-pack manifest keeps verifier target boundary" \
     "demo/proof-pack/proof-pack-manifest.json" \
-    "Service-proof artifact refusal taxonomy binding"
+    "Recognition-contract digest binding"
 
 assert_contains_fixed \
-    "proof-pack manifest keeps service-proof taxonomy field" \
+    "proof-pack manifest keeps recognition-contract digest field" \
     "demo/proof-pack/proof-pack-manifest.json" \
-    "installed_runtime_profile_service_artifact_verification_refusal_taxonomy_sha256"
+    "installed_runtime_profile_recognition_contract_sha256"
 
 assert_contains_fixed \
-    "proof-pack manifest keeps service-proof artifact verification boundary" \
+    "proof-pack manifest keeps recognition-contract digest boundary" \
     "demo/proof-pack/proof-pack-manifest.json" \
-    "service-proof artifact-verification evidence only"
+    "recognition-contract digest evidence only"
 
 assert_contains_fixed \
     "proof-pack manifest keeps no production downstream non-claim" \
@@ -331,22 +331,22 @@ assert_contains_fixed \
 assert_contains_fixed \
     "architecture archive keeps current release pointer" \
     "architecture.html" \
-    "Current public release: ZLAR v3.4.18 - Service-proof artifact refusal taxonomy binding."
+    "Current public release: ZLAR v3.4.19 - Recognition-contract digest binding."
 
 assert_contains_fixed \
     "CAISI archive keeps current release boundary" \
     "caisi-submission.html" \
-    "The current release binds service-proof artifact verification to the exact selected-profile refusal taxonomy"
+    "The current release binds the installed-runtime-profile recognition contract SHA-256"
 
 assert_contains_fixed \
     "CAISI metadata keeps current claim boundary" \
     "caisi-submission.html" \
-    "Current ZLAR public claims are bounded by v3.4.18"
+    "Current ZLAR public claims are bounded by v3.4.19"
 
 assert_contains_fixed \
     "fail-open archive keeps current release boundary" \
     "fail-open.html" \
-    "The current release binds service-proof artifact verification to the exact selected-profile refusal taxonomy"
+    "The current release binds the installed-runtime-profile recognition contract SHA-256"
 
 assert_contains_fixed \
     "boundaries page keeps records.write terminal proof boundary" \
@@ -361,22 +361,22 @@ assert_contains_fixed \
 assert_contains_fixed \
     "boundaries page keeps current release boundary" \
     "boundaries.html" \
-    "The current release binds service-proof artifact verification to the exact selected-profile refusal taxonomy"
+    "The current release binds the installed-runtime-profile recognition contract SHA-256"
 
 assert_contains_fixed \
-    "boundaries page keeps service-proof taxonomy field" \
+    "boundaries page keeps recognition-contract digest field" \
     "boundaries.html" \
-    "installed_runtime_profile_service_artifact_verification_refusal_taxonomy_sha256"
+    "installed_runtime_profile_recognition_contract_sha256"
 
 assert_contains_fixed \
-    "boundaries page keeps service-proof verifier binding" \
+    "boundaries page keeps recognition-contract digest binding" \
     "boundaries.html" \
-    "cannot be replaced by a matching refusal count"
+    "cannot be replaced behind matching profile and taxonomy counts"
 
 assert_contains_fixed \
-    "boundaries page keeps service-proof evidence boundary" \
+    "boundaries page keeps recognition-contract evidence boundary" \
     "boundaries.html" \
-    "local disposable installed-runtime-profile service-proof artifact-verification evidence only"
+    "local disposable installed-runtime-profile recognition-contract digest evidence only"
 
 assert_contains_fixed \
     "boundaries page keeps readiness verified field" \
@@ -821,6 +821,10 @@ assert_no_public_regex \
 assert_no_public_regex \
     "public copy must not preserve stale v3.4.17 current-release boundary" \
     'ZLAR v3[.]4[.]17 on GitHub|Current public release:[[:space:]]*ZLAR v3[.]4[.]17|Current ZLAR public claims are bounded by v3[.]4[.]17|releases/tag/v3[.]4[.]17|"current_public_release": "v3[.]4[.]17"|The current release binds terminal-chain refusal taxonomy'
+
+assert_no_public_regex \
+    "public copy must not preserve stale v3.4.18 current-release boundary" \
+    'ZLAR v3[.]4[.]18 on GitHub|Current public release:[[:space:]]*ZLAR v3[.]4[.]18|Current ZLAR public claims are bounded by v3[.]4[.]18|releases/tag/v3[.]4[.]18|"current_public_release": "v3[.]4[.]18"|The current release binds service-proof artifact verification'
 
 assert_no_public_regex \
     "public copy must not claim unconditional Telegram or phone approval routing" \
