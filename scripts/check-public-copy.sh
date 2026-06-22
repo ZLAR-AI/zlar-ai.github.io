@@ -180,22 +180,22 @@ assert_contains_fixed \
 assert_contains_fixed \
     "proof-pack page keeps current release boundary" \
     "proof-pack.html" \
-    "The current release binds service-proof artifact refusal taxonomy through the installed runtime-profile service-proof artifact verification path"
+    "The current release binds service-proof artifact verification to the exact selected-profile refusal taxonomy"
 
 assert_contains_fixed \
-    "proof-pack page keeps terminal-chain command" \
+    "proof-pack page keeps service-proof taxonomy field" \
     "proof-pack.html" \
-    "zlar protected-records-installed-runtime-profile-terminal-chain --sample"
+    "installed_runtime_profile_service_artifact_verification_refusal_taxonomy_sha256"
 
 assert_contains_fixed \
-    "proof-pack page keeps terminal-chain required count" \
+    "proof-pack page keeps service-proof verifier binding" \
     "proof-pack.html" \
-    "installed_runtime_profile_terminal_chain_required=true"
+    "cannot be replaced by a matching refusal count"
 
 assert_contains_fixed \
-    "proof-pack page keeps terminal-chain preserved count" \
+    "proof-pack page keeps service-proof evidence boundary" \
     "proof-pack.html" \
-    "installed_runtime_profile_terminal_chain_preserved=true"
+    "local disposable installed-runtime-profile service-proof artifact-verification evidence only"
 
 assert_contains_fixed \
     "proof-pack page keeps product proof path command" \
@@ -306,22 +306,22 @@ assert_contains_fixed \
 assert_contains_fixed \
     "proof-pack manifest keeps verifier target boundary" \
     "demo/proof-pack/proof-pack-manifest.json" \
-    "Existing installed runtime-profile terminal chain boundary"
+    "Service-proof artifact refusal taxonomy binding"
 
 assert_contains_fixed \
-    "proof-pack manifest keeps terminal-chain command" \
+    "proof-pack manifest keeps service-proof taxonomy field" \
     "demo/proof-pack/proof-pack-manifest.json" \
-    "zlar protected-records-installed-runtime-profile-terminal-chain --sample"
+    "installed_runtime_profile_service_artifact_verification_refusal_taxonomy_sha256"
 
 assert_contains_fixed \
-    "proof-pack manifest keeps terminal-chain required count" \
+    "proof-pack manifest keeps service-proof artifact verification boundary" \
     "demo/proof-pack/proof-pack-manifest.json" \
-    "installed_runtime_profile_terminal_chain_required=true"
+    "service-proof artifact-verification evidence only"
 
 assert_contains_fixed \
-    "proof-pack manifest keeps terminal-chain preserved count" \
+    "proof-pack manifest keeps no production downstream non-claim" \
     "demo/proof-pack/proof-pack-manifest.json" \
-    "installed_runtime_profile_terminal_chain_preserved=true"
+    "no production downstream recognition"
 
 assert_contains_fixed \
     "proof-pack manifest keeps external-attestation non-claim" \
@@ -336,7 +336,7 @@ assert_contains_fixed \
 assert_contains_fixed \
     "CAISI archive keeps current release boundary" \
     "caisi-submission.html" \
-    "The current release binds service-proof artifact refusal taxonomy through the installed runtime-profile service-proof artifact verification path"
+    "The current release binds service-proof artifact verification to the exact selected-profile refusal taxonomy"
 
 assert_contains_fixed \
     "CAISI metadata keeps current claim boundary" \
@@ -346,7 +346,7 @@ assert_contains_fixed \
 assert_contains_fixed \
     "fail-open archive keeps current release boundary" \
     "fail-open.html" \
-    "The current release binds service-proof artifact refusal taxonomy through the installed runtime-profile service-proof artifact verification path"
+    "The current release binds service-proof artifact verification to the exact selected-profile refusal taxonomy"
 
 assert_contains_fixed \
     "boundaries page keeps records.write terminal proof boundary" \
@@ -361,22 +361,22 @@ assert_contains_fixed \
 assert_contains_fixed \
     "boundaries page keeps current release boundary" \
     "boundaries.html" \
-    "The current release binds service-proof artifact refusal taxonomy through the installed runtime-profile service-proof artifact verification path"
+    "The current release binds service-proof artifact verification to the exact selected-profile refusal taxonomy"
 
 assert_contains_fixed \
-    "boundaries page keeps terminal-chain command" \
+    "boundaries page keeps service-proof taxonomy field" \
     "boundaries.html" \
-    "zlar protected-records-installed-runtime-profile-terminal-chain --sample"
+    "installed_runtime_profile_service_artifact_verification_refusal_taxonomy_sha256"
 
 assert_contains_fixed \
-    "boundaries page keeps terminal-chain required count" \
+    "boundaries page keeps service-proof verifier binding" \
     "boundaries.html" \
-    "installed_runtime_profile_terminal_chain_required=true"
+    "cannot be replaced by a matching refusal count"
 
 assert_contains_fixed \
-    "boundaries page keeps terminal-chain preserved count" \
+    "boundaries page keeps service-proof evidence boundary" \
     "boundaries.html" \
-    "installed_runtime_profile_terminal_chain_preserved=true"
+    "local disposable installed-runtime-profile service-proof artifact-verification evidence only"
 
 assert_contains_fixed \
     "boundaries page keeps readiness verified field" \
