@@ -129,17 +129,17 @@ assert_contains_fixed \
 assert_contains_fixed \
     "boundaries page keeps current release pointer" \
     "boundaries.html" \
-    "ZLAR v3.4.15 on GitHub"
+    "ZLAR v3.4.16 on GitHub"
 
 assert_contains_fixed \
     "proof-pack page keeps current release pointer" \
     "proof-pack.html" \
-    "ZLAR v3.4.15 on GitHub"
+    "ZLAR v3.4.16 on GitHub"
 
 assert_contains_fixed \
     "proof-pack page keeps current release boundary" \
     "proof-pack.html" \
-    "The current release adds installed runtime-profile terminal-chain evidence"
+    "The current release hardens terminal-chain fail-closed tests over the installed runtime-profile terminal-chain evidence path"
 
 assert_contains_fixed \
     "proof-pack page keeps terminal-chain command" \
@@ -169,27 +169,27 @@ assert_contains_fixed \
 assert_contains_fixed \
     "website README keeps current release pointer" \
     "README.md" \
-    "ZLAR v3.4.15 - Installed runtime-profile terminal chain"
+    "ZLAR v3.4.16 - Terminal-chain fail-closed test hardening"
 
 assert_contains_fixed \
     "LLM index keeps current release pointer" \
     "llms.txt" \
-    "Current public release: ZLAR v3.4.15 - Installed runtime-profile terminal chain."
+    "Current public release: ZLAR v3.4.16 - Terminal-chain fail-closed test hardening."
 
 assert_contains_fixed \
     "proof-pack README keeps current release pointer" \
     "demo/proof-pack/README.md" \
-    "ZLAR v3.4.15 - Installed runtime-profile terminal chain."
+    "ZLAR v3.4.16 - Terminal-chain fail-closed test hardening."
 
 assert_contains_fixed \
     "proof-pack manifest keeps current release pointer" \
     "demo/proof-pack/proof-pack-manifest.json" \
-    "\"current_public_release\": \"v3.4.15\""
+    "\"current_public_release\": \"v3.4.16\""
 
 assert_contains_fixed \
     "proof-pack manifest keeps verifier target boundary" \
     "demo/proof-pack/proof-pack-manifest.json" \
-    "Installed runtime-profile terminal chain"
+    "Existing installed runtime-profile terminal chain boundary"
 
 assert_contains_fixed \
     "proof-pack manifest keeps terminal-chain command" \
@@ -214,22 +214,22 @@ assert_contains_fixed \
 assert_contains_fixed \
     "architecture archive keeps current release pointer" \
     "architecture.html" \
-    "Current public release: ZLAR v3.4.15 - Installed runtime-profile terminal chain."
+    "Current public release: ZLAR v3.4.16 - Terminal-chain fail-closed test hardening."
 
 assert_contains_fixed \
     "CAISI archive keeps current release boundary" \
     "caisi-submission.html" \
-    "The current release adds installed runtime-profile terminal-chain evidence"
+    "The current release hardens terminal-chain fail-closed tests over the installed runtime-profile terminal-chain evidence path"
 
 assert_contains_fixed \
     "CAISI metadata keeps current claim boundary" \
     "caisi-submission.html" \
-    "Current ZLAR public claims are bounded by v3.4.15"
+    "Current ZLAR public claims are bounded by v3.4.16"
 
 assert_contains_fixed \
     "fail-open archive keeps current release boundary" \
     "fail-open.html" \
-    "The current release adds installed runtime-profile terminal-chain evidence"
+    "The current release hardens terminal-chain fail-closed tests over the installed runtime-profile terminal-chain evidence path"
 
 assert_contains_fixed \
     "boundaries page keeps records.write terminal proof boundary" \
@@ -244,7 +244,7 @@ assert_contains_fixed \
 assert_contains_fixed \
     "boundaries page keeps current release boundary" \
     "boundaries.html" \
-    "The current release adds installed runtime-profile terminal-chain evidence"
+    "The current release hardens terminal-chain fail-closed tests over the installed runtime-profile terminal-chain evidence path"
 
 assert_contains_fixed \
     "boundaries page keeps terminal-chain command" \
