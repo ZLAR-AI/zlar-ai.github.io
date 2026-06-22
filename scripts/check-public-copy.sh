@@ -212,6 +212,11 @@ assert_contains_fixed \
     "ready_for_public_distribution_claim=true"
 
 assert_contains_fixed \
+    "boundaries page keeps current release asset-publication boundary" \
+    "boundaries.html" \
+    "The current v3.4.5 release publishes all required verifier-kit assets"
+
+assert_contains_fixed \
     "boundaries page keeps public-distribution audit command" \
     "boundaries.html" \
     "zlar verifier-kit-public-distribution"
