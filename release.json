@@ -1,16 +1,16 @@
 {
   "schema": "zlar-public-release-metadata-v1",
-  "generated_at": "2026-06-22T22:39:51Z",
+  "generated_at": "2026-06-22T23:29:28Z",
   "site": "https://zlar.ai/",
   "current_public_release": {
-    "version": "v3.4.22",
-    "title": "Terminal-chain named refusal evidence",
-    "url": "https://github.com/ZLAR-AI/ZLAR/releases/tag/v3.4.22",
+    "version": "v3.4.23",
+    "title": "Terminal-chain recognition refusal groups",
+    "url": "https://github.com/ZLAR-AI/ZLAR/releases/tag/v3.4.23",
     "repository": "https://github.com/ZLAR-AI/ZLAR",
-    "commit": "38beec0d402ecad8471daa3612efe5b053197da1",
-    "tag": "v3.4.22",
-    "tag_object": "b36bc6e3d4817ae43437610345ac9ab6cddd7245",
-    "published_at": "2026-06-22T22:35:35Z"
+    "commit": "dcab1b8b57981177c8246a2af8b74e5439221d34",
+    "tag": "v3.4.23",
+    "tag_object": "5944a88047c8465ae2c59d4e699712e1c303e98e",
+    "published_at": "2026-06-22T23:20:38Z"
   },
   "website": {
     "repository": "https://github.com/ZLAR-AI/zlar-ai.github.io",
@@ -25,11 +25,11 @@
   },
   "authority_boundary": "A log records what happened. A ZLAR receipt records what counted as authorized effect when action tried to become consequence.",
   "claim_boundary": {
-    "summary": "Terminal-chain named refusal evidence while preserving the v3.4.21 verifier-kit diagnostics boundary and the v3.4.19 recognition-contract digest boundary.",
+    "summary": "Terminal-chain recognition refusal groups while preserving the v3.4.22 named receipt-refusal evidence, the v3.4.21 verifier-kit diagnostics boundary, and the v3.4.19 recognition-contract digest boundary.",
     "service_proof_command": "zlar protected-records-installed-runtime-profile-service-proof --sample",
     "service_proof_artifact_verification_command": "zlar protected-records-installed-runtime-profile-service-proof verify --sample --json",
     "terminal_chain_command": "zlar protected-records-installed-runtime-profile-terminal-chain --sample",
-    "evidence_threshold": "v3.4.22 release checks pass with terminal-chain named receipt-refusal preservation; v3.4.22+ release-forward dry-run checks preserve terminal_chain_refusal_evidence, named_receipt_refusals_sha256, and named refusal booleans for missing, invalid, stale, unknown-issuer, wrong-policy, wrong-domain, and wrong-tool receipt cases. v3.4.21+ release-forward dry-run checks still preserve zlar-verifier-kit-external-runner-diagnostics-v1.json, and v3.4.19+ readiness, proof-smoke, and release-forward dry-run checks still preserve installed-runtime-profile recognition-contract SHA-256 binding.",
+    "evidence_threshold": "v3.4.23 release checks pass with terminal-chain recognition-refusal group preservation; v3.4.23+ release-forward dry-run checks preserve terminal_chain_refusal_evidence, recognition_refusal_groups_sha256, and grouped before-mutation booleans for no usable recognized receipt authority, recognized receipt scope mismatch, and route/request authority material refusal cases. v3.4.22+ release-forward dry-run checks still preserve named_receipt_refusals_sha256 and named refusal booleans for missing, invalid, stale, unknown-issuer, wrong-policy, wrong-domain, and wrong-tool receipt cases. v3.4.21+ release-forward dry-run checks still preserve zlar-verifier-kit-external-runner-diagnostics-v1.json, and v3.4.19+ readiness, proof-smoke, and release-forward dry-run checks still preserve installed-runtime-profile recognition-contract SHA-256 binding.",
     "safe_codex_wording": "ZLAR can govern Codex CLI-invoked MCP tool calls when those MCP servers are routed through ZLAR.",
     "non_claims": [
       "No persistent install.",

@@ -170,17 +170,17 @@ assert_contains_fixed \
 assert_contains_fixed \
     "boundaries page keeps current release pointer" \
     "boundaries.html" \
-    "ZLAR v3.4.22 on GitHub"
+    "ZLAR v3.4.23 on GitHub"
 
 assert_contains_fixed \
     "proof-pack page keeps current release pointer" \
     "proof-pack.html" \
-    "ZLAR v3.4.22 on GitHub"
+    "ZLAR v3.4.23 on GitHub"
 
 assert_contains_fixed \
     "proof-pack page keeps current release boundary" \
     "proof-pack.html" \
-    "The current release preserves terminal-chain named refusal evidence"
+    "The current release preserves terminal-chain recognition refusal groups"
 
 assert_contains_fixed \
     "proof-pack page keeps terminal-chain refusal evidence field" \
@@ -203,9 +203,9 @@ assert_contains_fixed \
     "wrong-tool receipt cases"
 
 assert_contains_fixed \
-    "proof-pack page keeps named-refusal evidence boundary" \
+    "proof-pack page keeps recognition-group evidence boundary" \
     "proof-pack.html" \
-    "local disposable installed-runtime-profile named-refusal and recognition-contract evidence only"
+    "local disposable installed-runtime-profile recognition-refusal group, named-refusal, and recognition-contract evidence only"
 
 assert_contains_fixed \
     "proof-pack page keeps product proof path command" \
@@ -220,12 +220,12 @@ assert_contains_fixed \
 assert_contains_fixed \
     "website README keeps current release pointer" \
     "README.md" \
-    "ZLAR v3.4.22 - Terminal-chain named refusal evidence"
+    "ZLAR v3.4.23 - Terminal-chain recognition refusal groups"
 
 assert_contains_fixed \
     "LLM index keeps current release pointer" \
     "llms.txt" \
-    "Current public release: ZLAR v3.4.22 - Terminal-chain named refusal evidence."
+    "Current public release: ZLAR v3.4.23 - Terminal-chain recognition refusal groups."
 
 assert_contains_fixed \
     "LLM index keeps release metadata pointer" \
@@ -247,25 +247,25 @@ assert_json_value \
     "release metadata keeps current release" \
     "release.json" \
     "current_public_release.version" \
-    "v3.4.22"
+    "v3.4.23"
 
 assert_json_value \
     "release metadata keeps release title" \
     "release.json" \
     "current_public_release.title" \
-    "Terminal-chain named refusal evidence"
+    "Terminal-chain recognition refusal groups"
 
 assert_json_value \
     "release metadata keeps release commit" \
     "release.json" \
     "current_public_release.commit" \
-    "38beec0d402ecad8471daa3612efe5b053197da1"
+    "dcab1b8b57981177c8246a2af8b74e5439221d34"
 
 assert_json_value \
     "release metadata keeps tag object" \
     "release.json" \
     "current_public_release.tag_object" \
-    "b36bc6e3d4817ae43437610345ac9ab6cddd7245"
+    "5944a88047c8465ae2c59d4e699712e1c303e98e"
 
 assert_json_value \
     "release metadata keeps live URL" \
@@ -294,9 +294,14 @@ assert_contains_fixed \
     "zlar protected-records-installed-runtime-profile-terminal-chain --sample"
 
 assert_contains_fixed \
-    "release metadata keeps named refusal threshold" \
+    "release metadata keeps recognition group threshold" \
     "release.json" \
-    "v3.4.22 release checks pass with terminal-chain named receipt-refusal preservation"
+    "v3.4.23 release checks pass with terminal-chain recognition-refusal group preservation"
+
+assert_contains_fixed \
+    "release metadata keeps recognition group hash threshold" \
+    "release.json" \
+    "recognition_refusal_groups_sha256"
 
 assert_contains_fixed \
     "release metadata keeps named refusal hash threshold" \
@@ -311,17 +316,17 @@ assert_contains_fixed \
 assert_contains_fixed \
     "proof-pack README keeps current release pointer" \
     "demo/proof-pack/README.md" \
-    "ZLAR v3.4.22 - Terminal-chain named refusal evidence."
+    "ZLAR v3.4.23 - Terminal-chain recognition refusal groups."
 
 assert_contains_fixed \
     "proof-pack manifest keeps current release pointer" \
     "demo/proof-pack/proof-pack-manifest.json" \
-    "\"current_public_release\": \"v3.4.22\""
+    "\"current_public_release\": \"v3.4.23\""
 
 assert_contains_fixed \
     "proof-pack manifest keeps verifier target boundary" \
     "demo/proof-pack/proof-pack-manifest.json" \
-    "Terminal-chain named refusal evidence"
+    "Terminal-chain recognition refusal groups"
 
 assert_contains_fixed \
     "proof-pack manifest keeps terminal-chain refusal evidence field" \
@@ -339,9 +344,9 @@ assert_contains_fixed \
     "installed_runtime_profile_recognition_contract_sha256"
 
 assert_contains_fixed \
-    "proof-pack manifest keeps named-refusal evidence boundary" \
+    "proof-pack manifest keeps recognition-group evidence boundary" \
     "demo/proof-pack/proof-pack-manifest.json" \
-    "local disposable installed-runtime-profile named-refusal evidence only"
+    "local disposable installed-runtime-profile recognition-refusal group and named-refusal evidence only"
 
 assert_contains_fixed \
     "proof-pack manifest keeps no production downstream non-claim" \
@@ -356,22 +361,22 @@ assert_contains_fixed \
 assert_contains_fixed \
     "architecture archive keeps current release pointer" \
     "architecture.html" \
-    "Current public release: ZLAR v3.4.22 - Terminal-chain named refusal evidence."
+    "Current public release: ZLAR v3.4.23 - Terminal-chain recognition refusal groups."
 
 assert_contains_fixed \
     "CAISI archive keeps current release boundary" \
     "caisi-submission.html" \
-    "The current release preserves terminal-chain named refusal evidence"
+    "The current release preserves terminal-chain recognition refusal groups"
 
 assert_contains_fixed \
     "CAISI metadata keeps current claim boundary" \
     "caisi-submission.html" \
-    "Current ZLAR public claims are bounded by v3.4.22"
+    "Current ZLAR public claims are bounded by v3.4.23"
 
 assert_contains_fixed \
     "fail-open archive keeps current release boundary" \
     "fail-open.html" \
-    "The current release preserves terminal-chain named refusal evidence"
+    "The current release preserves terminal-chain recognition refusal groups"
 
 assert_contains_fixed \
     "boundaries page keeps records.write terminal proof boundary" \
@@ -386,7 +391,7 @@ assert_contains_fixed \
 assert_contains_fixed \
     "boundaries page keeps current release boundary" \
     "boundaries.html" \
-    "The current release preserves terminal-chain named refusal evidence"
+    "The current release preserves terminal-chain recognition refusal groups"
 
 assert_contains_fixed \
     "boundaries page keeps recognition-contract digest field" \
@@ -399,9 +404,9 @@ assert_contains_fixed \
     "named_receipt_refusals_sha256"
 
 assert_contains_fixed \
-    "boundaries page keeps named-refusal evidence boundary" \
+    "boundaries page keeps recognition-group evidence boundary" \
     "boundaries.html" \
-    "local disposable installed-runtime-profile named-refusal and recognition-contract evidence only"
+    "local disposable installed-runtime-profile recognition-refusal group, named-refusal, and recognition-contract evidence only"
 
 assert_contains_fixed \
     "boundaries page keeps readiness verified field" \
