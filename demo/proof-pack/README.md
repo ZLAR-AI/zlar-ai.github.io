@@ -4,7 +4,7 @@ This public bundle is a fake/scratch proof-pack example for zlar.ai. It is desig
 
 Current public release:
 
-ZLAR v3.4.21 - Release-forward verifier diagnostics preservation.
+ZLAR v3.4.22 - Terminal-chain named refusal evidence.
 
 Claim ceiling:
 

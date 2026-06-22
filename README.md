@@ -41,7 +41,7 @@ Do not edit these files unless the sample bundle is intentionally regenerated an
 
 ## Claim Boundary
 
-Current public release: [ZLAR v3.4.21 - Release-forward verifier diagnostics preservation](https://github.com/ZLAR-AI/ZLAR/releases/tag/v3.4.21).
+Current public release: [ZLAR v3.4.22 - Terminal-chain named refusal evidence](https://github.com/ZLAR-AI/ZLAR/releases/tag/v3.4.22).
 
 ZLAR governs routed/intercepted action surfaces only. Safe Codex wording:
 

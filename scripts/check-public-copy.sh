@@ -170,22 +170,27 @@ assert_contains_fixed \
 assert_contains_fixed \
     "boundaries page keeps current release pointer" \
     "boundaries.html" \
-    "ZLAR v3.4.21 on GitHub"
+    "ZLAR v3.4.22 on GitHub"
 
 assert_contains_fixed \
     "proof-pack page keeps current release pointer" \
     "proof-pack.html" \
-    "ZLAR v3.4.21 on GitHub"
+    "ZLAR v3.4.22 on GitHub"
 
 assert_contains_fixed \
     "proof-pack page keeps current release boundary" \
     "proof-pack.html" \
-    "The current release preserves release-forward verifier diagnostics evidence"
+    "The current release preserves terminal-chain named refusal evidence"
 
 assert_contains_fixed \
-    "proof-pack page keeps external-runner diagnostics artifact" \
+    "proof-pack page keeps terminal-chain refusal evidence field" \
     "proof-pack.html" \
-    "zlar-verifier-kit-external-runner-diagnostics-v1.json"
+    "terminal_chain_refusal_evidence"
+
+assert_contains_fixed \
+    "proof-pack page keeps named refusal hash" \
+    "proof-pack.html" \
+    "named_receipt_refusals_sha256"
 
 assert_contains_fixed \
     "proof-pack page keeps recognition-contract digest field" \
@@ -193,14 +198,14 @@ assert_contains_fixed \
     "installed_runtime_profile_recognition_contract_sha256"
 
 assert_contains_fixed \
-    "proof-pack page keeps verifier-kit dry-run diagnostics hardening" \
+    "proof-pack page keeps named refusal cases" \
     "proof-pack.html" \
-    "cannot be replaced behind matching profile and taxonomy counts"
+    "wrong-tool receipt cases"
 
 assert_contains_fixed \
-    "proof-pack page keeps recognition-contract evidence boundary" \
+    "proof-pack page keeps named-refusal evidence boundary" \
     "proof-pack.html" \
-    "local disposable installed-runtime-profile recognition-contract digest evidence only"
+    "local disposable installed-runtime-profile named-refusal and recognition-contract evidence only"
 
 assert_contains_fixed \
     "proof-pack page keeps product proof path command" \
@@ -215,12 +220,12 @@ assert_contains_fixed \
 assert_contains_fixed \
     "website README keeps current release pointer" \
     "README.md" \
-    "ZLAR v3.4.21 - Release-forward verifier diagnostics preservation"
+    "ZLAR v3.4.22 - Terminal-chain named refusal evidence"
 
 assert_contains_fixed \
     "LLM index keeps current release pointer" \
     "llms.txt" \
-    "Current public release: ZLAR v3.4.21 - Release-forward verifier diagnostics preservation."
+    "Current public release: ZLAR v3.4.22 - Terminal-chain named refusal evidence."
 
 assert_contains_fixed \
     "LLM index keeps release metadata pointer" \
@@ -242,25 +247,25 @@ assert_json_value \
     "release metadata keeps current release" \
     "release.json" \
     "current_public_release.version" \
-    "v3.4.21"
+    "v3.4.22"
 
 assert_json_value \
     "release metadata keeps release title" \
     "release.json" \
     "current_public_release.title" \
-    "Release-forward verifier diagnostics preservation"
+    "Terminal-chain named refusal evidence"
 
 assert_json_value \
     "release metadata keeps release commit" \
     "release.json" \
     "current_public_release.commit" \
-    "24f50f8a470357a24c5b831e73534ce6f28f1bf7"
+    "38beec0d402ecad8471daa3612efe5b053197da1"
 
 assert_json_value \
     "release metadata keeps tag object" \
     "release.json" \
     "current_public_release.tag_object" \
-    "615cd5cf1ead2d0effc473f68b5e8703499d5db7"
+    "b36bc6e3d4817ae43437610345ac9ab6cddd7245"
 
 assert_json_value \
     "release metadata keeps live URL" \
@@ -289,14 +294,14 @@ assert_contains_fixed \
     "zlar protected-records-installed-runtime-profile-terminal-chain --sample"
 
 assert_contains_fixed \
-    "release metadata keeps recognition-contract digest threshold" \
+    "release metadata keeps named refusal threshold" \
     "release.json" \
-    "v3.4.21 release checks pass with release-forward verifier diagnostics preservation"
+    "v3.4.22 release checks pass with terminal-chain named receipt-refusal preservation"
 
 assert_contains_fixed \
-    "release metadata keeps external-runner diagnostics threshold" \
+    "release metadata keeps named refusal hash threshold" \
     "release.json" \
-    "zlar-verifier-kit-external-runner-diagnostics-v1.json"
+    "named_receipt_refusals_sha256"
 
 assert_contains_fixed \
     "release metadata keeps current-machine non-claim" \
@@ -306,22 +311,27 @@ assert_contains_fixed \
 assert_contains_fixed \
     "proof-pack README keeps current release pointer" \
     "demo/proof-pack/README.md" \
-    "ZLAR v3.4.21 - Release-forward verifier diagnostics preservation."
+    "ZLAR v3.4.22 - Terminal-chain named refusal evidence."
 
 assert_contains_fixed \
     "proof-pack manifest keeps current release pointer" \
     "demo/proof-pack/proof-pack-manifest.json" \
-    "\"current_public_release\": \"v3.4.21\""
+    "\"current_public_release\": \"v3.4.22\""
 
 assert_contains_fixed \
     "proof-pack manifest keeps verifier target boundary" \
     "demo/proof-pack/proof-pack-manifest.json" \
-    "Release-forward verifier diagnostics preservation"
+    "Terminal-chain named refusal evidence"
 
 assert_contains_fixed \
-    "proof-pack manifest keeps external-runner diagnostics artifact" \
+    "proof-pack manifest keeps terminal-chain refusal evidence field" \
     "demo/proof-pack/proof-pack-manifest.json" \
-    "zlar-verifier-kit-external-runner-diagnostics-v1.json"
+    "terminal_chain_refusal_evidence"
+
+assert_contains_fixed \
+    "proof-pack manifest keeps named refusal hash field" \
+    "demo/proof-pack/proof-pack-manifest.json" \
+    "named_receipt_refusals_sha256"
 
 assert_contains_fixed \
     "proof-pack manifest keeps recognition-contract digest field" \
@@ -329,9 +339,9 @@ assert_contains_fixed \
     "installed_runtime_profile_recognition_contract_sha256"
 
 assert_contains_fixed \
-    "proof-pack manifest keeps recognition-contract digest boundary" \
+    "proof-pack manifest keeps named-refusal evidence boundary" \
     "demo/proof-pack/proof-pack-manifest.json" \
-    "recognition-contract digest evidence only"
+    "local disposable installed-runtime-profile named-refusal evidence only"
 
 assert_contains_fixed \
     "proof-pack manifest keeps no production downstream non-claim" \
@@ -346,22 +356,22 @@ assert_contains_fixed \
 assert_contains_fixed \
     "architecture archive keeps current release pointer" \
     "architecture.html" \
-    "Current public release: ZLAR v3.4.21 - Release-forward verifier diagnostics preservation."
+    "Current public release: ZLAR v3.4.22 - Terminal-chain named refusal evidence."
 
 assert_contains_fixed \
     "CAISI archive keeps current release boundary" \
     "caisi-submission.html" \
-    "The current release preserves release-forward verifier diagnostics evidence"
+    "The current release preserves terminal-chain named refusal evidence"
 
 assert_contains_fixed \
     "CAISI metadata keeps current claim boundary" \
     "caisi-submission.html" \
-    "Current ZLAR public claims are bounded by v3.4.21"
+    "Current ZLAR public claims are bounded by v3.4.22"
 
 assert_contains_fixed \
     "fail-open archive keeps current release boundary" \
     "fail-open.html" \
-    "The current release preserves release-forward verifier diagnostics evidence"
+    "The current release preserves terminal-chain named refusal evidence"
 
 assert_contains_fixed \
     "boundaries page keeps records.write terminal proof boundary" \
@@ -376,7 +386,7 @@ assert_contains_fixed \
 assert_contains_fixed \
     "boundaries page keeps current release boundary" \
     "boundaries.html" \
-    "The current release preserves release-forward verifier diagnostics evidence"
+    "The current release preserves terminal-chain named refusal evidence"
 
 assert_contains_fixed \
     "boundaries page keeps recognition-contract digest field" \
@@ -384,14 +394,14 @@ assert_contains_fixed \
     "installed_runtime_profile_recognition_contract_sha256"
 
 assert_contains_fixed \
-    "boundaries page keeps verifier-kit dry-run diagnostics hardening" \
+    "boundaries page keeps named refusal hash" \
     "boundaries.html" \
-    "cannot be replaced behind matching profile and taxonomy counts"
+    "named_receipt_refusals_sha256"
 
 assert_contains_fixed \
-    "boundaries page keeps recognition-contract evidence boundary" \
+    "boundaries page keeps named-refusal evidence boundary" \
     "boundaries.html" \
-    "local disposable installed-runtime-profile recognition-contract digest evidence only"
+    "local disposable installed-runtime-profile named-refusal and recognition-contract evidence only"
 
 assert_contains_fixed \
     "boundaries page keeps readiness verified field" \
