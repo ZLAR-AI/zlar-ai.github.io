@@ -4,7 +4,7 @@ This public bundle is a fake/scratch proof-pack example for zlar.ai. It is desig
 
 Current public release:
 
-ZLAR v3.4.12 - Installed runtime-profile service continuity proof.
+ZLAR v3.4.13 - Installed runtime-profile witness rollback proof.
 
 Claim ceiling:
 
