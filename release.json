@@ -23,7 +23,7 @@
     "manifest_url": "https://zlar.ai/demo/proof-pack/proof-pack-manifest.json",
     "sha256sums_url": "https://zlar.ai/demo/proof-pack/SHA256SUMS"
   },
-  "receipt_invariant": "A log records what happened. A ZLAR receipt records what counted as authorized effect when action tried to become consequence.",
+  "authority_boundary": "A log records what happened. A ZLAR receipt records what counted as authorized effect when action tried to become consequence.",
   "claim_boundary": {
     "summary": "Terminal-chain fail-closed test hardening over the installed runtime-profile terminal-chain evidence path.",
     "terminal_chain_command": "zlar protected-records-installed-runtime-profile-terminal-chain --sample",
