@@ -170,17 +170,17 @@ assert_contains_fixed \
 assert_contains_fixed \
     "boundaries page keeps current release pointer" \
     "boundaries.html" \
-    "ZLAR v3.4.16 on GitHub"
+    "ZLAR v3.4.17 on GitHub"
 
 assert_contains_fixed \
     "proof-pack page keeps current release pointer" \
     "proof-pack.html" \
-    "ZLAR v3.4.16 on GitHub"
+    "ZLAR v3.4.17 on GitHub"
 
 assert_contains_fixed \
     "proof-pack page keeps current release boundary" \
     "proof-pack.html" \
-    "The current release hardens terminal-chain fail-closed tests over the installed runtime-profile terminal-chain evidence path"
+    "The current release binds terminal-chain refusal taxonomy through the installed runtime-profile terminal-chain evidence path"
 
 assert_contains_fixed \
     "proof-pack page keeps terminal-chain command" \
@@ -210,12 +210,12 @@ assert_contains_fixed \
 assert_contains_fixed \
     "website README keeps current release pointer" \
     "README.md" \
-    "ZLAR v3.4.16 - Terminal-chain fail-closed test hardening"
+    "ZLAR v3.4.17 - Terminal-chain refusal taxonomy binding"
 
 assert_contains_fixed \
     "LLM index keeps current release pointer" \
     "llms.txt" \
-    "Current public release: ZLAR v3.4.16 - Terminal-chain fail-closed test hardening."
+    "Current public release: ZLAR v3.4.17 - Terminal-chain refusal taxonomy binding."
 
 assert_contains_fixed \
     "LLM index keeps release metadata pointer" \
@@ -237,25 +237,25 @@ assert_json_value \
     "release metadata keeps current release" \
     "release.json" \
     "current_public_release.version" \
-    "v3.4.16"
+    "v3.4.17"
 
 assert_json_value \
     "release metadata keeps release title" \
     "release.json" \
     "current_public_release.title" \
-    "Terminal-chain fail-closed test hardening"
+    "Terminal-chain refusal taxonomy binding"
 
 assert_json_value \
     "release metadata keeps release commit" \
     "release.json" \
     "current_public_release.commit" \
-    "b612550b2293e81e7be6b14678861cc31d0a69cc"
+    "077b9344fbb3cb9b74447a5adbda5f275617ec77"
 
 assert_json_value \
     "release metadata keeps tag object" \
     "release.json" \
     "current_public_release.tag_object" \
-    "c93422f7925b9ab82e82aa3c52ebb823de8df184"
+    "854bc401b7c73585ebf5af47feb6bc69dc323ac3"
 
 assert_json_value \
     "release metadata keeps live URL" \
@@ -276,7 +276,7 @@ assert_contains_fixed \
 assert_contains_fixed \
     "release metadata keeps terminal-chain threshold" \
     "release.json" \
-    "v3.4.15+ readiness requires terminal-chain artifact verification"
+    "v3.4.17+ readiness and proof-smoke preserve terminal-chain refusal taxonomy SHA-256 binding"
 
 assert_contains_fixed \
     "release metadata keeps current-machine non-claim" \
@@ -286,12 +286,12 @@ assert_contains_fixed \
 assert_contains_fixed \
     "proof-pack README keeps current release pointer" \
     "demo/proof-pack/README.md" \
-    "ZLAR v3.4.16 - Terminal-chain fail-closed test hardening."
+    "ZLAR v3.4.17 - Terminal-chain refusal taxonomy binding."
 
 assert_contains_fixed \
     "proof-pack manifest keeps current release pointer" \
     "demo/proof-pack/proof-pack-manifest.json" \
-    "\"current_public_release\": \"v3.4.16\""
+    "\"current_public_release\": \"v3.4.17\""
 
 assert_contains_fixed \
     "proof-pack manifest keeps verifier target boundary" \
@@ -321,22 +321,22 @@ assert_contains_fixed \
 assert_contains_fixed \
     "architecture archive keeps current release pointer" \
     "architecture.html" \
-    "Current public release: ZLAR v3.4.16 - Terminal-chain fail-closed test hardening."
+    "Current public release: ZLAR v3.4.17 - Terminal-chain refusal taxonomy binding."
 
 assert_contains_fixed \
     "CAISI archive keeps current release boundary" \
     "caisi-submission.html" \
-    "The current release hardens terminal-chain fail-closed tests over the installed runtime-profile terminal-chain evidence path"
+    "The current release binds terminal-chain refusal taxonomy through the installed runtime-profile terminal-chain evidence path"
 
 assert_contains_fixed \
     "CAISI metadata keeps current claim boundary" \
     "caisi-submission.html" \
-    "Current ZLAR public claims are bounded by v3.4.16"
+    "Current ZLAR public claims are bounded by v3.4.17"
 
 assert_contains_fixed \
     "fail-open archive keeps current release boundary" \
     "fail-open.html" \
-    "The current release hardens terminal-chain fail-closed tests over the installed runtime-profile terminal-chain evidence path"
+    "The current release binds terminal-chain refusal taxonomy through the installed runtime-profile terminal-chain evidence path"
 
 assert_contains_fixed \
     "boundaries page keeps records.write terminal proof boundary" \
@@ -351,7 +351,7 @@ assert_contains_fixed \
 assert_contains_fixed \
     "boundaries page keeps current release boundary" \
     "boundaries.html" \
-    "The current release hardens terminal-chain fail-closed tests over the installed runtime-profile terminal-chain evidence path"
+    "The current release binds terminal-chain refusal taxonomy through the installed runtime-profile terminal-chain evidence path"
 
 assert_contains_fixed \
     "boundaries page keeps terminal-chain command" \

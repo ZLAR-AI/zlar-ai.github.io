@@ -4,7 +4,7 @@ This public bundle is a fake/scratch proof-pack example for zlar.ai. It is desig
 
 Current public release:
 
-ZLAR v3.4.16 - Terminal-chain fail-closed test hardening.
+ZLAR v3.4.17 - Terminal-chain refusal taxonomy binding.
 
 Claim ceiling:
 

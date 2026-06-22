@@ -1,16 +1,16 @@
 {
   "schema": "zlar-public-release-metadata-v1",
-  "generated_at": "2026-06-22T17:03:46Z",
+  "generated_at": "2026-06-22T18:21:10Z",
   "site": "https://zlar.ai/",
   "current_public_release": {
-    "version": "v3.4.16",
-    "title": "Terminal-chain fail-closed test hardening",
-    "url": "https://github.com/ZLAR-AI/ZLAR/releases/tag/v3.4.16",
+    "version": "v3.4.17",
+    "title": "Terminal-chain refusal taxonomy binding",
+    "url": "https://github.com/ZLAR-AI/ZLAR/releases/tag/v3.4.17",
     "repository": "https://github.com/ZLAR-AI/ZLAR",
-    "commit": "b612550b2293e81e7be6b14678861cc31d0a69cc",
-    "tag": "v3.4.16",
-    "tag_object": "c93422f7925b9ab82e82aa3c52ebb823de8df184",
-    "published_at": "2026-06-22T16:43:16Z"
+    "commit": "077b9344fbb3cb9b74447a5adbda5f275617ec77",
+    "tag": "v3.4.17",
+    "tag_object": "854bc401b7c73585ebf5af47feb6bc69dc323ac3",
+    "published_at": "2026-06-22T18:12:08Z"
   },
   "website": {
     "repository": "https://github.com/ZLAR-AI/zlar-ai.github.io",
@@ -25,9 +25,9 @@
   },
   "authority_boundary": "A log records what happened. A ZLAR receipt records what counted as authorized effect when action tried to become consequence.",
   "claim_boundary": {
-    "summary": "Terminal-chain fail-closed test hardening over the installed runtime-profile terminal-chain evidence path.",
+    "summary": "Terminal-chain refusal taxonomy binding over the installed runtime-profile terminal-chain evidence path.",
     "terminal_chain_command": "zlar protected-records-installed-runtime-profile-terminal-chain --sample",
-    "evidence_threshold": "v3.4.15+ readiness requires terminal-chain artifact verification.",
+    "evidence_threshold": "v3.4.17+ readiness and proof-smoke preserve terminal-chain refusal taxonomy SHA-256 binding.",
     "safe_codex_wording": "ZLAR can govern Codex CLI-invoked MCP tool calls when those MCP servers are routed through ZLAR.",
     "non_claims": [
       "No persistent install.",
