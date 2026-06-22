@@ -129,42 +129,57 @@ assert_contains_fixed \
 assert_contains_fixed \
     "boundaries page keeps current release pointer" \
     "boundaries.html" \
-    "ZLAR v3.4.8 on GitHub"
+    "ZLAR v3.4.9 on GitHub"
 
 assert_contains_fixed \
     "proof-pack page keeps current release pointer" \
     "proof-pack.html" \
-    "ZLAR v3.4.8 on GitHub"
+    "ZLAR v3.4.9 on GitHub"
 
 assert_contains_fixed \
     "proof-pack page keeps current release boundary" \
     "proof-pack.html" \
-    "The current release adds recognition-proof artifact verification"
+    "The current release adds Product Proof Path evidence"
+
+assert_contains_fixed \
+    "proof-pack page keeps product proof path command" \
+    "proof-pack.html" \
+    "zlar product-proof-path --json-out zlar-product-proof-path-v1.json"
+
+assert_contains_fixed \
+    "proof-pack page keeps product proof path artifact" \
+    "proof-pack.html" \
+    "zlar-product-proof-path-v1.json"
 
 assert_contains_fixed \
     "website README keeps current release pointer" \
     "README.md" \
-    "ZLAR v3.4.8 - Recognition proof artifact verification"
+    "ZLAR v3.4.9 - Product proof path"
 
 assert_contains_fixed \
     "LLM index keeps current release pointer" \
     "llms.txt" \
-    "Current public release: ZLAR v3.4.8 - Recognition proof artifact verification."
+    "Current public release: ZLAR v3.4.9 - Product proof path."
 
 assert_contains_fixed \
     "proof-pack README keeps current release pointer" \
     "demo/proof-pack/README.md" \
-    "ZLAR v3.4.8 - Recognition proof artifact verification."
+    "ZLAR v3.4.9 - Product proof path."
 
 assert_contains_fixed \
     "proof-pack manifest keeps current release pointer" \
     "demo/proof-pack/proof-pack-manifest.json" \
-    "\"current_public_release\": \"v3.4.8\""
+    "\"current_public_release\": \"v3.4.9\""
 
 assert_contains_fixed \
     "proof-pack manifest keeps verifier target boundary" \
     "demo/proof-pack/proof-pack-manifest.json" \
-    "Recognition proof artifact verification"
+    "Product Proof Path"
+
+assert_contains_fixed \
+    "proof-pack manifest keeps product proof path artifact" \
+    "demo/proof-pack/proof-pack-manifest.json" \
+    "zlar-product-proof-path-v1.json"
 
 assert_contains_fixed \
     "proof-pack manifest keeps external-attestation non-claim" \
@@ -174,22 +189,22 @@ assert_contains_fixed \
 assert_contains_fixed \
     "architecture archive keeps current release pointer" \
     "architecture.html" \
-    "Current public release: ZLAR v3.4.8 - Recognition proof artifact verification."
+    "Current public release: ZLAR v3.4.9 - Product proof path."
 
 assert_contains_fixed \
     "CAISI archive keeps current release boundary" \
     "caisi-submission.html" \
-    "The current release adds recognition-proof artifact verification"
+    "The current release adds Product Proof Path evidence"
 
 assert_contains_fixed \
     "CAISI metadata keeps current claim boundary" \
     "caisi-submission.html" \
-    "Current ZLAR public claims are bounded by v3.4.8"
+    "Current ZLAR public claims are bounded by v3.4.9"
 
 assert_contains_fixed \
     "fail-open archive keeps current release boundary" \
     "fail-open.html" \
-    "The current release adds recognition-proof artifact verification"
+    "The current release adds Product Proof Path evidence"
 
 assert_contains_fixed \
     "boundaries page keeps records.write terminal proof boundary" \
@@ -204,7 +219,17 @@ assert_contains_fixed \
 assert_contains_fixed \
     "boundaries page keeps current release boundary" \
     "boundaries.html" \
-    "The current release adds recognition-proof artifact verification"
+    "The current release adds Product Proof Path evidence"
+
+assert_contains_fixed \
+    "boundaries page keeps product proof path command" \
+    "boundaries.html" \
+    "zlar product-proof-path --json-out zlar-product-proof-path-v1.json"
+
+assert_contains_fixed \
+    "boundaries page keeps product proof path artifact" \
+    "boundaries.html" \
+    "zlar-product-proof-path-v1.json"
 
 assert_contains_fixed \
     "boundaries page keeps byte-binding audit result" \
@@ -214,7 +239,7 @@ assert_contains_fixed \
 assert_contains_fixed \
     "boundaries page keeps current release asset-publication boundary" \
     "boundaries.html" \
-    "The current v3.4.8 release publishes all required verifier-kit assets"
+    "The current v3.4.9 release publishes all required verifier-kit assets"
 
 assert_contains_fixed \
     "boundaries page keeps public-distribution audit command" \
@@ -622,6 +647,10 @@ assert_no_public_regex \
 assert_no_public_regex \
     "public copy must not preserve stale v3.4.1 current-release pointer" \
     'ZLAR v3[.]4[.]1 on GitHub|Current public release:[[:space:]]*ZLAR v3[.]4[.]1|Current ZLAR public claims are bounded by v3[.]4[.]1|releases/tag/v3[.]4[.]1|"current_public_release": "v3[.]4[.]1"|The current release prepares a pinned v3[.]4[.]0 external-verifier target'
+
+assert_no_public_regex \
+    "public copy must not preserve stale v3.4.8 current-release boundary" \
+    'ZLAR v3[.]4[.]8 on GitHub|Current public release:[[:space:]]*ZLAR v3[.]4[.]8|Current ZLAR public claims are bounded by v3[.]4[.]8|releases/tag/v3[.]4[.]8|"current_public_release": "v3[.]4[.]8"|The current release adds recognition-proof artifact verification|Recognition proof artifact verification'
 
 assert_no_public_regex \
     "public copy must not claim unconditional Telegram or phone approval routing" \

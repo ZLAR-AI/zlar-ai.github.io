@@ -2,9 +2,9 @@
   "generated_at": "2026-05-14T00:00:00.000Z",
   "pack_type": "zlar-proof-pack-v0",
   "pack_version": 0,
-  "current_public_release": "v3.4.8",
-  "current_public_release_url": "https://github.com/ZLAR-AI/ZLAR/releases/tag/v3.4.8",
-  "current_public_release_boundary": "Recognition proof artifact verification; local hermetic recognition-proof artifact checkability from a portable checksummed artifact emitted by the installed-runtime-profile recognition proof sample and verified without live runtime state, preserving the selected profile recognition contract and the 18 selected-profile refusal cases, with no latest selection, no persistent installation, no runtime activation, no live runtime service start, no live records-system inspection, no current-machine governance, no production downstream recognition, no production authority, no enterprise readiness, no public external attestation, no sovereign recognition, and no coverage of unrouted surfaces claim.",
+  "current_public_release": "v3.4.9",
+  "current_public_release_url": "https://github.com/ZLAR-AI/ZLAR/releases/tag/v3.4.9",
+  "current_public_release_boundary": "Product Proof Path; fresh local fixture Product Proof Path evidence from `zlar product-proof-path --json-out zlar-product-proof-path-v1.json`, generating and verifying a local proof-pack artifact, preserving simulated-human authorization, receipt-verifier VALID / UNKNOWN-SIGNER / INVALID separation, visible non-coverage, false stronger-claim flags, no live approval, no current-machine governance, no production downstream recognition, no production authority, no enterprise readiness, no public external attestation, no all-MCP governance, no sovereign recognition, and no coverage of unrouted surfaces claim.",
   "claim_ceiling": "ZLAR can govern Codex CLI-invoked MCP tool calls when those MCP servers are routed through ZLAR.",
   "included_files": {
     "manifest": "proof-pack-manifest.json",
