@@ -129,17 +129,17 @@ assert_contains_fixed \
 assert_contains_fixed \
     "boundaries page keeps current release pointer" \
     "boundaries.html" \
-    "ZLAR v3.4.9 on GitHub"
+    "ZLAR v3.4.10 on GitHub"
 
 assert_contains_fixed \
     "proof-pack page keeps current release pointer" \
     "proof-pack.html" \
-    "ZLAR v3.4.9 on GitHub"
+    "ZLAR v3.4.10 on GitHub"
 
 assert_contains_fixed \
     "proof-pack page keeps current release boundary" \
     "proof-pack.html" \
-    "The current release adds Product Proof Path evidence"
+    "The current release adds Product Proof Path readiness intake"
 
 assert_contains_fixed \
     "proof-pack page keeps product proof path command" \
@@ -154,27 +154,32 @@ assert_contains_fixed \
 assert_contains_fixed \
     "website README keeps current release pointer" \
     "README.md" \
-    "ZLAR v3.4.9 - Product proof path"
+    "ZLAR v3.4.10 - Product proof path readiness intake"
 
 assert_contains_fixed \
     "LLM index keeps current release pointer" \
     "llms.txt" \
-    "Current public release: ZLAR v3.4.9 - Product proof path."
+    "Current public release: ZLAR v3.4.10 - Product proof path readiness intake."
 
 assert_contains_fixed \
     "proof-pack README keeps current release pointer" \
     "demo/proof-pack/README.md" \
-    "ZLAR v3.4.9 - Product proof path."
+    "ZLAR v3.4.10 - Product proof path readiness intake."
 
 assert_contains_fixed \
     "proof-pack manifest keeps current release pointer" \
     "demo/proof-pack/proof-pack-manifest.json" \
-    "\"current_public_release\": \"v3.4.9\""
+    "\"current_public_release\": \"v3.4.10\""
 
 assert_contains_fixed \
     "proof-pack manifest keeps verifier target boundary" \
     "demo/proof-pack/proof-pack-manifest.json" \
-    "Product Proof Path"
+    "Product Proof Path readiness intake"
+
+assert_contains_fixed \
+    "proof-pack manifest keeps readiness verified field" \
+    "demo/proof-pack/proof-pack-manifest.json" \
+    "product_proof_path_verified=true"
 
 assert_contains_fixed \
     "proof-pack manifest keeps product proof path artifact" \
@@ -189,22 +194,22 @@ assert_contains_fixed \
 assert_contains_fixed \
     "architecture archive keeps current release pointer" \
     "architecture.html" \
-    "Current public release: ZLAR v3.4.9 - Product proof path."
+    "Current public release: ZLAR v3.4.10 - Product proof path readiness intake."
 
 assert_contains_fixed \
     "CAISI archive keeps current release boundary" \
     "caisi-submission.html" \
-    "The current release adds Product Proof Path evidence"
+    "The current release adds Product Proof Path readiness intake"
 
 assert_contains_fixed \
     "CAISI metadata keeps current claim boundary" \
     "caisi-submission.html" \
-    "Current ZLAR public claims are bounded by v3.4.9"
+    "Current ZLAR public claims are bounded by v3.4.10"
 
 assert_contains_fixed \
     "fail-open archive keeps current release boundary" \
     "fail-open.html" \
-    "The current release adds Product Proof Path evidence"
+    "The current release adds Product Proof Path readiness intake"
 
 assert_contains_fixed \
     "boundaries page keeps records.write terminal proof boundary" \
@@ -219,7 +224,12 @@ assert_contains_fixed \
 assert_contains_fixed \
     "boundaries page keeps current release boundary" \
     "boundaries.html" \
-    "The current release adds Product Proof Path evidence"
+    "The current release adds Product Proof Path readiness intake"
+
+assert_contains_fixed \
+    "boundaries page keeps readiness verified field" \
+    "boundaries.html" \
+    "product_proof_path_verified=true"
 
 assert_contains_fixed \
     "boundaries page keeps product proof path command" \
@@ -239,7 +249,7 @@ assert_contains_fixed \
 assert_contains_fixed \
     "boundaries page keeps current release asset-publication boundary" \
     "boundaries.html" \
-    "The current v3.4.9 release publishes all required verifier-kit assets"
+    "The current v3.4.10 release publishes all required verifier-kit assets"
 
 assert_contains_fixed \
     "boundaries page keeps public-distribution audit command" \
@@ -646,7 +656,7 @@ assert_no_public_regex \
 
 assert_no_public_regex \
     "public copy must not preserve stale v3.4.1 current-release pointer" \
-    'ZLAR v3[.]4[.]1 on GitHub|Current public release:[[:space:]]*ZLAR v3[.]4[.]1|Current ZLAR public claims are bounded by v3[.]4[.]1|releases/tag/v3[.]4[.]1|"current_public_release": "v3[.]4[.]1"|The current release prepares a pinned v3[.]4[.]0 external-verifier target'
+    'ZLAR v3[.]4[.]1 on GitHub|Current public release:[[:space:]]*ZLAR v3[.]4[.]1([^0-9]|$)|Current ZLAR public claims are bounded by v3[.]4[.]1([^0-9]|$)|releases/tag/v3[.]4[.]1([^0-9]|$)|"current_public_release": "v3[.]4[.]1"|The current release prepares a pinned v3[.]4[.]0 external-verifier target'
 
 assert_no_public_regex \
     "public copy must not preserve stale v3.4.8 current-release boundary" \

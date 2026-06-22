@@ -2,9 +2,9 @@
   "generated_at": "2026-05-14T00:00:00.000Z",
   "pack_type": "zlar-proof-pack-v0",
   "pack_version": 0,
-  "current_public_release": "v3.4.9",
-  "current_public_release_url": "https://github.com/ZLAR-AI/ZLAR/releases/tag/v3.4.9",
-  "current_public_release_boundary": "Product Proof Path; fresh local fixture Product Proof Path evidence from `zlar product-proof-path --json-out zlar-product-proof-path-v1.json`, generating and verifying a local proof-pack artifact, preserving simulated-human authorization, receipt-verifier VALID / UNKNOWN-SIGNER / INVALID separation, visible non-coverage, false stronger-claim flags, no live approval, no current-machine governance, no production downstream recognition, no production authority, no enterprise readiness, no public external attestation, no all-MCP governance, no sovereign recognition, and no coverage of unrouted surfaces claim.",
+  "current_public_release": "v3.4.10",
+  "current_public_release_url": "https://github.com/ZLAR-AI/ZLAR/releases/tag/v3.4.10",
+  "current_public_release_boundary": "Product Proof Path readiness intake; `zlar north-star-readiness --sample --json` runs `zlar product-proof-path --json`, evidence-dir readiness consumes `zlar-product-proof-path-v1.json` when present, and `product_proof_path_verified=true` is recorded only for a PASS report with true acceptance gates, false forbidden-claim flags, verified proof-pack artifact, no live probing, and no private operator state. This remains local fixture Product Proof Path evidence only: no live approval, no current-machine governance, no production downstream recognition, no production authority, no enterprise readiness, no public external attestation, no all-MCP governance, no sovereign recognition, and no coverage of unrouted surfaces claim.",
   "claim_ceiling": "ZLAR can govern Codex CLI-invoked MCP tool calls when those MCP servers are routed through ZLAR.",
   "included_files": {
     "manifest": "proof-pack-manifest.json",
