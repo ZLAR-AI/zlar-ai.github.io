@@ -4,7 +4,7 @@ This public bundle is a fake/scratch proof-pack example for zlar.ai. It is desig
 
 Current public release:
 
-ZLAR v3.4.5 - Installed runtime-profile selector preflight.
+ZLAR v3.4.6 - Installed runtime-profile recognition contract.
 
 Claim ceiling:
 

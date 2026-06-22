@@ -39,7 +39,7 @@ Do not edit these files unless the sample bundle is intentionally regenerated an
 
 ## Claim Boundary
 
-Current public release: [ZLAR v3.4.5 - Installed runtime-profile selector preflight](https://github.com/ZLAR-AI/ZLAR/releases/tag/v3.4.5).
+Current public release: [ZLAR v3.4.6 - Installed runtime-profile recognition contract](https://github.com/ZLAR-AI/ZLAR/releases/tag/v3.4.6).
 
 ZLAR governs routed/intercepted action surfaces only. Safe Codex wording:
 
