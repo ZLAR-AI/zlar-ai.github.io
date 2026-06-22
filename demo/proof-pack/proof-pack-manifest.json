@@ -2,9 +2,9 @@
   "generated_at": "2026-05-14T00:00:00.000Z",
   "pack_type": "zlar-proof-pack-v0",
   "pack_version": 0,
-  "current_public_release": "v3.4.19",
-  "current_public_release_url": "https://github.com/ZLAR-AI/ZLAR/releases/tag/v3.4.19",
-  "current_public_release_boundary": "Recognition-contract digest binding; the installed-runtime-profile recognition_contract_sha256 stays bound across preflight, service proof, service-proof artifact verification, terminal chain, terminal-chain artifact verification, proof-smoke, North Star readiness, and release-forward dry-run checks. The public field is installed_runtime_profile_recognition_contract_sha256. This is local disposable installed-runtime-profile recognition-contract digest evidence only: no persistent install, no activation, no live runtime service, no hook/user/machine configuration, no current-machine governance, no production downstream recognition, no production authority, no enterprise readiness, no public external attestation, no all-MCP governance, no sovereign recognition, and no coverage of unrouted surfaces claim.",
+  "current_public_release": "v3.4.20",
+  "current_public_release_url": "https://github.com/ZLAR-AI/ZLAR/releases/tag/v3.4.20",
+  "current_public_release_boundary": "Verifier-kit dry-run diagnostics hardening; T-KIT-23 fixture checks and external-runner captured-output checks are hardened while the v3.4.19 installed-runtime-profile recognition_contract_sha256 boundary stays bound across preflight, service proof, service-proof artifact verification, terminal chain, terminal-chain artifact verification, proof-smoke, North Star readiness, and release-forward dry-run checks. The public field is installed_runtime_profile_recognition_contract_sha256. This is local disposable installed-runtime-profile recognition-contract digest evidence only: no persistent install, no activation, no live runtime service, no hook/user/machine configuration, no current-machine governance, no production downstream recognition, no production authority, no enterprise readiness, no public external attestation, no all-MCP governance, no sovereign recognition, and no coverage of unrouted surfaces claim.",
   "claim_ceiling": "ZLAR can govern Codex CLI-invoked MCP tool calls when those MCP servers are routed through ZLAR.",
   "included_files": {
     "manifest": "proof-pack-manifest.json",

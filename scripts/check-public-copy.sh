@@ -170,17 +170,17 @@ assert_contains_fixed \
 assert_contains_fixed \
     "boundaries page keeps current release pointer" \
     "boundaries.html" \
-    "ZLAR v3.4.19 on GitHub"
+    "ZLAR v3.4.20 on GitHub"
 
 assert_contains_fixed \
     "proof-pack page keeps current release pointer" \
     "proof-pack.html" \
-    "ZLAR v3.4.19 on GitHub"
+    "ZLAR v3.4.20 on GitHub"
 
 assert_contains_fixed \
     "proof-pack page keeps current release boundary" \
     "proof-pack.html" \
-    "The current release binds the installed-runtime-profile recognition contract SHA-256"
+    "The current release hardens verifier-kit dry-run diagnostics and preserves the v3.4.19 recognition-contract digest boundary"
 
 assert_contains_fixed \
     "proof-pack page keeps recognition-contract digest field" \
@@ -188,7 +188,7 @@ assert_contains_fixed \
     "installed_runtime_profile_recognition_contract_sha256"
 
 assert_contains_fixed \
-    "proof-pack page keeps recognition-contract digest binding" \
+    "proof-pack page keeps verifier-kit dry-run diagnostics hardening" \
     "proof-pack.html" \
     "cannot be replaced behind matching profile and taxonomy counts"
 
@@ -210,12 +210,12 @@ assert_contains_fixed \
 assert_contains_fixed \
     "website README keeps current release pointer" \
     "README.md" \
-    "ZLAR v3.4.19 - Recognition-contract digest binding"
+    "ZLAR v3.4.20 - Verifier-kit dry-run diagnostics hardening"
 
 assert_contains_fixed \
     "LLM index keeps current release pointer" \
     "llms.txt" \
-    "Current public release: ZLAR v3.4.19 - Recognition-contract digest binding."
+    "Current public release: ZLAR v3.4.20 - Verifier-kit dry-run diagnostics hardening."
 
 assert_contains_fixed \
     "LLM index keeps release metadata pointer" \
@@ -237,25 +237,25 @@ assert_json_value \
     "release metadata keeps current release" \
     "release.json" \
     "current_public_release.version" \
-    "v3.4.19"
+    "v3.4.20"
 
 assert_json_value \
     "release metadata keeps release title" \
     "release.json" \
     "current_public_release.title" \
-    "Recognition-contract digest binding"
+    "Verifier-kit dry-run diagnostics hardening"
 
 assert_json_value \
     "release metadata keeps release commit" \
     "release.json" \
     "current_public_release.commit" \
-    "1ee5950b10086a0c11cb539b4b224fbe48be350a"
+    "9f025b5c013f75740b4d84681fdde7099e9037c6"
 
 assert_json_value \
     "release metadata keeps tag object" \
     "release.json" \
     "current_public_release.tag_object" \
-    "6fc2abfddbf3c5f51cd11309230843e75667fcb0"
+    "a6dacef18919c0d01181d93f1394fde180c2f2c1"
 
 assert_json_value \
     "release metadata keeps live URL" \
@@ -286,7 +286,7 @@ assert_contains_fixed \
 assert_contains_fixed \
     "release metadata keeps recognition-contract digest threshold" \
     "release.json" \
-    "v3.4.19+ readiness, proof-smoke, and release-forward dry-run checks preserve installed-runtime-profile recognition-contract SHA-256 binding"
+    "v3.4.20 release checks pass with verifier-kit dry-run diagnostics hardening; v3.4.19+ readiness, proof-smoke, and release-forward dry-run checks preserve installed-runtime-profile recognition-contract SHA-256 binding"
 
 assert_contains_fixed \
     "release metadata keeps current-machine non-claim" \
@@ -296,17 +296,17 @@ assert_contains_fixed \
 assert_contains_fixed \
     "proof-pack README keeps current release pointer" \
     "demo/proof-pack/README.md" \
-    "ZLAR v3.4.19 - Recognition-contract digest binding."
+    "ZLAR v3.4.20 - Verifier-kit dry-run diagnostics hardening."
 
 assert_contains_fixed \
     "proof-pack manifest keeps current release pointer" \
     "demo/proof-pack/proof-pack-manifest.json" \
-    "\"current_public_release\": \"v3.4.19\""
+    "\"current_public_release\": \"v3.4.20\""
 
 assert_contains_fixed \
     "proof-pack manifest keeps verifier target boundary" \
     "demo/proof-pack/proof-pack-manifest.json" \
-    "Recognition-contract digest binding"
+    "Verifier-kit dry-run diagnostics hardening"
 
 assert_contains_fixed \
     "proof-pack manifest keeps recognition-contract digest field" \
@@ -331,22 +331,22 @@ assert_contains_fixed \
 assert_contains_fixed \
     "architecture archive keeps current release pointer" \
     "architecture.html" \
-    "Current public release: ZLAR v3.4.19 - Recognition-contract digest binding."
+    "Current public release: ZLAR v3.4.20 - Verifier-kit dry-run diagnostics hardening."
 
 assert_contains_fixed \
     "CAISI archive keeps current release boundary" \
     "caisi-submission.html" \
-    "The current release binds the installed-runtime-profile recognition contract SHA-256"
+    "The current release hardens verifier-kit dry-run diagnostics and preserves the v3.4.19 recognition-contract digest boundary"
 
 assert_contains_fixed \
     "CAISI metadata keeps current claim boundary" \
     "caisi-submission.html" \
-    "Current ZLAR public claims are bounded by v3.4.19"
+    "Current ZLAR public claims are bounded by v3.4.20"
 
 assert_contains_fixed \
     "fail-open archive keeps current release boundary" \
     "fail-open.html" \
-    "The current release binds the installed-runtime-profile recognition contract SHA-256"
+    "The current release hardens verifier-kit dry-run diagnostics and preserves the v3.4.19 recognition-contract digest boundary"
 
 assert_contains_fixed \
     "boundaries page keeps records.write terminal proof boundary" \
@@ -361,7 +361,7 @@ assert_contains_fixed \
 assert_contains_fixed \
     "boundaries page keeps current release boundary" \
     "boundaries.html" \
-    "The current release binds the installed-runtime-profile recognition contract SHA-256"
+    "The current release hardens verifier-kit dry-run diagnostics and preserves the v3.4.19 recognition-contract digest boundary"
 
 assert_contains_fixed \
     "boundaries page keeps recognition-contract digest field" \
@@ -369,7 +369,7 @@ assert_contains_fixed \
     "installed_runtime_profile_recognition_contract_sha256"
 
 assert_contains_fixed \
-    "boundaries page keeps recognition-contract digest binding" \
+    "boundaries page keeps verifier-kit dry-run diagnostics hardening" \
     "boundaries.html" \
     "cannot be replaced behind matching profile and taxonomy counts"
 
@@ -825,6 +825,10 @@ assert_no_public_regex \
 assert_no_public_regex \
     "public copy must not preserve stale v3.4.18 current-release boundary" \
     'ZLAR v3[.]4[.]18 on GitHub|Current public release:[[:space:]]*ZLAR v3[.]4[.]18|Current ZLAR public claims are bounded by v3[.]4[.]18|releases/tag/v3[.]4[.]18|"current_public_release": "v3[.]4[.]18"|The current release binds service-proof artifact verification'
+
+assert_no_public_regex \
+    "public copy must not preserve stale v3.4.19 current-release boundary" \
+    'ZLAR v3[.]4[.]19 on GitHub|Current public release:[[:space:]]*ZLAR v3[.]4[.]19|Current ZLAR public claims are bounded by v3[.]4[.]19|releases/tag/v3[.]4[.]19|"current_public_release": "v3[.]4[.]19"|The current release binds the installed-runtime-profile recognition contract'
 
 assert_no_public_regex \
     "public copy must not claim unconditional Telegram or phone approval routing" \
