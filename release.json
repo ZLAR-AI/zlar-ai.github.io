@@ -1,0 +1,47 @@
+{
+  "schema": "zlar-public-release-metadata-v1",
+  "generated_at": "2026-06-22T17:03:46Z",
+  "site": "https://zlar.ai/",
+  "current_public_release": {
+    "version": "v3.4.16",
+    "title": "Terminal-chain fail-closed test hardening",
+    "url": "https://github.com/ZLAR-AI/ZLAR/releases/tag/v3.4.16",
+    "repository": "https://github.com/ZLAR-AI/ZLAR",
+    "commit": "b612550b2293e81e7be6b14678861cc31d0a69cc",
+    "tag": "v3.4.16",
+    "tag_object": "c93422f7925b9ab82e82aa3c52ebb823de8df184",
+    "published_at": "2026-06-22T16:43:16Z"
+  },
+  "website": {
+    "repository": "https://github.com/ZLAR-AI/zlar-ai.github.io",
+    "branch": "main",
+    "metadata_path": "release.json",
+    "live_url": "https://zlar.ai/release.json",
+    "verification_hint": "Compare the live file with release.json on the website repository main branch. The file does not embed its own website commit."
+  },
+  "proof_pack": {
+    "manifest_url": "https://zlar.ai/demo/proof-pack/proof-pack-manifest.json",
+    "sha256sums_url": "https://zlar.ai/demo/proof-pack/SHA256SUMS"
+  },
+  "receipt_invariant": "A log records what happened. A ZLAR receipt records what counted as authorized effect when action tried to become consequence.",
+  "claim_boundary": {
+    "summary": "Terminal-chain fail-closed test hardening over the installed runtime-profile terminal-chain evidence path.",
+    "terminal_chain_command": "zlar protected-records-installed-runtime-profile-terminal-chain --sample",
+    "evidence_threshold": "v3.4.15+ readiness requires terminal-chain artifact verification.",
+    "safe_codex_wording": "ZLAR can govern Codex CLI-invoked MCP tool calls when those MCP servers are routed through ZLAR.",
+    "non_claims": [
+      "No persistent install.",
+      "No activation.",
+      "No live runtime service.",
+      "No hook, user, or machine configuration claim.",
+      "No current-machine governance claim.",
+      "No production downstream recognition.",
+      "No production authority.",
+      "No enterprise readiness.",
+      "No public external attestation.",
+      "No all-MCP governance.",
+      "No sovereign recognition.",
+      "No coverage of unrouted surfaces."
+    ]
+  }
+}

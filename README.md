@@ -37,6 +37,8 @@ The current information architecture is a plain public path:
 
 Do not edit these files unless the sample bundle is intentionally regenerated and all checksums/manifests are updated together.
 
+`release.json` is the public machine-readable current-release pointer for `zlar.ai`. It lets an auditor verify the live release claim directly instead of scraping HTML copy.
+
 ## Claim Boundary
 
 Current public release: [ZLAR v3.4.16 - Terminal-chain fail-closed test hardening](https://github.com/ZLAR-AI/ZLAR/releases/tag/v3.4.16).

@@ -15,6 +15,7 @@ PUBLIC_PATHS=(
     '*.html'
     '*.txt'
     '*.md'
+    'release.json'
     'docs'
     'specs'
     'demo'
@@ -44,6 +45,46 @@ assert_contains_fixed() {
         pass
     else
         fail "${label}" "missing in ${path}: ${needle}"
+    fi
+}
+
+assert_json_value() {
+    local label="$1"
+    local path="$2"
+    local pointer="$3"
+    local expected="$4"
+    TOTAL=$((TOTAL + 1))
+
+    local output rc
+    set +e
+    output=$(JSON_PATH="${path}" JSON_POINTER="${pointer}" JSON_EXPECTED="${expected}" node <<'NODE'
+const fs = require('node:fs');
+
+const jsonPath = process.env.JSON_PATH;
+const pointer = process.env.JSON_POINTER;
+const expected = process.env.JSON_EXPECTED;
+const data = JSON.parse(fs.readFileSync(jsonPath, 'utf8'));
+
+let value = data;
+for (const part of pointer.split('.').filter(Boolean)) {
+  if (!value || !Object.prototype.hasOwnProperty.call(value, part)) {
+    throw new Error(`missing ${pointer}`);
+  }
+  value = value[part];
+}
+
+if (String(value) !== expected) {
+  throw new Error(`${pointer} expected ${expected} but got ${String(value)}`);
+}
+NODE
+)
+    rc=$?
+    set -e
+
+    if [ "${rc}" -eq 0 ]; then
+        pass
+    else
+        fail "${label}" "${output}"
     fi
 }
 
@@ -175,6 +216,72 @@ assert_contains_fixed \
     "LLM index keeps current release pointer" \
     "llms.txt" \
     "Current public release: ZLAR v3.4.16 - Terminal-chain fail-closed test hardening."
+
+assert_contains_fixed \
+    "LLM index keeps release metadata pointer" \
+    "llms.txt" \
+    "https://zlar.ai/release.json"
+
+assert_contains_fixed \
+    "website README keeps release metadata pointer" \
+    "README.md" \
+    "machine-readable current-release pointer"
+
+assert_json_value \
+    "release metadata keeps schema" \
+    "release.json" \
+    "schema" \
+    "zlar-public-release-metadata-v1"
+
+assert_json_value \
+    "release metadata keeps current release" \
+    "release.json" \
+    "current_public_release.version" \
+    "v3.4.16"
+
+assert_json_value \
+    "release metadata keeps release title" \
+    "release.json" \
+    "current_public_release.title" \
+    "Terminal-chain fail-closed test hardening"
+
+assert_json_value \
+    "release metadata keeps release commit" \
+    "release.json" \
+    "current_public_release.commit" \
+    "b612550b2293e81e7be6b14678861cc31d0a69cc"
+
+assert_json_value \
+    "release metadata keeps tag object" \
+    "release.json" \
+    "current_public_release.tag_object" \
+    "c93422f7925b9ab82e82aa3c52ebb823de8df184"
+
+assert_json_value \
+    "release metadata keeps live URL" \
+    "release.json" \
+    "website.live_url" \
+    "https://zlar.ai/release.json"
+
+assert_contains_fixed \
+    "release metadata keeps receipt invariant" \
+    "release.json" \
+    "A log records what happened. A ZLAR receipt records what counted as authorized effect"
+
+assert_contains_fixed \
+    "release metadata keeps terminal-chain command" \
+    "release.json" \
+    "zlar protected-records-installed-runtime-profile-terminal-chain --sample"
+
+assert_contains_fixed \
+    "release metadata keeps terminal-chain threshold" \
+    "release.json" \
+    "v3.4.15+ readiness requires terminal-chain artifact verification"
+
+assert_contains_fixed \
+    "release metadata keeps current-machine non-claim" \
+    "release.json" \
+    "No current-machine governance claim."
 
 assert_contains_fixed \
     "proof-pack README keeps current release pointer" \

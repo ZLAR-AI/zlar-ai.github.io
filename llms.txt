@@ -14,6 +14,7 @@ Primary pages:
 - [Defense / Military](https://zlar.ai/defense.html): command visibility, rules, people, and proof for routed actions.
 - [Founder Note](https://zlar.ai/founder-note.html): first-person statement of the threshold thesis.
 - [Sample receipt](https://zlar.ai/proof-pack.html): human-first sample receipt with optional bounded terminal verification, manifest, coverage report, hashes, verifier, PASS output, and explicit non-claims.
+- [Release metadata](https://zlar.ai/release.json): machine-readable current-release pointer for direct live-site verification.
 - [Open Memo on Action-Level Assurance](https://zlar.ai/open-memo.html): policy memo for rules before action and receipts afterward.
 - [Boundaries and Non-Claims](https://zlar.ai/boundaries.html): what passes through ZLAR, what does not, and what the sample does not prove.
 - [Archive](https://zlar.ai/archive.html): affected-person pathway, Sealed Mode, older proof pages, standards submissions, specs, legal, and earlier founder writing.
