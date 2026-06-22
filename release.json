@@ -1,16 +1,16 @@
 {
   "schema": "zlar-public-release-metadata-v1",
-  "generated_at": "2026-06-22T18:21:10Z",
+  "generated_at": "2026-06-22T19:32:48Z",
   "site": "https://zlar.ai/",
   "current_public_release": {
-    "version": "v3.4.17",
-    "title": "Terminal-chain refusal taxonomy binding",
-    "url": "https://github.com/ZLAR-AI/ZLAR/releases/tag/v3.4.17",
+    "version": "v3.4.18",
+    "title": "Service-proof artifact refusal taxonomy binding",
+    "url": "https://github.com/ZLAR-AI/ZLAR/releases/tag/v3.4.18",
     "repository": "https://github.com/ZLAR-AI/ZLAR",
-    "commit": "077b9344fbb3cb9b74447a5adbda5f275617ec77",
-    "tag": "v3.4.17",
-    "tag_object": "854bc401b7c73585ebf5af47feb6bc69dc323ac3",
-    "published_at": "2026-06-22T18:12:08Z"
+    "commit": "8e320336004e40363137faaed4368bb698eda009",
+    "tag": "v3.4.18",
+    "tag_object": "49852ed174783a6a6c6e6b31287540a8bdfe978f",
+    "published_at": "2026-06-22T19:30:04Z"
   },
   "website": {
     "repository": "https://github.com/ZLAR-AI/zlar-ai.github.io",
@@ -25,9 +25,11 @@
   },
   "authority_boundary": "A log records what happened. A ZLAR receipt records what counted as authorized effect when action tried to become consequence.",
   "claim_boundary": {
-    "summary": "Terminal-chain refusal taxonomy binding over the installed runtime-profile terminal-chain evidence path.",
+    "summary": "Service-proof artifact refusal taxonomy binding over the installed runtime-profile service-proof artifact verification path.",
+    "service_proof_command": "zlar protected-records-installed-runtime-profile-service-proof --sample",
+    "service_proof_artifact_verification_command": "zlar protected-records-installed-runtime-profile-service-proof verify --sample --json",
     "terminal_chain_command": "zlar protected-records-installed-runtime-profile-terminal-chain --sample",
-    "evidence_threshold": "v3.4.17+ readiness and proof-smoke preserve terminal-chain refusal taxonomy SHA-256 binding.",
+    "evidence_threshold": "v3.4.18+ readiness, proof-smoke, private verifier intake, and release-forward dry-run checks preserve service-proof artifact-verification refusal taxonomy SHA-256 binding.",
     "safe_codex_wording": "ZLAR can govern Codex CLI-invoked MCP tool calls when those MCP servers are routed through ZLAR.",
     "non_claims": [
       "No persistent install.",

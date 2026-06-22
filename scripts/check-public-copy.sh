@@ -170,17 +170,17 @@ assert_contains_fixed \
 assert_contains_fixed \
     "boundaries page keeps current release pointer" \
     "boundaries.html" \
-    "ZLAR v3.4.17 on GitHub"
+    "ZLAR v3.4.18 on GitHub"
 
 assert_contains_fixed \
     "proof-pack page keeps current release pointer" \
     "proof-pack.html" \
-    "ZLAR v3.4.17 on GitHub"
+    "ZLAR v3.4.18 on GitHub"
 
 assert_contains_fixed \
     "proof-pack page keeps current release boundary" \
     "proof-pack.html" \
-    "The current release binds terminal-chain refusal taxonomy through the installed runtime-profile terminal-chain evidence path"
+    "The current release binds service-proof artifact refusal taxonomy through the installed runtime-profile service-proof artifact verification path"
 
 assert_contains_fixed \
     "proof-pack page keeps terminal-chain command" \
@@ -210,12 +210,12 @@ assert_contains_fixed \
 assert_contains_fixed \
     "website README keeps current release pointer" \
     "README.md" \
-    "ZLAR v3.4.17 - Terminal-chain refusal taxonomy binding"
+    "ZLAR v3.4.18 - Service-proof artifact refusal taxonomy binding"
 
 assert_contains_fixed \
     "LLM index keeps current release pointer" \
     "llms.txt" \
-    "Current public release: ZLAR v3.4.17 - Terminal-chain refusal taxonomy binding."
+    "Current public release: ZLAR v3.4.18 - Service-proof artifact refusal taxonomy binding."
 
 assert_contains_fixed \
     "LLM index keeps release metadata pointer" \
@@ -237,25 +237,25 @@ assert_json_value \
     "release metadata keeps current release" \
     "release.json" \
     "current_public_release.version" \
-    "v3.4.17"
+    "v3.4.18"
 
 assert_json_value \
     "release metadata keeps release title" \
     "release.json" \
     "current_public_release.title" \
-    "Terminal-chain refusal taxonomy binding"
+    "Service-proof artifact refusal taxonomy binding"
 
 assert_json_value \
     "release metadata keeps release commit" \
     "release.json" \
     "current_public_release.commit" \
-    "077b9344fbb3cb9b74447a5adbda5f275617ec77"
+    "8e320336004e40363137faaed4368bb698eda009"
 
 assert_json_value \
     "release metadata keeps tag object" \
     "release.json" \
     "current_public_release.tag_object" \
-    "854bc401b7c73585ebf5af47feb6bc69dc323ac3"
+    "49852ed174783a6a6c6e6b31287540a8bdfe978f"
 
 assert_json_value \
     "release metadata keeps live URL" \
@@ -269,14 +269,24 @@ assert_contains_fixed \
     "A log records what happened. A ZLAR receipt records what counted as authorized effect"
 
 assert_contains_fixed \
-    "release metadata keeps terminal-chain command" \
+    "release metadata keeps service-proof command" \
+    "release.json" \
+    "zlar protected-records-installed-runtime-profile-service-proof --sample"
+
+assert_contains_fixed \
+    "release metadata keeps service-proof artifact verification command" \
+    "release.json" \
+    "zlar protected-records-installed-runtime-profile-service-proof verify --sample --json"
+
+assert_contains_fixed \
+    "release metadata keeps terminal-chain command as prior boundary" \
     "release.json" \
     "zlar protected-records-installed-runtime-profile-terminal-chain --sample"
 
 assert_contains_fixed \
-    "release metadata keeps terminal-chain threshold" \
+    "release metadata keeps service-proof artifact taxonomy threshold" \
     "release.json" \
-    "v3.4.17+ readiness and proof-smoke preserve terminal-chain refusal taxonomy SHA-256 binding"
+    "v3.4.18+ readiness, proof-smoke, private verifier intake, and release-forward dry-run checks preserve service-proof artifact-verification refusal taxonomy SHA-256 binding"
 
 assert_contains_fixed \
     "release metadata keeps current-machine non-claim" \
@@ -286,12 +296,12 @@ assert_contains_fixed \
 assert_contains_fixed \
     "proof-pack README keeps current release pointer" \
     "demo/proof-pack/README.md" \
-    "ZLAR v3.4.17 - Terminal-chain refusal taxonomy binding."
+    "ZLAR v3.4.18 - Service-proof artifact refusal taxonomy binding."
 
 assert_contains_fixed \
     "proof-pack manifest keeps current release pointer" \
     "demo/proof-pack/proof-pack-manifest.json" \
-    "\"current_public_release\": \"v3.4.17\""
+    "\"current_public_release\": \"v3.4.18\""
 
 assert_contains_fixed \
     "proof-pack manifest keeps verifier target boundary" \
@@ -321,22 +331,22 @@ assert_contains_fixed \
 assert_contains_fixed \
     "architecture archive keeps current release pointer" \
     "architecture.html" \
-    "Current public release: ZLAR v3.4.17 - Terminal-chain refusal taxonomy binding."
+    "Current public release: ZLAR v3.4.18 - Service-proof artifact refusal taxonomy binding."
 
 assert_contains_fixed \
     "CAISI archive keeps current release boundary" \
     "caisi-submission.html" \
-    "The current release binds terminal-chain refusal taxonomy through the installed runtime-profile terminal-chain evidence path"
+    "The current release binds service-proof artifact refusal taxonomy through the installed runtime-profile service-proof artifact verification path"
 
 assert_contains_fixed \
     "CAISI metadata keeps current claim boundary" \
     "caisi-submission.html" \
-    "Current ZLAR public claims are bounded by v3.4.17"
+    "Current ZLAR public claims are bounded by v3.4.18"
 
 assert_contains_fixed \
     "fail-open archive keeps current release boundary" \
     "fail-open.html" \
-    "The current release binds terminal-chain refusal taxonomy through the installed runtime-profile terminal-chain evidence path"
+    "The current release binds service-proof artifact refusal taxonomy through the installed runtime-profile service-proof artifact verification path"
 
 assert_contains_fixed \
     "boundaries page keeps records.write terminal proof boundary" \
@@ -351,7 +361,7 @@ assert_contains_fixed \
 assert_contains_fixed \
     "boundaries page keeps current release boundary" \
     "boundaries.html" \
-    "The current release binds terminal-chain refusal taxonomy through the installed runtime-profile terminal-chain evidence path"
+    "The current release binds service-proof artifact refusal taxonomy through the installed runtime-profile service-proof artifact verification path"
 
 assert_contains_fixed \
     "boundaries page keeps terminal-chain command" \
@@ -807,6 +817,10 @@ assert_no_public_regex \
 assert_no_public_regex \
     "public copy must not preserve stale v3.4.10 current-release boundary" \
     'ZLAR v3[.]4[.]10 on GitHub|Current public release:[[:space:]]*ZLAR v3[.]4[.]10|Current ZLAR public claims are bounded by v3[.]4[.]10|releases/tag/v3[.]4[.]10|"current_public_release": "v3[.]4[.]10"|The current release adds Product Proof Path readiness intake|The current v3[.]4[.]10 release publishes'
+
+assert_no_public_regex \
+    "public copy must not preserve stale v3.4.17 current-release boundary" \
+    'ZLAR v3[.]4[.]17 on GitHub|Current public release:[[:space:]]*ZLAR v3[.]4[.]17|Current ZLAR public claims are bounded by v3[.]4[.]17|releases/tag/v3[.]4[.]17|"current_public_release": "v3[.]4[.]17"|The current release binds terminal-chain refusal taxonomy'
 
 assert_no_public_regex \
     "public copy must not claim unconditional Telegram or phone approval routing" \

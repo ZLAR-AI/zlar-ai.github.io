@@ -4,7 +4,7 @@ This public bundle is a fake/scratch proof-pack example for zlar.ai. It is desig
 
 Current public release:
 
-ZLAR v3.4.17 - Terminal-chain refusal taxonomy binding.
+ZLAR v3.4.18 - Service-proof artifact refusal taxonomy binding.
 
 Claim ceiling:
 
