@@ -4,7 +4,7 @@ This public bundle is a fake/scratch proof-pack example for zlar.ai. It is desig
 
 Current public release:
 
-ZLAR v3.4.43 - Release-forward contract parser repair.
+ZLAR v3.4.44 - Product Proof Path artifact binding.
 
 Claim ceiling:
 
