@@ -392,7 +392,6 @@ assert_proof_pack_bundle_verifies() {
 RELEASE_METADATA_GENERATED_AT="$(read_json_value "release.json" "generated_at")"
 CURRENT_RELEASE_VERSION="$(read_json_value "release.json" "current_public_release.version")"
 CURRENT_RELEASE_TITLE="$(read_json_value "release.json" "current_public_release.title")"
-CURRENT_RELEASE_TITLE_LOWER="$(printf '%s' "${CURRENT_RELEASE_TITLE}" | tr '[:upper:]' '[:lower:]')"
 CURRENT_RELEASE_URL="$(read_json_value "release.json" "current_public_release.url")"
 CURRENT_RELEASE_COMMIT="$(read_json_value "release.json" "current_public_release.commit")"
 CURRENT_RELEASE_TAG_OBJECT="$(read_json_value "release.json" "current_public_release.tag_object")"
@@ -400,7 +399,7 @@ CURRENT_RELEASE_POINTER="ZLAR ${CURRENT_RELEASE_VERSION} - ${CURRENT_RELEASE_TIT
 CURRENT_RELEASE_GITHUB_POINTER="ZLAR ${CURRENT_RELEASE_VERSION} on GitHub"
 CURRENT_RELEASE_LLM_POINTER="Current public release: ${CURRENT_RELEASE_POINTER}."
 CURRENT_RELEASE_CLAIM_BOUNDARY="Current ZLAR public claims are bounded by ${CURRENT_RELEASE_VERSION}"
-CURRENT_RELEASE_CHECK_THRESHOLD="${CURRENT_RELEASE_VERSION} release checks pass with ${CURRENT_RELEASE_TITLE_LOWER}"
+CURRENT_RELEASE_CHECK_THRESHOLD="${CURRENT_RELEASE_VERSION} release checks pass with ${CURRENT_RELEASE_TITLE}"
 
 echo "=== Website Public-Copy Guard ==="
 
@@ -452,7 +451,7 @@ assert_contains_fixed \
 assert_contains_fixed \
     "proof-pack page keeps current release boundary" \
     "proof-pack.html" \
-    "The current release preserves release_forward_report_contract as a canonical release-forward report contract manifest"
+    "${CURRENT_RELEASE_CHECK_THRESHOLD}"
 
 assert_contains_fixed \
     "proof-pack page keeps release-forward report contract manifest field" \
@@ -1139,7 +1138,7 @@ assert_contains_fixed \
 assert_contains_fixed \
     "CAISI archive keeps current release boundary" \
     "caisi-submission.html" \
-    "The current release preserves release_forward_report_contract as a canonical release-forward report contract manifest"
+    "${CURRENT_RELEASE_CHECK_THRESHOLD}"
 
 assert_contains_fixed \
     "CAISI metadata keeps current claim boundary" \
@@ -1149,7 +1148,7 @@ assert_contains_fixed \
 assert_contains_fixed \
     "fail-open archive keeps current release boundary" \
     "fail-open.html" \
-    "The current release preserves release_forward_report_contract as a canonical release-forward report contract manifest"
+    "${CURRENT_RELEASE_CHECK_THRESHOLD}"
 
 assert_contains_fixed \
     "boundaries page keeps records.write terminal proof boundary" \
@@ -1164,7 +1163,7 @@ assert_contains_fixed \
 assert_contains_fixed \
     "boundaries page keeps current release boundary" \
     "boundaries.html" \
-    "The current release preserves release_forward_report_contract as a canonical release-forward report contract manifest"
+    "${CURRENT_RELEASE_CHECK_THRESHOLD}"
 
 assert_contains_fixed \
     "boundaries page keeps release-forward report contract type" \
