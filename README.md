@@ -41,7 +41,7 @@ Do not edit these files unless the sample bundle is intentionally regenerated an
 
 ## Claim Boundary
 
-Current public release: [ZLAR v3.4.30 - Verifier-owned nested binding summary](https://github.com/ZLAR-AI/ZLAR/releases/tag/v3.4.30).
+Current public release: [ZLAR v3.4.31 - Verifier-kit release asset live read](https://github.com/ZLAR-AI/ZLAR/releases/tag/v3.4.31).
 
 ZLAR governs routed/intercepted action surfaces only. Safe Codex wording:
 

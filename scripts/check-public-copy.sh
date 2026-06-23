@@ -452,7 +452,7 @@ assert_contains_fixed \
 assert_contains_fixed \
     "proof-pack page keeps current release boundary" \
     "proof-pack.html" \
-    "The current release preserves verifier-owned terminal-chain nested binding evidence"
+    "The current release preserves verifier-kit release asset live-read evidence"
 
 assert_contains_fixed \
     "proof-pack page keeps forged inner preflight and service hash refusal" \
@@ -755,7 +755,7 @@ assert_contains_fixed \
 assert_contains_fixed \
     "CAISI archive keeps current release boundary" \
     "caisi-submission.html" \
-    "The current release preserves verifier-owned terminal-chain nested binding evidence"
+    "The current release preserves verifier-kit release asset live-read evidence"
 
 assert_contains_fixed \
     "CAISI metadata keeps current claim boundary" \
@@ -765,7 +765,7 @@ assert_contains_fixed \
 assert_contains_fixed \
     "fail-open archive keeps current release boundary" \
     "fail-open.html" \
-    "The current release preserves verifier-owned terminal-chain nested binding evidence"
+    "The current release preserves verifier-kit release asset live-read evidence"
 
 assert_contains_fixed \
     "boundaries page keeps records.write terminal proof boundary" \
@@ -780,7 +780,7 @@ assert_contains_fixed \
 assert_contains_fixed \
     "boundaries page keeps current release boundary" \
     "boundaries.html" \
-    "The current release preserves verifier-owned terminal-chain nested binding evidence"
+    "The current release preserves verifier-kit release asset live-read evidence"
 
 assert_contains_fixed \
     "boundaries page keeps recognition-contract digest field" \
