@@ -455,6 +455,16 @@ assert_contains_fixed \
     "The current release surfaces terminal-chain-local trusted-issuer registry refusal summaries"
 
 assert_contains_fixed \
+    "proof-pack page keeps release-forward manifest preservation" \
+    "proof-pack.html" \
+    "DRY-RUN-MANIFEST.json"
+
+assert_contains_fixed \
+    "proof-pack page keeps release-forward result preservation" \
+    "proof-pack.html" \
+    "DRY-RUN-RESULT.md"
+
+assert_contains_fixed \
     "proof-pack page keeps current registry refusal case ID" \
     "proof-pack.html" \
     "unrecognized_terminal_chain_registry_scope_refused"
@@ -463,6 +473,20 @@ assert_contains_fixed \
     "proof-pack page keeps current registry refusal reason code" \
     "proof-pack.html" \
     "scope_not_found"
+
+assert_contains_fixed \
+    "proof-pack page keeps trusted registry refusal preservation flag" \
+    "proof-pack.html" \
+    "all_trusted_issuer_registry_recognition_refusals_preserved=true"
+
+assert_contains_fixed \
+    "proof-pack page keeps v3.4.38 negative threshold" \
+    "proof-pack.html" \
+    "v3.4.38 targets omit these release-forward summary fields"
+
+assert_no_public_regex \
+    "current release must not use stale v3.4.39 registry summary wording" \
+    "current release surfaces terminal-chain-local trusted-issuer registry refusal summaries as first-class evaluator fields"
 
 assert_contains_fixed \
     "proof-pack page keeps terminal-chain registry binding field" \
@@ -692,6 +716,26 @@ assert_contains_fixed \
     "release metadata keeps recognition group threshold" \
     "release.json" \
     "${CURRENT_RELEASE_CHECK_THRESHOLD}"
+
+assert_contains_fixed \
+    "release metadata keeps release-forward manifest preservation" \
+    "release.json" \
+    "DRY-RUN-MANIFEST.json"
+
+assert_contains_fixed \
+    "release metadata keeps release-forward result preservation" \
+    "release.json" \
+    "DRY-RUN-RESULT.md"
+
+assert_contains_fixed \
+    "release metadata keeps trusted registry refusal preservation flag" \
+    "release.json" \
+    "all_trusted_issuer_registry_recognition_refusals_preserved=true"
+
+assert_contains_fixed \
+    "release metadata keeps v3.4.38 negative threshold" \
+    "release.json" \
+    "v3.4.38 targets omit these release-forward summary fields"
 
 assert_contains_fixed \
     "release metadata keeps forged inner preflight and service hash refusal" \
