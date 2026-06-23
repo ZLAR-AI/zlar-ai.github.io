@@ -41,7 +41,7 @@ Do not edit these files unless the sample bundle is intentionally regenerated an
 
 ## Claim Boundary
 
-Current public release: [ZLAR v3.4.32 - Release-asset readiness handoff](https://github.com/ZLAR-AI/ZLAR/releases/tag/v3.4.32).
+Current public release: [ZLAR v3.4.33 - Issuer-status evidence reviewability](https://github.com/ZLAR-AI/ZLAR/releases/tag/v3.4.33).
 
 ZLAR governs routed/intercepted action surfaces only. Safe Codex wording:
 
