@@ -452,12 +452,32 @@ assert_contains_fixed \
 assert_contains_fixed \
     "proof-pack page keeps current release boundary" \
     "proof-pack.html" \
-    "The current release makes private result verification evidence first-class"
+    "The current release makes trusted-issuer registry recognition evidence first-class"
 
 assert_contains_fixed \
     "proof-pack page keeps private result verification section" \
     "proof-pack.html" \
     "Private Result Verification Evidence"
+
+assert_contains_fixed \
+    "proof-pack page keeps registry recognition evidence section" \
+    "proof-pack.html" \
+    "Trusted Issuer Registry Recognition Evidence"
+
+assert_contains_fixed \
+    "proof-pack page keeps registry recognition manifest field" \
+    "proof-pack.html" \
+    "trusted_issuer_registry_recognition_evidence"
+
+assert_contains_fixed \
+    "proof-pack page keeps bundled local registry boundary" \
+    "proof-pack.html" \
+    "registry_evidence_model=bundled-local-fixture"
+
+assert_contains_fixed \
+    "proof-pack page keeps malformed registry fail-closed boundary" \
+    "proof-pack.html" \
+    "malformed_registry_fail_closed_before_verdict=true"
 
 assert_contains_fixed \
     "proof-pack page keeps private non-operator sample boundary" \
@@ -765,7 +785,7 @@ assert_contains_fixed \
 assert_contains_fixed \
     "CAISI archive keeps current release boundary" \
     "caisi-submission.html" \
-    "The current release makes private result verification evidence first-class"
+    "The current release makes trusted-issuer registry recognition evidence first-class"
 
 assert_contains_fixed \
     "CAISI metadata keeps current claim boundary" \
@@ -775,7 +795,7 @@ assert_contains_fixed \
 assert_contains_fixed \
     "fail-open archive keeps current release boundary" \
     "fail-open.html" \
-    "The current release makes private result verification evidence first-class"
+    "The current release makes trusted-issuer registry recognition evidence first-class"
 
 assert_contains_fixed \
     "boundaries page keeps records.write terminal proof boundary" \
@@ -790,12 +810,27 @@ assert_contains_fixed \
 assert_contains_fixed \
     "boundaries page keeps current release boundary" \
     "boundaries.html" \
-    "The current release makes private result verification evidence first-class"
+    "The current release makes trusted-issuer registry recognition evidence first-class"
 
 assert_contains_fixed \
     "boundaries page keeps private result verification section" \
     "boundaries.html" \
     "Private Result Verification Evidence"
+
+assert_contains_fixed \
+    "boundaries page keeps registry recognition evidence section" \
+    "boundaries.html" \
+    "Trusted Issuer Registry Recognition Evidence"
+
+assert_contains_fixed \
+    "boundaries page keeps registry recognition manifest field" \
+    "boundaries.html" \
+    "trusted_issuer_registry_recognition_evidence"
+
+assert_contains_fixed \
+    "boundaries page keeps no live registry claim" \
+    "boundaries.html" \
+    "proves_live_registry=false"
 
 assert_contains_fixed \
     "boundaries page keeps recognition-contract digest field" \
@@ -1287,6 +1322,10 @@ assert_no_public_regex \
 assert_no_public_regex \
     "public copy must not preserve stale v3.4.33 current-release pointer" \
     'ZLAR v3[.]4[.]33 on GitHub|Current public release:.*ZLAR v3[.]4[.]33([^0-9+]|$)|Current ZLAR public claims are bounded by v3[.]4[.]33([^0-9+]|$)|releases/tag/v3[.]4[.]33|"current_public_release": "v3[.]4[.]33"|ZLAR v3[.]4[.]33</h3>|v3[.]4[.]33 release</a>|The current release makes issuer-status fixture evidence first-class'
+
+assert_no_public_regex \
+    "public copy must not preserve stale v3.4.34 current-release pointer" \
+    'ZLAR v3[.]4[.]34 on GitHub|Current public release:.*ZLAR v3[.]4[.]34([^0-9+]|$)|Current ZLAR public claims are bounded by v3[.]4[.]34([^0-9+]|$)|releases/tag/v3[.]4[.]34|"current_public_release": "v3[.]4[.]34"|ZLAR v3[.]4[.]34</h3>|v3[.]4[.]34 release</a>|The current release makes private result verification evidence first-class'
 
 assert_no_public_regex \
     "public copy must not claim unconditional Telegram or phone approval routing" \
