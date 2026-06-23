@@ -713,6 +713,36 @@ assert_contains_fixed \
     "${CURRENT_RELEASE_TITLE}"
 
 assert_contains_fixed \
+    "proof-pack manifest keeps registry recognition evidence section" \
+    "demo/proof-pack/proof-pack-manifest.json" \
+    "Trusted Issuer Registry Recognition Evidence"
+
+assert_contains_fixed \
+    "proof-pack manifest keeps registry recognition manifest field" \
+    "demo/proof-pack/proof-pack-manifest.json" \
+    "trusted_issuer_registry_recognition_evidence"
+
+assert_contains_fixed \
+    "proof-pack manifest keeps exact malformed registry artifact name" \
+    "demo/proof-pack/proof-pack-manifest.json" \
+    "zlar-trusted-receipt-issuer-recognition-malformed-registry.json"
+
+assert_contains_fixed \
+    "proof-pack manifest keeps exact malformed registry error artifact name" \
+    "demo/proof-pack/proof-pack-manifest.json" \
+    "zlar-trusted-receipt-issuer-recognition-malformed-registry-error.txt"
+
+assert_contains_fixed \
+    "proof-pack manifest keeps no live registry claim" \
+    "demo/proof-pack/proof-pack-manifest.json" \
+    "proves_live_registry=false"
+
+assert_contains_fixed \
+    "proof-pack manifest keeps malformed registry fail-closed boundary" \
+    "demo/proof-pack/proof-pack-manifest.json" \
+    "malformed_registry_fail_closed_before_verdict=true"
+
+assert_contains_fixed \
     "proof-pack manifest keeps nested artifact binding" \
     "demo/proof-pack/proof-pack-manifest.json" \
     "nested_artifacts"
@@ -1326,6 +1356,10 @@ assert_no_public_regex \
 assert_no_public_regex \
     "public copy must not preserve stale v3.4.34 current-release pointer" \
     'ZLAR v3[.]4[.]34 on GitHub|Current public release:.*ZLAR v3[.]4[.]34([^0-9+]|$)|Current ZLAR public claims are bounded by v3[.]4[.]34([^0-9+]|$)|releases/tag/v3[.]4[.]34|"current_public_release": "v3[.]4[.]34"|ZLAR v3[.]4[.]34</h3>|v3[.]4[.]34 release</a>|The current release makes private result verification evidence first-class'
+
+assert_no_public_regex \
+    "public copy must not shorten trusted issuer malformed-registry artifact names" \
+    'zlar-trusted-receipt-issuer-malformed-registry'
 
 assert_no_public_regex \
     "public copy must not claim unconditional Telegram or phone approval routing" \
