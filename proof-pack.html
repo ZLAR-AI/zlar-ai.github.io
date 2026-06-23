@@ -92,6 +92,7 @@ cd zlar-proof-pack-v0-scratch
 mkdir -p evidence
 
 curl -fsSLO https://zlar.ai/demo/proof-pack/README.md
+curl -fsSLO https://zlar.ai/release.json
 curl -fsSLO https://zlar.ai/demo/proof-pack/proof-pack-manifest.json
 curl -fsSLO https://zlar.ai/demo/proof-pack/SHA256SUMS
 curl -fsSLO https://zlar.ai/demo/proof-pack/verify-proof-pack.mjs
@@ -125,6 +126,7 @@ node verify-proof-pack.mjs</code></pre>
         </div>
         <div class="download-list" aria-label="Sample receipt file downloads">
           <a href="demo/proof-pack/README.md" download>README</a>
+          <a href="release.json" download>Release Metadata</a>
           <a href="demo/proof-pack/proof-pack-manifest.json" download>Manifest</a>
           <a href="demo/proof-pack/SHA256SUMS" download>SHA256SUMS</a>
           <a href="demo/proof-pack/verify-proof-pack.mjs" download>Verifier</a>
@@ -143,7 +145,8 @@ node verify-proof-pack.mjs</code></pre>
             The output should show every downloaded file as OK, followed by PASS lines for the manifest, claim ceiling, coverage type, hashes, non-claims, privacy flags, and text scans.
           </p>
         </div>
-        <pre class="terminal"><code>README.md: OK
+        <pre class="terminal"><code>release.json: OK
+README.md: OK
 proof-pack-manifest.json: OK
 evidence/governed-profile-coverage-report.json: OK
 evidence/governed-profile-coverage-report.txt: OK
@@ -152,6 +155,10 @@ verify-proof-pack.mjs: OK
 <span class="pass">PASS</span> manifest claim ceiling
 <span class="pass">PASS</span> coverage report type
 <span class="pass">PASS</span> coverage claim ceiling
+<span class="pass">PASS</span> release metadata safe claim ceiling
+<span class="pass">PASS</span> manifest release version matches release metadata
+<span class="pass">PASS</span> manifest release URL matches release metadata
+<span class="pass">PASS</span> manifest release metadata timestamp matches release metadata
 <span class="pass">PASS</span> hashes match manifest entries
 <span class="pass">PASS</span> non-claims present
 <span class="pass">PASS</span> privacy flags are false

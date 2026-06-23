@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 import { createHash } from 'node:crypto';
-import { readFileSync } from 'node:fs';
+import { existsSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
 
 const SAFE_CLAIM =
@@ -49,6 +49,16 @@ function readJson(path) {
   return JSON.parse(readText(path));
 }
 
+function readFirstJson(paths, label) {
+  for (const path of paths) {
+    if (existsSync(path)) {
+      return readJson(path);
+    }
+  }
+
+  throw new Error(`missing ${label}: checked ${paths.join(', ')}`);
+}
+
 function sha256(path) {
   return createHash('sha256').update(readFileSync(path)).digest('hex');
 }
@@ -81,11 +91,34 @@ const manifest = readJson(manifestPath);
 const coverage = readJson(coverageJsonPath);
 const coverageText = readText(coverageTextPath);
 const readme = readText(readmePath);
+const release = readFirstJson(
+  [
+    join(root, 'release.json'),
+    join(root, '..', '..', 'release.json'),
+  ],
+  'release metadata'
+);
+const currentRelease = release.current_public_release || {};
+const releaseSafeClaim = release.claim_boundary?.safe_codex_wording;
 
 assert(manifest.pack_type === 'zlar-proof-pack-v0', 'proof-pack manifest type');
 assert(manifest.claim_ceiling === SAFE_CLAIM, 'manifest claim ceiling');
 assert(coverage.report_type === 'governed-profile-coverage-v0', 'coverage report type');
 assert(coverage.safe_claim_ceiling === SAFE_CLAIM, 'coverage claim ceiling');
+assert(releaseSafeClaim === SAFE_CLAIM, 'release metadata safe claim ceiling');
+assert(manifest.current_public_release === currentRelease.version, 'manifest release version matches release metadata');
+assert(manifest.current_public_release_url === currentRelease.url, 'manifest release URL matches release metadata');
+assert(manifest.release_metadata_updated_at === release.generated_at, 'manifest release metadata timestamp matches release metadata');
+assert(manifest.claim_ceiling === releaseSafeClaim, 'manifest claim ceiling matches release metadata');
+assert(coverage.safe_claim_ceiling === releaseSafeClaim, 'coverage claim ceiling matches release metadata');
+assert(
+  readme.includes(`ZLAR ${currentRelease.version} - ${currentRelease.title}.`),
+  'README release pointer matches release metadata'
+);
+assert(
+  manifest.current_public_release_boundary.includes(currentRelease.title),
+  'manifest release boundary title matches release metadata'
+);
 assert(manifest.evidence.governed_profile_coverage_report.json_sha256 === sha256(coverageJsonPath), 'coverage JSON hash matches manifest');
 assert(manifest.evidence.governed_profile_coverage_report.text_sha256 === sha256(coverageTextPath), 'coverage text hash matches manifest');
 

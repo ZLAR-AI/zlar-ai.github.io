@@ -88,6 +88,33 @@ NODE
     fi
 }
 
+read_json_value() {
+    local path="$1"
+    local pointer="$2"
+
+    JSON_PATH="${path}" JSON_POINTER="${pointer}" node <<'NODE'
+const fs = require('node:fs');
+
+const jsonPath = process.env.JSON_PATH;
+const pointer = process.env.JSON_POINTER;
+const data = JSON.parse(fs.readFileSync(jsonPath, 'utf8'));
+
+let value = data;
+for (const part of pointer.split('.').filter(Boolean)) {
+  if (!value || !Object.prototype.hasOwnProperty.call(value, part)) {
+    throw new Error(`missing ${pointer}`);
+  }
+  value = value[part];
+}
+
+if (value === null || typeof value === 'undefined') {
+  throw new Error(`${pointer} is null or undefined`);
+}
+
+process.stdout.write(String(value));
+NODE
+}
+
 assert_no_public_regex() {
     local label="$1"
     local pattern="$2"
@@ -280,6 +307,101 @@ NODE
     fi
 }
 
+assert_release_boundary_manifest() {
+    local label="$1"
+    TOTAL=$((TOTAL + 1))
+
+    local output rc
+    set +e
+    output=$(node <<'NODE'
+const fs = require('node:fs');
+
+const release = JSON.parse(fs.readFileSync('release.json', 'utf8'));
+const manifest = JSON.parse(fs.readFileSync('demo/proof-pack/proof-pack-manifest.json', 'utf8'));
+const coverage = JSON.parse(fs.readFileSync('demo/proof-pack/evidence/governed-profile-coverage-report.json', 'utf8'));
+const readme = fs.readFileSync('demo/proof-pack/README.md', 'utf8');
+
+const current = release.current_public_release || {};
+const safeClaim = release.claim_boundary?.safe_codex_wording;
+
+function requireEqual(name, actual, expected) {
+  if (actual !== expected) {
+    throw new Error(`${name} expected ${expected} but got ${actual}`);
+  }
+}
+
+function requireIncludes(name, body, needle) {
+  if (!String(body).includes(needle)) {
+    throw new Error(`${name} missing ${needle}`);
+  }
+}
+
+requireEqual('proof-pack current release', manifest.current_public_release, current.version);
+requireEqual('proof-pack current release URL', manifest.current_public_release_url, current.url);
+requireEqual('proof-pack release metadata timestamp', manifest.release_metadata_updated_at, release.generated_at);
+requireEqual('proof-pack claim ceiling', manifest.claim_ceiling, safeClaim);
+requireEqual('coverage safe claim ceiling', coverage.safe_claim_ceiling, safeClaim);
+requireIncludes('proof-pack README release pointer', readme, `ZLAR ${current.version} - ${current.title}.`);
+requireIncludes('proof-pack boundary title', manifest.current_public_release_boundary, current.title);
+requireIncludes('release evidence threshold', release.claim_boundary?.evidence_threshold || '', `${current.version} release checks pass`);
+NODE
+)
+    rc=$?
+    set -e
+
+    if [ "${rc}" -eq 0 ]; then
+        pass
+    else
+        fail "${label}" "${output}"
+    fi
+}
+
+assert_proof_pack_bundle_verifies() {
+    local label="$1"
+    TOTAL=$((TOTAL + 1))
+
+    local tmpdir output rc
+    tmpdir="$(mktemp -d)"
+    set +e
+    output=$(
+        cp release.json "${tmpdir}/release.json" &&
+        cp demo/proof-pack/README.md "${tmpdir}/README.md" &&
+        cp demo/proof-pack/proof-pack-manifest.json "${tmpdir}/proof-pack-manifest.json" &&
+        cp demo/proof-pack/SHA256SUMS "${tmpdir}/SHA256SUMS" &&
+        cp demo/proof-pack/verify-proof-pack.mjs "${tmpdir}/verify-proof-pack.mjs" &&
+        mkdir -p "${tmpdir}/evidence" &&
+        cp demo/proof-pack/evidence/governed-profile-coverage-report.json "${tmpdir}/evidence/governed-profile-coverage-report.json" &&
+        cp demo/proof-pack/evidence/governed-profile-coverage-report.txt "${tmpdir}/evidence/governed-profile-coverage-report.txt" &&
+        (
+            cd "${tmpdir}" &&
+            shasum -a 256 -c SHA256SUMS &&
+            node verify-proof-pack.mjs
+        ) 2>&1
+    )
+    rc=$?
+    rm -rf "${tmpdir}"
+    set -e
+
+    if [ "${rc}" -eq 0 ]; then
+        pass
+    else
+        fail "${label}" "${output}"
+    fi
+}
+
+RELEASE_METADATA_GENERATED_AT="$(read_json_value "release.json" "generated_at")"
+CURRENT_RELEASE_VERSION="$(read_json_value "release.json" "current_public_release.version")"
+CURRENT_RELEASE_TITLE="$(read_json_value "release.json" "current_public_release.title")"
+CURRENT_RELEASE_TITLE_LOWER="$(printf '%s' "${CURRENT_RELEASE_TITLE}" | tr '[:upper:]' '[:lower:]')"
+CURRENT_RELEASE_URL="$(read_json_value "release.json" "current_public_release.url")"
+CURRENT_RELEASE_COMMIT="$(read_json_value "release.json" "current_public_release.commit")"
+CURRENT_RELEASE_TAG_OBJECT="$(read_json_value "release.json" "current_public_release.tag_object")"
+CURRENT_RELEASE_POINTER="ZLAR ${CURRENT_RELEASE_VERSION} - ${CURRENT_RELEASE_TITLE}"
+CURRENT_RELEASE_GITHUB_POINTER="ZLAR ${CURRENT_RELEASE_VERSION} on GitHub"
+CURRENT_RELEASE_LLM_POINTER="Current public release: ${CURRENT_RELEASE_POINTER}."
+CURRENT_RELEASE_CLAIM_BOUNDARY="Current ZLAR public claims are bounded by ${CURRENT_RELEASE_VERSION}"
+CURRENT_RELEASE_CHECK_THRESHOLD="${CURRENT_RELEASE_VERSION} release checks pass with ${CURRENT_RELEASE_TITLE_LOWER}"
+
 echo "=== Website Public-Copy Guard ==="
 
 assert_contains_fixed \
@@ -300,12 +422,32 @@ assert_contains_fixed \
 assert_contains_fixed \
     "boundaries page keeps current release pointer" \
     "boundaries.html" \
-    "ZLAR v3.4.30 on GitHub"
+    "${CURRENT_RELEASE_GITHUB_POINTER}"
 
 assert_contains_fixed \
     "proof-pack page keeps current release pointer" \
     "proof-pack.html" \
-    "ZLAR v3.4.30 on GitHub"
+    "${CURRENT_RELEASE_GITHUB_POINTER}"
+
+assert_contains_fixed \
+    "proof-pack page downloads release metadata" \
+    "proof-pack.html" \
+    "curl -fsSLO https://zlar.ai/release.json"
+
+assert_contains_fixed \
+    "proof-pack sidecar hashes release metadata" \
+    "demo/proof-pack/SHA256SUMS" \
+    "release.json"
+
+assert_contains_fixed \
+    "proof-pack page links release metadata" \
+    "proof-pack.html" \
+    "Release Metadata"
+
+assert_contains_fixed \
+    "proof-pack page shows release metadata agreement checks" \
+    "proof-pack.html" \
+    "manifest release version matches release metadata"
 
 assert_contains_fixed \
     "proof-pack page keeps current release boundary" \
@@ -375,12 +517,12 @@ assert_contains_fixed \
 assert_contains_fixed \
     "website README keeps current release pointer" \
     "README.md" \
-    "ZLAR v3.4.30 - Verifier-owned nested binding summary"
+    "${CURRENT_RELEASE_POINTER}"
 
 assert_contains_fixed \
     "LLM index keeps current release pointer" \
     "llms.txt" \
-    "Current public release: ZLAR v3.4.30 - Verifier-owned nested binding summary."
+    "${CURRENT_RELEASE_LLM_POINTER}"
 
 assert_contains_fixed \
     "LLM index keeps release metadata pointer" \
@@ -402,25 +544,25 @@ assert_json_value \
     "release metadata keeps current release" \
     "release.json" \
     "current_public_release.version" \
-    "v3.4.30"
+    "${CURRENT_RELEASE_VERSION}"
 
 assert_json_value \
     "release metadata keeps release title" \
     "release.json" \
     "current_public_release.title" \
-    "Verifier-owned nested binding summary"
+    "${CURRENT_RELEASE_TITLE}"
 
 assert_json_value \
     "release metadata keeps release commit" \
     "release.json" \
     "current_public_release.commit" \
-    "457b313b3bece53e34bf2fe4c8478568cc4b7d6d"
+    "${CURRENT_RELEASE_COMMIT}"
 
 assert_json_value \
     "release metadata keeps tag object" \
     "release.json" \
     "current_public_release.tag_object" \
-    "29239a8102f58b077fa7d5982be610e500dfd82c"
+    "${CURRENT_RELEASE_TAG_OBJECT}"
 
 assert_latest_release_metadata_fresh \
     "release metadata matches GitHub latest release and tag"
@@ -454,7 +596,7 @@ assert_contains_fixed \
 assert_contains_fixed \
     "release metadata keeps recognition group threshold" \
     "release.json" \
-    "v3.4.30 release checks pass with verifier-owned nested binding summary"
+    "${CURRENT_RELEASE_CHECK_THRESHOLD}"
 
 assert_contains_fixed \
     "release metadata keeps forged inner preflight and service hash refusal" \
@@ -501,21 +643,34 @@ assert_contains_fixed \
     "release.json" \
     "No current-machine governance claim."
 
+assert_release_boundary_manifest \
+    "release boundary manifest agrees with proof-pack mirror"
+
+assert_proof_pack_bundle_verifies \
+    "downloadable proof-pack bundle verifies against release metadata"
+
 assert_contains_fixed \
     "proof-pack README keeps current release pointer" \
     "demo/proof-pack/README.md" \
-    "ZLAR v3.4.30 - Verifier-owned nested binding summary."
+    "${CURRENT_RELEASE_POINTER}."
 
-assert_contains_fixed \
+assert_json_value \
     "proof-pack manifest keeps current release pointer" \
     "demo/proof-pack/proof-pack-manifest.json" \
-    "\"current_public_release\": \"v3.4.30\""
+    "current_public_release" \
+    "${CURRENT_RELEASE_VERSION}"
+
+assert_json_value \
+    "proof-pack manifest keeps current release URL" \
+    "demo/proof-pack/proof-pack-manifest.json" \
+    "current_public_release_url" \
+    "${CURRENT_RELEASE_URL}"
 
 assert_json_value \
     "proof-pack manifest keeps release metadata timestamp" \
     "demo/proof-pack/proof-pack-manifest.json" \
     "release_metadata_updated_at" \
-    "2026-06-23T03:46:05Z"
+    "${RELEASE_METADATA_GENERATED_AT}"
 
 assert_contains_fixed \
     "proof-pack manifest keeps readiness case-ID report contract" \
@@ -525,7 +680,7 @@ assert_contains_fixed \
 assert_contains_fixed \
     "proof-pack manifest keeps verifier target boundary" \
     "demo/proof-pack/proof-pack-manifest.json" \
-    "Verifier-owned nested binding summary"
+    "${CURRENT_RELEASE_TITLE}"
 
 assert_contains_fixed \
     "proof-pack manifest keeps nested artifact binding" \
@@ -595,7 +750,7 @@ assert_contains_fixed \
 assert_contains_fixed \
     "architecture archive keeps current release pointer" \
     "architecture.html" \
-    "Current public release: ZLAR v3.4.30 - Verifier-owned nested binding summary."
+    "${CURRENT_RELEASE_LLM_POINTER}"
 
 assert_contains_fixed \
     "CAISI archive keeps current release boundary" \
@@ -605,7 +760,7 @@ assert_contains_fixed \
 assert_contains_fixed \
     "CAISI metadata keeps current claim boundary" \
     "caisi-submission.html" \
-    "Current ZLAR public claims are bounded by v3.4.30"
+    "${CURRENT_RELEASE_CLAIM_BOUNDARY}"
 
 assert_contains_fixed \
     "fail-open archive keeps current release boundary" \
