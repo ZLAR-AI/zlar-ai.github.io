@@ -1,16 +1,16 @@
 {
   "schema": "zlar-public-release-metadata-v1",
-  "generated_at": "2026-06-23T00:08:46Z",
+  "generated_at": "2026-06-23T00:52:50Z",
   "site": "https://zlar.ai/",
   "current_public_release": {
-    "version": "v3.4.24",
-    "title": "Release-forward recognition case IDs",
-    "url": "https://github.com/ZLAR-AI/ZLAR/releases/tag/v3.4.24",
+    "version": "v3.4.25",
+    "title": "Readiness recognition case-ID contract",
+    "url": "https://github.com/ZLAR-AI/ZLAR/releases/tag/v3.4.25",
     "repository": "https://github.com/ZLAR-AI/ZLAR",
-    "commit": "a799ac49f2716dc36e0347cfffa08b12e340c0a5",
-    "tag": "v3.4.24",
-    "tag_object": "babfb2d0a7e0f42a745434f8208fa2294eac186b",
-    "published_at": "2026-06-22T23:57:17Z"
+    "commit": "2ccbaab89563b2f92f1dbf4ab780474e570bdc5b",
+    "tag": "v3.4.25",
+    "tag_object": "80c496c4ffcf1ff0ffbc0d4b62090a4b791d3b0c",
+    "published_at": "2026-06-23T00:44:46Z"
   },
   "website": {
     "repository": "https://github.com/ZLAR-AI/zlar-ai.github.io",
@@ -25,11 +25,11 @@
   },
   "authority_boundary": "A log records what happened. A ZLAR receipt records what counted as authorized effect when action tried to become consequence.",
   "claim_boundary": {
-    "summary": "Release-forward terminal-chain recognition-refusal group case IDs while preserving the v3.4.23 recognition-refusal group evidence, the v3.4.22 named receipt-refusal evidence, the v3.4.21 verifier-kit diagnostics boundary, and the v3.4.19 recognition-contract digest boundary.",
+    "summary": "Readiness and proof-smoke terminal-chain recognition-refusal group case-ID contract while preserving the v3.4.24 release-forward manifest case-ID evidence, the v3.4.23 recognition-refusal group evidence, the v3.4.22 named receipt-refusal evidence, the v3.4.21 verifier-kit diagnostics boundary, and the v3.4.19 recognition-contract digest boundary.",
     "service_proof_command": "zlar protected-records-installed-runtime-profile-service-proof --sample",
     "service_proof_artifact_verification_command": "zlar protected-records-installed-runtime-profile-service-proof verify --sample --json",
     "terminal_chain_command": "zlar protected-records-installed-runtime-profile-terminal-chain --sample",
-    "evidence_threshold": "v3.4.24 release checks pass with release-forward terminal-chain recognition-refusal group case-id preservation; v3.4.24+ release-forward verifier packets preserve terminal_chain_refusal_evidence, recognition_refusal_group_case_ids, recognition_refusal_group_case_ids_required=true, and all_recognition_refusal_group_case_ids_preserved=true for no usable recognized receipt authority, recognized receipt scope mismatch, and route/request authority material refusal groups. v3.4.23+ release-forward dry-run checks still preserve recognition_refusal_groups_sha256 and grouped before-mutation booleans. v3.4.22+ release-forward dry-run checks still preserve named_receipt_refusals_sha256 and named refusal booleans for missing, invalid, stale, unknown-issuer, wrong-policy, wrong-domain, and wrong-tool receipt cases. v3.4.21+ release-forward dry-run checks still preserve zlar-verifier-kit-external-runner-diagnostics-v1.json, and v3.4.19+ readiness, proof-smoke, and release-forward dry-run checks still preserve installed-runtime-profile recognition-contract SHA-256 binding.",
+    "evidence_threshold": "v3.4.25 release checks pass with proof-smoke and North Star readiness terminal-chain recognition-refusal group case-ID report-contract preservation; v3.4.25+ proof-smoke and North Star readiness preserve group_count=3, case_count=18, and exact grouped case IDs for both terminal-chain evidence and terminal-chain artifact verification. v3.4.24+ release-forward verifier packets still preserve terminal_chain_refusal_evidence, recognition_refusal_group_case_ids, recognition_refusal_group_case_ids_required=true, and all_recognition_refusal_group_case_ids_preserved=true for no usable recognized receipt authority, recognized receipt scope mismatch, and route/request authority material refusal groups. v3.4.23+ release-forward dry-run checks still preserve recognition_refusal_groups_sha256 and grouped before-mutation booleans. v3.4.22+ release-forward dry-run checks still preserve named_receipt_refusals_sha256 and named refusal booleans for missing, invalid, stale, unknown-issuer, wrong-policy, wrong-domain, and wrong-tool receipt cases. v3.4.21+ release-forward dry-run checks still preserve zlar-verifier-kit-external-runner-diagnostics-v1.json, and v3.4.19+ readiness, proof-smoke, and release-forward dry-run checks still preserve installed-runtime-profile recognition-contract SHA-256 binding.",
     "safe_codex_wording": "ZLAR can govern Codex CLI-invoked MCP tool calls when those MCP servers are routed through ZLAR.",
     "non_claims": [
       "No persistent install.",

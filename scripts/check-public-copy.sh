@@ -170,17 +170,22 @@ assert_contains_fixed \
 assert_contains_fixed \
     "boundaries page keeps current release pointer" \
     "boundaries.html" \
-    "ZLAR v3.4.24 on GitHub"
+    "ZLAR v3.4.25 on GitHub"
 
 assert_contains_fixed \
     "proof-pack page keeps current release pointer" \
     "proof-pack.html" \
-    "ZLAR v3.4.24 on GitHub"
+    "ZLAR v3.4.25 on GitHub"
 
 assert_contains_fixed \
     "proof-pack page keeps current release boundary" \
     "proof-pack.html" \
-    "The current release preserves release-forward terminal-chain recognition-refusal group case IDs"
+    "The current release preserves the release-forward report contract for terminal-chain recognition-refusal group case IDs"
+
+assert_contains_fixed \
+    "proof-pack page keeps readiness case-ID report contract" \
+    "proof-pack.html" \
+    "v3.4.25+ proof-smoke and North Star readiness preserve \`group_count=3\`, \`case_count=18\`, and exact grouped case IDs"
 
 assert_contains_fixed \
     "proof-pack page keeps terminal-chain refusal evidence field" \
@@ -235,12 +240,12 @@ assert_contains_fixed \
 assert_contains_fixed \
     "website README keeps current release pointer" \
     "README.md" \
-    "ZLAR v3.4.24 - Release-forward recognition case IDs"
+    "ZLAR v3.4.25 - Readiness recognition case-ID contract"
 
 assert_contains_fixed \
     "LLM index keeps current release pointer" \
     "llms.txt" \
-    "Current public release: ZLAR v3.4.24 - Release-forward recognition case IDs."
+    "Current public release: ZLAR v3.4.25 - Readiness recognition case-ID contract."
 
 assert_contains_fixed \
     "LLM index keeps release metadata pointer" \
@@ -262,25 +267,25 @@ assert_json_value \
     "release metadata keeps current release" \
     "release.json" \
     "current_public_release.version" \
-    "v3.4.24"
+    "v3.4.25"
 
 assert_json_value \
     "release metadata keeps release title" \
     "release.json" \
     "current_public_release.title" \
-    "Release-forward recognition case IDs"
+    "Readiness recognition case-ID contract"
 
 assert_json_value \
     "release metadata keeps release commit" \
     "release.json" \
     "current_public_release.commit" \
-    "a799ac49f2716dc36e0347cfffa08b12e340c0a5"
+    "2ccbaab89563b2f92f1dbf4ab780474e570bdc5b"
 
 assert_json_value \
     "release metadata keeps tag object" \
     "release.json" \
     "current_public_release.tag_object" \
-    "babfb2d0a7e0f42a745434f8208fa2294eac186b"
+    "80c496c4ffcf1ff0ffbc0d4b62090a4b791d3b0c"
 
 assert_json_value \
     "release metadata keeps live URL" \
@@ -311,7 +316,12 @@ assert_contains_fixed \
 assert_contains_fixed \
     "release metadata keeps recognition group threshold" \
     "release.json" \
-    "v3.4.24 release checks pass with release-forward terminal-chain recognition-refusal group case-id preservation"
+    "v3.4.25 release checks pass with proof-smoke and North Star readiness terminal-chain recognition-refusal group case-ID report-contract preservation"
+
+assert_contains_fixed \
+    "release metadata keeps readiness case-ID report contract" \
+    "release.json" \
+    "v3.4.25+ proof-smoke and North Star readiness preserve group_count=3, case_count=18, and exact grouped case IDs"
 
 assert_contains_fixed \
     "release metadata keeps recognition group case-ID field" \
@@ -346,17 +356,22 @@ assert_contains_fixed \
 assert_contains_fixed \
     "proof-pack README keeps current release pointer" \
     "demo/proof-pack/README.md" \
-    "ZLAR v3.4.24 - Release-forward recognition case IDs."
+    "ZLAR v3.4.25 - Readiness recognition case-ID contract."
 
 assert_contains_fixed \
     "proof-pack manifest keeps current release pointer" \
     "demo/proof-pack/proof-pack-manifest.json" \
-    "\"current_public_release\": \"v3.4.24\""
+    "\"current_public_release\": \"v3.4.25\""
+
+assert_contains_fixed \
+    "proof-pack manifest keeps readiness case-ID report contract" \
+    "demo/proof-pack/proof-pack-manifest.json" \
+    "v3.4.25+ proof-smoke and North Star readiness preserve group_count=3, case_count=18, and exact grouped case IDs"
 
 assert_contains_fixed \
     "proof-pack manifest keeps verifier target boundary" \
     "demo/proof-pack/proof-pack-manifest.json" \
-    "Release-forward recognition case IDs"
+    "Readiness recognition case-ID contract"
 
 assert_contains_fixed \
     "proof-pack manifest keeps terminal-chain refusal evidence field" \
@@ -406,22 +421,22 @@ assert_contains_fixed \
 assert_contains_fixed \
     "architecture archive keeps current release pointer" \
     "architecture.html" \
-    "Current public release: ZLAR v3.4.24 - Release-forward recognition case IDs."
+    "Current public release: ZLAR v3.4.25 - Readiness recognition case-ID contract."
 
 assert_contains_fixed \
     "CAISI archive keeps current release boundary" \
     "caisi-submission.html" \
-    "The current release preserves release-forward terminal-chain recognition-refusal group case IDs"
+    "The current release preserves the release-forward report contract for terminal-chain recognition-refusal group case IDs"
 
 assert_contains_fixed \
     "CAISI metadata keeps current claim boundary" \
     "caisi-submission.html" \
-    "Current ZLAR public claims are bounded by v3.4.24"
+    "Current ZLAR public claims are bounded by v3.4.25"
 
 assert_contains_fixed \
     "fail-open archive keeps current release boundary" \
     "fail-open.html" \
-    "The current release preserves release-forward terminal-chain recognition-refusal group case IDs"
+    "The current release preserves the release-forward report contract for terminal-chain recognition-refusal group case IDs"
 
 assert_contains_fixed \
     "boundaries page keeps records.write terminal proof boundary" \
@@ -436,7 +451,7 @@ assert_contains_fixed \
 assert_contains_fixed \
     "boundaries page keeps current release boundary" \
     "boundaries.html" \
-    "The current release preserves release-forward terminal-chain recognition-refusal group case IDs"
+    "The current release preserves the release-forward report contract for terminal-chain recognition-refusal group case IDs"
 
 assert_contains_fixed \
     "boundaries page keeps recognition-contract digest field" \
@@ -908,6 +923,10 @@ assert_no_public_regex \
 assert_no_public_regex \
     "public copy must not preserve stale v3.4.23 current-release boundary" \
     'ZLAR v3[.]4[.]23 on GitHub|Current public release:[[:space:]]*ZLAR v3[.]4[.]23|Current ZLAR public claims are bounded by v3[.]4[.]23|releases/tag/v3[.]4[.]23|"current_public_release": "v3[.]4[.]23"|ZLAR v3[.]4[.]23</h3>|Terminal-chain recognition refusal groups'
+
+assert_no_public_regex \
+    "public copy must not preserve stale v3.4.24 current-release boundary" \
+    'ZLAR v3[.]4[.]24 on GitHub|Current public release:[[:space:]]*ZLAR v3[.]4[.]24|Current ZLAR public claims are bounded by v3[.]4[.]24|releases/tag/v3[.]4[.]24|"current_public_release": "v3[.]4[.]24"|ZLAR v3[.]4[.]24</h3>|Release-forward recognition case IDs'
 
 assert_no_public_regex \
     "public copy must not claim unconditional Telegram or phone approval routing" \
