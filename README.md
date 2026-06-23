@@ -41,7 +41,7 @@ Do not edit these files unless the sample bundle is intentionally regenerated an
 
 ## Claim Boundary
 
-Current public release: [ZLAR v3.4.40 - Release-forward registry refusal summaries](https://github.com/ZLAR-AI/ZLAR/releases/tag/v3.4.40).
+Current public release: [ZLAR v3.4.41 - Release-forward report contract manifest](https://github.com/ZLAR-AI/ZLAR/releases/tag/v3.4.41).
 
 ZLAR governs routed/intercepted action surfaces only. Safe Codex wording:
 

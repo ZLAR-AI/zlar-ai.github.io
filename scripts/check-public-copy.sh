@@ -452,7 +452,32 @@ assert_contains_fixed \
 assert_contains_fixed \
     "proof-pack page keeps current release boundary" \
     "proof-pack.html" \
-    "The current release surfaces terminal-chain-local trusted-issuer registry refusal summaries"
+    "The current release preserves release_forward_report_contract as a canonical release-forward report contract manifest"
+
+assert_contains_fixed \
+    "proof-pack page keeps release-forward report contract manifest field" \
+    "proof-pack.html" \
+    "release_forward_report_contract"
+
+assert_contains_fixed \
+    "proof-pack page keeps release-forward report contract type" \
+    "proof-pack.html" \
+    "zlar-release-forward-dry-run-report-contract-v1"
+
+assert_contains_fixed \
+    "proof-pack page keeps release-forward report contract result prefix" \
+    "proof-pack.html" \
+    "manifest.release_forward_report_contract.*"
+
+assert_contains_fixed \
+    "proof-pack page keeps report contract satisfied flag" \
+    "proof-pack.html" \
+    "report_contract_satisfied=true"
+
+assert_contains_fixed \
+    "proof-pack page keeps manifest canonical flag" \
+    "proof-pack.html" \
+    "manifest_is_canonical=true"
 
 assert_contains_fixed \
     "proof-pack page keeps release-forward manifest preservation" \
@@ -483,6 +508,11 @@ assert_contains_fixed \
     "proof-pack page keeps v3.4.38 negative threshold" \
     "proof-pack.html" \
     "v3.4.38 targets omit these release-forward summary fields"
+
+assert_contains_fixed \
+    "proof-pack page keeps v3.4.40 report contract negative threshold" \
+    "proof-pack.html" \
+    "v3.4.40 targets omit release_forward_report_contract"
 
 assert_no_public_regex \
     "current release must not use stale v3.4.39 registry summary wording" \
@@ -723,6 +753,31 @@ assert_contains_fixed \
     "DRY-RUN-MANIFEST.json"
 
 assert_contains_fixed \
+    "release metadata keeps release-forward report contract manifest field" \
+    "release.json" \
+    "release_forward_report_contract"
+
+assert_contains_fixed \
+    "release metadata keeps release-forward report contract type" \
+    "release.json" \
+    "zlar-release-forward-dry-run-report-contract-v1"
+
+assert_contains_fixed \
+    "release metadata keeps release-forward report contract result prefix" \
+    "release.json" \
+    "manifest.release_forward_report_contract.*"
+
+assert_contains_fixed \
+    "release metadata keeps report contract satisfied flag" \
+    "release.json" \
+    "report_contract_satisfied=true"
+
+assert_contains_fixed \
+    "release metadata keeps manifest canonical flag" \
+    "release.json" \
+    "manifest_is_canonical=true"
+
+assert_contains_fixed \
     "release metadata keeps release-forward result preservation" \
     "release.json" \
     "DRY-RUN-RESULT.md"
@@ -736,6 +791,11 @@ assert_contains_fixed \
     "release metadata keeps v3.4.38 negative threshold" \
     "release.json" \
     "v3.4.38 targets omit these release-forward summary fields"
+
+assert_contains_fixed \
+    "release metadata keeps v3.4.40 report contract negative threshold" \
+    "release.json" \
+    "v3.4.40 targets omit release_forward_report_contract"
 
 assert_contains_fixed \
     "release metadata keeps forged inner preflight and service hash refusal" \
@@ -885,6 +945,31 @@ assert_contains_fixed \
     "proof-pack manifest keeps verifier target boundary" \
     "demo/proof-pack/proof-pack-manifest.json" \
     "${CURRENT_RELEASE_TITLE}"
+
+assert_contains_fixed \
+    "proof-pack manifest keeps release-forward report contract manifest field" \
+    "demo/proof-pack/proof-pack-manifest.json" \
+    "release_forward_report_contract"
+
+assert_contains_fixed \
+    "proof-pack manifest keeps release-forward report contract type" \
+    "demo/proof-pack/proof-pack-manifest.json" \
+    "zlar-release-forward-dry-run-report-contract-v1"
+
+assert_contains_fixed \
+    "proof-pack manifest keeps release-forward report contract result prefix" \
+    "demo/proof-pack/proof-pack-manifest.json" \
+    "manifest.release_forward_report_contract.*"
+
+assert_contains_fixed \
+    "proof-pack manifest keeps report contract satisfied flag" \
+    "demo/proof-pack/proof-pack-manifest.json" \
+    "report_contract_satisfied=true"
+
+assert_contains_fixed \
+    "proof-pack manifest keeps manifest canonical flag" \
+    "demo/proof-pack/proof-pack-manifest.json" \
+    "manifest_is_canonical=true"
 
 assert_contains_fixed \
     "proof-pack manifest keeps terminal-chain registry binding field" \
@@ -1054,7 +1139,7 @@ assert_contains_fixed \
 assert_contains_fixed \
     "CAISI archive keeps current release boundary" \
     "caisi-submission.html" \
-    "The current release surfaces terminal-chain-local trusted-issuer registry refusal summaries"
+    "The current release preserves release_forward_report_contract as a canonical release-forward report contract manifest"
 
 assert_contains_fixed \
     "CAISI metadata keeps current claim boundary" \
@@ -1064,7 +1149,7 @@ assert_contains_fixed \
 assert_contains_fixed \
     "fail-open archive keeps current release boundary" \
     "fail-open.html" \
-    "The current release surfaces terminal-chain-local trusted-issuer registry refusal summaries"
+    "The current release preserves release_forward_report_contract as a canonical release-forward report contract manifest"
 
 assert_contains_fixed \
     "boundaries page keeps records.write terminal proof boundary" \
@@ -1079,7 +1164,12 @@ assert_contains_fixed \
 assert_contains_fixed \
     "boundaries page keeps current release boundary" \
     "boundaries.html" \
-    "The current release surfaces terminal-chain-local trusted-issuer registry refusal summaries"
+    "The current release preserves release_forward_report_contract as a canonical release-forward report contract manifest"
+
+assert_contains_fixed \
+    "boundaries page keeps release-forward report contract type" \
+    "boundaries.html" \
+    "zlar-release-forward-dry-run-report-contract-v1"
 
 assert_contains_fixed \
     "boundaries page keeps current registry refusal case ID" \
@@ -1661,6 +1751,10 @@ assert_no_public_regex \
 assert_no_public_regex \
     "public copy must not preserve stale v3.4.38 current-release pointer" \
     'ZLAR v3[.]4[.]38 on GitHub|Current public release:.*ZLAR v3[.]4[.]38([^0-9+]|$)|Current ZLAR public claims are bounded by v3[.]4[.]38([^0-9+]|$)|releases/tag/v3[.]4[.]38">ZLAR v3[.]4[.]38|releases/tag/v3[.]4[.]38">v3[.]4[.]38 release|"current_public_release": "v3[.]4[.]38"|The current release adds terminal-chain-local trusted-issuer registry refusal evidence|Terminal-chain registry refusal boundary while preserving terminal-chain registry recognition'
+
+assert_no_public_regex \
+    "public copy must not preserve stale v3.4.40 current-release pointer" \
+    'ZLAR v3[.]4[.]40 on GitHub|Current public release:.*ZLAR v3[.]4[.]40([^0-9+]|$)|Current ZLAR public claims are bounded by v3[.]4[.]40([^0-9+]|$)|releases/tag/v3[.]4[.]40">ZLAR v3[.]4[.]40|releases/tag/v3[.]4[.]40">v3[.]4[.]40 release|"current_public_release": "v3[.]4[.]40"|The current release surfaces terminal-chain-local trusted-issuer registry refusal summaries'
 
 assert_no_public_regex \
     "public copy must not shorten trusted issuer malformed-registry artifact names" \
