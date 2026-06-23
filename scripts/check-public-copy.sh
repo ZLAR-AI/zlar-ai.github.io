@@ -452,7 +452,7 @@ assert_contains_fixed \
 assert_contains_fixed \
     "proof-pack page keeps current release boundary" \
     "proof-pack.html" \
-    "The current release preserves verifier-kit release asset live-read evidence"
+    "The current release hardens release-asset readiness handoff"
 
 assert_contains_fixed \
     "proof-pack page keeps forged inner preflight and service hash refusal" \
@@ -755,7 +755,7 @@ assert_contains_fixed \
 assert_contains_fixed \
     "CAISI archive keeps current release boundary" \
     "caisi-submission.html" \
-    "The current release preserves verifier-kit release asset live-read evidence"
+    "The current release hardens release-asset readiness handoff"
 
 assert_contains_fixed \
     "CAISI metadata keeps current claim boundary" \
@@ -765,7 +765,7 @@ assert_contains_fixed \
 assert_contains_fixed \
     "fail-open archive keeps current release boundary" \
     "fail-open.html" \
-    "The current release preserves verifier-kit release asset live-read evidence"
+    "The current release hardens release-asset readiness handoff"
 
 assert_contains_fixed \
     "boundaries page keeps records.write terminal proof boundary" \
@@ -780,7 +780,7 @@ assert_contains_fixed \
 assert_contains_fixed \
     "boundaries page keeps current release boundary" \
     "boundaries.html" \
-    "The current release preserves verifier-kit release asset live-read evidence"
+    "The current release hardens release-asset readiness handoff"
 
 assert_contains_fixed \
     "boundaries page keeps recognition-contract digest field" \
@@ -1264,6 +1264,10 @@ assert_no_public_regex \
 assert_no_public_regex \
     "public copy must not preserve stale v3.4.28 current-release pointer" \
     'ZLAR v3[.]4[.]28 on GitHub|Current public release:[[:space:]]*ZLAR v3[.]4[.]28([^0-9+]|$)|Current ZLAR public claims are bounded by v3[.]4[.]28([^0-9+]|$)|releases/tag/v3[.]4[.]28|"current_public_release": "v3[.]4[.]28"|ZLAR v3[.]4[.]28</h3>|v3[.]4[.]28 release</a>|The current release preserves terminal-chain nested artifact binding'
+
+assert_no_public_regex \
+    "public copy must not preserve stale v3.4.31 current-release pointer" \
+    'ZLAR v3[.]4[.]31 on GitHub|Current public release:[[:space:]]*ZLAR v3[.]4[.]31([^0-9+]|$)|Current ZLAR public claims are bounded by v3[.]4[.]31([^0-9+]|$)|releases/tag/v3[.]4[.]31|"current_public_release": "v3[.]4[.]31"|ZLAR v3[.]4[.]31</h3>|v3[.]4[.]31 release</a>|Verifier-kit release asset live read'
 
 assert_no_public_regex \
     "public copy must not claim unconditional Telegram or phone approval routing" \

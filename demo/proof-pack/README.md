@@ -4,7 +4,7 @@ This public bundle is a fake/scratch proof-pack example for zlar.ai. It is desig
 
 Current public release:
 
-ZLAR v3.4.31 - Verifier-kit release asset live read.
+ZLAR v3.4.32 - Release-asset readiness handoff.
 
 Claim ceiling:
 
