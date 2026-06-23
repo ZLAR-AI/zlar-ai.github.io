@@ -452,7 +452,32 @@ assert_contains_fixed \
 assert_contains_fixed \
     "proof-pack page keeps current release boundary" \
     "proof-pack.html" \
-    "The current release makes the Product Proof Path trusted-issuer registry recognition component first-class"
+    "The current release binds terminal-chain trusted-issuer registry recognition"
+
+assert_contains_fixed \
+    "proof-pack page keeps terminal-chain registry binding field" \
+    "proof-pack.html" \
+    "terminal_chain_trusted_issuer_registry_recognition_binding"
+
+assert_contains_fixed \
+    "proof-pack page keeps registry receipt contract hash binding" \
+    "proof-pack.html" \
+    "registry_receipt_contract_hash_bound=true"
+
+assert_contains_fixed \
+    "proof-pack page keeps no registry public key material boundary" \
+    "proof-pack.html" \
+    "registry_public_key_material_included=false"
+
+assert_contains_fixed \
+    "proof-pack page keeps no receipt envelope boundary" \
+    "proof-pack.html" \
+    "receipt_envelope_included=false"
+
+assert_contains_fixed \
+    "proof-pack page keeps artifact cryptographic evidence non-reproducibility boundary" \
+    "proof-pack.html" \
+    "cryptographic_evidence_reproducible_from_artifact=false"
 
 assert_contains_fixed \
     "proof-pack page keeps product proof registry component field" \
@@ -895,7 +920,7 @@ assert_contains_fixed \
 assert_contains_fixed \
     "CAISI archive keeps current release boundary" \
     "caisi-submission.html" \
-    "The current release makes the Product Proof Path trusted-issuer registry recognition component first-class"
+    "The current release binds terminal-chain trusted-issuer registry recognition"
 
 assert_contains_fixed \
     "CAISI metadata keeps current claim boundary" \
@@ -905,7 +930,7 @@ assert_contains_fixed \
 assert_contains_fixed \
     "fail-open archive keeps current release boundary" \
     "fail-open.html" \
-    "The current release makes the Product Proof Path trusted-issuer registry recognition component first-class"
+    "The current release binds terminal-chain trusted-issuer registry recognition"
 
 assert_contains_fixed \
     "boundaries page keeps records.write terminal proof boundary" \
@@ -920,7 +945,17 @@ assert_contains_fixed \
 assert_contains_fixed \
     "boundaries page keeps current release boundary" \
     "boundaries.html" \
-    "The current release makes the Product Proof Path trusted-issuer registry recognition component first-class"
+    "The current release binds terminal-chain trusted-issuer registry recognition"
+
+assert_contains_fixed \
+    "boundaries page keeps terminal-chain registry binding field" \
+    "boundaries.html" \
+    "terminal_chain_trusted_issuer_registry_recognition_binding"
+
+assert_contains_fixed \
+    "boundaries page keeps no receipt envelope boundary" \
+    "boundaries.html" \
+    "receipt_envelope_included=false"
 
 assert_contains_fixed \
     "boundaries page keeps product proof registry component field" \
@@ -1470,6 +1505,10 @@ assert_no_public_regex \
 assert_no_public_regex \
     "public copy must not preserve stale v3.4.35 current-release pointer" \
     'ZLAR v3[.]4[.]35 on GitHub|Current public release:.*ZLAR v3[.]4[.]35([^0-9+]|$)|Current ZLAR public claims are bounded by v3[.]4[.]35([^0-9+]|$)|releases/tag/v3[.]4[.]35|"current_public_release": "v3[.]4[.]35"|ZLAR v3[.]4[.]35</h3>|v3[.]4[.]35 release</a>|The current release makes trusted-issuer registry recognition evidence first-class'
+
+assert_no_public_regex \
+    "public copy must not preserve stale v3.4.36 current-release pointer" \
+    'ZLAR v3[.]4[.]36 on GitHub|Current public release:.*ZLAR v3[.]4[.]36([^0-9+]|$)|Current ZLAR public claims are bounded by v3[.]4[.]36([^0-9+]|$)|"current_public_release": "v3[.]4[.]36"|ZLAR v3[.]4[.]36</h3>|v3[.]4[.]36 release</a>|The current release makes the Product Proof Path trusted-issuer registry recognition component first-class'
 
 assert_no_public_regex \
     "public copy must not shorten trusted issuer malformed-registry artifact names" \

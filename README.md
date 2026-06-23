@@ -41,7 +41,7 @@ Do not edit these files unless the sample bundle is intentionally regenerated an
 
 ## Claim Boundary
 
-Current public release: [ZLAR v3.4.36 - Product proof registry recognition component](https://github.com/ZLAR-AI/ZLAR/releases/tag/v3.4.36).
+Current public release: [ZLAR v3.4.37 - Terminal-chain registry recognition boundary](https://github.com/ZLAR-AI/ZLAR/releases/tag/v3.4.37).
 
 ZLAR governs routed/intercepted action surfaces only. Safe Codex wording:
 

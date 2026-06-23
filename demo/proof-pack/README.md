@@ -4,7 +4,7 @@ This public bundle is a fake/scratch proof-pack example for zlar.ai. It is desig
 
 Current public release:
 
-ZLAR v3.4.36 - Product proof registry recognition component.
+ZLAR v3.4.37 - Terminal-chain registry recognition boundary.
 
 Claim ceiling:
 
