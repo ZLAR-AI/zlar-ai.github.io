@@ -300,22 +300,22 @@ assert_contains_fixed \
 assert_contains_fixed \
     "boundaries page keeps current release pointer" \
     "boundaries.html" \
-    "ZLAR v3.4.29 on GitHub"
+    "ZLAR v3.4.30 on GitHub"
 
 assert_contains_fixed \
     "proof-pack page keeps current release pointer" \
     "proof-pack.html" \
-    "ZLAR v3.4.29 on GitHub"
+    "ZLAR v3.4.30 on GitHub"
 
 assert_contains_fixed \
     "proof-pack page keeps current release boundary" \
     "proof-pack.html" \
-    "The current release exports terminal-chain nested preflight refusal evidence"
+    "The current release preserves verifier-owned terminal-chain nested binding evidence"
 
 assert_contains_fixed \
     "proof-pack page keeps forged inner preflight and service hash refusal" \
     "proof-pack.html" \
-    "release-forward dry-run exports terminal_chain_refusal_evidence.nested_artifact_binding with forged_inner_preflight_hash_refused=true and forged_inner_service_hash_refused=true after refusing forged inner preflight and service-proof hashes while recomputing outer terminal-chain artifact integrity"
+    "release-forward dry-run exports terminal_chain_refusal_evidence.nested_artifact_tamper_refusals with forged_inner_preflight_hash_refused=true and forged_inner_service_hash_refused=true after refusing forged inner preflight and service-proof hashes while recomputing outer terminal-chain artifact integrity"
 
 assert_contains_fixed \
     "proof-pack page keeps readiness case-ID report contract" \
@@ -360,7 +360,7 @@ assert_contains_fixed \
 assert_contains_fixed \
     "proof-pack page keeps recognition-group evidence boundary" \
     "proof-pack.html" \
-    "local disposable terminal-chain nested preflight refusal evidence, installed-runtime-profile recognition-refusal group case-id, recognition-refusal group, named-refusal, and recognition-contract evidence only"
+    "local disposable verifier-owned terminal-chain nested binding summary and tamper-refusal evidence, installed-runtime-profile recognition-refusal group case-id, recognition-refusal group, named-refusal, and recognition-contract evidence only"
 
 assert_contains_fixed \
     "proof-pack page keeps product proof path command" \
@@ -375,12 +375,12 @@ assert_contains_fixed \
 assert_contains_fixed \
     "website README keeps current release pointer" \
     "README.md" \
-    "ZLAR v3.4.29 - Terminal-chain nested preflight refusal export"
+    "ZLAR v3.4.30 - Verifier-owned nested binding summary"
 
 assert_contains_fixed \
     "LLM index keeps current release pointer" \
     "llms.txt" \
-    "Current public release: ZLAR v3.4.29 - Terminal-chain nested preflight refusal export."
+    "Current public release: ZLAR v3.4.30 - Verifier-owned nested binding summary."
 
 assert_contains_fixed \
     "LLM index keeps release metadata pointer" \
@@ -402,25 +402,25 @@ assert_json_value \
     "release metadata keeps current release" \
     "release.json" \
     "current_public_release.version" \
-    "v3.4.29"
+    "v3.4.30"
 
 assert_json_value \
     "release metadata keeps release title" \
     "release.json" \
     "current_public_release.title" \
-    "Terminal-chain nested preflight refusal export"
+    "Verifier-owned nested binding summary"
 
 assert_json_value \
     "release metadata keeps release commit" \
     "release.json" \
     "current_public_release.commit" \
-    "4667e4f51e8eb750f4e63bfe3a026fc67e9d08a5"
+    "457b313b3bece53e34bf2fe4c8478568cc4b7d6d"
 
 assert_json_value \
     "release metadata keeps tag object" \
     "release.json" \
     "current_public_release.tag_object" \
-    "cda5dec8fdcbe8d4a6eadaacf995d747d2fa114f"
+    "29239a8102f58b077fa7d5982be610e500dfd82c"
 
 assert_latest_release_metadata_fresh \
     "release metadata matches GitHub latest release and tag"
@@ -454,12 +454,12 @@ assert_contains_fixed \
 assert_contains_fixed \
     "release metadata keeps recognition group threshold" \
     "release.json" \
-    "v3.4.29 release checks pass with terminal-chain nested preflight refusal export"
+    "v3.4.30 release checks pass with verifier-owned nested binding summary"
 
 assert_contains_fixed \
     "release metadata keeps forged inner preflight and service hash refusal" \
     "release.json" \
-    "release-forward dry-run exports terminal_chain_refusal_evidence.nested_artifact_binding with forged_inner_preflight_hash_refused=true and forged_inner_service_hash_refused=true after refusing forged inner preflight and service-proof hashes while recomputing outer terminal-chain artifact integrity"
+    "release-forward dry-run exports terminal_chain_refusal_evidence.nested_artifact_tamper_refusals with forged_inner_preflight_hash_refused=true and forged_inner_service_hash_refused=true after refusing forged inner preflight and service-proof hashes while recomputing outer terminal-chain artifact integrity"
 
 assert_contains_fixed \
     "release metadata keeps observed summary threshold" \
@@ -504,12 +504,18 @@ assert_contains_fixed \
 assert_contains_fixed \
     "proof-pack README keeps current release pointer" \
     "demo/proof-pack/README.md" \
-    "ZLAR v3.4.29 - Terminal-chain nested preflight refusal export."
+    "ZLAR v3.4.30 - Verifier-owned nested binding summary."
 
 assert_contains_fixed \
     "proof-pack manifest keeps current release pointer" \
     "demo/proof-pack/proof-pack-manifest.json" \
-    "\"current_public_release\": \"v3.4.29\""
+    "\"current_public_release\": \"v3.4.30\""
+
+assert_json_value \
+    "proof-pack manifest keeps release metadata timestamp" \
+    "demo/proof-pack/proof-pack-manifest.json" \
+    "release_metadata_updated_at" \
+    "2026-06-23T03:46:05Z"
 
 assert_contains_fixed \
     "proof-pack manifest keeps readiness case-ID report contract" \
@@ -519,7 +525,7 @@ assert_contains_fixed \
 assert_contains_fixed \
     "proof-pack manifest keeps verifier target boundary" \
     "demo/proof-pack/proof-pack-manifest.json" \
-    "Terminal-chain nested preflight refusal export"
+    "Verifier-owned nested binding summary"
 
 assert_contains_fixed \
     "proof-pack manifest keeps nested artifact binding" \
@@ -529,12 +535,12 @@ assert_contains_fixed \
 assert_contains_fixed \
     "proof-pack manifest keeps forged inner preflight and service hash refusal" \
     "demo/proof-pack/proof-pack-manifest.json" \
-    "terminal_chain_refusal_evidence.nested_artifact_binding.forged_inner_preflight_hash_refused"
+    "terminal_chain_refusal_evidence.nested_artifact_tamper_refusals.forged_inner_preflight_hash_refused"
 
 assert_contains_fixed \
     "proof-pack manifest keeps forged inner service hash refusal" \
     "demo/proof-pack/proof-pack-manifest.json" \
-    "terminal_chain_refusal_evidence.nested_artifact_binding.forged_inner_service_hash_refused"
+    "terminal_chain_refusal_evidence.nested_artifact_tamper_refusals.forged_inner_service_hash_refused"
 
 assert_contains_fixed \
     "proof-pack manifest keeps observed summary boundary" \
@@ -589,22 +595,22 @@ assert_contains_fixed \
 assert_contains_fixed \
     "architecture archive keeps current release pointer" \
     "architecture.html" \
-    "Current public release: ZLAR v3.4.29 - Terminal-chain nested preflight refusal export."
+    "Current public release: ZLAR v3.4.30 - Verifier-owned nested binding summary."
 
 assert_contains_fixed \
     "CAISI archive keeps current release boundary" \
     "caisi-submission.html" \
-    "The current release exports terminal-chain nested preflight refusal evidence"
+    "The current release preserves verifier-owned terminal-chain nested binding evidence"
 
 assert_contains_fixed \
     "CAISI metadata keeps current claim boundary" \
     "caisi-submission.html" \
-    "Current ZLAR public claims are bounded by v3.4.29"
+    "Current ZLAR public claims are bounded by v3.4.30"
 
 assert_contains_fixed \
     "fail-open archive keeps current release boundary" \
     "fail-open.html" \
-    "The current release exports terminal-chain nested preflight refusal evidence"
+    "The current release preserves verifier-owned terminal-chain nested binding evidence"
 
 assert_contains_fixed \
     "boundaries page keeps records.write terminal proof boundary" \
@@ -619,7 +625,7 @@ assert_contains_fixed \
 assert_contains_fixed \
     "boundaries page keeps current release boundary" \
     "boundaries.html" \
-    "The current release exports terminal-chain nested preflight refusal evidence"
+    "The current release preserves verifier-owned terminal-chain nested binding evidence"
 
 assert_contains_fixed \
     "boundaries page keeps recognition-contract digest field" \
@@ -634,7 +640,7 @@ assert_contains_fixed \
 assert_contains_fixed \
     "boundaries page keeps recognition-group evidence boundary" \
     "boundaries.html" \
-    "local disposable terminal-chain nested preflight refusal evidence, installed-runtime-profile recognition-refusal group case-id, recognition-refusal group, named-refusal, and recognition-contract evidence only"
+    "local disposable verifier-owned terminal-chain nested binding summary and tamper-refusal evidence, installed-runtime-profile recognition-refusal group case-id, recognition-refusal group, named-refusal, and recognition-contract evidence only"
 
 assert_contains_fixed \
     "boundaries page keeps readiness verified field" \

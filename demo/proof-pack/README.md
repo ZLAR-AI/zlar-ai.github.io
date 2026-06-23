@@ -4,7 +4,7 @@ This public bundle is a fake/scratch proof-pack example for zlar.ai. It is desig
 
 Current public release:
 
-ZLAR v3.4.29 - Terminal-chain nested preflight refusal export.
+ZLAR v3.4.30 - Verifier-owned nested binding summary.
 
 Claim ceiling:
 
