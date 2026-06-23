@@ -1773,6 +1773,10 @@ assert_no_public_regex \
     'ZLAR v3[.]4[.]47 on GitHub|Current public release:.*ZLAR v3[.]4[.]47([^0-9+]|$)|Current ZLAR public claims are bounded by v3[.]4[.]47([^0-9+]|$)|releases/tag/v3[.]4[.]47">ZLAR v3[.]4[.]47|releases/tag/v3[.]4[.]47">v3[.]4[.]47 release</a> for Private intake Product Proof Path content binding|"current_public_release": "v3[.]4[.]47"|ZLAR v3[.]4[.]47</h3>'
 
 assert_no_public_regex \
+    "public copy must not preserve stale v3.4.48 current-release pointer" \
+    'ZLAR v3[.]4[.]48 on GitHub|Current public release:.*ZLAR v3[.]4[.]48([^0-9+]|$)|Current ZLAR public claims are bounded by v3[.]4[.]48([^0-9+]|$)|releases/tag/v3[.]4[.]48">ZLAR v3[.]4[.]48|releases/tag/v3[.]4[.]48">v3[.]4[.]48 release</a> for Product Proof Path deployment-profile authority bridge|"current_public_release": "v3[.]4[.]48"|ZLAR v3[.]4[.]48</h3>'
+
+assert_no_public_regex \
     "public copy must not shorten trusted issuer malformed-registry artifact names" \
     'zlar-trusted-receipt-issuer-malformed-registry'
 

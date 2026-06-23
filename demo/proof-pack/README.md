@@ -4,7 +4,7 @@ This public bundle is a fake/scratch proof-pack example for zlar.ai. It is desig
 
 Current public release:
 
-ZLAR v3.4.48 - Product Proof Path deployment-profile authority bridge.
+ZLAR v3.4.49 - Deployment-profile authority refusal contract.
 
 Claim ceiling:
 
