@@ -150,6 +150,136 @@ NODE
     fi
 }
 
+assert_latest_release_metadata_fresh() {
+    local label="$1"
+    TOTAL=$((TOTAL + 1))
+
+    local output rc
+    set +e
+    output=$(node <<'NODE'
+const fs = require('node:fs');
+const https = require('node:https');
+
+const strict = process.env.ZLAR_REQUIRE_LATEST_RELEASE_FRESHNESS === 'true';
+const release = JSON.parse(fs.readFileSync('release.json', 'utf8')).current_public_release;
+
+function fetchJson(url) {
+  const headers = {
+    'Accept': 'application/vnd.github+json',
+    'User-Agent': 'zlar-public-copy-guard',
+    'X-GitHub-Api-Version': '2022-11-28',
+  };
+
+  if (process.env.GITHUB_TOKEN) {
+    headers.Authorization = `Bearer ${process.env.GITHUB_TOKEN}`;
+  }
+
+  return fetchJsonWithRetry(url, headers);
+}
+
+function fetchJsonOnce(url, headers) {
+  return new Promise((resolve, reject) => {
+    https.get(url, { headers }, (res) => {
+      let body = '';
+      res.setEncoding('utf8');
+      res.on('data', (chunk) => {
+        body += chunk;
+      });
+      res.on('end', () => {
+        if (res.statusCode < 200 || res.statusCode >= 300) {
+          reject(new Error(`${url} returned HTTP ${res.statusCode}: ${body.slice(0, 200)}`));
+          return;
+        }
+
+        try {
+          resolve(JSON.parse(body));
+        } catch (err) {
+          reject(new Error(`${url} returned invalid JSON: ${err.message}`));
+        }
+      });
+    }).on('error', reject).setTimeout(10000, function onTimeout() {
+      this.destroy(new Error(`${url} timed out after 10000ms`));
+    });
+  });
+}
+
+function delay(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
+function isTransient(err) {
+  return /getaddrinfo|ENOTFOUND|ECONNRESET|ETIMEDOUT|EAI_AGAIN|timed out|HTTP 403|HTTP 429/.test(err.message);
+}
+
+async function fetchJsonWithRetry(url, headers) {
+  let lastErr;
+  for (let attempt = 1; attempt <= 3; attempt += 1) {
+    try {
+      return await fetchJsonOnce(url, headers);
+    } catch (err) {
+      lastErr = err;
+      if (!isTransient(err) || attempt === 3) {
+        break;
+      }
+      await delay(attempt * 1000);
+    }
+  }
+
+  throw lastErr;
+}
+
+function requireEqual(name, actual, expected) {
+  if (actual !== expected) {
+    throw new Error(`${name} expected ${expected} but got ${actual}`);
+  }
+}
+
+(async () => {
+  const latest = await fetchJson('https://api.github.com/repos/ZLAR-AI/ZLAR/releases/latest');
+  requireEqual('latest release tag', latest.tag_name, release.version);
+  requireEqual('latest release URL', latest.html_url, release.url);
+  requireEqual('latest release published_at', latest.published_at, release.published_at);
+  const expectedNames = [
+    `${release.version} - ${release.title}`,
+    `${release.version} \u2014 ${release.title}`,
+  ];
+  if (!expectedNames.includes(String(latest.name || ''))) {
+    throw new Error(`latest release name expected one of ${expectedNames.join(' / ')} but got ${latest.name}`);
+  }
+
+  const ref = await fetchJson(`https://api.github.com/repos/ZLAR-AI/ZLAR/git/ref/tags/${release.tag}`);
+  requireEqual('latest tag object', ref.object.sha, release.tag_object);
+
+  if (ref.object.type === 'tag') {
+    const tag = await fetchJson(ref.object.url);
+    requireEqual('latest tag target commit', tag.object.sha, release.commit);
+  } else {
+    requireEqual('latest lightweight tag commit', ref.object.sha, release.commit);
+  }
+})().catch((err) => {
+  if (!strict && /getaddrinfo|ENOTFOUND|ECONNRESET|ETIMEDOUT|EAI_AGAIN|timed out|HTTP 403|HTTP 429/.test(err.message)) {
+    console.log(`freshness check skipped outside strict mode: ${err.message}`);
+    process.exit(2);
+  }
+
+  console.error(err.message);
+  process.exit(1);
+});
+NODE
+)
+    rc=$?
+    set -e
+
+    if [ "${rc}" -eq 0 ]; then
+        pass
+    elif [ "${rc}" -eq 2 ] && [ "${ZLAR_REQUIRE_LATEST_RELEASE_FRESHNESS:-false}" != "true" ]; then
+        pass
+        printf '  WARN: %s\n' "${output}"
+    else
+        fail "${label}" "${output}"
+    fi
+}
+
 echo "=== Website Public-Copy Guard ==="
 
 assert_contains_fixed \
@@ -170,22 +300,22 @@ assert_contains_fixed \
 assert_contains_fixed \
     "boundaries page keeps current release pointer" \
     "boundaries.html" \
-    "ZLAR v3.4.28 on GitHub"
+    "ZLAR v3.4.29 on GitHub"
 
 assert_contains_fixed \
     "proof-pack page keeps current release pointer" \
     "proof-pack.html" \
-    "ZLAR v3.4.28 on GitHub"
+    "ZLAR v3.4.29 on GitHub"
 
 assert_contains_fixed \
     "proof-pack page keeps current release boundary" \
     "proof-pack.html" \
-    "The current release preserves terminal-chain nested artifact binding"
+    "The current release exports terminal-chain nested preflight refusal evidence"
 
 assert_contains_fixed \
-    "proof-pack page keeps forged inner service hash refusal" \
+    "proof-pack page keeps forged inner preflight and service hash refusal" \
     "proof-pack.html" \
-    "release-forward dry-run refuses forged inner service-proof hashes after recomputing outer terminal-chain artifact integrity"
+    "release-forward dry-run exports terminal_chain_refusal_evidence.nested_artifact_binding with forged_inner_preflight_hash_refused=true and forged_inner_service_hash_refused=true after refusing forged inner preflight and service-proof hashes while recomputing outer terminal-chain artifact integrity"
 
 assert_contains_fixed \
     "proof-pack page keeps readiness case-ID report contract" \
@@ -230,7 +360,7 @@ assert_contains_fixed \
 assert_contains_fixed \
     "proof-pack page keeps recognition-group evidence boundary" \
     "proof-pack.html" \
-    "local disposable terminal-chain nested artifact binding, installed-runtime-profile recognition-refusal group case-id, recognition-refusal group, named-refusal, and recognition-contract evidence only"
+    "local disposable terminal-chain nested preflight refusal evidence, installed-runtime-profile recognition-refusal group case-id, recognition-refusal group, named-refusal, and recognition-contract evidence only"
 
 assert_contains_fixed \
     "proof-pack page keeps product proof path command" \
@@ -245,12 +375,12 @@ assert_contains_fixed \
 assert_contains_fixed \
     "website README keeps current release pointer" \
     "README.md" \
-    "ZLAR v3.4.28 - Terminal-chain nested artifact binding"
+    "ZLAR v3.4.29 - Terminal-chain nested preflight refusal export"
 
 assert_contains_fixed \
     "LLM index keeps current release pointer" \
     "llms.txt" \
-    "Current public release: ZLAR v3.4.28 - Terminal-chain nested artifact binding."
+    "Current public release: ZLAR v3.4.29 - Terminal-chain nested preflight refusal export."
 
 assert_contains_fixed \
     "LLM index keeps release metadata pointer" \
@@ -272,25 +402,28 @@ assert_json_value \
     "release metadata keeps current release" \
     "release.json" \
     "current_public_release.version" \
-    "v3.4.28"
+    "v3.4.29"
 
 assert_json_value \
     "release metadata keeps release title" \
     "release.json" \
     "current_public_release.title" \
-    "Terminal-chain nested artifact binding"
+    "Terminal-chain nested preflight refusal export"
 
 assert_json_value \
     "release metadata keeps release commit" \
     "release.json" \
     "current_public_release.commit" \
-    "ae91b5625f00a38c363424edfc0193ba4153ed55"
+    "4667e4f51e8eb750f4e63bfe3a026fc67e9d08a5"
 
 assert_json_value \
     "release metadata keeps tag object" \
     "release.json" \
     "current_public_release.tag_object" \
-    "1ffcea74f9685d0b2489ff731418e2cd45722064"
+    "cda5dec8fdcbe8d4a6eadaacf995d747d2fa114f"
+
+assert_latest_release_metadata_fresh \
+    "release metadata matches GitHub latest release and tag"
 
 assert_json_value \
     "release metadata keeps live URL" \
@@ -321,12 +454,12 @@ assert_contains_fixed \
 assert_contains_fixed \
     "release metadata keeps recognition group threshold" \
     "release.json" \
-    "v3.4.28 release checks pass with terminal-chain nested artifact binding"
+    "v3.4.29 release checks pass with terminal-chain nested preflight refusal export"
 
 assert_contains_fixed \
-    "release metadata keeps forged inner service hash refusal" \
+    "release metadata keeps forged inner preflight and service hash refusal" \
     "release.json" \
-    "release-forward dry-run refuses forged inner service-proof hashes after recomputing outer terminal-chain artifact integrity"
+    "release-forward dry-run exports terminal_chain_refusal_evidence.nested_artifact_binding with forged_inner_preflight_hash_refused=true and forged_inner_service_hash_refused=true after refusing forged inner preflight and service-proof hashes while recomputing outer terminal-chain artifact integrity"
 
 assert_contains_fixed \
     "release metadata keeps observed summary threshold" \
@@ -371,12 +504,12 @@ assert_contains_fixed \
 assert_contains_fixed \
     "proof-pack README keeps current release pointer" \
     "demo/proof-pack/README.md" \
-    "ZLAR v3.4.28 - Terminal-chain nested artifact binding."
+    "ZLAR v3.4.29 - Terminal-chain nested preflight refusal export."
 
 assert_contains_fixed \
     "proof-pack manifest keeps current release pointer" \
     "demo/proof-pack/proof-pack-manifest.json" \
-    "\"current_public_release\": \"v3.4.28\""
+    "\"current_public_release\": \"v3.4.29\""
 
 assert_contains_fixed \
     "proof-pack manifest keeps readiness case-ID report contract" \
@@ -386,7 +519,7 @@ assert_contains_fixed \
 assert_contains_fixed \
     "proof-pack manifest keeps verifier target boundary" \
     "demo/proof-pack/proof-pack-manifest.json" \
-    "Terminal-chain nested artifact binding"
+    "Terminal-chain nested preflight refusal export"
 
 assert_contains_fixed \
     "proof-pack manifest keeps nested artifact binding" \
@@ -394,9 +527,14 @@ assert_contains_fixed \
     "nested_artifacts"
 
 assert_contains_fixed \
+    "proof-pack manifest keeps forged inner preflight and service hash refusal" \
+    "demo/proof-pack/proof-pack-manifest.json" \
+    "terminal_chain_refusal_evidence.nested_artifact_binding.forged_inner_preflight_hash_refused"
+
+assert_contains_fixed \
     "proof-pack manifest keeps forged inner service hash refusal" \
     "demo/proof-pack/proof-pack-manifest.json" \
-    "release_forward.terminal_chain_nested_artifact_binding.forged_inner_service_hash_refused"
+    "terminal_chain_refusal_evidence.nested_artifact_binding.forged_inner_service_hash_refused"
 
 assert_contains_fixed \
     "proof-pack manifest keeps observed summary boundary" \
@@ -451,22 +589,22 @@ assert_contains_fixed \
 assert_contains_fixed \
     "architecture archive keeps current release pointer" \
     "architecture.html" \
-    "Current public release: ZLAR v3.4.28 - Terminal-chain nested artifact binding."
+    "Current public release: ZLAR v3.4.29 - Terminal-chain nested preflight refusal export."
 
 assert_contains_fixed \
     "CAISI archive keeps current release boundary" \
     "caisi-submission.html" \
-    "The current release preserves terminal-chain nested artifact binding"
+    "The current release exports terminal-chain nested preflight refusal evidence"
 
 assert_contains_fixed \
     "CAISI metadata keeps current claim boundary" \
     "caisi-submission.html" \
-    "Current ZLAR public claims are bounded by v3.4.28"
+    "Current ZLAR public claims are bounded by v3.4.29"
 
 assert_contains_fixed \
     "fail-open archive keeps current release boundary" \
     "fail-open.html" \
-    "The current release preserves terminal-chain nested artifact binding"
+    "The current release exports terminal-chain nested preflight refusal evidence"
 
 assert_contains_fixed \
     "boundaries page keeps records.write terminal proof boundary" \
@@ -481,7 +619,7 @@ assert_contains_fixed \
 assert_contains_fixed \
     "boundaries page keeps current release boundary" \
     "boundaries.html" \
-    "The current release preserves terminal-chain nested artifact binding"
+    "The current release exports terminal-chain nested preflight refusal evidence"
 
 assert_contains_fixed \
     "boundaries page keeps recognition-contract digest field" \
@@ -496,7 +634,7 @@ assert_contains_fixed \
 assert_contains_fixed \
     "boundaries page keeps recognition-group evidence boundary" \
     "boundaries.html" \
-    "local disposable terminal-chain nested artifact binding, installed-runtime-profile recognition-refusal group case-id, recognition-refusal group, named-refusal, and recognition-contract evidence only"
+    "local disposable terminal-chain nested preflight refusal evidence, installed-runtime-profile recognition-refusal group case-id, recognition-refusal group, named-refusal, and recognition-contract evidence only"
 
 assert_contains_fixed \
     "boundaries page keeps readiness verified field" \
@@ -961,6 +1099,10 @@ assert_no_public_regex \
 assert_no_public_regex \
     "public copy must not preserve stale v3.4.25 current-release pointer" \
     'ZLAR v3[.]4[.]25 on GitHub|Current public release:[[:space:]]*ZLAR v3[.]4[.]25([^0-9+]|$)|Current ZLAR public claims are bounded by v3[.]4[.]25([^0-9+]|$)|releases/tag/v3[.]4[.]25|"current_public_release": "v3[.]4[.]25"|ZLAR v3[.]4[.]25</h3>|v3[.]4[.]25 release</a>'
+
+assert_no_public_regex \
+    "public copy must not preserve stale v3.4.28 current-release pointer" \
+    'ZLAR v3[.]4[.]28 on GitHub|Current public release:[[:space:]]*ZLAR v3[.]4[.]28([^0-9+]|$)|Current ZLAR public claims are bounded by v3[.]4[.]28([^0-9+]|$)|releases/tag/v3[.]4[.]28|"current_public_release": "v3[.]4[.]28"|ZLAR v3[.]4[.]28</h3>|v3[.]4[.]28 release</a>|The current release preserves terminal-chain nested artifact binding'
 
 assert_no_public_regex \
     "public copy must not claim unconditional Telegram or phone approval routing" \
