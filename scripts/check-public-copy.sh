@@ -742,6 +742,11 @@ assert_contains_fixed \
     "zlar protected-records-installed-runtime-profile-terminal-chain --sample"
 
 assert_contains_fixed \
+    "release metadata keeps deployment-profile authority bridge command" \
+    "release.json" \
+    "zlar protected-records-one-terminal-deployment-profile --sample"
+
+assert_contains_fixed \
     "release metadata keeps recognition group threshold" \
     "release.json" \
     "${CURRENT_RELEASE_CHECK_THRESHOLD}"
@@ -1762,6 +1767,10 @@ assert_no_public_regex \
 assert_no_public_regex \
     "public copy must not preserve stale v3.4.46 current-release pointer" \
     'ZLAR v3[.]4[.]46 on GitHub|Current public release:.*ZLAR v3[.]4[.]46([^0-9+]|$)|Current ZLAR public claims are bounded by v3[.]4[.]46([^0-9+]|$)|releases/tag/v3[.]4[.]46">ZLAR v3[.]4[.]46|releases/tag/v3[.]4[.]46">v3[.]4[.]46 release</a> for Product Proof Path exact terminal-chain refusal groups|"current_public_release": "v3[.]4[.]46"|ZLAR v3[.]4[.]46</h3>'
+
+assert_no_public_regex \
+    "public copy must not preserve stale v3.4.47 current-release pointer" \
+    'ZLAR v3[.]4[.]47 on GitHub|Current public release:.*ZLAR v3[.]4[.]47([^0-9+]|$)|Current ZLAR public claims are bounded by v3[.]4[.]47([^0-9+]|$)|releases/tag/v3[.]4[.]47">ZLAR v3[.]4[.]47|releases/tag/v3[.]4[.]47">v3[.]4[.]47 release</a> for Private intake Product Proof Path content binding|"current_public_release": "v3[.]4[.]47"|ZLAR v3[.]4[.]47</h3>'
 
 assert_no_public_regex \
     "public copy must not shorten trusted issuer malformed-registry artifact names" \
