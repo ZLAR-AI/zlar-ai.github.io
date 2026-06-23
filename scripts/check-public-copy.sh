@@ -452,7 +452,37 @@ assert_contains_fixed \
 assert_contains_fixed \
     "proof-pack page keeps current release boundary" \
     "proof-pack.html" \
-    "The current release makes trusted-issuer registry recognition evidence first-class"
+    "The current release makes the Product Proof Path trusted-issuer registry recognition component first-class"
+
+assert_contains_fixed \
+    "proof-pack page keeps product proof registry component field" \
+    "proof-pack.html" \
+    "trusted_issuer_registry_recognition"
+
+assert_contains_fixed \
+    "proof-pack page keeps registry fixture validated flag" \
+    "proof-pack.html" \
+    "registry_fixture_validated=true"
+
+assert_contains_fixed \
+    "proof-pack page keeps registry fixture evaluated flag" \
+    "proof-pack.html" \
+    "registry_fixture_evaluated=true"
+
+assert_contains_fixed \
+    "proof-pack page keeps registry-to-recognition rule evaluated flag" \
+    "proof-pack.html" \
+    "registry_to_recognition_rule_evaluated=true"
+
+assert_contains_fixed \
+    "proof-pack page keeps registry evaluation result type" \
+    "proof-pack.html" \
+    "registry_evaluation_result_type=downstream-recognition-rule-v1"
+
+assert_contains_fixed \
+    "proof-pack page keeps registry trusted issuer count" \
+    "proof-pack.html" \
+    "registry_trusted_issuer_count=1"
 
 assert_contains_fixed \
     "proof-pack page keeps private result verification section" \
@@ -673,6 +703,31 @@ assert_contains_fixed \
     "release.json" \
     "No current-machine governance claim."
 
+assert_contains_fixed \
+    "release metadata keeps product proof registry component field" \
+    "release.json" \
+    "trusted_issuer_registry_recognition as a first-class component"
+
+assert_contains_fixed \
+    "release metadata keeps registry fixture evaluation flags" \
+    "release.json" \
+    "registry_fixture_validated=true, registry_fixture_evaluated=true, registry_to_recognition_rule_evaluated=true"
+
+assert_contains_fixed \
+    "release metadata keeps registry evaluation result type" \
+    "release.json" \
+    "registry_evaluation_result_type=downstream-recognition-rule-v1"
+
+assert_contains_fixed \
+    "release metadata keeps registry trusted issuer count" \
+    "release.json" \
+    "registry_trusted_issuer_count=1"
+
+assert_contains_fixed \
+    "release metadata keeps current-machine governance false flag" \
+    "release.json" \
+    "proves_current_machine_governance=false"
+
 assert_release_boundary_manifest \
     "release boundary manifest agrees with proof-pack mirror"
 
@@ -711,6 +766,31 @@ assert_contains_fixed \
     "proof-pack manifest keeps verifier target boundary" \
     "demo/proof-pack/proof-pack-manifest.json" \
     "${CURRENT_RELEASE_TITLE}"
+
+assert_contains_fixed \
+    "proof-pack manifest keeps product proof registry component field" \
+    "demo/proof-pack/proof-pack-manifest.json" \
+    "trusted_issuer_registry_recognition as a first-class component"
+
+assert_contains_fixed \
+    "proof-pack manifest keeps registry fixture evaluation flags" \
+    "demo/proof-pack/proof-pack-manifest.json" \
+    "registry_fixture_validated=true, registry_fixture_evaluated=true, registry_to_recognition_rule_evaluated=true"
+
+assert_contains_fixed \
+    "proof-pack manifest keeps registry evaluation result type" \
+    "demo/proof-pack/proof-pack-manifest.json" \
+    "registry_evaluation_result_type=downstream-recognition-rule-v1"
+
+assert_contains_fixed \
+    "proof-pack manifest keeps registry trusted issuer count" \
+    "demo/proof-pack/proof-pack-manifest.json" \
+    "registry_trusted_issuer_count=1"
+
+assert_contains_fixed \
+    "proof-pack manifest keeps current-machine governance false flag" \
+    "demo/proof-pack/proof-pack-manifest.json" \
+    "proves_current_machine_governance=false"
 
 assert_contains_fixed \
     "proof-pack manifest keeps registry recognition evidence section" \
@@ -815,7 +895,7 @@ assert_contains_fixed \
 assert_contains_fixed \
     "CAISI archive keeps current release boundary" \
     "caisi-submission.html" \
-    "The current release makes trusted-issuer registry recognition evidence first-class"
+    "The current release makes the Product Proof Path trusted-issuer registry recognition component first-class"
 
 assert_contains_fixed \
     "CAISI metadata keeps current claim boundary" \
@@ -825,7 +905,7 @@ assert_contains_fixed \
 assert_contains_fixed \
     "fail-open archive keeps current release boundary" \
     "fail-open.html" \
-    "The current release makes trusted-issuer registry recognition evidence first-class"
+    "The current release makes the Product Proof Path trusted-issuer registry recognition component first-class"
 
 assert_contains_fixed \
     "boundaries page keeps records.write terminal proof boundary" \
@@ -840,7 +920,37 @@ assert_contains_fixed \
 assert_contains_fixed \
     "boundaries page keeps current release boundary" \
     "boundaries.html" \
-    "The current release makes trusted-issuer registry recognition evidence first-class"
+    "The current release makes the Product Proof Path trusted-issuer registry recognition component first-class"
+
+assert_contains_fixed \
+    "boundaries page keeps product proof registry component field" \
+    "boundaries.html" \
+    "trusted_issuer_registry_recognition"
+
+assert_contains_fixed \
+    "boundaries page keeps registry fixture validated flag" \
+    "boundaries.html" \
+    "registry_fixture_validated=true"
+
+assert_contains_fixed \
+    "boundaries page keeps registry fixture evaluated flag" \
+    "boundaries.html" \
+    "registry_fixture_evaluated=true"
+
+assert_contains_fixed \
+    "boundaries page keeps registry-to-recognition rule evaluated flag" \
+    "boundaries.html" \
+    "registry_to_recognition_rule_evaluated=true"
+
+assert_contains_fixed \
+    "boundaries page keeps registry evaluation result type" \
+    "boundaries.html" \
+    "registry_evaluation_result_type=downstream-recognition-rule-v1"
+
+assert_contains_fixed \
+    "boundaries page keeps registry trusted issuer count" \
+    "boundaries.html" \
+    "registry_trusted_issuer_count=1"
 
 assert_contains_fixed \
     "boundaries page keeps private result verification section" \
@@ -1356,6 +1466,10 @@ assert_no_public_regex \
 assert_no_public_regex \
     "public copy must not preserve stale v3.4.34 current-release pointer" \
     'ZLAR v3[.]4[.]34 on GitHub|Current public release:.*ZLAR v3[.]4[.]34([^0-9+]|$)|Current ZLAR public claims are bounded by v3[.]4[.]34([^0-9+]|$)|releases/tag/v3[.]4[.]34|"current_public_release": "v3[.]4[.]34"|ZLAR v3[.]4[.]34</h3>|v3[.]4[.]34 release</a>|The current release makes private result verification evidence first-class'
+
+assert_no_public_regex \
+    "public copy must not preserve stale v3.4.35 current-release pointer" \
+    'ZLAR v3[.]4[.]35 on GitHub|Current public release:.*ZLAR v3[.]4[.]35([^0-9+]|$)|Current ZLAR public claims are bounded by v3[.]4[.]35([^0-9+]|$)|releases/tag/v3[.]4[.]35|"current_public_release": "v3[.]4[.]35"|ZLAR v3[.]4[.]35</h3>|v3[.]4[.]35 release</a>|The current release makes trusted-issuer registry recognition evidence first-class'
 
 assert_no_public_regex \
     "public copy must not shorten trusted issuer malformed-registry artifact names" \
