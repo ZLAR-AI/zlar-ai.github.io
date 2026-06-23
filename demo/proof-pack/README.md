@@ -4,7 +4,7 @@ This public bundle is a fake/scratch proof-pack example for zlar.ai. It is desig
 
 Current public release:
 
-ZLAR v3.4.27 - Deterministic crypto tamper test.
+ZLAR v3.4.28 - Terminal-chain nested artifact binding.
 
 Claim ceiling:
 

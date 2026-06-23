@@ -170,17 +170,22 @@ assert_contains_fixed \
 assert_contains_fixed \
     "boundaries page keeps current release pointer" \
     "boundaries.html" \
-    "ZLAR v3.4.27 on GitHub"
+    "ZLAR v3.4.28 on GitHub"
 
 assert_contains_fixed \
     "proof-pack page keeps current release pointer" \
     "proof-pack.html" \
-    "ZLAR v3.4.27 on GitHub"
+    "ZLAR v3.4.28 on GitHub"
 
 assert_contains_fixed \
     "proof-pack page keeps current release boundary" \
     "proof-pack.html" \
-    "The current release preserves the release-forward report contract for terminal-chain recognition-refusal group case IDs"
+    "The current release preserves terminal-chain nested artifact binding"
+
+assert_contains_fixed \
+    "proof-pack page keeps forged inner service hash refusal" \
+    "proof-pack.html" \
+    "release-forward dry-run refuses forged inner service-proof hashes after recomputing outer terminal-chain artifact integrity"
 
 assert_contains_fixed \
     "proof-pack page keeps readiness case-ID report contract" \
@@ -225,7 +230,7 @@ assert_contains_fixed \
 assert_contains_fixed \
     "proof-pack page keeps recognition-group evidence boundary" \
     "proof-pack.html" \
-    "local disposable installed-runtime-profile recognition-refusal group case-id, recognition-refusal group, named-refusal, and recognition-contract evidence only"
+    "local disposable terminal-chain nested artifact binding, installed-runtime-profile recognition-refusal group case-id, recognition-refusal group, named-refusal, and recognition-contract evidence only"
 
 assert_contains_fixed \
     "proof-pack page keeps product proof path command" \
@@ -240,12 +245,12 @@ assert_contains_fixed \
 assert_contains_fixed \
     "website README keeps current release pointer" \
     "README.md" \
-    "ZLAR v3.4.27 - Deterministic crypto tamper test"
+    "ZLAR v3.4.28 - Terminal-chain nested artifact binding"
 
 assert_contains_fixed \
     "LLM index keeps current release pointer" \
     "llms.txt" \
-    "Current public release: ZLAR v3.4.27 - Deterministic crypto tamper test."
+    "Current public release: ZLAR v3.4.28 - Terminal-chain nested artifact binding."
 
 assert_contains_fixed \
     "LLM index keeps release metadata pointer" \
@@ -267,25 +272,25 @@ assert_json_value \
     "release metadata keeps current release" \
     "release.json" \
     "current_public_release.version" \
-    "v3.4.27"
+    "v3.4.28"
 
 assert_json_value \
     "release metadata keeps release title" \
     "release.json" \
     "current_public_release.title" \
-    "Deterministic crypto tamper test"
+    "Terminal-chain nested artifact binding"
 
 assert_json_value \
     "release metadata keeps release commit" \
     "release.json" \
     "current_public_release.commit" \
-    "9a145e698fbbc467b5cc46e3323535bf69781e50"
+    "ae91b5625f00a38c363424edfc0193ba4153ed55"
 
 assert_json_value \
     "release metadata keeps tag object" \
     "release.json" \
     "current_public_release.tag_object" \
-    "19a048532424f84139c1ef1db022360c4c1aa807"
+    "1ffcea74f9685d0b2489ff731418e2cd45722064"
 
 assert_json_value \
     "release metadata keeps live URL" \
@@ -316,7 +321,12 @@ assert_contains_fixed \
 assert_contains_fixed \
     "release metadata keeps recognition group threshold" \
     "release.json" \
-    "v3.4.27 release checks pass with deterministic crypto test-harness stabilization while preserving prior readiness evidence"
+    "v3.4.28 release checks pass with terminal-chain nested artifact binding"
+
+assert_contains_fixed \
+    "release metadata keeps forged inner service hash refusal" \
+    "release.json" \
+    "release-forward dry-run refuses forged inner service-proof hashes after recomputing outer terminal-chain artifact integrity"
 
 assert_contains_fixed \
     "release metadata keeps observed summary threshold" \
@@ -361,12 +371,12 @@ assert_contains_fixed \
 assert_contains_fixed \
     "proof-pack README keeps current release pointer" \
     "demo/proof-pack/README.md" \
-    "ZLAR v3.4.27 - Deterministic crypto tamper test."
+    "ZLAR v3.4.28 - Terminal-chain nested artifact binding."
 
 assert_contains_fixed \
     "proof-pack manifest keeps current release pointer" \
     "demo/proof-pack/proof-pack-manifest.json" \
-    "\"current_public_release\": \"v3.4.27\""
+    "\"current_public_release\": \"v3.4.28\""
 
 assert_contains_fixed \
     "proof-pack manifest keeps readiness case-ID report contract" \
@@ -376,7 +386,17 @@ assert_contains_fixed \
 assert_contains_fixed \
     "proof-pack manifest keeps verifier target boundary" \
     "demo/proof-pack/proof-pack-manifest.json" \
-    "Deterministic crypto test-harness stabilization"
+    "Terminal-chain nested artifact binding"
+
+assert_contains_fixed \
+    "proof-pack manifest keeps nested artifact binding" \
+    "demo/proof-pack/proof-pack-manifest.json" \
+    "nested_artifacts"
+
+assert_contains_fixed \
+    "proof-pack manifest keeps forged inner service hash refusal" \
+    "demo/proof-pack/proof-pack-manifest.json" \
+    "release_forward.terminal_chain_nested_artifact_binding.forged_inner_service_hash_refused"
 
 assert_contains_fixed \
     "proof-pack manifest keeps observed summary boundary" \
@@ -431,22 +451,22 @@ assert_contains_fixed \
 assert_contains_fixed \
     "architecture archive keeps current release pointer" \
     "architecture.html" \
-    "Current public release: ZLAR v3.4.27 - Deterministic crypto tamper test."
+    "Current public release: ZLAR v3.4.28 - Terminal-chain nested artifact binding."
 
 assert_contains_fixed \
     "CAISI archive keeps current release boundary" \
     "caisi-submission.html" \
-    "The current release preserves the release-forward report contract for terminal-chain recognition-refusal group case IDs"
+    "The current release preserves terminal-chain nested artifact binding"
 
 assert_contains_fixed \
     "CAISI metadata keeps current claim boundary" \
     "caisi-submission.html" \
-    "Current ZLAR public claims are bounded by v3.4.27"
+    "Current ZLAR public claims are bounded by v3.4.28"
 
 assert_contains_fixed \
     "fail-open archive keeps current release boundary" \
     "fail-open.html" \
-    "The current release preserves the release-forward report contract for terminal-chain recognition-refusal group case IDs"
+    "The current release preserves terminal-chain nested artifact binding"
 
 assert_contains_fixed \
     "boundaries page keeps records.write terminal proof boundary" \
@@ -461,7 +481,7 @@ assert_contains_fixed \
 assert_contains_fixed \
     "boundaries page keeps current release boundary" \
     "boundaries.html" \
-    "The current release preserves the release-forward report contract for terminal-chain recognition-refusal group case IDs"
+    "The current release preserves terminal-chain nested artifact binding"
 
 assert_contains_fixed \
     "boundaries page keeps recognition-contract digest field" \
@@ -476,7 +496,7 @@ assert_contains_fixed \
 assert_contains_fixed \
     "boundaries page keeps recognition-group evidence boundary" \
     "boundaries.html" \
-    "local disposable installed-runtime-profile recognition-refusal group case-id, recognition-refusal group, named-refusal, and recognition-contract evidence only"
+    "local disposable terminal-chain nested artifact binding, installed-runtime-profile recognition-refusal group case-id, recognition-refusal group, named-refusal, and recognition-contract evidence only"
 
 assert_contains_fixed \
     "boundaries page keeps readiness verified field" \
