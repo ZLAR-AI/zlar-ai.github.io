@@ -170,22 +170,37 @@ assert_contains_fixed \
 assert_contains_fixed \
     "boundaries page keeps current release pointer" \
     "boundaries.html" \
-    "ZLAR v3.4.23 on GitHub"
+    "ZLAR v3.4.24 on GitHub"
 
 assert_contains_fixed \
     "proof-pack page keeps current release pointer" \
     "proof-pack.html" \
-    "ZLAR v3.4.23 on GitHub"
+    "ZLAR v3.4.24 on GitHub"
 
 assert_contains_fixed \
     "proof-pack page keeps current release boundary" \
     "proof-pack.html" \
-    "The current release preserves terminal-chain recognition refusal groups"
+    "The current release preserves release-forward terminal-chain recognition-refusal group case IDs"
 
 assert_contains_fixed \
     "proof-pack page keeps terminal-chain refusal evidence field" \
     "proof-pack.html" \
     "terminal_chain_refusal_evidence"
+
+assert_contains_fixed \
+    "proof-pack page keeps recognition group case IDs" \
+    "proof-pack.html" \
+    "recognition_refusal_group_case_ids"
+
+assert_contains_fixed \
+    "proof-pack page keeps recognition group case-ID requirement" \
+    "proof-pack.html" \
+    "recognition_refusal_group_case_ids_required=true"
+
+assert_contains_fixed \
+    "proof-pack page keeps all case IDs preserved flag" \
+    "proof-pack.html" \
+    "all_recognition_refusal_group_case_ids_preserved=true"
 
 assert_contains_fixed \
     "proof-pack page keeps named refusal hash" \
@@ -205,7 +220,7 @@ assert_contains_fixed \
 assert_contains_fixed \
     "proof-pack page keeps recognition-group evidence boundary" \
     "proof-pack.html" \
-    "local disposable installed-runtime-profile recognition-refusal group, named-refusal, and recognition-contract evidence only"
+    "local disposable installed-runtime-profile recognition-refusal group case-id, recognition-refusal group, named-refusal, and recognition-contract evidence only"
 
 assert_contains_fixed \
     "proof-pack page keeps product proof path command" \
@@ -220,12 +235,12 @@ assert_contains_fixed \
 assert_contains_fixed \
     "website README keeps current release pointer" \
     "README.md" \
-    "ZLAR v3.4.23 - Terminal-chain recognition refusal groups"
+    "ZLAR v3.4.24 - Release-forward recognition case IDs"
 
 assert_contains_fixed \
     "LLM index keeps current release pointer" \
     "llms.txt" \
-    "Current public release: ZLAR v3.4.23 - Terminal-chain recognition refusal groups."
+    "Current public release: ZLAR v3.4.24 - Release-forward recognition case IDs."
 
 assert_contains_fixed \
     "LLM index keeps release metadata pointer" \
@@ -247,25 +262,25 @@ assert_json_value \
     "release metadata keeps current release" \
     "release.json" \
     "current_public_release.version" \
-    "v3.4.23"
+    "v3.4.24"
 
 assert_json_value \
     "release metadata keeps release title" \
     "release.json" \
     "current_public_release.title" \
-    "Terminal-chain recognition refusal groups"
+    "Release-forward recognition case IDs"
 
 assert_json_value \
     "release metadata keeps release commit" \
     "release.json" \
     "current_public_release.commit" \
-    "dcab1b8b57981177c8246a2af8b74e5439221d34"
+    "a799ac49f2716dc36e0347cfffa08b12e340c0a5"
 
 assert_json_value \
     "release metadata keeps tag object" \
     "release.json" \
     "current_public_release.tag_object" \
-    "5944a88047c8465ae2c59d4e699712e1c303e98e"
+    "babfb2d0a7e0f42a745434f8208fa2294eac186b"
 
 assert_json_value \
     "release metadata keeps live URL" \
@@ -296,10 +311,25 @@ assert_contains_fixed \
 assert_contains_fixed \
     "release metadata keeps recognition group threshold" \
     "release.json" \
-    "v3.4.23 release checks pass with terminal-chain recognition-refusal group preservation"
+    "v3.4.24 release checks pass with release-forward terminal-chain recognition-refusal group case-id preservation"
 
 assert_contains_fixed \
-    "release metadata keeps recognition group hash threshold" \
+    "release metadata keeps recognition group case-ID field" \
+    "release.json" \
+    "recognition_refusal_group_case_ids"
+
+assert_contains_fixed \
+    "release metadata keeps recognition group case-ID requirement" \
+    "release.json" \
+    "recognition_refusal_group_case_ids_required=true"
+
+assert_contains_fixed \
+    "release metadata keeps all case IDs preserved flag" \
+    "release.json" \
+    "all_recognition_refusal_group_case_ids_preserved=true"
+
+assert_contains_fixed \
+    "release metadata keeps prior recognition group hash threshold" \
     "release.json" \
     "recognition_refusal_groups_sha256"
 
@@ -316,22 +346,37 @@ assert_contains_fixed \
 assert_contains_fixed \
     "proof-pack README keeps current release pointer" \
     "demo/proof-pack/README.md" \
-    "ZLAR v3.4.23 - Terminal-chain recognition refusal groups."
+    "ZLAR v3.4.24 - Release-forward recognition case IDs."
 
 assert_contains_fixed \
     "proof-pack manifest keeps current release pointer" \
     "demo/proof-pack/proof-pack-manifest.json" \
-    "\"current_public_release\": \"v3.4.23\""
+    "\"current_public_release\": \"v3.4.24\""
 
 assert_contains_fixed \
     "proof-pack manifest keeps verifier target boundary" \
     "demo/proof-pack/proof-pack-manifest.json" \
-    "Terminal-chain recognition refusal groups"
+    "Release-forward recognition case IDs"
 
 assert_contains_fixed \
     "proof-pack manifest keeps terminal-chain refusal evidence field" \
     "demo/proof-pack/proof-pack-manifest.json" \
     "terminal_chain_refusal_evidence"
+
+assert_contains_fixed \
+    "proof-pack manifest keeps recognition group case IDs" \
+    "demo/proof-pack/proof-pack-manifest.json" \
+    "recognition_refusal_group_case_ids"
+
+assert_contains_fixed \
+    "proof-pack manifest keeps recognition group case-ID requirement" \
+    "demo/proof-pack/proof-pack-manifest.json" \
+    "recognition_refusal_group_case_ids_required=true"
+
+assert_contains_fixed \
+    "proof-pack manifest keeps all case IDs preserved flag" \
+    "demo/proof-pack/proof-pack-manifest.json" \
+    "all_recognition_refusal_group_case_ids_preserved=true"
 
 assert_contains_fixed \
     "proof-pack manifest keeps named refusal hash field" \
@@ -346,7 +391,7 @@ assert_contains_fixed \
 assert_contains_fixed \
     "proof-pack manifest keeps recognition-group evidence boundary" \
     "demo/proof-pack/proof-pack-manifest.json" \
-    "local disposable installed-runtime-profile recognition-refusal group and named-refusal evidence only"
+    "local disposable installed-runtime-profile recognition-refusal group case-id, recognition-refusal group, and named-refusal evidence only"
 
 assert_contains_fixed \
     "proof-pack manifest keeps no production downstream non-claim" \
@@ -361,22 +406,22 @@ assert_contains_fixed \
 assert_contains_fixed \
     "architecture archive keeps current release pointer" \
     "architecture.html" \
-    "Current public release: ZLAR v3.4.23 - Terminal-chain recognition refusal groups."
+    "Current public release: ZLAR v3.4.24 - Release-forward recognition case IDs."
 
 assert_contains_fixed \
     "CAISI archive keeps current release boundary" \
     "caisi-submission.html" \
-    "The current release preserves terminal-chain recognition refusal groups"
+    "The current release preserves release-forward terminal-chain recognition-refusal group case IDs"
 
 assert_contains_fixed \
     "CAISI metadata keeps current claim boundary" \
     "caisi-submission.html" \
-    "Current ZLAR public claims are bounded by v3.4.23"
+    "Current ZLAR public claims are bounded by v3.4.24"
 
 assert_contains_fixed \
     "fail-open archive keeps current release boundary" \
     "fail-open.html" \
-    "The current release preserves terminal-chain recognition refusal groups"
+    "The current release preserves release-forward terminal-chain recognition-refusal group case IDs"
 
 assert_contains_fixed \
     "boundaries page keeps records.write terminal proof boundary" \
@@ -391,7 +436,7 @@ assert_contains_fixed \
 assert_contains_fixed \
     "boundaries page keeps current release boundary" \
     "boundaries.html" \
-    "The current release preserves terminal-chain recognition refusal groups"
+    "The current release preserves release-forward terminal-chain recognition-refusal group case IDs"
 
 assert_contains_fixed \
     "boundaries page keeps recognition-contract digest field" \
@@ -406,7 +451,7 @@ assert_contains_fixed \
 assert_contains_fixed \
     "boundaries page keeps recognition-group evidence boundary" \
     "boundaries.html" \
-    "local disposable installed-runtime-profile recognition-refusal group, named-refusal, and recognition-contract evidence only"
+    "local disposable installed-runtime-profile recognition-refusal group case-id, recognition-refusal group, named-refusal, and recognition-contract evidence only"
 
 assert_contains_fixed \
     "boundaries page keeps readiness verified field" \
@@ -859,6 +904,10 @@ assert_no_public_regex \
 assert_no_public_regex \
     "public copy must not preserve stale v3.4.19 current-release boundary" \
     'ZLAR v3[.]4[.]19 on GitHub|Current public release:[[:space:]]*ZLAR v3[.]4[.]19|Current ZLAR public claims are bounded by v3[.]4[.]19|releases/tag/v3[.]4[.]19|"current_public_release": "v3[.]4[.]19"|The current release binds the installed-runtime-profile recognition contract'
+
+assert_no_public_regex \
+    "public copy must not preserve stale v3.4.23 current-release boundary" \
+    'ZLAR v3[.]4[.]23 on GitHub|Current public release:[[:space:]]*ZLAR v3[.]4[.]23|Current ZLAR public claims are bounded by v3[.]4[.]23|releases/tag/v3[.]4[.]23|"current_public_release": "v3[.]4[.]23"|ZLAR v3[.]4[.]23</h3>|Terminal-chain recognition refusal groups'
 
 assert_no_public_regex \
     "public copy must not claim unconditional Telegram or phone approval routing" \
