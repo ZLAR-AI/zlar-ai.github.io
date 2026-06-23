@@ -753,6 +753,46 @@ assert_contains_fixed \
     "release.json" \
     "proves_current_machine_governance=false"
 
+assert_contains_fixed \
+    "release metadata keeps terminal-chain registry binding field" \
+    "release.json" \
+    "terminal_chain_trusted_issuer_registry_recognition_binding"
+
+assert_contains_fixed \
+    "release metadata keeps terminal-chain registry summary alias" \
+    "release.json" \
+    "trusted_issuer_registry_recognition_binding"
+
+assert_contains_fixed \
+    "release metadata keeps registry contract hash field" \
+    "release.json" \
+    "registry_contract_sha256"
+
+assert_contains_fixed \
+    "release metadata keeps receipt contract hash field" \
+    "release.json" \
+    "receipt_contract_sha256"
+
+assert_contains_fixed \
+    "release metadata keeps registry receipt contract hash binding" \
+    "release.json" \
+    "registry_receipt_contract_hash_bound=true"
+
+assert_contains_fixed \
+    "release metadata keeps no registry public key material boundary" \
+    "release.json" \
+    "registry_public_key_material_included=false"
+
+assert_contains_fixed \
+    "release metadata keeps no receipt envelope boundary" \
+    "release.json" \
+    "receipt_envelope_included=false"
+
+assert_contains_fixed \
+    "release metadata keeps artifact cryptographic evidence non-reproducibility boundary" \
+    "release.json" \
+    "cryptographic_evidence_reproducible_from_artifact=false"
+
 assert_release_boundary_manifest \
     "release boundary manifest agrees with proof-pack mirror"
 
@@ -791,6 +831,46 @@ assert_contains_fixed \
     "proof-pack manifest keeps verifier target boundary" \
     "demo/proof-pack/proof-pack-manifest.json" \
     "${CURRENT_RELEASE_TITLE}"
+
+assert_contains_fixed \
+    "proof-pack manifest keeps terminal-chain registry binding field" \
+    "demo/proof-pack/proof-pack-manifest.json" \
+    "terminal_chain_trusted_issuer_registry_recognition_binding"
+
+assert_contains_fixed \
+    "proof-pack manifest keeps terminal-chain registry summary alias" \
+    "demo/proof-pack/proof-pack-manifest.json" \
+    "trusted_issuer_registry_recognition_binding"
+
+assert_contains_fixed \
+    "proof-pack manifest keeps registry contract hash field" \
+    "demo/proof-pack/proof-pack-manifest.json" \
+    "registry_contract_sha256"
+
+assert_contains_fixed \
+    "proof-pack manifest keeps receipt contract hash field" \
+    "demo/proof-pack/proof-pack-manifest.json" \
+    "receipt_contract_sha256"
+
+assert_contains_fixed \
+    "proof-pack manifest keeps registry receipt contract hash binding" \
+    "demo/proof-pack/proof-pack-manifest.json" \
+    "registry_receipt_contract_hash_bound=true"
+
+assert_contains_fixed \
+    "proof-pack manifest keeps no registry public key material boundary" \
+    "demo/proof-pack/proof-pack-manifest.json" \
+    "registry_public_key_material_included=false"
+
+assert_contains_fixed \
+    "proof-pack manifest keeps no receipt envelope boundary" \
+    "demo/proof-pack/proof-pack-manifest.json" \
+    "receipt_envelope_included=false"
+
+assert_contains_fixed \
+    "proof-pack manifest keeps artifact cryptographic evidence non-reproducibility boundary" \
+    "demo/proof-pack/proof-pack-manifest.json" \
+    "cryptographic_evidence_reproducible_from_artifact=false"
 
 assert_contains_fixed \
     "proof-pack manifest keeps product proof registry component field" \
