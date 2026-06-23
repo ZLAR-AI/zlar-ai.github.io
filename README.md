@@ -41,7 +41,7 @@ Do not edit these files unless the sample bundle is intentionally regenerated an
 
 ## Claim Boundary
 
-Current public release: [ZLAR v3.4.38 - Terminal-chain registry refusal boundary](https://github.com/ZLAR-AI/ZLAR/releases/tag/v3.4.38).
+Current public release: [ZLAR v3.4.39 - Registry refusal summary surfacing](https://github.com/ZLAR-AI/ZLAR/releases/tag/v3.4.39).
 
 ZLAR governs routed/intercepted action surfaces only. Safe Codex wording:
 

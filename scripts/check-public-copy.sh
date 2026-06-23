@@ -452,7 +452,17 @@ assert_contains_fixed \
 assert_contains_fixed \
     "proof-pack page keeps current release boundary" \
     "proof-pack.html" \
-    "The current release adds terminal-chain-local trusted-issuer registry refusal evidence"
+    "The current release surfaces terminal-chain-local trusted-issuer registry refusal summaries"
+
+assert_contains_fixed \
+    "proof-pack page keeps current registry refusal case ID" \
+    "proof-pack.html" \
+    "unrecognized_terminal_chain_registry_scope_refused"
+
+assert_contains_fixed \
+    "proof-pack page keeps current registry refusal reason code" \
+    "proof-pack.html" \
+    "scope_not_found"
 
 assert_contains_fixed \
     "proof-pack page keeps terminal-chain registry binding field" \
@@ -1000,7 +1010,7 @@ assert_contains_fixed \
 assert_contains_fixed \
     "CAISI archive keeps current release boundary" \
     "caisi-submission.html" \
-    "The current release adds terminal-chain-local trusted-issuer registry refusal evidence"
+    "The current release surfaces terminal-chain-local trusted-issuer registry refusal summaries"
 
 assert_contains_fixed \
     "CAISI metadata keeps current claim boundary" \
@@ -1010,7 +1020,7 @@ assert_contains_fixed \
 assert_contains_fixed \
     "fail-open archive keeps current release boundary" \
     "fail-open.html" \
-    "The current release adds terminal-chain-local trusted-issuer registry refusal evidence"
+    "The current release surfaces terminal-chain-local trusted-issuer registry refusal summaries"
 
 assert_contains_fixed \
     "boundaries page keeps records.write terminal proof boundary" \
@@ -1025,7 +1035,17 @@ assert_contains_fixed \
 assert_contains_fixed \
     "boundaries page keeps current release boundary" \
     "boundaries.html" \
-    "The current release adds terminal-chain-local trusted-issuer registry refusal evidence"
+    "The current release surfaces terminal-chain-local trusted-issuer registry refusal summaries"
+
+assert_contains_fixed \
+    "boundaries page keeps current registry refusal case ID" \
+    "boundaries.html" \
+    "registry_receipt_contract_mismatch_refused"
+
+assert_contains_fixed \
+    "boundaries page keeps current registry refusal reason code" \
+    "boundaries.html" \
+    "detail_hash_mismatch"
 
 assert_contains_fixed \
     "boundaries page keeps terminal-chain registry binding field" \
@@ -1593,6 +1613,10 @@ assert_no_public_regex \
 assert_no_public_regex \
     "public copy must not preserve stale v3.4.37 current-release pointer" \
     'ZLAR v3[.]4[.]37 on GitHub|Current public release:.*ZLAR v3[.]4[.]37([^0-9+]|$)|Current ZLAR public claims are bounded by v3[.]4[.]37([^0-9+]|$)|releases/tag/v3[.]4[.]37">ZLAR v3[.]4[.]37|releases/tag/v3[.]4[.]37">v3[.]4[.]37 release|"current_public_release": "v3[.]4[.]37"|ZLAR v3[.]4[.]37</h3>|The current release binds terminal-chain trusted-issuer registry recognition'
+
+assert_no_public_regex \
+    "public copy must not preserve stale v3.4.38 current-release pointer" \
+    'ZLAR v3[.]4[.]38 on GitHub|Current public release:.*ZLAR v3[.]4[.]38([^0-9+]|$)|Current ZLAR public claims are bounded by v3[.]4[.]38([^0-9+]|$)|releases/tag/v3[.]4[.]38">ZLAR v3[.]4[.]38|releases/tag/v3[.]4[.]38">v3[.]4[.]38 release|"current_public_release": "v3[.]4[.]38"|The current release adds terminal-chain-local trusted-issuer registry refusal evidence|Terminal-chain registry refusal boundary while preserving terminal-chain registry recognition'
 
 assert_no_public_regex \
     "public copy must not shorten trusted issuer malformed-registry artifact names" \
