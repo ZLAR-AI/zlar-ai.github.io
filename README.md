@@ -41,7 +41,7 @@ Do not edit these files unless the sample bundle is intentionally regenerated an
 
 ## Claim Boundary
 
-Current public release: [ZLAR v3.4.46 - Product Proof Path exact terminal-chain refusal groups](https://github.com/ZLAR-AI/ZLAR/releases/tag/v3.4.46).
+Current public release: [ZLAR v3.4.47 - Private intake Product Proof Path content binding](https://github.com/ZLAR-AI/ZLAR/releases/tag/v3.4.47).
 
 ZLAR governs routed/intercepted action surfaces only. Safe Codex wording:
 

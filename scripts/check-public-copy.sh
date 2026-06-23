@@ -1760,6 +1760,10 @@ assert_no_public_regex \
     'ZLAR v3[.]4[.]44 on GitHub|Current public release:.*ZLAR v3[.]4[.]44([^0-9+]|$)|Current ZLAR public claims are bounded by v3[.]4[.]44([^0-9+]|$)|releases/tag/v3[.]4[.]44">ZLAR v3[.]4[.]44|releases/tag/v3[.]4[.]44">v3[.]4[.]44 release|"current_public_release": "v3[.]4[.]44"|ZLAR v3[.]4[.]44</h3>'
 
 assert_no_public_regex \
+    "public copy must not preserve stale v3.4.46 current-release pointer" \
+    'ZLAR v3[.]4[.]46 on GitHub|Current public release:.*ZLAR v3[.]4[.]46([^0-9+]|$)|Current ZLAR public claims are bounded by v3[.]4[.]46([^0-9+]|$)|releases/tag/v3[.]4[.]46">ZLAR v3[.]4[.]46|releases/tag/v3[.]4[.]46">v3[.]4[.]46 release</a> for Product Proof Path exact terminal-chain refusal groups|"current_public_release": "v3[.]4[.]46"|ZLAR v3[.]4[.]46</h3>'
+
+assert_no_public_regex \
     "public copy must not shorten trusted issuer malformed-registry artifact names" \
     'zlar-trusted-receipt-issuer-malformed-registry'
 
