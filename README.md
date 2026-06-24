@@ -41,7 +41,7 @@ Do not edit these files unless the sample bundle is intentionally regenerated an
 
 ## Claim Boundary
 
-Current public release: [ZLAR v3.4.49 - Deployment-profile authority refusal contract](https://github.com/ZLAR-AI/ZLAR/releases/tag/v3.4.49).
+Current public release: [ZLAR v3.4.50 - Terminal-chain authority-refusal mirror](https://github.com/ZLAR-AI/ZLAR/releases/tag/v3.4.50).
 
 ZLAR governs routed/intercepted action surfaces only. Safe Codex wording:
 
