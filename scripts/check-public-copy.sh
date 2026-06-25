@@ -11,14 +11,24 @@ PASS=0
 FAIL=0
 TOTAL=0
 
+# Public text surfaces for zlar.ai. Binary publication assets such as PDFs and
+# images still need human review before publication; git grep skips binary
+# content.
 PUBLIC_PATHS=(
     '*.html'
     '*.txt'
     '*.md'
-    'release.json'
+    '*.json'
+    '*.xml'
+    '*.css'
+    '.github'
+    'CNAME'
+    'LICENSE'
     'docs'
     'specs'
     'demo'
+    'install.sh'
+    'uninstall.sh'
 )
 
 pass() {
@@ -174,6 +184,19 @@ NODE
         pass
     else
         fail "${label}" "${matches}"
+    fi
+}
+
+assert_regex_matches_text() {
+    local label="$1"
+    local pattern="$2"
+    local text="$3"
+    TOTAL=$((TOTAL + 1))
+
+    if printf '%s\n' "${text}" | grep -Eiq "${pattern}"; then
+        pass
+    else
+        fail "${label}" "pattern did not match representative bad example: ${text}"
     fi
 }
 
@@ -400,8 +423,81 @@ CURRENT_RELEASE_GITHUB_POINTER="ZLAR ${CURRENT_RELEASE_VERSION} on GitHub"
 CURRENT_RELEASE_LLM_POINTER="Current public release: ${CURRENT_RELEASE_POINTER}."
 CURRENT_RELEASE_CLAIM_BOUNDARY="Current ZLAR public claims are bounded by ${CURRENT_RELEASE_VERSION}"
 CURRENT_RELEASE_CHECK_THRESHOLD="${CURRENT_RELEASE_VERSION} release checks pass with ${CURRENT_RELEASE_TITLE}"
+private_absolute_path_pattern='/Users/[A-Za-z0-9._-]+(/[^[:space:]"'"'"'<>]*)?|/home/[A-Za-z0-9._-]+(/[^[:space:]"'"'"'<>]*)?|C:\\Users\\[A-Za-z0-9._-]+'
+fixture_operator_name_pattern='"(user|operator|authorizer|approver|reviewer|maintainer)"[[:space:]]*:[[:space:]]*"(vincent|vincentnijjar|Vincent|Vincent Nijjar)"'
+hardware_serial_pattern='(YubiKey|hardware|device|security key|key)[[:print:]]{0,100}(serial|s/n|serial number)[[:print:]]{0,60}[0-9]{6,}|(serial|s/n|serial number)[[:print:]]{0,60}[0-9]{6,}[[:print:]]{0,100}(YubiKey|hardware|device|security key|key)'
+machine_model_pattern='(^|[^[:alnum:]])(Mac mini|MacBook|Mac Studio|Mac Pro|iMac)([^[:alnum:]]|$)'
+numeric_human_id_pattern='(human|authorizer|approver|telegram|chat_id|telegram[_ -]?(chat|human)?[_ -]?id)[^[:space:]]{0,30}(:|=| )[[:space:]]*[0-9]{7,}|human:[0-9]{7,}'
+token_secret_pattern="(Bearer[[:space:]]+[A-Za-z0-9._-]{20,}|(token|api[_-]?key|secret)[[:space:]]*[:=][[:space:]]*['\"]?([A-Za-z0-9._-]{20,}|sk-[A-Za-z0-9_-]{8,}|pk-[A-Za-z0-9_-]{8,}))"
+unsupported_public_claim_pattern='(ZLAR (is )?(production[- ]ready|externally attested|independently attested)|production[- ]ready ZLAR|external attestation (is )?(complete|completed|done|achieved|received)|public external attestation (is )?(complete|completed|done|achieved|received)|non[- ]Vincent verifier (has )?(verified|attested)|production (adapter|adaptor) proof)'
+bad_serial_digits="37175116"
+bad_numeric_human_id="123456789"
+bad_token_suffix="live-secret-1234567890"
 
 echo "=== Website Public-Copy Guard ==="
+
+assert_no_public_regex \
+    "website public surfaces must not expose private absolute local paths" \
+    "${private_absolute_path_pattern}"
+
+assert_no_public_regex \
+    "website public surfaces must not name the operator in fixture role fields" \
+    "${fixture_operator_name_pattern}"
+
+assert_no_public_regex \
+    "website public surfaces must not expose hardware serial numbers" \
+    "${hardware_serial_pattern}"
+
+assert_no_public_regex \
+    "website public surfaces must not expose machine model names" \
+    "${machine_model_pattern}"
+
+assert_no_public_regex \
+    "website public surfaces must not expose numeric Telegram or human ids" \
+    "${numeric_human_id_pattern}"
+
+assert_no_public_regex \
+    "website public surfaces must not expose token or API-key shaped strings" \
+    "${token_secret_pattern}"
+
+assert_no_public_regex \
+    "website public surfaces must not imply unsupported production or attestation claims" \
+    "${unsupported_public_claim_pattern}"
+
+assert_regex_matches_text \
+    "website privacy guard catches private path examples" \
+    "${private_absolute_path_pattern}" \
+    "example.html:1:/Users/alice/.ssh/id_ed25519"
+
+assert_regex_matches_text \
+    "website privacy guard catches operator fixture names" \
+    "${fixture_operator_name_pattern}" \
+    'demo/example.json:1:{"operator":"Vincent"}'
+
+assert_regex_matches_text \
+    "website privacy guard catches hardware serial examples" \
+    "${hardware_serial_pattern}" \
+    "example.html:1:YubiKey spare device serial ${bad_serial_digits}"
+
+assert_regex_matches_text \
+    "website privacy guard catches machine model examples" \
+    "${machine_model_pattern}" \
+    "example.html:1:Mac mini filesystem checked"
+
+assert_regex_matches_text \
+    "website privacy guard catches numeric human id examples" \
+    "${numeric_human_id_pattern}" \
+    "demo/example.json:1:{\"authorizer\":\"human:${bad_numeric_human_id}\"}"
+
+assert_regex_matches_text \
+    "website privacy guard catches token examples" \
+    "${token_secret_pattern}" \
+    "example.html:1:api_key=sk-${bad_token_suffix}"
+
+assert_regex_matches_text \
+    "website privacy guard catches unsupported public claim examples" \
+    "${unsupported_public_claim_pattern}" \
+    "example.html:1:ZLAR is externally attested"
 
 assert_contains_fixed \
     "homepage keeps log/receipt invariant" \
