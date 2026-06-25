@@ -4,7 +4,7 @@ This public bundle is a fake/scratch proof-pack example for zlar.ai. It is desig
 
 Current public release:
 
-ZLAR v3.4.50 - Terminal-chain authority-refusal mirror.
+ZLAR v3.4.51 - Protected-records refusal and claim-boundary hardening.
 
 Claim ceiling:
 
