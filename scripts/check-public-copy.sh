@@ -58,6 +58,19 @@ assert_contains_fixed() {
     fi
 }
 
+assert_not_contains_fixed() {
+    local label="$1"
+    local path="$2"
+    local needle="$3"
+    TOTAL=$((TOTAL + 1))
+
+    if grep -Fq "${needle}" "${path}"; then
+        fail "${label}" "unexpected in ${path}: ${needle}"
+    else
+        pass
+    fi
+}
+
 assert_json_value() {
     local label="$1"
     local path="$2"
@@ -510,19 +523,74 @@ assert_contains_fixed \
     "The gate decisions are real; the receipt is bounded demo evidence, not live production governance."
 
 assert_contains_fixed \
-    "boundaries page keeps release boundary" \
-    "boundaries.html" \
-    "that guard is CI evidence only and adds no runtime authority"
+    "homepage keeps airport hero" \
+    "index.html" \
+    "Intelligence may change. Consequence still needs authority."
 
 assert_contains_fixed \
-    "boundaries page keeps current release pointer" \
-    "boundaries.html" \
-    "${CURRENT_RELEASE_GITHUB_POINTER}"
+    "homepage keeps core claim" \
+    "index.html" \
+    "For defined routed action surfaces, ZLAR makes consequential AI action pass"
 
 assert_contains_fixed \
-    "proof-pack page keeps current release pointer" \
+    "homepage keeps receipt as formal artifact" \
+    "index.html" \
+    "Ticket</span><h3>Receipt</h3>"
+
+assert_contains_fixed \
+    "homepage keeps Bring One Action concrete" \
+    "index.html" \
+    "One action. One route. One policy. One receipt. One refusal rule. One honest"
+
+assert_contains_fixed \
+    "homepage keeps GitHub machine-room handoff" \
+    "index.html" \
+    "GitHub / Machine Room"
+
+assert_contains_fixed \
+    "proof-pack page keeps receipt scanner summary" \
     "proof-pack.html" \
-    "${CURRENT_RELEASE_GITHUB_POINTER}"
+    "Receipt scanner summary: the public sample is fake/scratch evidence"
+
+assert_contains_fixed \
+    "proof-pack page keeps GitHub machine-room handoff" \
+    "proof-pack.html" \
+    "Release-by-release detail lives in"
+
+assert_contains_fixed \
+    "boundaries page keeps side-door map" \
+    "boundaries.html" \
+    "The airport map is honest because it names the side doors."
+
+assert_contains_fixed \
+    "boundaries page keeps exact routed-surface boundary" \
+    "boundaries.html" \
+    "ZLAR governs routed/intercepted action surfaces only."
+
+assert_contains_fixed \
+    "boundaries page keeps GitHub machine-room handoff" \
+    "boundaries.html" \
+    "this page states only the claim boundary."
+
+assert_not_contains_fixed \
+    "proof-pack human page does not mirror current release checks" \
+    "proof-pack.html" \
+    "${CURRENT_RELEASE_CHECK_THRESHOLD}"
+
+assert_not_contains_fixed \
+    "boundaries human page does not mirror current release checks" \
+    "boundaries.html" \
+    "${CURRENT_RELEASE_CHECK_THRESHOLD}"
+
+assert_not_contains_fixed \
+    "proof-pack human page does not paste release-forward contract archaeology" \
+    "proof-pack.html" \
+    "release_forward_report_contract"
+
+assert_not_contains_fixed \
+    "boundaries human page does not paste release-forward contract archaeology" \
+    "boundaries.html" \
+    "release_forward_report_contract"
 
 assert_contains_fixed \
     "proof-pack page downloads release metadata" \
@@ -545,223 +613,19 @@ assert_contains_fixed \
     "manifest release version matches release metadata"
 
 assert_contains_fixed \
-    "proof-pack page keeps current release boundary" \
+    "proof-pack page keeps human-first proof questions" \
     "proof-pack.html" \
-    "${CURRENT_RELEASE_CHECK_THRESHOLD}"
+    "Read the receipt as a boarding credential."
 
 assert_contains_fixed \
-    "proof-pack page keeps release-forward report contract manifest field" \
+    "proof-pack page keeps scanner commands second" \
     "proof-pack.html" \
-    "release_forward_report_contract"
+    "These commands download the public sample manifest"
 
 assert_contains_fixed \
-    "proof-pack page keeps release-forward report contract type" \
-    "proof-pack.html" \
-    "zlar-release-forward-dry-run-report-contract-v1"
-
-assert_contains_fixed \
-    "proof-pack page keeps release-forward report contract result prefix" \
-    "proof-pack.html" \
-    "manifest.release_forward_report_contract.*"
-
-assert_contains_fixed \
-    "proof-pack page keeps report contract satisfied flag" \
-    "proof-pack.html" \
-    "report_contract_satisfied=true"
-
-assert_contains_fixed \
-    "proof-pack page keeps manifest canonical flag" \
-    "proof-pack.html" \
-    "manifest_is_canonical=true"
-
-assert_contains_fixed \
-    "proof-pack page keeps release-forward manifest preservation" \
-    "proof-pack.html" \
-    "DRY-RUN-MANIFEST.json"
-
-assert_contains_fixed \
-    "proof-pack page keeps release-forward result preservation" \
-    "proof-pack.html" \
-    "DRY-RUN-RESULT.md"
-
-assert_contains_fixed \
-    "proof-pack page keeps current registry refusal case ID" \
-    "proof-pack.html" \
-    "unrecognized_terminal_chain_registry_scope_refused"
-
-assert_contains_fixed \
-    "proof-pack page keeps current registry refusal reason code" \
-    "proof-pack.html" \
-    "scope_not_found"
-
-assert_contains_fixed \
-    "proof-pack page keeps trusted registry refusal preservation flag" \
-    "proof-pack.html" \
-    "all_trusted_issuer_registry_recognition_refusals_preserved=true"
-
-assert_contains_fixed \
-    "proof-pack page keeps v3.4.38 negative threshold" \
-    "proof-pack.html" \
-    "v3.4.38 targets omit these release-forward summary fields"
-
-assert_contains_fixed \
-    "proof-pack page keeps v3.4.40 report contract negative threshold" \
-    "proof-pack.html" \
-    "v3.4.40 targets omit release_forward_report_contract"
-
-assert_no_public_regex \
-    "current release must not use stale v3.4.39 registry summary wording" \
-    "current release surfaces terminal-chain-local trusted-issuer registry refusal summaries as first-class evaluator fields"
-
-assert_contains_fixed \
-    "proof-pack page keeps terminal-chain registry binding field" \
-    "proof-pack.html" \
-    "terminal_chain_trusted_issuer_registry_recognition_binding"
-
-assert_contains_fixed \
-    "proof-pack page keeps registry receipt contract hash binding" \
-    "proof-pack.html" \
-    "registry_receipt_contract_hash_bound=true"
-
-assert_contains_fixed \
-    "proof-pack page keeps no registry public key material boundary" \
-    "proof-pack.html" \
-    "registry_public_key_material_included=false"
-
-assert_contains_fixed \
-    "proof-pack page keeps no receipt envelope boundary" \
-    "proof-pack.html" \
-    "receipt_envelope_included=false"
-
-assert_contains_fixed \
-    "proof-pack page keeps artifact cryptographic evidence non-reproducibility boundary" \
-    "proof-pack.html" \
-    "cryptographic_evidence_reproducible_from_artifact=false"
-
-assert_contains_fixed \
-    "proof-pack page keeps product proof registry component field" \
-    "proof-pack.html" \
-    "trusted_issuer_registry_recognition"
-
-assert_contains_fixed \
-    "proof-pack page keeps registry fixture validated flag" \
-    "proof-pack.html" \
-    "registry_fixture_validated=true"
-
-assert_contains_fixed \
-    "proof-pack page keeps registry fixture evaluated flag" \
-    "proof-pack.html" \
-    "registry_fixture_evaluated=true"
-
-assert_contains_fixed \
-    "proof-pack page keeps registry-to-recognition rule evaluated flag" \
-    "proof-pack.html" \
-    "registry_to_recognition_rule_evaluated=true"
-
-assert_contains_fixed \
-    "proof-pack page keeps registry evaluation result type" \
-    "proof-pack.html" \
-    "registry_evaluation_result_type=downstream-recognition-rule-v1"
-
-assert_contains_fixed \
-    "proof-pack page keeps registry trusted issuer count" \
-    "proof-pack.html" \
-    "registry_trusted_issuer_count=1"
-
-assert_contains_fixed \
-    "proof-pack page keeps private result verification section" \
-    "proof-pack.html" \
-    "Private Result Verification Evidence"
-
-assert_contains_fixed \
-    "proof-pack page keeps registry recognition evidence section" \
-    "proof-pack.html" \
-    "Trusted Issuer Registry Recognition Evidence"
-
-assert_contains_fixed \
-    "proof-pack page keeps registry recognition manifest field" \
-    "proof-pack.html" \
-    "trusted_issuer_registry_recognition_evidence"
-
-assert_contains_fixed \
-    "proof-pack page keeps bundled local registry boundary" \
-    "proof-pack.html" \
-    "registry_evidence_model=bundled-local-fixture"
-
-assert_contains_fixed \
-    "proof-pack page keeps malformed registry fail-closed boundary" \
-    "proof-pack.html" \
-    "malformed_registry_fail_closed_before_verdict=true"
-
-assert_contains_fixed \
-    "proof-pack page keeps private non-operator sample boundary" \
-    "proof-pack.html" \
-    "private_non_operator_pass_validated=false"
-
-assert_contains_fixed \
-    "proof-pack page keeps forged inner preflight and service hash refusal" \
-    "proof-pack.html" \
-    "release-forward dry-run exports terminal_chain_refusal_evidence.nested_artifact_tamper_refusals with forged_inner_preflight_hash_refused=true and forged_inner_service_hash_refused=true after refusing forged inner preflight and service-proof hashes while recomputing outer terminal-chain artifact integrity"
-
-assert_contains_fixed \
-    "proof-pack page keeps readiness case-ID report contract" \
-    "proof-pack.html" \
-    "v3.4.25+ proof-smoke and North Star readiness preserve \`group_count=3\`, \`case_count=18\`, and exact grouped case IDs"
-
-assert_contains_fixed \
-    "proof-pack page keeps terminal-chain refusal evidence field" \
-    "proof-pack.html" \
-    "terminal_chain_refusal_evidence"
-
-assert_contains_fixed \
-    "proof-pack page keeps recognition group case IDs" \
-    "proof-pack.html" \
-    "recognition_refusal_group_case_ids"
-
-assert_contains_fixed \
-    "proof-pack page keeps recognition group case-ID requirement" \
-    "proof-pack.html" \
-    "recognition_refusal_group_case_ids_required=true"
-
-assert_contains_fixed \
-    "proof-pack page keeps all case IDs preserved flag" \
-    "proof-pack.html" \
-    "all_recognition_refusal_group_case_ids_preserved=true"
-
-assert_contains_fixed \
-    "proof-pack page keeps named refusal hash" \
-    "proof-pack.html" \
-    "named_receipt_refusals_sha256"
-
-assert_contains_fixed \
-    "proof-pack page keeps recognition-contract digest field" \
-    "proof-pack.html" \
-    "installed_runtime_profile_recognition_contract_sha256"
-
-assert_contains_fixed \
-    "proof-pack page keeps named refusal cases" \
-    "proof-pack.html" \
-    "wrong-tool receipt cases"
-
-assert_contains_fixed \
-    "proof-pack page keeps recognition-group evidence boundary" \
-    "proof-pack.html" \
-    "local disposable verifier-owned terminal-chain nested binding summary and tamper-refusal evidence, installed-runtime-profile recognition-refusal group case-id, recognition-refusal group, named-refusal, and recognition-contract evidence only"
-
-assert_contains_fixed \
-    "proof-pack page keeps product proof path command" \
-    "proof-pack.html" \
-    "zlar product-proof-path --json-out zlar-product-proof-path-v1.json"
-
-assert_contains_fixed \
-    "proof-pack page keeps product proof path artifact" \
-    "proof-pack.html" \
-    "zlar-product-proof-path-v1.json"
-
-assert_contains_fixed \
-    "website README keeps current release pointer" \
+    "website README keeps evergreen machine-room boundary" \
     "README.md" \
-    "${CURRENT_RELEASE_POINTER}"
+    "The website should remain evergreen"
 
 assert_contains_fixed \
     "LLM index keeps current release pointer" \
@@ -1232,382 +1096,32 @@ assert_contains_fixed \
     "no public external attestation"
 
 assert_contains_fixed \
-    "architecture archive keeps current release pointer" \
+    "architecture archive points to machine room" \
     "architecture.html" \
-    "${CURRENT_RELEASE_LLM_POINTER}"
+    "Release and commit detail lives in"
 
 assert_contains_fixed \
-    "CAISI archive keeps current release boundary" \
+    "CAISI archive uses evergreen boundary" \
     "caisi-submission.html" \
-    "${CURRENT_RELEASE_CHECK_THRESHOLD}"
+    "Release-by-release detail belongs in GitHub."
 
 assert_contains_fixed \
-    "CAISI metadata keeps current claim boundary" \
+    "CAISI metadata uses evergreen boundary" \
     "caisi-submission.html" \
-    "${CURRENT_RELEASE_CLAIM_BOUNDARY}"
+    "Current ZLAR public claims are bounded by the side-door map"
 
 assert_contains_fixed \
-    "fail-open archive keeps current release boundary" \
+    "fail-open archive uses evergreen boundary" \
     "fail-open.html" \
-    "${CURRENT_RELEASE_CHECK_THRESHOLD}"
+    "Release-by-release detail belongs in GitHub."
 
 assert_contains_fixed \
-    "boundaries page keeps records.write terminal proof boundary" \
+    "boundaries page keeps explicit non-claims" \
     "boundaries.html" \
-    "records-write-terminal-proof"
+    "Unrouted shell/filesystem/browser/app/network/model-reasoning/final-text surfaces are not claimed"
 
 assert_contains_fixed \
-    "boundaries page keeps verifier packet split status" \
-    "boundaries.html" \
-    "The historical private verifier request remains sent and private-by-default"
-
-assert_contains_fixed \
-    "boundaries page keeps current release boundary" \
-    "boundaries.html" \
-    "${CURRENT_RELEASE_CHECK_THRESHOLD}"
-
-assert_contains_fixed \
-    "boundaries page keeps release-forward report contract type" \
-    "boundaries.html" \
-    "zlar-release-forward-dry-run-report-contract-v1"
-
-assert_contains_fixed \
-    "boundaries page keeps current registry refusal case ID" \
-    "boundaries.html" \
-    "registry_receipt_contract_mismatch_refused"
-
-assert_contains_fixed \
-    "boundaries page keeps current registry refusal reason code" \
-    "boundaries.html" \
-    "detail_hash_mismatch"
-
-assert_contains_fixed \
-    "boundaries page keeps terminal-chain registry binding field" \
-    "boundaries.html" \
-    "terminal_chain_trusted_issuer_registry_recognition_binding"
-
-assert_contains_fixed \
-    "boundaries page keeps no receipt envelope boundary" \
-    "boundaries.html" \
-    "receipt_envelope_included=false"
-
-assert_contains_fixed \
-    "boundaries page keeps product proof registry component field" \
-    "boundaries.html" \
-    "trusted_issuer_registry_recognition"
-
-assert_contains_fixed \
-    "boundaries page keeps registry fixture validated flag" \
-    "boundaries.html" \
-    "registry_fixture_validated=true"
-
-assert_contains_fixed \
-    "boundaries page keeps registry fixture evaluated flag" \
-    "boundaries.html" \
-    "registry_fixture_evaluated=true"
-
-assert_contains_fixed \
-    "boundaries page keeps registry-to-recognition rule evaluated flag" \
-    "boundaries.html" \
-    "registry_to_recognition_rule_evaluated=true"
-
-assert_contains_fixed \
-    "boundaries page keeps registry evaluation result type" \
-    "boundaries.html" \
-    "registry_evaluation_result_type=downstream-recognition-rule-v1"
-
-assert_contains_fixed \
-    "boundaries page keeps registry trusted issuer count" \
-    "boundaries.html" \
-    "registry_trusted_issuer_count=1"
-
-assert_contains_fixed \
-    "boundaries page keeps private result verification section" \
-    "boundaries.html" \
-    "Private Result Verification Evidence"
-
-assert_contains_fixed \
-    "boundaries page keeps registry recognition evidence section" \
-    "boundaries.html" \
-    "Trusted Issuer Registry Recognition Evidence"
-
-assert_contains_fixed \
-    "boundaries page keeps registry recognition manifest field" \
-    "boundaries.html" \
-    "trusted_issuer_registry_recognition_evidence"
-
-assert_contains_fixed \
-    "boundaries page keeps no live registry claim" \
-    "boundaries.html" \
-    "proves_live_registry=false"
-
-assert_contains_fixed \
-    "boundaries page keeps recognition-contract digest field" \
-    "boundaries.html" \
-    "installed_runtime_profile_recognition_contract_sha256"
-
-assert_contains_fixed \
-    "boundaries page keeps named refusal hash" \
-    "boundaries.html" \
-    "named_receipt_refusals_sha256"
-
-assert_contains_fixed \
-    "boundaries page keeps recognition-group evidence boundary" \
-    "boundaries.html" \
-    "local disposable verifier-owned terminal-chain nested binding summary and tamper-refusal evidence, installed-runtime-profile recognition-refusal group case-id, recognition-refusal group, named-refusal, and recognition-contract evidence only"
-
-assert_contains_fixed \
-    "boundaries page keeps readiness verified field" \
-    "boundaries.html" \
-    "product_proof_path_verified=true"
-
-assert_contains_fixed \
-    "boundaries page keeps product proof path command" \
-    "boundaries.html" \
-    "zlar product-proof-path --json-out zlar-product-proof-path-v1.json"
-
-assert_contains_fixed \
-    "boundaries page keeps product proof path artifact" \
-    "boundaries.html" \
-    "zlar-product-proof-path-v1.json"
-
-assert_contains_fixed \
-    "boundaries page keeps byte-binding audit result" \
-    "boundaries.html" \
-    "ready_for_public_distribution_claim=true"
-
-assert_contains_fixed \
-    "boundaries page keeps current release asset-publication boundary" \
-    "boundaries.html" \
-    "The v3.4.10 release also published all required verifier-kit assets"
-
-assert_contains_fixed \
-    "boundaries page keeps public-distribution audit command" \
-    "boundaries.html" \
-    "zlar verifier-kit-public-distribution"
-
-assert_contains_fixed \
-    "boundaries page keeps public-distribution report artifact" \
-    "boundaries.html" \
-    "zlar-verifier-kit-public-distribution-v1.json"
-
-assert_contains_fixed \
-    "boundaries page keeps production-authority non-claim" \
-    "boundaries.html" \
-    "not public external attestation"
-
-assert_contains_fixed \
-    "boundaries page keeps v3.3.108 pointer summary as historical" \
-    "boundaries.html" \
-    "The v3.3.108 release added release-forward result pointer summary"
-
-assert_contains_fixed \
-    "boundaries page keeps historical readiness pointer field" \
-    "boundaries.html" \
-    "private_intake_sample_manifest_pointer"
-
-assert_contains_fixed \
-    "boundaries page keeps historical pointer contract section" \
-    "boundaries.html" \
-    "Private Intake Pointer Contract"
-
-assert_contains_fixed \
-    "boundaries page keeps v3.3.107 pointer reporting as historical" \
-    "boundaries.html" \
-    "The v3.3.107 release added North Star private intake pointer reporting"
-
-assert_contains_fixed \
-    "boundaries page keeps v3.3.105 private sample as historical" \
-    "boundaries.html" \
-    "The v3.3.105 release added release-forward private intake sample evidence"
-
-assert_contains_fixed \
-    "boundaries page keeps v3.3.104 hash verification as historical" \
-    "boundaries.html" \
-    "The v3.3.104 release added private evidence hash verification"
-
-assert_contains_fixed \
-    "boundaries page keeps v3.3.103 verifier intake as historical" \
-    "boundaries.html" \
-    "The v3.3.103 release added private verifier result intake"
-
-assert_contains_fixed \
-    "boundaries page keeps private verifier result command" \
-    "boundaries.html" \
-    "bin/zlar private-verifier-result verify"
-
-assert_contains_fixed \
-    "boundaries page keeps private verifier result schema" \
-    "boundaries.html" \
-    "zlar-private-verifier-result-v1"
-
-assert_contains_fixed \
-    "boundaries page keeps v3.3.102 receipt boundary as historical" \
-    "boundaries.html" \
-    "The v3.3.102 release clarified receipt-emission boundaries"
-
-assert_contains_fixed \
-    "boundaries page keeps configured action receipt boundary" \
-    "boundaries.html" \
-    "ZLAR_EMIT_RECEIPTS=true"
-
-assert_contains_fixed \
-    "boundaries page keeps constructed quickstart event boundary" \
-    "boundaries.html" \
-    "constructed quickstart audit event"
-
-assert_contains_fixed \
-    "boundaries page keeps reproducibility claim-boundary flags" \
-    "boundaries.html" \
-    "false reproducibility claim-boundary flags"
-
-assert_contains_fixed \
-    "boundaries page keeps v3.3.101 readiness bridge as historical" \
-    "boundaries.html" \
-    "The v3.3.101 release added the readiness report reproducibility bridge"
-
-assert_contains_fixed \
-    "boundaries page keeps verifier kit reproducibility artifact" \
-    "boundaries.html" \
-    "zlar-verifier-kit-reproducibility-v1.json"
-
-assert_contains_fixed \
-    "boundaries page keeps source-build determinism boundary" \
-    "boundaries.html" \
-    "source-build archive determinism for identical inputs and the same publisher key only"
-
-assert_contains_fixed \
-    "boundaries page keeps v3.3.100 reproducibility as historical" \
-    "boundaries.html" \
-    "The v3.3.100 release added verifier-kit reproducibility evidence"
-
-assert_contains_fixed \
-    "boundaries page keeps v3.3.99 markdown polish as historical" \
-    "boundaries.html" \
-    "The v3.3.99 release added release-forward result Markdown polish"
-
-assert_contains_fixed \
-    "boundaries page keeps dry-run result markdown artifact" \
-    "boundaries.html" \
-    "DRY-RUN-RESULT.md"
-
-assert_contains_fixed \
-    "boundaries page keeps markdown polish regression boundary" \
-    "boundaries.html" \
-    "rejects escaped Markdown backticks"
-
-assert_contains_fixed \
-    "boundaries page keeps North Star readiness artifact" \
-    "boundaries.html" \
-    "zlar-north-star-readiness-v1.json"
-
-assert_contains_fixed \
-    "boundaries page keeps not-ready-for-v3.4 result" \
-    "boundaries.html" \
-    "NOT_READY_FOR_V3_4_0"
-
-assert_contains_fixed \
-    "boundaries page keeps no v3.4 readiness claim" \
-    "boundaries.html" \
-    "not v3.4.0 readiness"
-
-assert_contains_fixed \
-    "boundaries page keeps malformed-registry no-verdict boundary" \
-    "boundaries.html" \
-    "no \`RECOGNIZED\` or \`RECOGNITION-REFUSED\` verdict is emitted before the schema-contract error"
-
-assert_contains_fixed \
-    "boundaries page keeps schema-contract mismatch boundary" \
-    "boundaries.html" \
-    "unsupported top-level fields, unsupported issuer fields, missing \`evidence_model\`, missing issuer \`public_key_pem\`, or bad \`required_detail_hash\`"
-
-assert_contains_fixed \
-    "boundaries page keeps refusal matrix boundary" \
-    "boundaries.html" \
-    "unknown issuer, retired issuer, compromised issuer, wrong policy, wrong scope, and malformed registry input are refused"
-
-assert_contains_fixed \
-    "boundaries page keeps service-profile coverage lane" \
-    "boundaries.html" \
-    "protected-records.service-profile.records.write"
-
-assert_contains_fixed \
-    "boundaries page keeps current 5/5 coverage boundary" \
-    "boundaries.html" \
-    "current \`v3.3.91+\` service-profile coverage lane at \`5/5\` and the \`v3.3.93+\` service-profile wrong-policy preflight at \`11/11\`"
-
-assert_contains_fixed \
-    "boundaries page keeps verifier recognition boundary" \
-    "boundaries.html" \
-    "the release-forward verifier packet can preserve \`zlar-trusted-receipt-issuer-recognition.json\` for \`v3.3.94+\` targets"
-
-assert_contains_fixed \
-    "boundaries page keeps dry-run manifest file" \
-    "boundaries.html" \
-    "DRY-RUN-MANIFEST.json"
-
-assert_contains_fixed \
-    "boundaries page keeps dry-run manifest fields" \
-    "boundaries.html" \
-    "explicit target, observed commit, assertion counts, artifact hashes, run-file hashes, privacy flags, and non-claim flags"
-
-assert_contains_fixed \
-    "boundaries page keeps helper moving-target refusal" \
-    "boundaries.html" \
-    "refuses moving targets such as \`main\`, \`HEAD\`, \`latest\`, and \`--latest\`"
-
-assert_contains_fixed \
-    "boundaries page keeps pinned v3.3.90 verifier target" \
-    "boundaries.html" \
-    "The prepared pinned \`v3.3.90\` release-forward verifier target"
-
-assert_contains_fixed \
-    "boundaries page keeps pinned verifier target sha" \
-    "boundaries.html" \
-    "9a8147163384f776777bf283217a5cd55cbbdfe7"
-
-assert_contains_fixed \
-    "boundaries page keeps verifier preservation boundary" \
-    "boundaries.html" \
-    "The verifier/evaluator boundary still preserves the \`v3.3.81+\` runtime-profile installation counts"
-
-assert_contains_fixed \
-    "boundaries page keeps 4/4 coverage boundary" \
-    "boundaries.html" \
-    "older pinned \`v3.3.90\` coverage sample at \`4/4\`"
-
-assert_contains_fixed \
-    "boundaries page keeps configured-channel fail-closed boundary" \
-    "boundaries.html" \
-    "configured approval channel when enabled and fail closed when absent"
-
-assert_contains_fixed \
-    "boundaries page keeps earlier v3.3.76 target boundary" \
-    "boundaries.html" \
-    "the earlier prepared \`v3.3.81\` runtime-profile-installation target and \`v3.3.76\` active-profile target remain intact"
-
-assert_contains_fixed \
-    "boundaries page keeps no non-operator review claim" \
-    "boundaries.html" \
-    "does not prove non-operator review"
-
-assert_contains_fixed \
-    "boundaries page keeps no new verifier contact" \
-    "boundaries.html" \
-    "It sends no verifier request, contacts no verifier, creates no public external attestation"
-
-assert_contains_fixed \
-    "boundaries page keeps previous runtime-profile installation proof boundary" \
-    "boundaries.html" \
-    "The previous \`v3.3.81\` release added local disposable runtime-profile installation proof"
-
-assert_contains_fixed \
-    "boundaries page keeps public claim guard hardening boundary" \
-    "boundaries.html" \
-    "Approval-channel boundary copy remains configured-channel behavior"
-
-assert_contains_fixed \
-    "boundaries page keeps private verifier request boundary" \
+    "boundaries page keeps private verifier boundary" \
     "boundaries.html" \
     "private-by-default non-Vincent verifier request"
 
@@ -1616,25 +1130,15 @@ assert_contains_fixed \
     "boundaries.html" \
     "no public external attestation is claimed in this repo"
 
-assert_contains_fixed \
-    "boundaries page keeps verifier-env JSON report boundary" \
-    "boundaries.html" \
-    "zlar-verifier-env-report-v0.json"
+assert_not_contains_fixed \
+    "CAISI archive does not mirror current release checks" \
+    "caisi-submission.html" \
+    "${CURRENT_RELEASE_CHECK_THRESHOLD}"
 
-assert_contains_fixed \
-    "boundaries page keeps verifier-env public attestation non-claim" \
-    "boundaries.html" \
-    "creates no public external attestation"
-
-assert_contains_fixed \
-    "boundaries page keeps Codex adapter Telegram-silent boundary" \
-    "boundaries.html" \
-    "ZLAR_TELEGRAM_DISABLED=1"
-
-assert_contains_fixed \
-    "boundaries page keeps Telegram health non-claim" \
-    "boundaries.html" \
-    "does not prove Telegram health"
+assert_not_contains_fixed \
+    "fail-open archive does not mirror current release checks" \
+    "fail-open.html" \
+    "${CURRENT_RELEASE_CHECK_THRESHOLD}"
 
 assert_no_public_regex \
     "public copy must not mark v3.3.99 Markdown polish as current" \

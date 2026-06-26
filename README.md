@@ -2,27 +2,31 @@
 
 Static public website for ZLAR Inc.
 
-The current information architecture is a plain public path:
+The current information architecture is the public airport map for ZLAR:
 
-- "ZLAR is where AI action becomes answerable."
-- "ZLAR keeps humans in the loop when AI starts doing real things."
-- "AI can move. Humans remain present. Actions become answerable."
-- "If AI affected you, ask for the receipt."
+- "Intelligence may change. Consequence still needs authority."
+- "ZLAR is the boarding system for defined routed AI actions."
+- "Terminal activity is not boarding."
+- "The receipt is the boarding credential."
+- "The scanner verifies the receipt; the manifest names the boundary."
+- "Side doors are disclosed, not laundered into the claim."
+- "GitHub / Machine Room is where engineers and agents inspect the evidence machine."
+- "Bring One Action means one action class, one route, one policy, one receipt, one refusal rule, and one map of side doors."
 
 ## Primary Pages
 
 | Page | Path | Purpose |
 | --- | --- | --- |
-| Homepage | `index.html` | Plain voice spine, operator routing, sample receipt, scope disclosure, contact |
+| Homepage / The Map | `index.html` | Airport map for AI action: terminal/reasoning, gate/governed route, checkpoint/policy, ticket/receipt, scanner/verifier, manifest/evidence bundle, aircraft door/refusal, side doors |
 | Enterprise | `enterprise.html` | Rules before enterprise AI changes files, calls tools, or starts workflows |
-| Government | `government.html` | Public records for AI actions: what happened, what rule applied, and what proof remains |
-| Financial Services | `financial-services.html` | The gap between login and what AI is allowed to do |
+| Government | `government.html` | Public records for routed AI actions: rule, authority, receipt, and boundary |
+| Financial Services | `financial-services.html` | The gap between identity and action-level boarding permission |
 | Healthcare | `healthcare.html` | Bounded healthcare workflow framing without clinical claims |
-| Defense / Military | `defense.html` | Command visibility, rules, people, and proof for routed actions |
+| Defense / Military | `defense.html` | Delegation, command visibility, rules, people, and receipts for routed actions |
 | Founder Note | `founder-note.html` | First-person statement of the threshold thesis |
-| Sample receipt | `proof-pack.html` | Human-first sample receipt with optional bounded terminal verification |
+| Receipt Scanner | `proof-pack.html` | Human-first receipt/scanner/manifest path with optional bounded terminal verification |
 | Open Memo | `open-memo.html` | Policy memo for rules before action and receipts afterward |
-| Boundaries | `boundaries.html` | What passes through ZLAR, what does not, and what the sample does not prove |
+| Side Doors / Boundaries | `boundaries.html` | What boards through ZLAR, what does not, and what the sample receipt does not prove |
 | Archive | `archive.html` | Affected-person pathway, Sealed Mode, older material, standards submissions, and secondary resources |
 
 ## Demo Artifacts
@@ -41,7 +45,7 @@ Do not edit these files unless the sample bundle is intentionally regenerated an
 
 ## Claim Boundary
 
-Current public release: [ZLAR v3.4.51 - Protected-records refusal and claim-boundary hardening](https://github.com/ZLAR-AI/ZLAR/releases/tag/v3.4.51).
+Technical evidence and release history live in [GitHub / Machine Room](https://github.com/ZLAR-AI/ZLAR). The website should remain evergreen: explain the category, receipt scanner, and side-door boundary without mirroring every repo commit.
 
 ZLAR governs routed/intercepted action surfaces only. Safe Codex wording:
 

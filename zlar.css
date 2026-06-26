@@ -140,6 +140,12 @@ code {
   padding: 4.5rem 0 3rem;
 }
 
+.airport-hero {
+  background:
+    radial-gradient(circle at 78% 28%, rgba(251, 191, 36, 0.12), transparent 24rem),
+    radial-gradient(circle at 15% 12%, rgba(74, 222, 128, 0.09), transparent 18rem);
+}
+
 .hero-grid {
   align-items: center;
   display: grid;
@@ -210,6 +216,25 @@ code {
   font-size: 0.9rem;
 }
 
+.map-boundary {
+  border-left: 4px solid var(--gold);
+  color: var(--muted);
+  font-size: 0.9rem;
+  margin: 1.3rem 0 0;
+  max-width: 760px;
+  padding-left: 1rem;
+}
+
+.claim-spine {
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius);
+  color: var(--ink);
+  font-weight: 650;
+  margin: 1.15rem 0 0;
+  max-width: 760px;
+  padding: 0.9rem 1rem;
+}
+
 .button {
   align-items: center;
   border: 1px solid var(--ink);
@@ -264,6 +289,12 @@ code {
   font-size: 1.2rem;
   line-height: 1.25;
   margin: 0 0 0.6rem;
+}
+
+.section p,
+.section li,
+.section a {
+  overflow-wrap: anywhere;
 }
 
 .section-intro {
@@ -332,6 +363,116 @@ code {
   text-transform: uppercase;
 }
 
+.airport-map {
+  background: rgba(13, 21, 32, 0.94);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  padding: 1.25rem;
+}
+
+.route-line {
+  display: grid;
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+.route-stop {
+  background: rgba(17, 24, 39, 0.92);
+  border: 1px solid var(--line-strong);
+  border-left: 5px solid var(--teal);
+  border-radius: var(--radius);
+  padding: 0.95rem 1rem;
+}
+
+.route-stop span,
+.map-card span {
+  color: var(--muted);
+  display: block;
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  margin-bottom: 0.4rem;
+  text-transform: uppercase;
+}
+
+.route-stop strong {
+  display: block;
+  font-size: 1rem;
+  line-height: 1.25;
+  margin-bottom: 0.2rem;
+}
+
+.route-stop p {
+  font-size: 0.86rem;
+  line-height: 1.45;
+  margin: 0;
+}
+
+.terminal-stop {
+  border-left-color: var(--violet);
+}
+
+.gate-stop,
+.checkpoint-stop {
+  border-left-color: var(--teal);
+}
+
+.receipt-stop {
+  border-left-color: var(--gold);
+}
+
+.aircraft-stop {
+  border-left-color: var(--green);
+}
+
+.side-door {
+  background: rgba(248, 113, 113, 0.08);
+  border: 1px solid rgba(248, 113, 113, 0.28);
+  border-radius: var(--radius);
+  margin-top: 0.9rem;
+  padding: 0.95rem 1rem;
+}
+
+.side-door strong {
+  color: #fecaca;
+  display: block;
+  margin-bottom: 0.2rem;
+}
+
+.side-door p {
+  color: #fecaca;
+  font-size: 0.86rem;
+  margin: 0;
+}
+
+.map-grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  margin-top: 1.5rem;
+}
+
+.map-card {
+  background: rgba(13, 21, 32, 0.92);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  min-height: 100%;
+  padding: 1.15rem;
+}
+
+.map-card h3 {
+  font-size: 1.05rem;
+}
+
+.map-card p {
+  font-size: 0.9rem;
+  line-height: 1.5;
+  margin-bottom: 0;
+}
+
 .disclosure {
   background: rgba(248, 113, 113, 0.08);
   border: 1px solid rgba(248, 113, 113, 0.28);
@@ -352,6 +493,7 @@ code {
 .disclosure li {
   color: #fecaca;
   font-size: 0.94rem;
+  overflow-wrap: anywhere;
 }
 
 .disclosure ul,
@@ -667,12 +809,14 @@ code {
   .two-col,
   .three-col,
   .operator-grid,
-  .archive-grid {
+  .archive-grid,
+  .map-grid {
     grid-template-columns: 1fr;
   }
 
   .proof-anatomy,
-  .coverage-map {
+  .coverage-map,
+  .map-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
@@ -716,12 +860,19 @@ code {
   }
 
   .proof-anatomy,
-  .coverage-map {
+  .coverage-map,
+  .map-grid {
     grid-template-columns: 1fr;
   }
 
   .receipt-row,
   .layer {
     grid-template-columns: 1fr;
+  }
+
+  .terminal code,
+  .code-block code {
+    overflow-wrap: anywhere;
+    white-space: pre-wrap;
   }
 }
