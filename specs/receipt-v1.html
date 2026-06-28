@@ -50,8 +50,8 @@
     <div class="nav">
       <a href="/">Home</a>
       <a href="/specs/">Specifications</a>
-      <a href="https://github.com/ZLAR-AI/ZLAR/blob/main/etc/receipt-v1.schema.json">Schema</a>
-      <a href="https://github.com/ZLAR-AI/ZLAR/blob/main/docs/adr/ADR-007-receipt-v1-envelope.md">ADR-007</a>
+      <a href="/specs/receipt-v1.html">Schema</a>
+      <a href="/specs/receipt-v1.html">ADR-007</a>
     </div>
 
     <h1>Governed Action Receipt v1</h1>
@@ -63,7 +63,7 @@
     <p>A Governed Action Receipt is portable cryptographic proof that an AI agent action was evaluated by deterministic policy and decided by the stated authority. Anyone with the public key can verify. No platform access required.</p>
 
     <div class="warn note">
-      <p><strong>Format frozen.</strong> The v1 schema is committed. Changes require a version bump to v2. See <a href="https://github.com/ZLAR-AI/ZLAR/blob/main/docs/adr/ADR-007-receipt-v1-envelope.md">ADR-007</a> for the decision record.</p>
+      <p><strong>Format frozen.</strong> The v1 schema is a public specification. Changes require a version bump to v2. The current core source is private; source review is by request.</p>
     </div>
 
     <h2>Design Principles</h2>
@@ -138,10 +138,15 @@
 
     <h2>Verify a Receipt</h2>
     <pre><code># Clone the repo
-git clone https://github.com/ZLAR-AI/ZLAR.git
+curl -fsSLO https://zlar.ai/demo/proof-pack/verify-proof-pack.mjs
+curl -fsSLO https://zlar.ai/demo/proof-pack/proof-pack-manifest.json
 
-# Verify any receipt (v0 or v1)
-node bin/zlar-verify receipt.json --pubkey key.pub --verbose</code></pre>
+# The current public scanner path is documented at:
+# https://zlar.ai/proof-pack.html#verify</code></pre>
+    <p>
+      Current public verification uses static zlar.ai artifacts. This page does
+      not promise public access to the current core repository or verifier source.
+    </p>
 
     <h2>What a Valid Receipt Proves</h2>
     <ol>
@@ -156,9 +161,9 @@ node bin/zlar-verify receipt.json --pubkey key.pub --verbose</code></pre>
 
     <p style="color: var(--muted); font-size: 0.85rem;">
       Permanent URL: <code>https://zlar.ai/specs/receipt-v1</code><br>
-      Schema: <a href="https://github.com/ZLAR-AI/ZLAR/blob/main/etc/receipt-v1.schema.json">etc/receipt-v1.schema.json</a><br>
-      Payload schema: <a href="https://github.com/ZLAR-AI/ZLAR/blob/main/etc/receipt-v1-payload.schema.json">etc/receipt-v1-payload.schema.json</a><br>
-      Decision record: <a href="https://github.com/ZLAR-AI/ZLAR/blob/main/docs/adr/ADR-007-receipt-v1-envelope.md">ADR-007</a><br>
+      Schema: public receipt v1 page<br>
+      Payload schema: public receipt v1 page<br>
+      Decision record: public receipt v1 page<br>
       License: Apache 2.0 &mdash; ZLAR Inc.
     </p>
   </div>

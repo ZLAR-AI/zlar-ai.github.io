@@ -2,9 +2,9 @@
 # ═══════════════════════════════════════════════════════════════════════════════
 # ZLAR — Clean Uninstall
 #
-# curl -fsSL https://zlar.ai/uninstall.sh | bash
+# Historical cleanup helper for prior public installs. Review before running.
 #
-# Removes hooks from all frameworks, deletes ~/.zlar/.
+# Removes hooks from supported frameworks, deletes ~/.zlar/.
 # Preserves ~/.zlar-signing.key (may be shared with other ZLAR products).
 # ═══════════════════════════════════════════════════════════════════════════════
 

@@ -4,7 +4,7 @@ This public bundle is a fake/scratch proof-pack example for zlar.ai. It is desig
 
 Current public release:
 
-ZLAR v3.4.54 - Scoped Claude Code pre-authority install readiness.
+ZLAR v3.4.54 - Scoped Claude Code pre-authority install readiness. Public verification uses static zlar.ai artifacts, not private GitHub URLs.
 
 Claim ceiling:
 
@@ -27,6 +27,10 @@ What the scratch verifier checks:
 - Privacy flags remain false.
 - Manifest hashes match the included coverage report files.
 - The text contains no private paths, credentials, raw argument keys, or broad Codex governance claim.
+
+Source boundary:
+
+Prior Apache-2.0 public distribution remains licensed. Current core source access is private. This bundle does not provide a public clone, installer, public CI view, or current-source inspection path.
 
 What this does not prove:
 

@@ -39,6 +39,10 @@ const UNSAFE_PATTERNS = [
     'stale verifier contact status',
   ],
   [/\bv3\.3\.15 safe Codex wording\b/i, 'stale proof-pack release anchor'],
+  [new RegExp(`${'github' + '.com'}/ZLAR-AI/ZLAR(?:[\\/.?#\\s\"'<>]|$)`, 'i'), 'private core GitHub URL'],
+  [/git\s+clone\s+https:\/\/github\.com\/ZLAR-AI\/ZLAR\.git/i, 'private core clone instruction'],
+  [/ZLAR\s+is\s+open[- ]source\s+at/i, 'current open-source source claim'],
+  [new RegExp(`${['Remote', 'CI'].join('\\s+')}|${'Cod' + 'eQL'}|${'Open' + 'SSF'}|${'Score' + 'card'}`, 'i'), 'public CI visibility claim'],
 ];
 
 function readText(path) {
@@ -140,5 +144,6 @@ scanSafe('manifest', JSON.stringify(manifest));
 scanSafe('coverage JSON', JSON.stringify(coverage));
 scanSafe('coverage text', coverageText);
 scanSafe('README', readme);
+scanSafe('release metadata', JSON.stringify(release));
 pass('privacy and claim text scan');
 pass('scratch proof pack verified');

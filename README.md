@@ -10,7 +10,7 @@ The current information architecture is the public airport map for ZLAR:
 - "The receipt is the boarding credential."
 - "The scanner verifies the receipt; the manifest names the boundary."
 - "Side doors are disclosed, not laundered into the claim."
-- "GitHub / Machine Room is where engineers and agents inspect the evidence machine."
+- "Public Proof Desk is where readers inspect static zlar.ai proof artifacts; current core source review is by request."
 - "Bring One Action means one action class, one route, one policy, one receipt, one refusal rule, and one map of side doors."
 
 ## Primary Pages
@@ -41,11 +41,11 @@ The current information architecture is the public airport map for ZLAR:
 
 Do not edit these files unless the sample bundle is intentionally regenerated and all checksums/manifests are updated together.
 
-`release.json` is the public machine-readable current-release pointer for `zlar.ai`. It lets an auditor verify the live release claim directly instead of scraping HTML copy.
+`release.json` is the public machine-readable current-release pointer for `zlar.ai`. It lets an auditor verify the live release claim through static website artifacts instead of scraping HTML copy or relying on private core GitHub access.
 
 ## Claim Boundary
 
-Technical evidence and release history live in [GitHub / Machine Room](https://github.com/ZLAR-AI/ZLAR). The website should remain evergreen: explain the category, receipt scanner, and side-door boundary without mirroring every repo commit.
+Public proof artifacts live in [Public Proof Desk](/proof-pack.html). Current core source access is private. Prior Apache-2.0 public distribution remains licensed. The website should remain evergreen: explain the category, receipt scanner, and side-door boundary without mirroring every repo commit.
 
 ZLAR governs routed/intercepted action surfaces only. Safe Codex wording:
 

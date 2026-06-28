@@ -84,7 +84,7 @@
       <li><a href="boundaries.html">Side Doors</a></li>
       <li><a href="specs/">Specifications</a></li>
       <li><a href="open-memo.html">Open Memo</a></li>
-      <li><a href="https://github.com/ZLAR-AI/ZLAR">GitHub / Machine Room</a></li>
+      <li><a href="/proof-pack.html">Public Proof Desk</a></li>
     </ul>
   </nav>
 
@@ -132,10 +132,17 @@ MCowBQYDK2VwAyEAKMpK9MhgPiyZExlIOf6fL98C5baux+xWD4+DEL7IR8U=
       Raw file: <a href="demo/receipt-signing.pub">demo/receipt-signing.pub</a>
     </p>
 
-    <span class="section-label">Verify it yourself</span>
-    <h2>One clone, one command.</h2>
-    <div class="cmd">git clone https://github.com/ZLAR-AI/ZLAR.git &amp;&amp; cd ZLAR</div>
-    <div class="cmd">bin/zlar-verify <span class="muted">path/to/</span>receipt.json --pubkey <span class="muted">path/to/</span>receipt-signing.pub --verbose</div>
+    <span class="section-label">Public verification path</span>
+    <h2>No public clone path is promised here.</h2>
+    <p>
+      The current public verifier path is the static receipt scanner on zlar.ai.
+      Current core source access is private; prior Apache-2.0 public distribution
+      remains licensed. Source review can be requested by email.
+    </p>
+    <div class="cmd">curl -fsSLO https://zlar.ai/demo/proof-pack/verify-proof-pack.mjs</div>
+    <div class="cmd">curl -fsSLO https://zlar.ai/demo/proof-pack/proof-pack-manifest.json</div>
+    <div class="cmd">curl -fsSLO https://zlar.ai/demo/proof-pack/SHA256SUMS</div>
+    <div class="cmd"><span class="muted">See full scanner commands:</span> https://zlar.ai/proof-pack.html#verify</div>
 
     <p>Expected output:</p>
     <div class="artifact">
@@ -180,13 +187,13 @@ Verified. Action "Write" in domain "write" was deny by policy at 2026-04-24T12:5
       This page uses demo keys, not operational keys. Operational deployments choose their own keys and publish the public keys they want third parties to use.
     </p>
     <p style="font-size: 0.9rem;">
-      Reproduce the quickstart path yourself: <code style="font-family: var(--mono); color: var(--teal);">bash scripts/quickstart.sh</code> generates fresh keys, runs the real gate against four tool-call-shaped inputs, then signs and verifies a v1 receipt over a constructed quickstart audit event. The gate decisions are real; the receipt is bounded demo evidence, not live production governance.
+      The archived quickstart path generated fresh keys, ran the gate against four tool-call-shaped inputs, then signed and verified a v1 receipt over a constructed quickstart audit event. The gate decisions are real; the receipt is bounded demo evidence, not live production governance. This page does not provide a current public install, clone, or live hook path.
     </p>
 
     <div class="links-row">
-      <a href="https://github.com/ZLAR-AI/ZLAR/blob/main/doctrine/SCOPE.md">doctrine/SCOPE.md</a>
-      <a href="https://github.com/ZLAR-AI/ZLAR/blob/main/spec/governed-action-receipt-v1.md">Receipt v1 spec</a>
-      <a href="https://github.com/ZLAR-AI/ZLAR/blob/main/bin/zlar-verify">bin/zlar-verify source</a>
+      <a href="/boundaries.html">Boundaries</a>
+      <a href="/specs/receipt-v1.html">Receipt v1 spec</a>
+      <a href="/proof-pack.html">Public Proof Desk</a>
       <a href="/">The Map</a>
     </div>
   </main>
