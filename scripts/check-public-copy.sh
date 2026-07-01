@@ -245,6 +245,7 @@ machine_model_pattern='(^|[^[:alnum:]])(Mac mini|MacBook|Mac Studio|Mac Pro|iMac
 numeric_human_id_pattern='(human|authorizer|approver|telegram|chat_id|telegram[_ -]?(chat|human)?[_ -]?id)[^[:space:]]{0,30}(:|=| )[[:space:]]*[0-9]{7,}|human:[0-9]{7,}'
 token_secret_pattern="(Bearer[[:space:]]+[A-Za-z0-9._-]{20,}|(token|api[_-]?key|secret)[[:space:]]*[:=][[:space:]]*['\"]?([A-Za-z0-9._-]{20,}|sk-[A-Za-z0-9_-]{8,}|pk-[A-Za-z0-9_-]{8,}))"
 unsupported_public_claim_pattern='(ZLAR (is )?(production[- ]ready|externally attested|independently attested)|production[- ]ready ZLAR|external attestation (is )?(complete|completed|done|achieved|received)|public external attestation (is )?(complete|completed|done|achieved|received)|non[- ]Vincent verifier (has )?(verified|attested)|production (adapter|adaptor) proof)'
+authority_overclaim_pattern='authority (is|becomes|must become) code[- ]based|code[- ]based authority|code creates legitimacy|legal standing|statutory (right|rights|remedy|remedies)'
 private_core_github_pattern='github[.]com/ZLAR-AI/ZLAR([/.?#"'"'"'[:space:]<>]|$)'
 private_core_clone_pattern='git[[:space:]]+clone[[:space:]]+https://github[.]com/ZLAR-AI/ZLAR[.]git'
 public_machine_room_pattern='GitHub[[:space:]]*/[[:space:]]*Machine Room|View on GitHub|Inspect GitHub|Machine Room'
@@ -270,7 +271,9 @@ assert_no_public_regex "public surfaces must not expose machine model names" "${
 assert_no_public_regex "public surfaces must not expose numeric Telegram or human ids" "${numeric_human_id_pattern}"
 assert_no_public_regex "public surfaces must not expose token or API-key shaped strings" "${token_secret_pattern}"
 assert_no_public_regex "public surfaces must not imply unsupported production or attestation claims" "${unsupported_public_claim_pattern}"
+assert_no_public_regex "public surfaces must not imply code-created or legal authority" "${authority_overclaim_pattern}"
 assert_no_public_regex "public surfaces must not publish v3.4.55" 'v3[.]4[.]55'
+assert_no_public_regex "public surfaces must not publish v3.4.57" 'v3[.]4[.]57'
 
 assert_regex_matches_text "private-core guard catches repo URLs" "${private_core_github_pattern}" "example.html:1:https://github.com/ZLAR-AI/ZLAR"
 assert_regex_matches_text "clone guard catches private clone commands" "${private_core_clone_pattern}" "example.html:1:git clone https://github.com/ZLAR-AI/ZLAR.git"
@@ -282,8 +285,12 @@ assert_regex_matches_text "privacy guard catches hardware serial examples" "${ha
 assert_regex_matches_text "privacy guard catches machine model examples" "${machine_model_pattern}" "example.html:1:Mac mini filesystem checked"
 assert_regex_matches_text "privacy guard catches numeric human id examples" "${numeric_human_id_pattern}" "demo/example.json:1:{\"authorizer\":\"human:${bad_numeric_human_id}\"}"
 assert_regex_matches_text "privacy guard catches token examples" "${token_secret_pattern}" "example.html:1:api_key=sk-${bad_token_suffix}"
+assert_regex_matches_text "authority guard catches legal standing wording" "${authority_overclaim_pattern}" "example.html:1:ZLAR gives legal standing to affected people"
 
 assert_contains_fixed "homepage keeps airport hero" "index.html" "Intelligence may change. Consequence still needs authority."
+assert_contains_fixed "homepage uses authority-gate headline" "index.html" "Consequential machine action needs a boarding gate."
+assert_contains_fixed "homepage keeps human institution authority source" "index.html" "Human institutions define authority."
+assert_contains_fixed "homepage keeps machine-checkable action gate" "index.html" "machine-checkable at the point of action."
 assert_contains_fixed "homepage keeps core claim" "index.html" "For defined routed action surfaces, ZLAR makes consequential AI action pass"
 assert_contains_fixed "homepage states private current core" "index.html" "Current core source access is private."
 assert_contains_fixed "homepage keeps Bring One Action concrete" "index.html" "One action. One route. One policy. One receipt. One refusal rule. One honest"

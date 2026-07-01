@@ -5,6 +5,8 @@ Static public website for ZLAR Inc.
 The current information architecture is the public airport map for ZLAR:
 
 - "Intelligence may change. Consequence still needs authority."
+- "Consequential machine action needs a boarding gate."
+- "Human institutions define authority. ZLAR makes authority machine-checkable at the point of action."
 - "ZLAR is the boarding system for defined routed AI actions."
 - "Terminal activity is not boarding."
 - "The receipt is the boarding credential."
@@ -17,7 +19,8 @@ The current information architecture is the public airport map for ZLAR:
 
 | Page | Path | Purpose |
 | --- | --- | --- |
-| Homepage / The Map | `index.html` | Airport map for AI action: terminal/reasoning, gate/governed route, checkpoint/policy, ticket/receipt, scanner/verifier, manifest/evidence bundle, aircraft door/refusal, side doors |
+| Homepage / The Map | `index.html` | Airport map for AI action: terminal/reasoning, gate/governed route, checkpoint/policy, receipt/formal artifact, scanner/verifier, manifest/evidence bundle, aircraft door/refusal, side doors |
+| If AI Affected You | `affected.html` | Affected-person pathway for receipt, authority, non-authorization, and boundary questions |
 | Enterprise | `enterprise.html` | Rules before enterprise AI changes files, calls tools, or starts workflows |
 | Government | `government.html` | Public records for routed AI actions: rule, authority, receipt, and boundary |
 | Financial Services | `financial-services.html` | The gap between identity and action-level boarding permission |
@@ -27,7 +30,7 @@ The current information architecture is the public airport map for ZLAR:
 | Receipt Scanner | `proof-pack.html` | Human-first receipt/scanner/manifest path with optional bounded terminal verification |
 | Open Memo | `open-memo.html` | Policy memo for rules before action and receipts afterward |
 | Side Doors / Boundaries | `boundaries.html` | What boards through ZLAR, what does not, and what the sample receipt does not prove |
-| Archive | `archive.html` | Affected-person pathway, Sealed Mode, older material, standards submissions, and secondary resources |
+| Archive | `archive.html` | Sealed Mode, older material, standards submissions, and secondary resources |
 
 ## Demo Artifacts
 
